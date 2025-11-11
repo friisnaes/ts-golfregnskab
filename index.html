@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lille Golfgruppe - Årlig Turnering</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c5f2d 0%, #97bc62 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .tagline {
+            font-size: 1.3em;
+            font-style: italic;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 60px 40px;
+        }
+
+        h2 {
+            color: #2c5f2d;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #97bc62;
+        }
+
+        /* Leaderboard styles */
+        .leaderboard-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 50px;
+        }
+
+        .leaderboard-item {
+            background: white;
+            padding: 25px 30px;
+            margin: 20px 0;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .leaderboard-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .rank {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #2c5f2d;
+            min-width: 80px;
+        }
+
+        .player-info {
+            flex-grow: 1;
+            padding: 0 20px;
+        }
+
+        .player-name {
+            font-size: 1.8em;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .player-details {
+            font-size: 0.95em;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+
+        .total-score {
+            font-size: 2.5em;
+            color: #2c5f2d;
+            font-weight: bold;
+            text-align: right;
+            min-width: 100px;
+        }
+
+        /* Round card styles */
+        .rounds-section {
+            margin: 50px 0;
+        }
+
+        .round-card {
+            background: white;
+            border-left: 5px solid #97bc62;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .round-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        .round-title {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #2c5f2d;
+        }
+
+        .round-date {
+            color: #7f8c8d;
+            font-size: 1.1em;
+        }
+
+        .course-name {
+            color: #34495e;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .results-table th {
+            background: #f8f9fa;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #2c5f2d;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .results-table td {
+            padding: 15px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .results-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .results-table .placement {
+            font-weight: bold;
+            color: #2c5f2d;
+            font-size: 1.3em;
+        }
+
+        .results-table .points {
+            font-weight: bold;
+            color: #27ae60;
+            font-size: 1.4em;
+        }
+
+        /* Tournament format section */
+        .format-section {
+            background: #e8f5e9;
+            border-left: 5px solid #2c5f2d;
+            padding: 30px;
+            margin: 50px 0;
+            border-radius: 10px;
+        }
+
+        .format-section h3 {
+            color: #2c5f2d;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        .format-section p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .format-rules {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .format-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #97bc62;
+        }
+
+        .format-card h4 {
+            color: #2c5f2d;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        /* Add round form */
+        .add-round-section {
+            background: #fff9e6;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 50px 0;
+            border: 2px solid #97bc62;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c5f2d;
+            font-weight: 600;
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border 0.3s;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: #2c5f2d;
+        }
+
+        .player-score-input {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #2c5f2d 0%, #97bc62 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            margin: 10px 5px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(44, 95, 45, 0.4);
+        }
+
+        button.secondary {
+            background: #95a5a6;
+        }
+
+        button.secondary:hover {
+            background: #7f8c8d;
+        }
+
+        button.danger {
+            background: #e74c3c;
+        }
+
+        button.danger:hover {
+            background: #c0392b;
+        }
+
+        footer {
+            background: #34495e;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.8em;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            .leaderboard-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .rank, .total-score {
+                margin: 10px 0;
+            }
+
+            .player-info {
+                padding: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⛳ Lille Golfgruppe</h1>
+            <p class="tagline">Årlig Turnering 2024/2025</p>
+        </header>
+
+        <div class="content">
+            <!-- Leaderboard -->
+            <section>
+                <h2>🏆 Samlet Stilling</h2>
+                <p style="font-size: 1.1em; color: #7f8c8d; margin-bottom: 20px;">
+                    Baseret på de 15 bedste runder for hver spiller
+                </p>
+                <div class="leaderboard-section" id="leaderboard">
+                    <!-- Dynamically filled -->
+                </div>
+            </section>
+
+            <!-- Add Round Form -->
+            <section class="add-round-section">
+                <h2>➕ Tilføj Ny Runde</h2>
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label for="courseName">Banens Navn</label>
+                        <input type="text" id="courseName" placeholder="f.eks. Rungsted Golf Club">
+                    </div>
+                    <div class="input-group">
+                        <label for="roundDate">Dato</label>
+                        <input type="date" id="roundDate">
+                    </div>
+                </div>
+
+                <h3 style="margin: 30px 0 20px 0; color: #2c5f2d;">Spillere og Scores</h3>
+                <div id="playerScores">
+                    <!-- Dynamically filled -->
+                </div>
+
+                <button onclick="addRound()">Gem Runde</button>
+                <button class="secondary" onclick="resetForm()">Nulstil Formular</button>
+            </section>
+
+            <!-- Rounds History -->
+            <section class="rounds-section">
+                <h2>📋 Spillede Runder</h2>
+                <div id="roundsHistory">
+                    <!-- Dynamically filled -->
+                </div>
+            </section>
+
+            <!-- Tournament Format -->
+            <section class="format-section">
+                <h3>📖 Turneringsformat</h3>
+                <p><strong>Grundlæggende regler:</strong></p>
+                <p>Vi spiller en løbende turnering gennem sæsonen, hvor kun de 15 bedste runder tæller for hver spiller.</p>
+                
+                <div class="format-rules">
+                    <div class="format-card">
+                        <h4>2 Spillere</h4>
+                        <p>Vinder: <strong>1 point</strong><br>Taber: <strong>0 point</strong></p>
+                    </div>
+                    <div class="format-card">
+                        <h4>3 Spillere</h4>
+                        <p>1. plads: <strong>2 point</strong><br>
+                           2. plads: <strong>1 point</strong><br>
+                           3. plads: <strong>0 point</strong></p>
+                    </div>
+                    <div class="format-card">
+                        <h4>4 Spillere</h4>
+                        <p>1. plads: <strong>3 point</strong><br>
+                           2. plads: <strong>2 point</strong><br>
+                           3. plads: <strong>1 point</strong><br>
+                           4. plads: <strong>0 point</strong></p>
+                    </div>
+                </div>
+
+                <p style="margin-top: 25px;"><strong>Spillere:</strong> Thomas, Henrik, Kim, Morten</p>
+                <p><strong>Scoring:</strong> Stableford point-system</p>
+                <p><strong>Sæson:</strong> Kun de 15 bedste runder tæller i den endelige opgørelse</p>
+            </section>
+
+            <!-- Admin Section -->
+            <section style="margin-top: 50px; padding: 30px; background: #fff3cd; border-radius: 10px; border: 2px solid #ffc107;">
+                <h3 style="color: #856404; margin-bottom: 20px;">⚙️ Administration</h3>
+                <button class="danger" onclick="clearAllData()">Slet Alle Data</button>
+                <button class="secondary" onclick="exportData()">Eksporter Data</button>
+                <p style="margin-top: 15px; color: #856404; font-size: 0.95em;">
+                    <strong>Bemærk:</strong> Data gemmes lokalt i din browser. Brug eksport-funktionen til backup.
+                </p>
+            </section>
+        </div>
+
+        <footer>
+            <p>&copy; 2024/2025 Lille Golfgruppe | Hvor præcision møder passion</p>
+        </footer>
+    </div>
+
+    <script>
+        const PLAYERS = ['Thomas', 'Henrik', 'Kim', 'Morten'];
+        const POINT_SYSTEM = {
+            2: [1, 0],
+            3: [2, 1, 0],
+            4: [3, 2, 1, 0]
+        };
+
+        // Load data from localStorage
+        function loadRounds() {
+            const rounds = localStorage.getItem('golfRounds');
+            return rounds ? JSON.parse(rounds) : [];
+        }
+
+        // Save data to localStorage
+        function saveRounds(rounds) {
+            localStorage.setItem('golfRounds', JSON.stringify(rounds));
+        }
+
+        // Initialize player score inputs
+        function initializePlayerInputs() {
+            const container = document.getElementById('playerScores');
+            container.innerHTML = '';
+            
+            PLAYERS.forEach(player => {
+                const div = document.createElement('div');
+                div.className = 'player-score-input';
+                div.innerHTML = `
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 100px; gap: 15px; align-items: end;">
+                        <div class="input-group" style="margin: 0;">
+                            <label>
+                                <input type="checkbox" id="playing_${player}" onchange="togglePlayerInput('${player}')" checked>
+                                ${player}
+                            </label>
+                        </div>
+                        <div class="input-group" style="margin: 0;">
+                            <label for="score_${player}">Stableford Point</label>
+                            <input type="number" id="score_${player}" min="0" max="50" placeholder="Point">
+                        </div>
+                        <div style="font-size: 1.2em; font-weight: bold; color: #2c5f2d;" id="placement_${player}">
+                            -
+                        </div>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Toggle player input
+        function togglePlayerInput(player) {
+            const checkbox = document.getElementById(`playing_${player}`);
+            const scoreInput = document.getElementById(`score_${player}`);
+            scoreInput.disabled = !checkbox.checked;
+            if (!checkbox.checked) {
+                scoreInput.value = '';
+            }
+        }
+
+        // Calculate placements and points
+        function calculatePlacements() {
+            const playingPlayers = [];
+            
+            PLAYERS.forEach(player => {
+                const checkbox = document.getElementById(`playing_${player}`);
+                const scoreInput = document.getElementById(`score_${player}`);
+                
+                if (checkbox.checked && scoreInput.value) {
+                    playingPlayers.push({
+                        name: player,
+                        score: parseInt(scoreInput.value)
+                    });
+                }
+            });
+
+            // Sort by score (highest first)
+            playingPlayers.sort((a, b) => b.score - a.score);
+
+            // Assign points
+            const numPlayers = playingPlayers.length;
+            const pointSystem = POINT_SYSTEM[numPlayers];
+
+            if (pointSystem) {
+                playingPlayers.forEach((player, index) => {
+                    const placementDiv = document.getElementById(`placement_${player.name}`);
+                    placementDiv.textContent = `${index + 1}. plads (${pointSystem[index]} pt)`;
+                });
+            }
+
+            return playingPlayers.map((player, index) => ({
+                ...player,
+                placement: index + 1,
+                points: pointSystem ? pointSystem[index] : 0
+            }));
+        }
+
+        // Auto-calculate placements when scores change
+        PLAYERS.forEach(player => {
+            const scoreInput = document.getElementById(`score_${player}`);
+            if (scoreInput) {
+                scoreInput.addEventListener('input', calculatePlacements);
+            }
+        });
+
+        // Add a new round
+        function addRound() {
+            const courseName = document.getElementById('courseName').value.trim();
+            const roundDate = document.getElementById('roundDate').value;
+            
+            if (!courseName || !roundDate) {
+                alert('Indtast venligst banenavn og dato');
+                return;
+            }
+
+            const results = calculatePlacements();
+            
+            if (results.length < 2) {
+                alert('Der skal mindst være 2 spillere');
+                return;
+            }
+
+            const rounds = loadRounds();
+            rounds.push({
+                id: Date.now(),
+                courseName,
+                date: roundDate,
+                results
+            });
+
+            saveRounds(rounds);
+            updateDisplay();
+            resetForm();
+            alert('Runde tilføjet!');
+        }
+
+        // Reset form
+        function resetForm() {
+            document.getElementById('courseName').value = '';
+            document.getElementById('roundDate').value = '';
+            PLAYERS.forEach(player => {
+                document.getElementById(`playing_${player}`).checked = true;
+                document.getElementById(`score_${player}`).value = '';
+                document.getElementById(`score_${player}`).disabled = false;
+                document.getElementById(`placement_${player}`).textContent = '-';
+            });
+        }
+
+        // Calculate leaderboard
+        function calculateLeaderboard() {
+            const rounds = loadRounds();
+            const playerStats = {};
+
+            PLAYERS.forEach(player => {
+                playerStats[player] = {
+                    name: player,
+                    allRounds: [],
+                    totalRounds: 0,
+                    best15Total: 0
+                };
+            });
+
+            // Collect all rounds for each player
+            rounds.forEach(round => {
+                round.results.forEach(result => {
+                    if (playerStats[result.name]) {
+                        playerStats[result.name].allRounds.push({
+                            points: result.points,
+                            date: round.date,
+                            course: round.courseName
+                        });
+                        playerStats[result.name].totalRounds++;
+                    }
+                });
+            });
+
+            // Calculate best 15 for each player
+            Object.values(playerStats).forEach(player => {
+                player.allRounds.sort((a, b) => b.points - a.points);
+                player.best15 = player.allRounds.slice(0, 15);
+                player.best15Total = player.best15.reduce((sum, round) => sum + round.points, 0);
+            });
+
+            // Sort by best 15 total
+            const sortedPlayers = Object.values(playerStats).sort((a, b) => b.best15Total - a.best15Total);
+
+            return sortedPlayers;
+        }
+
+        // Update leaderboard display
+        function updateLeaderboard() {
+            const leaderboard = calculateLeaderboard();
+            const container = document.getElementById('leaderboard');
+            
+            if (leaderboard.every(p => p.totalRounds === 0)) {
+                container.innerHTML = '<p style="text-align: center; font-size: 1.2em; color: #7f8c8d;">Ingen runder spillet endnu</p>';
+                return;
+            }
+
+            const medals = ['🥇', '🥈', '🥉', ''];
+            
+            let html = '';
+            leaderboard.forEach((player, index) => {
+                const medal = medals[index] || '';
+                html += `
+                    <div class="leaderboard-item">
+                        <span class="rank">#${index + 1} ${medal}</span>
+                        <div class="player-info">
+                            <div class="player-name">${player.name}</div>
+                            <div class="player-details">
+                                ${player.totalRounds} runder spillet | 
+                                Bedste 15: ${Math.min(player.totalRounds, 15)} runder
+                            </div>
+                        </div>
+                        <div class="total-score">${player.best15Total}</div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Update rounds history display
+        function updateRoundsHistory() {
+            const rounds = loadRounds();
+            const container = document.getElementById('roundsHistory');
+            
+            if (rounds.length === 0) {
+                container.innerHTML = '<p style="text-align: center; font-size: 1.2em; color: #7f8c8d; padding: 40px;">Ingen runder registreret endnu</p>';
+                return;
+            }
+
+            // Sort by date (newest first)
+            rounds.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            let html = '';
+            rounds.forEach((round, index) => {
+                const dateObj = new Date(round.date);
+                const formattedDate = dateObj.toLocaleDateString('da-DK', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+
+                html += `
+                    <div class="round-card">
+                        <div class="round-header">
+                            <div class="round-title">Runde ${rounds.length - index}</div>
+                            <div class="round-date">${formattedDate}</div>
+                        </div>
+                        <div class="course-name">📍 ${round.courseName}</div>
+                        <table class="results-table">
+                            <thead>
+                                <tr>
+                                    <th>Placering</th>
+                                    <th>Spiller</th>
+                                    <th>Stableford Point</th>
+                                    <th>Turneringspoint</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+
+                round.results.forEach(result => {
+                    html += `
+                        <tr>
+                            <td class="placement">${result.placement}.</td>
+                            <td>${result.name}</td>
+                            <td>${result.score}</td>
+                            <td class="points">${result.points} pt</td>
+                        </tr>
+                    `;
+                });
+
+                html += `
+                            </tbody>
+                        </table>
+                        <button class="danger" style="margin-top: 20px; padding: 10px 20px; font-size: 0.9em;" onclick="deleteRound(${round.id})">Slet Runde</button>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Delete a round
+        function deleteRound(roundId) {
+            if (!confirm('Er du sikker på, at du vil slette denne runde?')) {
+                return;
+            }
+
+            let rounds = loadRounds();
+            rounds = rounds.filter(r => r.id !== roundId);
+            saveRounds(rounds);
+            updateDisplay();
+        }
+
+        // Clear all data
+        function clearAllData() {
+            if (confirm('Er du SIKKER på, at du vil slette ALLE data? Dette kan ikke fortrydes!')) {
+                if (confirm('Sidste chance! Vil du virkelig slette alt?')) {
+                    localStorage.removeItem('golfRounds');
+                    updateDisplay();
+                    alert('Alle data er slettet');
+                }
+            }
+        }
+
+        // Export data
+        function exportData() {
+            const rounds = loadRounds();
+            const dataStr = JSON.stringify(rounds, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `golf-turnering-backup-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+        }
+
+        // Update all displays
+        function updateDisplay() {
+            updateLeaderboard();
+            updateRoundsHistory();
+        }
+
+        // Set today's date as default
+        document.getElementById('roundDate').valueAsDate = new Date();
+
+        // Initialize
+        initializePlayerInputs();
+        updateDisplay();
+    </script>
+</body>
+</html>
