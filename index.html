@@ -624,6 +624,39 @@
             <section style="margin-top: 50px; padding: 30px; background: #fff3cd; border-radius: 10px; border: 2px solid #ffc107;">
                 <h3 style="color: #856404; margin-bottom: 20px;">⚙️ Administration</h3>
                 
+                <div id="sheetsSetupInstructions" style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                    <h4 style="color: #856404; margin-bottom: 15px;">📊 Google Sheets Setup (Engangsopgave)</h4>
+                    <p style="margin-bottom: 10px;"><strong>Trin 1:</strong> <a href="https://docs.google.com/spreadsheets/create" target="_blank">Opret et nyt Google Sheet</a></p>
+                    <p style="margin-bottom: 10px;"><strong>Trin 2:</strong> Navngiv arket "Runder" og tilføj disse kolonneoverskrifter i række 1:</p>
+                    <p style="margin-left: 20px; font-family: monospace; background: #f5f5f5; padding: 10px; border-radius: 5px;">
+                        A1: RoundID | B1: CourseName | C1: Date | D1: PlayerName | E1: Score | F1: Points | G1: Placement | H1: Tied
+                    </p>
+                    <p style="margin-bottom: 10px; margin-top: 15px;"><strong>Trin 3:</strong> Gør sheetet offentligt tilgængeligt:</p>
+                    <ul style="margin-left: 30px; margin-bottom: 10px;">
+                        <li>Klik på "Del" (Share) knappen</li>
+                        <li>Klik "Skift til alle med linket" (Change to anyone with the link)</li>
+                        <li>Vælg "Viewer" (Læser)</li>
+                    </ul>
+                    <p style="margin-bottom: 10px;"><strong>Trin 4:</strong> Publicér som CSV:</p>
+                    <ul style="margin-left: 30px; margin-bottom: 10px;">
+                        <li>Gå til "Filer" → "Del" → "Publicer på nettet" (File → Share → Publish to web)</li>
+                        <li>Vælg arket "Runder"</li>
+                        <li>Vælg format "Comma-separated values (.csv)"</li>
+                        <li>Klik "Publicer" (Publish)</li>
+                        <li>Kopier det lange URL der starter med "https://docs.google.com/spreadsheets/..."</li>
+                    </ul>
+                    <p style="margin-bottom: 10px;"><strong>Trin 5:</strong> Rediger index.html filen:</p>
+                    <ul style="margin-left: 30px; margin-bottom: 10px;">
+                        <li>Find linjen: <code>const GOOGLE_SHEETS_URL = 'YOUR_GOOGLE_SHEETS_CSV_URL_HERE';</code></li>
+                        <li>Erstat 'YOUR_GOOGLE_SHEETS_CSV_URL_HERE' med dit URL</li>
+                        <li>Sæt <code>const USE_GOOGLE_SHEETS = true;</code></li>
+                        <li>Upload den opdaterede index.html til GitHub</li>
+                    </ul>
+                    <p style="background: #e7f3ff; padding: 10px; border-radius: 5px; margin-top: 15px;">
+                        💡 <strong>Tip:</strong> Når Google Sheets er aktiveret, indtaster du runder direkte i Google Sheets (meget nemt på mobil!), og alle ser automatisk opdateringerne på hjemmesiden.
+                    </p>
+                </div>
+                
                 <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
                     <button class="secondary" onclick="exportData()">Eksporter Data (JSON)</button>
                     <button class="secondary" onclick="exportForGoogleSheets()">Eksporter til Sheets (CSV)</button>
@@ -632,11 +665,8 @@
                     <button class="danger" onclick="clearAllData()">Slet Alle Data</button>
                 </div>
                 <p style="margin-top: 15px; color: #856404; font-size: 0.95em;">
-                    <strong>Google Sheets:</strong> Data læses automatisk fra dit Google Sheet. 
-                    Indtast nye runder direkte i sheetet, og alle ser opdateringerne når de genindlæser siden.
-                </p>
-                <p style="margin-top: 10px; color: #856404; font-size: 0.95em;">
-                    <strong>Link til dit sheet:</strong> <a href="https://docs.google.com/spreadsheets/d/1vQJlVFWPaVOBOCro9c5dN3S0eba3oaL7OSPa5hokYI603LXOldRy7lNPLEEA3dQb2j2h9vruitqUwae/" target="_blank">Åbn GUCCI Golf 2026 sheet</a>
+                    <strong>Bemærk:</strong> Indtil Google Sheets er konfigureret, gemmes data lokalt i din browser. 
+                    Efter Google Sheets setup, læses alle data fra sheetet og alle kan se dem.
                 </p>
             </section>
         </div>
