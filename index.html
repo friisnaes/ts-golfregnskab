@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUCCI Golf - Årlig Turnering</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 20px;
+
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+
+
+        header {
+            background: linear-gradient(135deg, #2c5f2d 0%, #97bc62 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+
+
+        .tagline {
+            font-size: 1.3em;
+            font-style: italic;
+            opacity: 0.95;
+
+
+        .content {
+            padding: 60px 40px;
+
+
+        h2 {
+            color: #2c5f2d;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #97bc62;
+
+
+        /* Leaderboard styles */
+        .leaderboard-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 50px;
+
+
+        .leaderboard-item {
+            background: white;
+            padding: 25px 30px;
+            margin: 20px 0;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+
+
+        .leaderboard-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+
+
+        .rank {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #2c5f2d;
+            min-width: 80px;
+
+
+        .player-info {
+            flex-grow: 1;
+            padding: 0 20px;
+
+
+        .player-name {
+            font-size: 1.8em;
+            font-weight: 600;
+            color: #2c3e50;
+
+
+        .player-details {
+            font-size: 0.95em;
+            color: #7f8c8d;
+            margin-top: 5px;
+
+
+        .total-score {
+            font-size: 2.5em;
+            color: #2c5f2d;
+            font-weight: bold;
+            text-align: right;
+            min-width: 100px;
+
+
+        /* Round card styles */
+        .rounds-section {
+            margin: 50px 0;
+
+
+        .round-card {
+            background: white;
+            border-left: 5px solid #97bc62;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+
+
+        .round-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #ecf0f1;
+
+
+        .round-title {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #2c5f2d;
+
+
+        .round-date {
+            color: #7f8c8d;
+            font-size: 1.1em;
+
+
+        .course-name {
+            color: #34495e;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-style: italic;
+
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+
+
+        .results-table th {
+            background: #f8f9fa;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #2c5f2d;
+            border-bottom: 2px solid #dee2e6;
+
+
+        .results-table td {
+            padding: 15px;
+            border-bottom: 1px solid #ecf0f1;
+
+
+        .results-table tr:last-child td {
+            border-bottom: none;
+
+
+        .results-table .placement {
+            font-weight: bold;
+            color: #2c5f2d;
+            font-size: 1.3em;
+
+
+        .results-table .points {
+            font-weight: bold;
+            color: #27ae60;
+            font-size: 1.4em;
+
+
+        /* Tournament format section */
+        .format-section {
+            background: #e8f5e9;
+            border-left: 5px solid #2c5f2d;
+            padding: 30px;
+            margin: 50px 0;
+            border-radius: 10px;
+
+
+        .format-section h3 {
+            color: #2c5f2d;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+
+
+        .format-section p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 15px;
+
+
+        .format-rules {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+
+
+        .format-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #97bc62;
+
+
+        .format-card h4 {
+            color: #2c5f2d;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+
+
+        /* Add round form */
+        .add-round-section {
+            background: #fff9e6;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 50px 0;
+            border: 2px solid #97bc62;
+
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+
+
+        .input-group {
+            margin-bottom: 20px;
+
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c5f2d;
+            font-weight: 600;
+
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border 0.3s;
+
+
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: #2c5f2d;
+
+
+        .player-score-input {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+
+
+        button {
+            background: linear-gradient(135deg, #2c5f2d 0%, #97bc62 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            margin: 10px 5px;
+
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(44, 95, 45, 0.4);
+
+
+        button.secondary {
+            background: #95a5a6;
+
+
+        button.secondary:hover {
+            background: #7f8c8d;
+
+
+        button.danger {
+            background: #e74c3c;
+
+
+        button.danger:hover {
+            background: #c0392b;
+
+
+        footer {
+            background: #34495e;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            animation: fadeIn 0.3s;
+
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            animation: slideIn 0.3s;
+
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+
+
+        .modal-header {
+            background: linear-gradient(135deg, #2c5f2d 0%, #97bc62 100%);
+            color: white;
+            padding: 30px 40px;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 2em;
+
+
+        .close {
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            line-height: 1;
+
+
+        .close:hover {
+            transform: scale(1.2);
+
+
+        .modal-body {
+            padding: 40px;
+            max-height: 60vh;
+            overflow-y: auto;
+
+
+        .player-summary {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+
+
+        .stat-box {
+            text-align: center;
+
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #2c5f2d;
+
+
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-top: 5px;
+
+
+        .rounds-list {
+            margin-top: 20px;
+
+
+        .round-item {
+            background: white;
+            border: 2px solid #ecf0f1;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 20px;
+            align-items: center;
+            transition: all 0.3s;
+
+
+        .round-item:hover {
+            border-color: #97bc62;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+
+
+        .round-item.best-15 {
+            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+            border-color: #2c5f2d;
+            font-weight: bold;
+
+
+        .round-number {
+            font-size: 1.5em;
+            color: #2c5f2d;
+            font-weight: bold;
+            min-width: 50px;
+
+
+        .round-details {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+
+        .round-course {
+            font-size: 1.1em;
+            color: #2c3e50;
+
+
+        .round-date {
+            color: #7f8c8d;
+            font-size: 0.9em;
+
+
+        .round-points {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #2c5f2d;
+            text-align: right;
+
+
+        .clickable {
+            cursor: pointer;
+            transition: all 0.3s;
+
+
+        .clickable:hover {
+            transform: translateX(5px);
+
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.6em; }
+            .content { padding: 20px 15px; }
+            header { padding: 30px 20px; }
+            
+            .leaderboard-item {
+                padding: 15px !important;
+                margin: 10px 0 !important;
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+    
+            
+            .rank {
+                font-size: 1.8em !important;
+                min-width: 60px !important;
+                margin: 0 !important;
+    
+            
+            .player-info {
+                flex: 1 !important;
+                padding: 0 15px !important;
+    
+            
+            .player-name {
+                font-size: 1.3em !important;
+    
+            
+            .player-details {
+                font-size: 0.8em !important;
+                margin-top: 3px !important;
+    
+            
+            .total-score {
+                font-size: 2em !important;
+                min-width: 70px !important;
+                margin: 0 !important;
+    
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⛳ GUCCI Golf</h1>
+            <p class="tagline">Årlig Turnering 2026</p>
+        </header>
+
+        <div class="content">
+            <!-- Leaderboard -->
+            <section>
+                <h2>🏆 Samlet Stilling</h2>
+                <p style="font-size: 1.1em; color: #7f8c8d; margin-bottom: 20px;">
+                    Baseret på de 15 bedste runder for hver spiller
+                </p>
+                <div class="leaderboard-section" id="leaderboard">
+                    <!-- Dynamically filled -->
+        
+            </section>
+
+            <!-- Add Round Form -->
+
+            <!-- Rounds History -->
+            <section class="rounds-section">
+                <h2>📋 Spillede Runder</h2>
+                <div id="roundsHistory">
+                    <!-- Dynamically filled -->
+        
+            </section>
+
+            <!-- Tournament Format -->
+            <section class="format-section">
+                <h3>📖 Turneringsformat</h3>
+                <p><strong>Grundlæggende regler:</strong></p>
+                <p>Vi spiller en løbende turnering gennem sæsonen, hvor kun de 15 bedste runder tæller for hver spiller.</p>
+                
+                <div class="format-rules">
+                    <div class="format-card">
+                        <h4>2 Spillere</h4>
+                        <p>Vinder: <strong>1 point</strong><br>Taber: <strong>0 point</strong></p>
+            
+                    <div class="format-card">
+                        <h4>3 Spillere</h4>
+                        <p>1. plads: <strong>2 point</strong><br>
+                           2. plads: <strong>1 point</strong><br>
+                           3. plads: <strong>0 point</strong></p>
+            
+                    <div class="format-card">
+                        <h4>4 Spillere</h4>
+                        <p>1. plads: <strong>3 point</strong><br>
+                           2. plads: <strong>2 point</strong><br>
+                           3. plads: <strong>1 point</strong><br>
+                           4. plads: <strong>0 point</strong></p>
+            
+                    <div class="format-card">
+                        <h4>⚖️ Delte Placeringer</h4>
+                        <p>Ved lige antal Stableford point deles pointene ligeligt mellem spillerne.<br><br>
+                        <em>Eksempel: To spillere deler 1. plads med 4 spillere - hver får (3+2)/2 = 2,5 point</em></p>
+            
+        
+
+                <p style="margin-top: 25px;"><strong>Spillere:</strong> Thomas, Henrik, Kim, Morten</p>
+                <p><strong>Scoring:</strong> Stableford point-system</p>
+                <p><strong>Sæson:</strong> Kun de 15 bedste runder tæller i den endelige opgørelse</p>
+            </section>
+
+            <!-- Admin Section -->
+            <section style="margin-top: 50px; padding: 30px; background: #fff3cd; border-radius: 10px; border: 2px solid #ffc107;">
+                <h3 style="color: #856404; margin-bottom: 20px;">⚙️ Administration</h3>
+                
+                <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+                    <button class="secondary" onclick="exportData()">Eksporter Data (JSON)</button>
+                    <button class="secondary" onclick="exportForGoogleSheets()">Eksporter til Sheets (CSV)</button>
+                    <button class="secondary" onclick="document.getElementById('importFile').click()">Importer Data</button>
+                    <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importData(event)">
+                    <button class="danger" onclick="clearAllData()">Slet Alle Data</button>
+        
+                <p style="margin-top: 15px; color: #856404; font-size: 0.95em;">
+                    <strong>Google Sheets:</strong> Data læses automatisk fra dit Google Sheet. 
+                    Indtast nye runder direkte i sheetet, og alle ser opdateringerne når de genindlæser siden.
+                </p>
+                <p style="margin-top: 10px; color: #856404; font-size: 0.95em;">
+                    <strong>Link til dit sheet:</strong> <a href="https://docs.google.com/spreadsheets/d/1vQJlVFWPaVOBOCro9c5dN3S0eba3oaL7OSPa5hokYI603LXOldRy7lNPLEEA3dQb2j2h9vruitqUwae/" target="_blank">Åbn GUCCI Golf 2026 sheet</a>
+                </p>
+            </section>
+
+
+        <!-- Player Details Modal -->
+        <div id="playerModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalPlayerName"></h3>
+                    <span class="close" onclick="closePlayerModal()">&times;</span>
+        
+                <div class="modal-body">
+                    <div class="player-summary">
+                        <div class="stat-box">
+                            <div class="stat-value" id="modalTotalRounds">0</div>
+                            <div class="stat-label">Total Runder</div>
+                
+                        <div class="stat-box">
+                            <div class="stat-value" id="modalBest15Count">0</div>
+                            <div class="stat-label">Bedste 15</div>
+                
+                        <div class="stat-box">
+                            <div class="stat-value" id="modalTotalPoints">0</div>
+                            <div class="stat-label">Samlet Point</div>
+                
+                        <div class="stat-box">
+                            <div class="stat-value" id="modalAvgPoints">0</div>
+                            <div class="stat-label">Gns. Point (Top 15)</div>
+                
+                        <div class="stat-box">
+                            <div class="stat-value" id="modalBestStableford">0</div>
+                            <div class="stat-label">Bedste Stableford</div>
+                
+                        <div class="stat-box">
+                            <div class="stat-value" id="modalAvgStableford">0</div>
+                            <div class="stat-label">Gns. Stableford (alle)</div>
+                
+            
+                    <h4 style="color: #2c5f2d; margin-bottom: 15px;">Alle Runder</h4>
+                    <p style="color: #7f8c8d; margin-bottom: 20px;"><em>De 15 bedste runder er markeret med grøn baggrund</em></p>
+                    <div class="rounds-list" id="modalRoundsList">
+                        <!-- Dynamically filled -->
+            
+        
+    
+
+
+        <footer>
+            <p>&copy; 2026 GUCCI Golf | Hvor præcision møder passion</p>
+        </footer>
+
+
+    <script>
+        const PLAYERS = ['Thomas', 'Henrik', 'Kim', 'Morten'];
+        const POINT_SYSTEM = {
+            2: [1, 0],
+            3: [2, 1, 0],
+            4: [3, 2, 1, 0]
+;
+        
+        // Google Sheets configuration
+        const GOOGLE_SHEETS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQJlVFWPaVOBOCro9c5dN3S0eba3oaL7OSPa5hokYI603LXOldRy7lNPLEEA3dQb2j2h9vruitqUwae/pub?gid=0&single=true&output=csv';
+        const USE_GOOGLE_SHEETS = true;
+
+        // Load data from localStorage
+        function loadRounds() {
+            const rounds = localStorage.getItem('golfRounds');
+            return rounds ? JSON.parse(rounds) : [];
+
+
+        // Load data from Google Sheets
+        async function loadRoundsFromSheets() {
+            if (!USE_GOOGLE_SHEETS || GOOGLE_SHEETS_URL === 'YOUR_GOOGLE_SHEETS_CSV_URL_HERE') {
+                console.log('Using localStorage');
+                return loadRounds();
+    
+            
+            try {
+                console.log('Fetching from Google Sheets:', GOOGLE_SHEETS_URL);
+                const response = await fetch(GOOGLE_SHEETS_URL, {
+                    mode: 'cors',
+                    cache: 'no-cache'
+    
+                console.log('Response status:', response.status);
+                const csvText = await response.text();
+                console.log('CSV length:', csvText.length);
+                console.log('First 200 chars:', csvText.substring(0, 200));
+                const rounds = parseCSVToRounds(csvText);
+                console.log('Parsed rounds:', rounds.length);
+                return rounds;
+     catch (error) {
+                console.error('Error loading from Google Sheets:', error);
+                alert('Fejl ved indlæsning fra Google Sheets. Tjek console.');
+                return loadRounds();
+    
+
+
+        // Parse CSV to rounds format
+        function parseCSVToRounds(csvText) {
+            const lines = csvText.trim().split('\n');
+            const rounds = {};
+            
+            // Skip header line (index 0)
+            for (let i = 1; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (!line) continue;
+                
+                const parts = line.split(',');
+                if (parts.length < 8) continue; // Must have all 8 columns
+                
+                const roundID = parts[0];
+                const courseName = parts[1];
+                const date = parts[2];
+                const playerName = parts[3];
+                const score = parseInt(parts[4]);
+                const points = parseFloat(parts[5]);
+                const placement = parseInt(parts[6]);
+                const tied = parts[7].toUpperCase() === 'TRUE';
+                
+                // Create round if it doesn't exist
+                if (!rounds[roundID]) {
+                    rounds[roundID] = {
+                        id: parseInt(roundID) || Date.now(),
+                        courseName: courseName,
+                        date: date,
+                        results: []
+            ;
+        
+                
+                // Add player result to round
+                rounds[roundID].results.push({
+                    name: playerName,
+                    score: score,
+                    points: points,
+                    placement: placement,
+                    tied: tied
+    
+    
+            
+            // Convert object to array
+            return Object.values(rounds);
+
+
+        // Save data to localStorage
+        function saveRounds(rounds) {
+            localStorage.setItem('golfRounds', JSON.stringify(rounds));
+
+
+        
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            
+                
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+        // Calculate placements and points
+        function calculatePlacements() {
+            const playingPlayers = [];
+            
+            PLAYERS.forEach(player => {
+    
+    
+                
+                if (checkbox.checked && scoreInput.value) {
+                    playingPlayers.push({
+                        name: player,
+                        score: parseInt(scoreInput.value)
+        
+        
+
+
+            if (playingPlayers.length === 0) return [];
+
+            // Sort by score (highest first), then by name for consistency
+            playingPlayers.sort((a, b) => {
+                if (b.score !== a.score) return b.score - a.score;
+                return a.name.localeCompare(b.name);
+
+
+            const numPlayers = playingPlayers.length;
+            const pointSystem = POINT_SYSTEM[numPlayers];
+
+            if (!pointSystem) return [];
+
+            // Clear all placement displays first
+            PLAYERS.forEach(player => {
+                const placementDiv = document.getElementById(`placement_${player}`);
+                if (placementDiv) placementDiv.textContent = '-';
+
+
+            // Assign placements and calculate shared points
+            const results = [];
+            let i = 0;
+            
+            while (i < playingPlayers.length) {
+                const currentScore = playingPlayers[i].score;
+                const currentRank = i + 1; // Rank starts from current position
+                
+                // Find all players with the same score
+                const tiedPlayers = [];
+                let j = i;
+                while (j < playingPlayers.length && playingPlayers[j].score === currentScore) {
+                    tiedPlayers.push(playingPlayers[j]);
+                    j++;
+        
+                
+                // Calculate total points for these positions
+                let totalPoints = 0;
+                for (let k = 0; k < tiedPlayers.length; k++) {
+                    if (i + k < pointSystem.length) {
+                        totalPoints += pointSystem[i + k];
+            
+        
+                
+                // Calculate shared points
+                const sharedPoints = totalPoints / tiedPlayers.length;
+                
+                // Assign to all tied players
+                tiedPlayers.forEach(player => {
+                    const displayPoints = sharedPoints % 1 === 0 ? sharedPoints : sharedPoints.toFixed(1);
+                    const placementText = tiedPlayers.length > 1 ? 
+                        `Delt ${currentRank}. plads (${displayPoints} pt)` : 
+                        `${currentRank}. plads (${displayPoints} pt)
+                    
+                    const placementDiv = document.getElementById(`placement_${player.name}`);
+                    if (placementDiv) {
+                        placementDiv.textContent = placementText;
+            
+                    
+                    results.push({
+                        name: player.name,
+                        score: player.score,
+                        placement: currentRank,
+                        points: sharedPoints,
+                        tied: tiedPlayers.length > 1
+        
+    
+                
+                // Move to next group of players
+                i = j;
+    
+
+            return results;
+
+
+        // Auto-calculate placements when scores change
+        PLAYERS.forEach(player => {
+
+            if (scoreInput) {
+                scoreInput.addEventListener('input', calculatePlacements);
+    
+);
+
+        // Add a new round
+        function addRound() {
+            const courseName = document.getElementById('courseName').value.trim();
+            const roundDate = document.getElementById('roundDate').value;
+            
+            if (!courseName || !roundDate) {
+                alert('Indtast venligst banenavn og dato');
+                return;
+    
+
+            const results = calculatePlacements();
+            
+            if (results.length < 2) {
+                alert('Der skal mindst være 2 spillere');
+                return;
+    
+
+            const rounds = loadRounds();
+            rounds.push({
+                id: Date.now(),
+                courseName,
+                date: roundDate,
+                results
+
+
+            saveRounds(rounds);
+            updateDisplay();
+            resetForm();
+            alert('Runde tilføjet!');
+
+
+        // Reset form
+        function resetForm() {
+            document.getElementById('courseName').value = '';
+            document.getElementById('roundDate').value = '';
+            PLAYERS.forEach(player => {
+                document.getElementById(`playing_${player}`).checked = true;
+                document.getElementById(`score_${player}`).value = '';
+                document.getElementById(`score_${player}`).disabled = false;
+                document.getElementById(`placement_${player}`).textContent = '-';
+
+
+
+        // Calculate leaderboard
+        async function calculateLeaderboard() {
+            const rounds = await loadRoundsFromSheets();
+            const playerStats = {};
+
+            PLAYERS.forEach(player => {
+                playerStats[player] = {
+                    name: player,
+                    allRounds: [],
+                    totalRounds: 0,
+                    best15Total: 0
+        ;
+
+
+            // Collect all rounds for each player
+            rounds.forEach(round => {
+                round.results.forEach(result => {
+                    if (playerStats[result.name]) {
+                        playerStats[result.name].allRounds.push({
+                            points: result.points,
+                            date: round.date,
+                            course: round.courseName
+            
+                        playerStats[result.name].totalRounds++;
+            
+    
+
+
+            // Calculate best 15 for each player
+            Object.values(playerStats).forEach(player => {
+                player.allRounds.sort((a, b) => b.points - a.points);
+                player.best15 = player.allRounds.slice(0, 15);
+                player.best15Total = player.best15.reduce((sum, round) => sum + round.points, 0);
+
+
+            // Sort by best 15 total
+            const sortedPlayers = Object.values(playerStats).sort((a, b) => b.best15Total - a.best15Total);
+
+            return sortedPlayers;
+
+
+        // Update leaderboard display
+        async function updateLeaderboard() {
+            const leaderboard = await calculateLeaderboard();
+            const container = document.getElementById('leaderboard');
+            
+            if (leaderboard.every(p => p.totalRounds === 0)) {
+                container.innerHTML = '<p style="text-align: center; font-size: 1.2em; color: #7f8c8d;">Ingen runder spillet endnu</p>';
+                return;
+    
+
+            const medals = ['🥇', '🥈', '🥉', ''];
+            
+            let html = '';
+            leaderboard.forEach((player, index) => {
+                const medal = medals[index] || '';
+                const avgPoints = player.best15.length > 0 ? (player.best15Total / player.best15.length).toFixed(1) : '0.0';
+                html += `
+                    <div class="leaderboard-item clickable" onclick="showPlayerDetails('${player.name}')">
+                        <span class="rank">#${index + 1} ${medal}</span>
+                        <div class="player-info">
+                            <div class="player-name">${player.name}</div>
+                            <div class="player-details">
+                                ${player.totalRounds} runder spillet | 
+                                Bedste 15: ${Math.min(player.totalRounds, 15)} runder | 
+                                Gns: ${avgPoints} point
+                    
+                
+                        <div class="total-score">${player.best15Total}</div>
+            
+                
+
+            
+            container.innerHTML = html;
+
+
+        // Update rounds history display
+        async function updateRoundsHistory() {
+            const rounds = await loadRoundsFromSheets();
+            const container = document.getElementById('roundsHistory');
+            
+            if (rounds.length === 0) {
+                container.innerHTML = '<p style="text-align: center; font-size: 1.2em; color: #7f8c8d; padding: 40px;">Ingen runder registreret endnu</p>';
+                return;
+    
+
+            // Sort by date (newest first)
+            rounds.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            let html = '';
+            rounds.forEach((round, index) => {
+                const dateObj = new Date(round.date);
+                const formattedDate = dateObj.toLocaleDateString('da-DK', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+    
+
+                html += `
+                    <div class="round-card">
+                        <div class="round-header">
+                            <div class="round-title">Runde ${rounds.length - index}</div>
+                            <div class="round-date">${formattedDate}</div>
+                
+                        <div class="course-name">📍 ${round.courseName}</div>
+                        <table class="results-table">
+                            <thead>
+                                <tr>
+                                    <th>Placering</th>
+                                    <th>Spiller</th>
+                                    <th>Stableford Point</th>
+                                    <th>Turneringspoint</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                
+
+                round.results.forEach(result => {
+                    const placementText = result.tied ? `Delt ${result.placement}.` : `${result.placement}.
+                    const displayPoints = result.points % 1 === 0 ? result.points : result.points.toFixed(1);
+                    html += `
+                        <tr>
+                            <td class="placement">${placementText}</td>
+                            <td>${result.name}</td>
+                            <td>${result.score}</td>
+                            <td class="points">${displayPoints} pt</td>
+                        </tr>
+                    
+    
+
+                html += `
+                            </tbody>
+                        </table>
+                        <button class="danger" style="margin-top: 20px; padding: 10px 20px; font-size: 0.9em;" onclick="deleteRound(${round.id})">Slet Runde</button>
+            
+                
+
+
+            container.innerHTML = html;
+
+
+        // Delete a round
+        function deleteRound(roundId) {
+            if (!confirm('Er du sikker på, at du vil slette denne runde?')) {
+                return;
+    
+
+            let rounds = loadRounds();
+            rounds = rounds.filter(r => r.id !== roundId);
+            saveRounds(rounds);
+            updateDisplay();
+
+
+        // Clear all data
+        function clearAllData() {
+            if (confirm('Er du SIKKER på, at du vil slette ALLE data? Dette kan ikke fortrydes!')) {
+                if (confirm('Sidste chance! Vil du virkelig slette alt?')) {
+                    localStorage.removeItem('golfRounds');
+                    updateDisplay();
+                    alert('Alle data er slettet');
+        
+    
+
+
+        // Export data
+        function exportData() {
+            const rounds = loadRounds();
+            const dataStr = JSON.stringify(rounds, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `gucci-golf-backup-${new Date().toISOString().split('T')[0]}.json
+            link.click();
+            URL.revokeObjectURL(url);
+
+
+        // Export data as Google Sheets CSV format
+        function exportForGoogleSheets() {
+            const rounds = loadRounds();
+            let csv = 'RoundID,CourseName,Date,PlayerName,Score,Points,Placement,Tied\n';
+            
+            rounds.forEach(round => {
+                round.results.forEach(result => {
+                    csv += `${round.id},${round.courseName},${round.date},${result.name},${result.score},${result.points},${result.placement},${result.tied}\n
+    
+
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `gucci-golf-sheets-${new Date().toISOString().split('T')[0]}.csv
+            link.click();
+            URL.revokeObjectURL(url);
+
+
+        // Import data
+        function importData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedRounds = JSON.parse(e.target.result);
+                    
+                    // Validate that it's an array
+                    if (!Array.isArray(importedRounds)) {
+                        alert('Ugyldig fil format. Filen skal indeholde en liste af runder.');
+                        return;
+            
+                    
+                    // Ask for confirmation
+                    const currentRounds = loadRounds();
+                    const message = currentRounds.length > 0 
+                        ? `Du har ${currentRounds.length} eksisterende runder. Vil du:\n\n` +
+                          `OK = Tilføj ${importedRounds.length} nye runder til de eksisterende\n` +
+                          `Annuller = Erstat alle data med de ${importedRounds.length} importerede runder`
+                        : `Importer ${importedRounds.length} runder?
+                    
+                    const shouldMerge = currentRounds.length > 0 ? confirm(message) : true;
+                    
+                    if (currentRounds.length === 0 || !shouldMerge) {
+                        // Replace all data
+                        saveRounds(importedRounds);
+                        alert(`${importedRounds.length} runder er importeret (alle tidligere data erstattet).`);
+             else {
+                        // Merge data - add imported rounds that don't already exist
+                        const existingIds = new Set(currentRounds.map(r => r.id));
+                        const newRounds = importedRounds.filter(r => !existingIds.has(r.id));
+                        const mergedRounds = [...currentRounds, ...newRounds];
+                        saveRounds(mergedRounds);
+                        alert(`${newRounds.length} nye runder tilføjet. Total: ${mergedRounds.length} runder.`);
+            
+                    
+                    updateDisplay();
+                    
+         catch (error) {
+                    alert('Fejl ved indlæsning af fil. Sørg for at filen er en gyldig GUCCI Golf backup-fil.');
+                    console.error('Import error:', error);
+        
+    ;
+            
+            reader.readAsText(file);
+            
+            // Reset file input so the same file can be imported again if needed
+            event.target.value = '';
+
+
+        // Show player details modal
+        async function showPlayerDetails(playerName) {
+            const rounds = await loadRoundsFromSheets();
+            const playerRounds = [];
+            
+            // Collect all rounds for this player with full context
+            rounds.forEach(round => {
+                const playerResult = round.results.find(r => r.name === playerName);
+                if (playerResult) {
+                    playerRounds.push({
+                        ...playerResult,
+                        courseName: round.courseName,
+                        date: round.date,
+                        id: round.id
+        
+        
+
+            
+            // Sort by points (highest first) to identify best 15
+            playerRounds.sort((a, b) => b.points - a.points);
+            
+            // Mark best 15
+            playerRounds.forEach((round, index) => {
+                round.isBest15 = index < 15;
+
+            
+            // Sort by date (newest first) for display
+            playerRounds.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            // Calculate stats
+            const best15 = playerRounds.filter(r => r.isBest15);
+            const totalPoints = best15.reduce((sum, r) => sum + r.points, 0);
+            const avgPoints = best15.length > 0 ? (totalPoints / best15.length).toFixed(2) : '0.00';
+            
+            // Calculate Stableford stats (all rounds)
+            const bestStableford = playerRounds.length > 0 
+                ? Math.max(...playerRounds.map(r => r.score))
+                : 0;
+            const totalStableford = playerRounds.reduce((sum, r) => sum + r.score, 0);
+            const avgStableford = playerRounds.length > 0 
+                ? (totalStableford / playerRounds.length).toFixed(1)
+                : '0.0';
+            
+            // Update modal content
+            document.getElementById('modalPlayerName').textContent = playerName;
+            document.getElementById('modalTotalRounds').textContent = playerRounds.length;
+            document.getElementById('modalBest15Count').textContent = Math.min(playerRounds.length, 15);
+            document.getElementById('modalTotalPoints').textContent = totalPoints.toFixed(1);
+            document.getElementById('modalAvgPoints').textContent = avgPoints;
+            document.getElementById('modalBestStableford').textContent = bestStableford;
+            document.getElementById('modalAvgStableford').textContent = avgStableford;
+            
+            // Create rounds list
+            const roundsList = document.getElementById('modalRoundsList');
+            let html = '';
+            
+            playerRounds.forEach((round, index) => {
+                const dateObj = new Date(round.date);
+                const formattedDate = dateObj.toLocaleDateString('da-DK', { 
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric'
+    
+                
+                const placementText = round.tied ? `Delt ${round.placement}.` : `${round.placement}. plads
+                const best15Class = round.isBest15 ? 'best-15' : '';
+                const displayPoints = round.points % 1 === 0 ? round.points : round.points.toFixed(1);
+                
+                html += `
+                    <div class="round-item ${best15Class}">
+                        <div class="round-number">#${playerRounds.length - index}</div>
+                        <div class="round-details">
+                            <div class="round-course">${round.courseName}</div>
+                            <div class="round-date">${formattedDate} • ${placementText} • ${round.score} Stableford</div>
+                
+                        <div class="round-points">${displayPoints} pt</div>
+            
+                
+
+            
+            roundsList.innerHTML = html || '<p style="text-align: center; color: #7f8c8d;">Ingen runder endnu</p>';
+            
+            // Show modal
+            document.getElementById('playerModal').style.display = 'block';
+
+        
+        // Close player details modal
+        function closePlayerModal() {
+            document.getElementById('playerModal').style.display = 'none';
+
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('playerModal');
+            if (event.target == modal) {
+                closePlayerModal();
+    
+
+
+        // Update all displays
+        async function updateDisplay() {
+            await updateLeaderboard();
+            await updateRoundsHistory();
+
+
+        // Set today's date as default
+        document.getElementById('roundDate').valueAsDate = new Date();
+
+        // Initialize
+        updateDisplay();
+    </script>
+</body>
+</html>
