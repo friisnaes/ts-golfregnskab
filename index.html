@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUCCI Golf - Sæson 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark: #0c1a0e;
+            --dark-green: #142318;
+            --green: #1a3a24;
+            --green-mid: #264d34;
+            --green-light: #3a6b4a;
+            --gold: #c9a84c;
+            --gold-light: #dfc06e;
+            --gold-dim: #8a7233;
+            --cream: #f4f0e8;
+            --cream-dark: #e8e0d0;
+            --text-light: #d4cfc4;
+            --text-muted: #8a8578;
+            --white: #faf8f4;
+            --card-bg: rgba(255,255,255,0.04);
+            --card-border: rgba(201,168,76,0.15);
+            --shadow: 0 4px 30px rgba(0,0,0,0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--dark);
+            min-height: 100vh;
+        }
+
+        /* Subtle background texture */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 0%, rgba(26,58,36,0.6) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 100%, rgba(26,58,36,0.3) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .page-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ── Header / Hero ── */
+        .hero {
+            position: relative;
+            height: 340px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 60%;
+            filter: brightness(0.55) saturate(1.1);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(12,26,14,0.3) 0%,
+                rgba(12,26,14,0.5) 50%,
+                rgba(12,26,14,0.85) 100%
+            );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 0 24px;
+            animation: fadeDown 0.8s ease-out;
+        }
+
+        header {
+            padding: 0;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-size: 3.6em;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15em;
+            font-style: italic;
+            font-weight: 400;
+            color: var(--gold);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+        }
+
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            margin: 24px auto;
+            opacity: 0.5;
+        }
+
+        /* ── Sections ── */
+        section {
+            padding: 60px 0;
+        }
+
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+            font-size: 1.6em;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeUp 0.6s ease-out forwards;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-subtitle {
+            font-size: 0.82em;
+            color: var(--text-muted);
+            letter-spacing: 0.08em;
+            margin-top: -30px;
+            margin-bottom: 36px;
+        }
+
+        /* ── Leaderboard ── */
+        .leaderboard {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .player-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 24px 32px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            opacity: 0;
+            animation: fadeUp 0.5s ease-out forwards;
+        }
+
+        .player-card:nth-child(1) { animation-delay: 0.1s; }
+        .player-card:nth-child(2) { animation-delay: 0.2s; }
+        .player-card:nth-child(3) { animation-delay: 0.3s; }
+        .player-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .player-card:hover {
+            background: rgba(201,168,76,0.06);
+            border-color: rgba(201,168,76,0.35);
+            transform: translateX(6px);
+        }
+
+        .player-card.leader {
+            border-color: rgba(201,168,76,0.4);
+            background: linear-gradient(135deg, rgba(201,168,76,0.08) 0%, rgba(201,168,76,0.02) 100%);
+        }
+
+        .rank {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2em;
+            font-weight: 600;
+            color: var(--gold-dim);
+            min-width: 48px;
+            text-align: center;
+        }
+
+        .player-card.leader .rank {
+            color: var(--gold);
+        }
+
+        .player-info {
+            flex: 1;
+        }
+
+        .player-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5em;
+            font-weight: 600;
+            color: var(--white);
+            letter-spacing: 0.04em;
+        }
+
+        .player-card.leader .player-name {
+            color: var(--gold-light);
+        }
+
+        .player-stats {
+            font-size: 0.78em;
+            color: var(--text-muted);
+            margin-top: 4px;
+            letter-spacing: 0.04em;
+        }
+
+        .total-points {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.4em;
+            font-weight: 700;
+            color: var(--white);
+            min-width: 80px;
+            text-align: right;
+            letter-spacing: -0.02em;
+        }
+
+        .total-points .unit {
+            font-size: 0.4em;
+            font-weight: 400;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+
+        /* ── Rounds ── */
+        .rounds-section {
+            border-top: 1px solid var(--card-border);
+        }
+
+        .round {
+            border: 1px solid var(--card-border);
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeUp 0.5s ease-out forwards;
+        }
+
+        .round-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 24px 28px 16px;
+        }
+
+        .round-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15em;
+            font-weight: 600;
+            color: var(--white);
+            letter-spacing: 0.06em;
+        }
+
+        .round-date {
+            font-size: 0.78em;
+            color: var(--text-muted);
+            letter-spacing: 0.04em;
+        }
+
+        .course {
+            padding: 0 28px 20px;
+            font-size: 0.88em;
+            color: var(--gold-dim);
+            font-style: italic;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 0.03em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            padding: 12px 28px;
+            text-align: left;
+            font-size: 0.7em;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            background: rgba(0,0,0,0.15);
+            border-top: 1px solid var(--card-border);
+        }
+
+        td {
+            padding: 14px 28px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            font-size: 0.92em;
+        }
+
+        tr:first-child td {
+            border-top: none;
+        }
+
+        .placement {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-size: 1.1em;
+            color: var(--white);
+        }
+
+        .points {
+            font-weight: 500;
+            color: var(--gold);
+            font-size: 1em;
+        }
+
+        /* ── Empty state ── */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+            font-style: italic;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1em;
+            letter-spacing: 0.04em;
+        }
+
+        /* ── Footer ── */
+        footer {
+            text-align: center;
+            padding: 48px 0;
+            border-top: 1px solid var(--card-border);
+            margin-top: 20px;
+        }
+
+        footer p {
+            font-size: 0.75em;
+            color: var(--text-muted);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        /* ── Modal ── */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.75);
+            overflow-y: auto;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+
+        .modal.active {
+            display: block;
+            animation: fadeIn 0.25s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: var(--dark-green);
+            border: 1px solid var(--card-border);
+            margin: 60px auto;
+            border-radius: 6px;
+            max-width: 700px;
+            width: 90%;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+            animation: modalSlide 0.3s ease-out;
+        }
+
+        @keyframes modalSlide {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            padding: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .modal-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-size: 1.8em;
+            color: var(--white);
+            letter-spacing: 0.06em;
+            margin: 0;
+            animation: none;
+            opacity: 1;
+            text-transform: none;
+        }
+
+        .close {
+            color: var(--text-muted);
+            font-size: 1.8em;
+            cursor: pointer;
+            transition: color 0.2s;
+            line-height: 1;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close:hover {
+            color: var(--white);
+            background: rgba(255,255,255,0.06);
+        }
+
+        .modal-body {
+            padding: 32px;
+        }
+
+        .player-summary {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 36px;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 16px 8px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 4px;
+        }
+
+        .stat-label {
+            font-size: 0.68em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .rounds-list h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+            font-size: 1em;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold-dim);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .round-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 16px;
+            margin: 6px 0;
+            border-radius: 3px;
+            border-left: 3px solid transparent;
+            transition: background 0.2s;
+        }
+
+        .round-item:hover {
+            background: rgba(255,255,255,0.02);
+        }
+
+        .round-item.top15 {
+            background: rgba(201,168,76,0.05);
+            border-left-color: var(--gold);
+        }
+
+        .round-item.top15 .round-points {
+            color: var(--gold);
+        }
+
+        .round-info {
+            flex: 1;
+        }
+
+        .round-course {
+            font-weight: 500;
+            color: var(--text-light);
+            font-size: 0.92em;
+        }
+
+        .modal .round-date {
+            font-size: 0.78em;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .round-score {
+            text-align: center;
+            margin: 0 20px;
+            font-size: 0.9em;
+            color: var(--text-muted);
+        }
+
+        .round-points {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--text-light);
+            min-width: 60px;
+            text-align: right;
+        }
+
+        /* ── Mobile ── */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.4em;
+                letter-spacing: 0.08em;
+            }
+
+            .hero {
+                height: 260px;
+            }
+
+            .tagline {
+                font-size: 0.95em;
+                letter-spacing: 0.15em;
+            }
+
+            section {
+                padding: 40px 0;
+            }
+
+            h2 {
+                font-size: 1.3em;
+                margin-bottom: 28px;
+            }
+
+            .player-card {
+                padding: 18px 20px;
+                gap: 16px;
+            }
+
+            .rank {
+                font-size: 1.5em;
+                min-width: 36px;
+            }
+
+            .player-name {
+                font-size: 1.2em;
+            }
+
+            .player-stats {
+                font-size: 0.72em;
+            }
+
+            .total-points {
+                font-size: 1.8em;
+                min-width: 60px;
+            }
+
+            .round-header {
+                flex-direction: column;
+                gap: 4px;
+                padding: 18px 20px 12px;
+            }
+
+            .course {
+                padding: 0 20px 16px;
+            }
+
+            th, td {
+                padding: 10px 16px;
+            }
+
+            .modal-content {
+                margin: 20px auto;
+                width: 94%;
+            }
+
+            .player-summary {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .round-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+
+            .round-score {
+                margin: 0;
+            }
+
+            .round-points {
+                align-self: flex-end;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-wrapper {
+                padding: 0 16px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .player-card {
+                padding: 14px 16px;
+                gap: 12px;
+            }
+
+            .rank {
+                font-size: 1.3em;
+                min-width: 30px;
+            }
+
+            .player-name {
+                font-size: 1.05em;
+            }
+
+            .total-points {
+                font-size: 1.5em;
+                min-width: 50px;
+            }
+
+            table {
+                font-size: 0.85em;
+                display: block;
+                overflow-x: auto;
+            }
+
+            th, td {
+                padding: 10px 12px;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <header>
+            <div class="hero">
+                <img class="hero-img" src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=1400&q=80&auto=format" alt="Golf course">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h1>GUCCI Golf</h1>
+                    <div class="divider"></div>
+                    <p class="tagline">Sæson 2026</p>
+                </div>
+            </div>
+        </header>
+
+        <section>
+            <h2>Samlet Stilling</h2>
+            <p class="section-subtitle">Baseret på de 15 bedste runder for hver spiller</p>
+            <div id="leaderboard" class="leaderboard">
+                <div class="empty-state">Indlæser...</div>
+            </div>
+        </section>
+
+        <section class="rounds-section">
+            <h2>Spillede Runder</h2>
+            <div id="rounds">
+                <div class="empty-state">Indlæser...</div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 GUCCI Golf &mdash; Hvor præcision møder passion</p>
+        </footer>
+    </div>
+
+    <!-- Player Details Modal -->
+    <div id="playerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalPlayerName"></h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="player-summary" id="playerSummary"></div>
+                <div class="rounds-list">
+                    <h3>Alle runder</h3>
+                    <div id="playerRounds"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ╔══════════════════════════════════════════════════════════════════╗
+        // ║                    SPILLERE OG DATA                            ║
+        // ║                                                                ║
+        // ║  Her kan du redigere spillernavne og tilføje nye runder.       ║
+        // ║  Følg formatet nøjagtigt — se eksemplerne nedenfor.           ║
+        // ╚══════════════════════════════════════════════════════════════════╝
+
+        // --- SPILLERE ---
+        const PLAYERS = ['Thomas', 'Henrik', 'Kim', 'Morten'];
+
+        // --- RUNDER ---
+        // POINTSYSTEM:
+        //   Sidstepladsen får altid 0, derefter +1 op for hver bedre placering.
+        //   4 spillere: 3-2-1-0 (6 point i spil)
+        //   3 spillere: 2-1-0   (3 point i spil)
+        //   2 spillere: 1-0     (1 point i spil)
+        //   Delt placering: pointene lægges sammen og deles med antal
+        //
+        // Tilføj nye runder nederst. Kopier skabelonen og udfyld:
+        //
+        // {
+        //     course: "Banenavn",
+        //     date: "2026-MM-DD",
+        //     results: [
+        //         { player: "Thomas",  score: 00, points: 0, placement: 0, tied: false },
+        //         { player: "Henrik",  score: 00, points: 0, placement: 0, tied: false },
+        //         { player: "Kim",     score: 00, points: 0, placement: 0, tied: false },
+        //         { player: "Morten",  score: 00, points: 0, placement: 0, tied: false },
+        //     ]
+        // },
+
+        const ROUNDS_DATA = [
+
+            // ===== SÆSON 2026 — DEMO DATA =====
+
+            { // Runde 1 — alle 4, delt plac. (4 spillere: 3-2-1-0)
+                course: "Rungsted Golf Klub",
+                date: "2026-01-10",
+                results: [
+                    { player: "Kim",      score: 40, points: 3,   placement: 1, tied: false },
+                    { player: "Thomas",   score: 31, points: 1.5, placement: 2, tied: true },
+                    { player: "Morten",   score: 31, points: 1.5, placement: 2, tied: true },
+                    { player: "Henrik",   score: 25, points: 0,   placement: 4, tied: false },
+                ]
+            },
+            { // Runde 2 — alle 4 (4 spillere: 3-2-1-0)
+                course: "Kokkedal Golfklub",
+                date: "2026-01-24",
+                results: [
+                    { player: "Kim",      score: 36, points: 3,   placement: 1, tied: false },
+                    { player: "Thomas",   score: 35, points: 2,   placement: 2, tied: false },
+                    { player: "Morten",   score: 34, points: 1,   placement: 3, tied: false },
+                    { player: "Henrik",   score: 33, points: 0,   placement: 4, tied: false },
+                ]
+            },
+            { // Runde 3 — uden Kim (3 spillere: 2-1-0)
+                course: "Hillerød Golfklub",
+                date: "2026-02-07",
+                results: [
+                    { player: "Morten",   score: 42, points: 2,   placement: 1, tied: false },
+                    { player: "Henrik",   score: 28, points: 1,   placement: 2, tied: false },
+                    { player: "Thomas",   score: 27, points: 0,   placement: 3, tied: false },
+                ]
+            },
+            { // Runde 4 — alle 4 (4 spillere: 3-2-1-0)
+                course: "Skovbo Golfklub",
+                date: "2026-02-21",
+                results: [
+                    { player: "Henrik",   score: 41, points: 3,   placement: 1, tied: false },
+                    { player: "Thomas",   score: 36, points: 2,   placement: 2, tied: false },
+                    { player: "Kim",      score: 32, points: 1,   placement: 3, tied: false },
+                    { player: "Morten",   score: 30, points: 0,   placement: 4, tied: false },
+                ]
+            },
+            { // Runde 5 — uden Kim (3 spillere: 2-1-0)
+                course: "Gilleleje Golfklub",
+                date: "2026-03-07",
+                results: [
+                    { player: "Thomas",   score: 33, points: 2,   placement: 1, tied: false },
+                    { player: "Morten",   score: 22, points: 1,   placement: 2, tied: false },
+                    { player: "Henrik",   score: 19, points: 0,   placement: 3, tied: false },
+                ]
+            },
+            { // Runde 6 — alle 4 (4 spillere: 3-2-1-0)
+                course: "Fredensborg Golf Club",
+                date: "2026-03-21",
+                results: [
+                    { player: "Henrik",   score: 41, points: 3,   placement: 1, tied: false },
+                    { player: "Kim",      score: 37, points: 2,   placement: 2, tied: false },
+                    { player: "Thomas",   score: 29, points: 1,   placement: 3, tied: false },
+                    { player: "Morten",   score: 22, points: 0,   placement: 4, tied: false },
+                ]
+            },
+            { // Runde 7 — uden Thomas (3 spillere: 2-1-0)
+                course: "Asserbo Golf Club",
+                date: "2026-04-04",
+                results: [
+                    { player: "Henrik",   score: 42, points: 2,   placement: 1, tied: false },
+                    { player: "Kim",      score: 40, points: 1,   placement: 2, tied: false },
+                    { player: "Morten",   score: 26, points: 0,   placement: 3, tied: false },
+                ]
+            },
+            { // Runde 8 — alle 4 (4 spillere: 3-2-1-0)
+                course: "Hornbæk Golfklub",
+                date: "2026-04-18",
+                results: [
+                    { player: "Morten",   score: 42, points: 3,   placement: 1, tied: false },
+                    { player: "Kim",      score: 40, points: 2,   placement: 2, tied: false },
+                    { player: "Thomas",   score: 31, points: 1,   placement: 3, tied: false },
+                    { player: "Henrik",   score: 25, points: 0,   placement: 4, tied: false },
+                ]
+            },
+            { // Runde 9 — uden Kim (3 spillere: 2-1-0)
+                course: "Helsingør Golfklub",
+                date: "2026-05-02",
+                results: [
+                    { player: "Thomas",   score: 33, points: 2,   placement: 1, tied: false },
+                    { player: "Henrik",   score: 31, points: 1,   placement: 2, tied: false },
+                    { player: "Morten",   score: 21, points: 0,   placement: 3, tied: false },
+                ]
+            },
+            { // Runde 10 — uden Henrik (3 spillere: 2-1-0)
+                course: "Smørum Golfklub",
+                date: "2026-05-16",
+                results: [
+                    { player: "Kim",      score: 38, points: 2,   placement: 1, tied: false },
+                    { player: "Morten",   score: 26, points: 1,   placement: 2, tied: false },
+                    { player: "Thomas",   score: 25, points: 0,   placement: 3, tied: false },
+                ]
+            },
+            { // Runde 11 — kun Morten og Henrik (2 spillere: 1-0)
+                course: "Birkerød Golfklub",
+                date: "2026-05-30",
+                results: [
+                    { player: "Morten",   score: 37, points: 1,   placement: 1, tied: false },
+                    { player: "Henrik",   score: 33, points: 0,   placement: 2, tied: false },
+                ]
+            },
+            { // Runde 12 — alle 4, delt plac. (4 spillere: 3-2-1-0)
+                course: "Royal Copenhagen Golf Club",
+                date: "2026-06-06",
+                results: [
+                    { player: "Morten",   score: 38, points: 3,   placement: 1, tied: false },
+                    { player: "Thomas",   score: 28, points: 1.5, placement: 2, tied: true },
+                    { player: "Henrik",   score: 28, points: 1.5, placement: 2, tied: true },
+                    { player: "Kim",      score: 22, points: 0,   placement: 4, tied: false },
+                ]
+            },
+            { // Runde 13 — uden Thomas, delt plac. (3 spillere: 2-1-0)
+                course: "Nordsjællands Golfklub",
+                date: "2026-06-20",
+                results: [
+                    { player: "Kim",      score: 40, points: 2,   placement: 1, tied: false },
+                    { player: "Morten",   score: 35, points: 0.5, placement: 2, tied: true },
+                    { player: "Henrik",   score: 35, points: 0.5, placement: 2, tied: true },
+                ]
+            },
+            { // Runde 14 — uden Henrik, delt plac. (3 spillere: 2-1-0)
+                course: "Holte Golfklub",
+                date: "2026-07-04",
+                results: [
+                    { player: "Morten",   score: 26, points: 1.5, placement: 1, tied: true },
+                    { player: "Kim",      score: 26, points: 1.5, placement: 1, tied: true },
+                    { player: "Thomas",   score: 25, points: 0,   placement: 3, tied: false },
+                ]
+            },
+            { // Runde 15 — kun Thomas og Morten (2 spillere: 1-0)
+                course: "Vedbæk Golfklub",
+                date: "2026-07-18",
+                results: [
+                    { player: "Morten",   score: 39, points: 1,   placement: 1, tied: false },
+                    { player: "Thomas",   score: 26, points: 0,   placement: 2, tied: false },
+                ]
+            },
+            { // Runde 16 — alle 4, delt plac. (4 spillere: 3-2-1-0)
+                course: "Dragør Golfklub",
+                date: "2026-08-01",
+                results: [
+                    { player: "Kim",      score: 37, points: 3,   placement: 1, tied: false },
+                    { player: "Thomas",   score: 36, points: 2,   placement: 2, tied: false },
+                    { player: "Morten",   score: 27, points: 0.5, placement: 3, tied: true },
+                    { player: "Henrik",   score: 27, points: 0.5, placement: 3, tied: true },
+                ]
+            },
+            { // Runde 17 — kun Morten og Henrik, delt plac. (2 spillere: 1-0)
+                course: "Lyngby Golfklub",
+                date: "2026-08-15",
+                results: [
+                    { player: "Morten",   score: 30, points: 0.5, placement: 1, tied: true },
+                    { player: "Henrik",   score: 30, points: 0.5, placement: 1, tied: true },
+                ]
+            },
+            { // Runde 18 — alle 4, delt plac. (4 spillere: 3-2-1-0)
+                course: "Værløse Golfklub",
+                date: "2026-08-29",
+                results: [
+                    { player: "Kim",      score: 38, points: 3,   placement: 1, tied: false },
+                    { player: "Thomas",   score: 28, points: 1.5, placement: 2, tied: true },
+                    { player: "Morten",   score: 28, points: 1.5, placement: 2, tied: true },
+                    { player: "Henrik",   score: 27, points: 0,   placement: 4, tied: false },
+                ]
+            },
+            { // Runde 19 — uden Kim (3 spillere: 2-1-0)
+                course: "Allerød Golfklub",
+                date: "2026-09-12",
+                results: [
+                    { player: "Thomas",   score: 39, points: 2,   placement: 1, tied: false },
+                    { player: "Morten",   score: 33, points: 1,   placement: 2, tied: false },
+                    { player: "Henrik",   score: 31, points: 0,   placement: 3, tied: false },
+                ]
+            },
+            { // Runde 20 — uden Kim (3 spillere: 2-1-0)
+                course: "Søllerød Golfklub",
+                date: "2026-09-26",
+                results: [
+                    { player: "Morten",   score: 32, points: 2,   placement: 1, tied: false },
+                    { player: "Henrik",   score: 27, points: 1,   placement: 2, tied: false },
+                    { player: "Thomas",   score: 26, points: 0,   placement: 3, tied: false },
+                ]
+            },
+
+        ];
+
+
+        // ╔══════════════════════════════════════════════════════════════════╗
+        // ║           HERFRA OG NED BEHØVER DU IKKE REDIGERE              ║
+        // ╚══════════════════════════════════════════════════════════════════╝
+
+        let allRounds = [];
+        let playerData = {};
+
+        function showPlayerDetails(playerName) {
+            const modal = document.getElementById('playerModal');
+            const modalPlayerName = document.getElementById('modalPlayerName');
+            const playerSummary = document.getElementById('playerSummary');
+            const playerRounds = document.getElementById('playerRounds');
+
+            const player = playerData[playerName];
+            if (!player) return;
+
+            modalPlayerName.textContent = playerName;
+
+            const avg = player.best15.length > 0 ? (player.total / player.best15.length).toFixed(1) : '0.0';
+            const allAvg = player.allRounds.length > 0 ? 
+                (player.allRounds.reduce((sum, r) => sum + r.points, 0) / player.allRounds.length).toFixed(1) : '0.0';
+            
+            playerSummary.innerHTML = `
+                <div class="stat-box">
+                    <div class="stat-label">Total</div>
+                    <div class="stat-value">${player.total.toFixed(1)}</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Runder</div>
+                    <div class="stat-value">${player.allRounds.length}</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Top 15 gns.</div>
+                    <div class="stat-value">${avg}</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Alle gns.</div>
+                    <div class="stat-value">${allAvg}</div>
+                </div>
+            `;
+
+            const sortedRounds = [...player.allRounds].sort((a, b) => b.points - a.points);
+            const top15Points = new Set(player.best15);
+
+            let roundsHtml = '';
+            sortedRounds.forEach((round, index) => {
+                const isTop15 = top15Points.has(round.points) && index < 15;
+                const dateObj = new Date(round.date);
+                const formattedDate = dateObj.toLocaleDateString('da-DK', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric'
+                });
+
+                roundsHtml += `
+                    <div class="round-item ${isTop15 ? 'top15' : ''}">
+                        <div class="round-info">
+                            <div class="round-course">${round.course}</div>
+                            <div class="round-date">${formattedDate}</div>
+                        </div>
+                        <div class="round-score">${round.score} stbf</div>
+                        <div class="round-points">${round.points.toFixed(1)} pt</div>
+                    </div>
+                `;
+            });
+
+            playerRounds.innerHTML = roundsHtml;
+            modal.classList.add('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('playerModal');
+            const closeBtn = document.querySelector('.close');
+
+            closeBtn.onclick = function() {
+                modal.classList.remove('active');
+            }
+
+            window.onclick = function(event) {
+                if (event.target === modal) {
+                    modal.classList.remove('active');
+                }
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') modal.classList.remove('active');
+            });
+        });
+
+        function calculateLeaderboard(rounds) {
+            const players = {};
+            
+            PLAYERS.forEach(name => {
+                players[name] = {
+                    name: name,
+                    allPoints: [],
+                    allRounds: [],
+                    totalRounds: 0
+                };
+            });
+            
+            rounds.forEach(round => {
+                round.results.forEach(result => {
+                    if (players[result.player]) {
+                        players[result.player].allPoints.push(result.points);
+                        players[result.player].allRounds.push({
+                            course: round.course,
+                            date: round.date,
+                            score: result.score,
+                            points: result.points,
+                            placement: result.placement
+                        });
+                        players[result.player].totalRounds++;
+                    }
+                });
+            });
+            
+            Object.values(players).forEach(player => {
+                player.allPoints.sort((a, b) => b - a);
+                player.best15 = player.allPoints.slice(0, 15);
+                player.total = player.best15.reduce((sum, p) => sum + p, 0);
+            });
+            
+            playerData = players;
+            return Object.values(players).sort((a, b) => b.total - a.total);
+        }
+
+        function displayLeaderboard(leaderboard) {
+            const container = document.getElementById('leaderboard');
+            
+            if (leaderboard.every(p => p.totalRounds === 0)) {
+                container.innerHTML = '<div class="empty-state">Sæsonen er ikke startet endnu — første runde afventes</div>';
+                return;
+            }
+
+            let html = '';
+            leaderboard.forEach((player, index) => {
+                const avg = player.best15.length > 0 ? (player.total / player.best15.length).toFixed(1) : '–';
+                const isLeader = index === 0 && player.total > 0;
+                
+                html += `
+                    <div class="player-card ${isLeader ? 'leader' : ''}" onclick="showPlayerDetails('${player.name}')">
+                        <div class="rank">${index + 1}</div>
+                        <div class="player-info">
+                            <div class="player-name">${player.name}</div>
+                            <div class="player-stats">
+                                ${player.totalRounds} runder${player.totalRounds > 0 ? ` · Gns. ${avg} pt` : ''}
+                            </div>
+                        </div>
+                        <div class="total-points">${player.total.toFixed(1)}<span class="unit">pt</span></div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function displayRounds(rounds) {
+            const container = document.getElementById('rounds');
+            
+            if (rounds.length === 0) {
+                container.innerHTML = '<div class="empty-state">Ingen runder spillet endnu</div>';
+                return;
+            }
+            
+            const sortedRounds = [...rounds].sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            let html = '';
+            sortedRounds.forEach((round, index) => {
+                const dateObj = new Date(round.date);
+                const formattedDate = dateObj.toLocaleDateString('da-DK', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                
+                const sortedResults = [...round.results].sort((a, b) => a.placement - b.placement);
+                
+                html += `
+                    <div class="round" style="animation-delay: ${index * 0.1}s">
+                        <div class="round-header">
+                            <div class="round-title">Runde ${sortedRounds.length - index}</div>
+                            <div class="round-date">${formattedDate}</div>
+                        </div>
+                        <div class="course">${round.course}</div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Plac.</th>
+                                    <th>Spiller</th>
+                                    <th>Stableford</th>
+                                    <th>Point</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                
+                sortedResults.forEach(result => {
+                    const place = result.tied ? `${result.placement}=` : `${result.placement}.`;
+                    const pts = result.points % 1 === 0 ? result.points : result.points.toFixed(1);
+                    
+                    html += `
+                        <tr>
+                            <td class="placement">${place}</td>
+                            <td>${result.player}</td>
+                            <td>${result.score}</td>
+                            <td class="points">${pts}</td>
+                        </tr>
+                    `;
+                });
+                
+                html += `
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function init() {
+            allRounds = ROUNDS_DATA;
+            const leaderboard = calculateLeaderboard(allRounds);
+            displayLeaderboard(leaderboard);
+            displayRounds(allRounds);
+        }
+
+        init();
+    </script>
+</body>
+</html>
