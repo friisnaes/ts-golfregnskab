@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Riviera Open 2026 — GUCCI Golf</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --dark:#0c1a0e;--dark-green:#142318;
+  --gold:#c9a84c;--gold-light:#dfc06e;--gold-dim:#8a7233;
+  --text:#e8e4dc;--muted:#a8a29a;--white:#faf8f4;
+  --card:rgba(255,255,255,0.04);--border:rgba(201,168,76,0.15);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Outfit',sans-serif;font-weight:400;font-size:17px;line-height:1.7;color:var(--text);background:var(--dark);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 0%,rgba(26,58,36,0.6) 0%,transparent 60%),radial-gradient(ellipse at 80% 100%,rgba(26,58,36,0.3) 0%,transparent 50%);pointer-events:none;z-index:0;}
+.wrap{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:0 24px 80px;}
+.back-link{display:inline-flex;align-items:center;gap:8px;padding:20px 0 0;font-size:0.78em;color:var(--muted);text-decoration:none;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s;}
+.back-link:hover{color:var(--gold);}
+
+/* ── LOCK SCREEN ── */
+#lockScreen{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--dark);padding:24px;}
+#lockScreen::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 0%,rgba(26,58,36,0.6) 0%,transparent 60%),radial-gradient(ellipse at 80% 100%,rgba(26,58,36,0.3) 0%,transparent 50%);pointer-events:none;}
+.lock-inner{position:relative;z-index:1;text-align:center;max-width:420px;width:100%;}
+.lock-flag{font-size:3em;margin-bottom:12px;}
+.lock-title{font-family:'Cormorant Garamond',serif;font-size:2.8em;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--white);margin-bottom:6px;}
+.lock-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1em;color:var(--gold-dim);margin-bottom:28px;}
+.gold-line{width:48px;height:1px;background:var(--gold);margin:16px auto;opacity:0.5;}
+
+/* Countdown on lock screen */
+.lock-countdown-label{font-size:0.65em;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.lock-countdown{display:flex;align-items:baseline;justify-content:center;gap:6px;font-family:'Cormorant Garamond',serif;margin-bottom:28px;}
+.lc-unit{display:flex;flex-direction:column;align-items:center;}
+.lc-num{font-size:2.4em;font-weight:700;color:var(--white);line-height:1;letter-spacing:-0.02em;}
+.lc-lbl{font-size:0.5em;color:var(--muted);letter-spacing:0.14em;text-transform:uppercase;font-family:'Outfit',sans-serif;}
+.lc-sep{font-size:1.6em;color:var(--gold-dim);align-self:flex-end;margin-bottom:0.3em;opacity:0.4;}
+.lock-open-msg{font-family:'Cormorant Garamond',serif;font-size:1.05em;font-style:italic;color:var(--gold-dim);margin-bottom:28px;}
+
+/* Login form */
+.lock-form{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:4px;padding:28px;}
+.lock-form-title{font-size:0.65em;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;}
+.lock-input{width:100%;padding:12px 16px;background:rgba(0,0,0,0.3);border:1px solid rgba(201,168,76,0.2);border-radius:3px;color:var(--white);font-family:'Outfit',sans-serif;font-size:1em;outline:none;transition:border-color 0.2s;margin-bottom:10px;}
+.lock-input:focus{border-color:rgba(201,168,76,0.5);}
+.lock-btn{width:100%;padding:12px 24px;background:var(--gold);color:var(--dark);font-family:'Outfit',sans-serif;font-size:0.9em;font-weight:600;letter-spacing:0.1em;border:none;border-radius:3px;cursor:pointer;transition:background 0.2s;margin-top:4px;}
+.lock-btn:hover{background:var(--gold-light);}
+.lock-err{font-size:0.78em;color:#e89090;margin-bottom:8px;display:none;text-align:center;}
+.lock-icon{font-size:2em;margin-bottom:20px;}
+
+/* ── MAIN CONTENT ── */
+#mainContent{display:none;}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid var(--border);}
+.hero-flag{font-size:3em;margin-bottom:12px;}
+h1{font-family:'Cormorant Garamond',serif;font-size:3em;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--white);margin-bottom:6px;}
+.hero-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2em;color:var(--gold-dim);letter-spacing:0.06em;}
+
+/* Countdown inside page */
+.hero-countdown{margin-top:20px;}
+.hc-label{font-size:0.65em;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.hc-digits{display:flex;align-items:baseline;justify-content:center;gap:6px;font-family:'Cormorant Garamond',serif;}
+.hc-unit{display:flex;flex-direction:column;align-items:center;}
+.hc-num{font-size:2.2em;font-weight:700;color:var(--white);line-height:1;letter-spacing:-0.02em;}
+.hc-lbl{font-size:0.5em;color:var(--muted);letter-spacing:0.14em;text-transform:uppercase;font-family:'Outfit',sans-serif;}
+.hc-sep{font-size:1.4em;color:var(--gold-dim);align-self:flex-end;margin-bottom:0.3em;opacity:0.4;}
+.hc-started{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold-dim);font-size:1.1em;}
+
+h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:1.7em;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;margin-top:56px;padding-top:32px;border-top:1px solid var(--border);}
+
+/* Player grid */
+.player-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;}
+.player-card{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:24px 20px;text-align:center;transition:border-color 0.25s;}
+.player-card:hover{border-color:rgba(201,168,76,0.35);}
+.player-photo{width:90px;height:90px;border-radius:50%;object-fit:cover;border:2.5px solid;margin:0 auto 14px;display:block;}
+.player-card-name{font-family:'Cormorant Garamond',serif;font-size:1.2em;font-weight:600;color:var(--white);margin-bottom:4px;line-height:1.2;}
+.player-card-club{font-size:0.72em;color:var(--muted);letter-spacing:0.06em;margin-bottom:6px;}
+.hcp-badge{font-family:'Cormorant Garamond',serif;font-size:1.1em;font-weight:700;color:var(--gold);}
+.hcp-label{font-size:0.62em;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-left:3px;}
+
+/* Tee times */
+.tee-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;}
+.tee-card{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:18px 20px;}
+.tee-day{font-size:0.62em;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:6px;}
+.tee-course{font-family:'Cormorant Garamond',serif;font-size:1.2em;font-weight:600;color:var(--white);margin-bottom:8px;}
+.tee-date{font-size:0.75em;color:var(--muted);margin-bottom:10px;}
+.tee-times{display:flex;gap:8px;flex-wrap:wrap;}
+.tee-time-badge{font-family:'Cormorant Garamond',serif;font-size:1.2em;font-weight:700;color:var(--white);background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);border-radius:3px;padding:4px 12px;}
+
+/* Prize pool */
+.prize-box{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:28px;}
+.prize-title{font-size:0.68em;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;}
+.prize-flow{display:flex;border:1px solid var(--border);border-radius:4px;overflow:hidden;flex-wrap:wrap;}
+.prize-item{flex:1;min-width:130px;padding:18px 16px;text-align:center;border-right:1px solid var(--border);}
+.prize-item:last-child{border-right:none;}
+.prize-amount{font-family:'Cormorant Garamond',serif;font-size:2.2em;font-weight:700;color:var(--gold);}
+.prize-desc{font-size:0.72em;color:var(--muted);letter-spacing:0.04em;margin-top:4px;line-height:1.5;}
+.prize-rule{font-size:0.85em;color:var(--text);line-height:1.7;margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.06);}
+.prize-rule strong{color:var(--gold-dim);font-weight:600;}
+
+/* Day blocks */
+.day-block{border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:16px;}
+.day-header{display:flex;align-items:center;gap:16px;padding:18px 22px;background:rgba(0,0,0,0.12);border-bottom:1px solid var(--border);}
+.day-num{font-family:'Cormorant Garamond',serif;font-size:1.8em;font-weight:700;color:var(--gold-dim);min-width:32px;}
+.day-course-name{font-family:'Cormorant Garamond',serif;font-size:1.2em;font-weight:600;color:var(--white);}
+.day-date{font-size:0.72em;color:var(--muted);}
+.day-teetimes{font-size:0.72em;color:var(--gold-dim);letter-spacing:0.04em;margin-top:2px;}
+.day-pool{margin-left:auto;text-align:right;}
+.day-pool-amt{font-family:'Cormorant Garamond',serif;font-size:1.5em;font-weight:700;color:var(--gold);}
+.day-pool-lbl{font-size:0.62em;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;}
+.stbf-table{width:100%;border-collapse:collapse;}
+.stbf-table th{padding:10px 16px;font-size:0.65em;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);background:rgba(0,0,0,0.08);text-align:left;border-bottom:1px solid var(--border);}
+.stbf-table td{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.92em;}
+.stbf-table tr:last-child td{border-bottom:none;}
+.stbf-table tr.winner-row td{background:rgba(201,168,76,0.07);}
+.rank-num{font-family:'Cormorant Garamond',serif;font-size:1.2em;font-weight:700;color:var(--muted);}
+.rank-num.first{color:var(--gold);}
+.p-mini-photo{width:28px;height:28px;border-radius:50%;object-fit:cover;border:1.5px solid;vertical-align:middle;margin-right:8px;}
+.stbf-score{font-family:'Cormorant Garamond',serif;font-size:1.3em;font-weight:700;color:var(--white);}
+.prize-won{color:var(--gold);font-weight:600;}
+.bet-section{background:rgba(0,0,0,0.1);border-top:1px solid var(--border);padding:16px 22px;}
+.bet-title{font-size:0.62em;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.bet-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.bet-chip{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px;font-size:0.78em;color:var(--text);}
+.bcp{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.carryover-badge{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);border-radius:12px;font-size:0.72em;color:var(--gold-dim);margin-left:8px;}
+.pending-box{text-align:center;padding:32px;font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--muted);}
+.totals-table{width:100%;border-collapse:collapse;}
+.totals-table th{padding:10px 16px;font-size:0.65em;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);background:rgba(0,0,0,0.15);text-align:left;border-bottom:1px solid var(--border);}
+.totals-table td{padding:14px 16px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.92em;}
+.totals-table tr.leader td{background:rgba(201,168,76,0.06);}
+.tot-name{font-family:'Cormorant Garamond',serif;font-size:1.15em;font-weight:600;color:var(--white);}
+.tot-amt{font-family:'Cormorant Garamond',serif;font-size:1.4em;font-weight:700;}
+.tot-amt.pos{color:#7de8c4;}.tot-amt.neg{color:#e89090;}.tot-amt.zero{color:var(--muted);}
+@media(max-width:600px){
+  h1{font-size:2.2em;}
+  .player-grid{grid-template-columns:repeat(2,1fr);}
+  .prize-flow{flex-direction:column;}
+  .prize-item{border-right:none;border-bottom:1px solid var(--border);}
+  .prize-item:last-child{border-bottom:none;}
+  .tee-grid{grid-template-columns:1fr 1fr;}
+  h2{font-size:1.4em;}
+  .lock-title{font-size:2.2em;}
+  .lc-num{font-size:2em;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     LOCK SCREEN
+══════════════════════════════════════════════ -->
+<div id="lockScreen">
+  <div class="lock-inner">
+    <div class="lock-flag">🇫🇷</div>
+    <div class="lock-title">Riviera Open</div>
+    <div class="gold-line"></div>
+    <div class="lock-sub">Côte d'Azur · 30. april – 3. maj 2026</div>
+
+    <div id="lockCountdownWrap"></div>
+
+    <div class="lock-form">
+      <div class="lock-form-title">🔒 Kun for inviterede</div>
+      <input class="lock-input" type="text" id="lockId" placeholder="ID" autocomplete="off">
+      <input class="lock-input" type="password" id="lockPw" placeholder="Password" autocomplete="off">
+      <div class="lock-err" id="lockErr">Forkert kode — prøv igen</div>
+      <button class="lock-btn" onclick="checkLock()">Åbn siden</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     MAIN CONTENT
+══════════════════════════════════════════════ -->
+<div id="mainContent">
+<div class="wrap">
+
+<a class="back-link" href="index.html">← Tilbage til GUCCI Golf</a>
+
+<div class="hero">
+  <div class="hero-flag">🇫🇷</div>
+  <h1>Riviera Open 2026</h1>
+  <div class="hero-sub">Côte d'Azur · 7 spillere · 4 dage · 4 baner</div>
+
+  <div class="hero-countdown" id="heroCountdown"></div>
+</div>
+
+<!-- SPILLERE -->
+<h2>Spillerne</h2>
+<div class="player-grid" id="playerGrid"></div>
+
+<!-- TEETIDER -->
+<h2>Program &amp; Teetider</h2>
+<div class="tee-grid">
+  <div class="tee-card">
+    <div class="tee-day">Dag 1 · Torsdag 30. april</div>
+    <div class="tee-course">Royal Mougins</div>
+    <div class="tee-times">
+      <div class="tee-time-badge">12:20</div>
+      <div class="tee-time-badge">12:30</div>
+    </div>
+  </div>
+  <div class="tee-card">
+    <div class="tee-day">Dag 2 · Fredag 1. maj</div>
+    <div class="tee-course">Terre Blanche</div>
+    <div class="tee-times">
+      <div class="tee-time-badge">12:30</div>
+      <div class="tee-time-badge">12:40</div>
+    </div>
+  </div>
+  <div class="tee-card">
+    <div class="tee-day">Dag 3 · Lørdag 2. maj</div>
+    <div class="tee-course">Cannes Mougins</div>
+    <div class="tee-times">
+      <div class="tee-time-badge">12:00</div>
+      <div class="tee-time-badge">12:10</div>
+    </div>
+  </div>
+  <div class="tee-card">
+    <div class="tee-day">Dag 4 · Søndag 3. maj</div>
+    <div class="tee-course">Old Course Mandelieu</div>
+    <div class="tee-times">
+      <div class="tee-time-badge">11:04</div>
+      <div class="tee-time-badge">11:12</div>
+    </div>
+  </div>
+</div>
+
+<!-- PRÆMIESTRUKTUR -->
+<h2>Præmiestruktur</h2>
+<div class="prize-box">
+  <div class="prize-title">7 spillere × 3 × 10€ × 4 dage = 840€ i alt · 3 selvstændige puljer</div>
+  <div class="prize-flow">
+    <div class="prize-item">
+      <div class="prize-amount">70€</div>
+      <div class="prize-desc">pr. dag<br><strong style="color:var(--gold-light)">Pulje 1</strong><br>Dagens vinder<br><em style="font-size:0.85em;opacity:0.7">flest stbf · deles ved uafgjort</em></div>
+    </div>
+    <div class="prize-item">
+      <div class="prize-amount">70€</div>
+      <div class="prize-desc">pr. dag<br><strong style="color:var(--gold-light)">Pulje 2</strong><br>Væddemål<br><em style="font-size:0.85em;opacity:0.7">rulles videre ved ingen vinder</em></div>
+    </div>
+    <div class="prize-item">
+      <div class="prize-amount">280€</div>
+      <div class="prize-desc">samlet<br><strong style="color:var(--gold-light)">Pulje 3</strong><br>Samlet vinder<br><em style="font-size:0.85em;opacity:0.7">flest stbf over alle 4 dage</em></div>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;justify-content:center;margin-top:16px;flex-wrap:wrap">
+    <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:3px;padding:10px 16px;text-align:center;flex:1;min-width:120px">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.4em;font-weight:700;color:var(--gold)">840€</div>
+      <div style="font-size:0.65em;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase">Total på spil</div>
+    </div>
+    <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:3px;padding:10px 16px;text-align:center;flex:1;min-width:120px">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.4em;font-weight:700;color:var(--gold)">30€</div>
+      <div style="font-size:0.65em;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase">Pr. spiller pr. dag</div>
+    </div>
+    <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:3px;padding:10px 16px;text-align:center;flex:1;min-width:120px">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.4em;font-weight:700;color:var(--gold)">120€</div>
+      <div style="font-size:0.65em;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase">Pr. spiller i alt</div>
+    </div>
+  </div>
+  <div class="prize-rule">
+    <strong>Pulje 1 — Dagsvinder (70€/dag):</strong> Den der scorer flest stableford-point den dag vinder. Deles ved uafgjort.<br>
+    <strong>Pulje 2 — Væddemål (70€/dag):</strong> Alle 7 sætter 10€ på hvem de tror vinder dagen. De der satser rigtigt deler puljen. Har ingen gættet rigtigt rulles puljen til næste dag.<br>
+    <strong>Pulje 3 — Samlet vinder (280€):</strong> Udbetales ved turneringens afslutning til den med flest stableford-point sammenlagt over alle 4 dage. Deles ved uafgjort.
+  </div>
+</div>
+
+<!-- DAGLIG KONKURRENCE -->
+<h2>Daglig Konkurrence</h2>
+<div id="dailyBlocks"></div>
+
+<!-- SAMLET ØKONOMI -->
+<h2>Samlet Stilling — Pulje 3</h2>
+<div style="background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:8px">
+  <table class="stbf-table">
+    <thead><tr><th></th><th>Spiller</th><th>Dag 1</th><th>Dag 2</th><th>Dag 3</th><th>Dag 4</th><th>Total stbf</th></tr></thead>
+    <tbody id="overallBody"></tbody>
+  </table>
+</div>
+<div style="font-size:0.78em;color:var(--muted);font-style:italic;font-family:'Cormorant Garamond',serif;margin-bottom:0;padding:8px 0 24px">
+  Pulje 3 på 280€ udbetales til den samlede vinder når alle 4 runder er spillet
+</div>
+<h2>Økonomi</h2>
+<div style="background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden">
+  <table class="totals-table">
+    <thead><tr>
+      <th>Spiller</th><th>Indbetalt</th><th>Vundet</th><th>Netto</th>
+    </tr></thead>
+    <tbody id="totalsBody"></tbody>
+  </table>
+</div>
+
+</div><!-- /wrap -->
+</div><!-- /mainContent -->
+
+<script>
+const PHOTOS = {"thomas": "data:image/jpeg;base64,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", "henrik": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAB4AHgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwCHxN4hutYuWedzsz8qnGB+lYPynqR+lBkZjwR/n8aQmQDv+v8AjXjXPUsOyg7jP4f40jzKo++P8/jUEryDnn9aj3PIRuX9D/hS5iuUq62RLZ53jKurAZ98evvXovgO4ZbaMx2l29uE5mCggn868x8Q2LPbxXYX/j3OWGOqnqenbg/nXofw/wBLsNR02Nr61ivJYj8vmEkIO2F6DiuijZrU1pppvlPT9D1Cz1hd9jKshiJSTsUYdiOoNVTrsI1SKCSbUplc7RFb2xcZ/wBogZH4muR+G7RReKPEK2wjWDzVAWMYG4DH8q72TYly0ts6K0n90kZPetlI1cDbWRXg43Yx/EpUj8DWabS2uxG13saWMt5atyM/yzViL5Yvmbc2OTUE7xxaZJNcsqW0JaaQ55+XBAH1NJtt2Rhyxi/ePL/EkMbXc6hFXGMqvABwMj881x+nptRv94/zror+7a4mmmbO6Rmc/jzWHYpugBweSf51201bQ+crSUm5LuXk/wBWagMLOpCqTxWtpmnyXRCopOe9dOmgRWtg7NgybTk11wRxNt7HN6FZQafaancyYMvkD8ODRWHfXzQQa0qtnEeP0NFU5qOhKpuepHDGW7E/n/hVhrfK9P0/+tVSCQL3H5D/AAq5FJ5hGGXj2FfLtn16RTktmOcr+n/1qI7Q5Hyrj6D/AArZW23jgr+lI9sUH3l/P/69TcZS+zIYSGRGUjBUgcio/BGp/wBiHV7NmIaLLJnqR2/mK0kRguQy/n/9euf1uL7BrFtqUqhraQeTOAfUcHr9PyrSnLWxdOXK7m98ItXuhc38P2aB0ctOZyfnJPUY6V6kbqOezQTSKyMP+WrANn+efpXh/g22kttRuHWdzZnOxPMKjntxjIr2jQ3gayUxwqsmMD5efxPWuyLXQ1s+XmbL2n3azQKYZPMQNtLY5xjv+Ncb4+vrj7etnHNILVkDvGD8rHccZrsbS2SzWSRzgyHcfrXJeL7DzbuS6jbc0aRrMmPubs7T7g4I9j9aqglznn49y9k2jkpMhGJ9DVjwzpr3scQVfl6k/jSW1rLch4gmcA8133h+1i0/S4QAAduSa9GMep8+3fQt2FhDYW+FUZxyawPE2siK2kjiOWII4qbXNa2xukJ5x1riZJXmSYv1I71tFmM+yOUlZ20nXZn64PP4UUy/mMfhrXPQkiisKktTtoQ0ZfVoycZH5/8A16v2Qj3gk/8Aj3/16yIsE87/AMz/AI1oQKoUYMg/E14LR76Z09o8YXO79f8A69WnRHXqPz/+vXFX2vafpfy3d4Ek/uAlm/IVlXXxItYUIsrS4nfsZWCL/U1UaFSp8MSJVqcPiZ6A1uc8H9T/AI1m6lJa3Hm6QCs99PDIVtwcthVJ3H0AwK8n1bxdrmpxsXvDbwHpFb/IMe56n866L4B6ppml+Lr+/wBXZpHSzfy48/NJzmTBPVgozjvzXZTy6SadRnPLGp6QRpeCVkcW0pc7AQxQ9jXsnh+WfcVhhJLncC5xiuXPhYWEssMW1xlpYWXo8ZJZCP8AgJFdJ4Xmnttu9i8THAOORUODTsenf3dDqI7Zyd9y4ZugHYViNYSX/iHxPBE5CSaArLj+GVJCVP6fpW7LOBGzscADPPauf025lXwp498QEsEaMWdsw4JCLg4/4E9b4eH7yKRyYh2oTcuxw/hXXLe8spcbY75EJlhJ5/3l9R/KtaTVpJbONI8j5RmvFdTMsNwJo2KSL8wZTgrW1pHjqS2SOLVLVJk6ebH8rfiOh/SvXrYeUX7mx8tTqKWj3O9ny0bE1j3LssbAcVd0/XtL1FP9FmhdiP8AVs21/wAjReyW/lODbc49a54prc0PPtYcr4T1Un+Jz/MUUviC4h/4Qa8CwYcyH5if9qisam6O6hszehiI6r/n8qqeIdUGj6a82B5z/JED3Y/h261o4IH3R+X/ANavPfH90ZdYgts4WFASP9puf5YrzsPSVSoos9KtVcINnPyZmnaRyWJOST1J9aUouMk4AqVACwHTinXUB+yPg5K8n1r6X2ejsjwPaa2bM4kqDhjtbnFdl8KvDcniTxLFaRSGIgFt47AK2a43GMV7R+zNED4lnlPGIZMH/vkf1rCKu3fszovt6ntmk6TdzvBpeoFFvrePNrL93zAOqHsQRz7HNRXsC2k7FBskU/OhGOa757OK8iQSqHZDlWB2sPcH1qnJ4bg1vUYL+6lleOFSjqPlFyR0Lj25Bx1rgrU+bVHqYfEcmk9jjJLDVda08QabGA0rbTM5wiev1x7VF8Y7ZPD/AIA0/TrOUrbEpZldoG/kO0h98r/48a9YtomhVV+Vgo2oFQIFX047V4h+0Nqwl1vRNIQgmFXu5cH1+VR/Ot8HSSqo5sZiHOm1sjxjVbYyk7Rlmrnb228mzkkd02IDt98V1d7wCyjlu3b3Ncv4lZXsmCMwDusUajue+a9ydkmzwIK8kZQlOyNxnlc9K3tH16/tyiGeSSNuNknzDH49OKhbTdkEUQxuzt6/596LOKOHXIUYgoqsx9PQf1rN0v5jTnvsavi5Vh8FzRqAf3g5+pzRSeMG+0eGrqOEbtoVyB2Cnn9KK8jGU1CpZbHo4OXNC7OoDkgdK8n1uY3+u3swP3pWC/ReB/KvU7mGS2tZ5nI2xxs/X0BNeQRh9iSKR5q/MQe+a5cvpvmcmjrxs1ypJj4ZD56A+2fwrTlG4AEcEc49Kxp5Va/VkBUlclT2Peti3kEsO7PPSvbpSu3G55FWNrSMI/cAP8PFe4fsysP7cnXIz5TnH4pXidwu2eVRwM5Fexfs4XAg8QSZGcwyAD3wD/SueC1kvJnTf4X5n1SWO51Q42xliR24rZtY1t7OCL+7Go/SsmyhKWMjyf6yUAH8eK1rh8SqvtXHLc60DMFQkV8n/EHUf7a8f6zdZysTrbxsO20c/qTX0l4y1ZNF8O3987YEUTMPrivke1eZojNKS0twzSOccgtyTXdgYauRx4uXuqIsxLNhscnap7Ed6523UatrxnbH2Kz+WPP8bdz+da2vTMtoIbU/vZhtXHZe5qG3t0sjBapJgJHufgdc16LV2l0OBO131LDqGv1YouETdjHfNUCpN3LcJhVD7eO4HH881NfyNboz7yXIPGB+FZaQTizQySFY+CB0LHPJNEpW0sSl5m5byrM+xyCsgKnPTBFFZdu2x0I5IPfmisJxUndhGThoj0Hx5cJb+E9TZYmRmi2An1Ygf1rxeWJH5TcOOwr1X4s3BTwwkfTzrhF/AAn+grzG3JjtskEk152B99O56mL9xqxiSuVvoyTk9K29PlCtk/dYGsG8I+2hsAc9qvWzmKVFY/IxFXSnyzZNSHNBE9+AJ0YdwQcetemfs9yrH43sUlPys5QjtyrD+eK881FCtuH+VlBBz3Fb/wANr/8As/xPaXGSFWRJCR2AYEn8q35bTa7mKleCfY+6QQVjDYKFl/x/pSXM2buMAEDB61Hp7Hyos885/nUF/Kv2xjnHlj9K8+2p6B5d+0HrRTR7bSIj813IN4B/gHJ/l+teKRSLy6njoAewre+KOvDWvGl15b7obJfJAHqeWP8AIfnXITSmV1ZSi7eQx7j8K9fCw5II8zEz5pizzyGXctvtfJALDP6CoLbTzFunupJpJXbJJAUdOMVZWSRsOzrjP3iv1qpJcSTyAuxZAT2xW8u5z9ChrVxtaJWyNzADJ7ZFOOoLGmy6hjGPukEk/jWB4luv9JRFblfmwO3NbtuY7qwOAhJAY8HdXPGpzSkkzVw5YxbW5OHWQB4mHXIAFFZrxTQuDDlSCCMmik5tPVC9mnszrfjBKRDpVuTndI8h/AAf1rhJCFiCj0rq/i5KD4hsIgeI4N3/AH0x/wAK514UMG8HGRnpXHgIfuzsxk7T1OWvP+PgY9aur+8iUDqBVO5+a829cZq1DggA8HtWUfiZrL4UakM6vEIZxwRjmptCYxXyqTyhKn3B/wDrVVI+VNw+bHX1p/mC31G3lP3HG0/Wu5Nppvocm90j7f8Ahpq02p+F9GnuCCZbMfMDn5kOwn8cZrP+JGvJoWlardu4DJBlfcngCuZ+AmsGXwxqFiY/Mawl3wc4GyUbgPYblavPfjl4kfVNbj0qPiOACadQwJ3fwp6e/wCIrndK9VxOpVLUlI8+VpD+8c7rqUl3PcknJz6ikjtwj5uGJwMnsBzSQNJgMSC4OBntQY2kkLXDLtUDjmvTSVtjzW3d6jwv2yZI1GyAZJY96i1O4iDLbaeF4HzSY6VU1C8kuHFvBgJ02oP51EIzEhAyXPYdBWMp3ukWo6XZzevKEuQAOMEfrW7oVzsRQx4Ix1qTVtAJ8GSavIQJFuQqE/xJ904/4Ef0rL08fulYY4FcNGf72VjsqQvSSZ0t+VTYSflbBBFFJp0iX1p9mOBMoyg9faiuuUm9UckYpaMT4nyed4wuVH/LOKJB9duf61gTzyCyjVVOdvJzRRXNhdKenY6cRrPXuc8T/pIJ9avJzRRXNT3Z0TNdRuiQ4JG3selNnh+0W+wE5zx7GiivV5U1Z9TzFJp37HoPwi8dx+HTqP259gksmhYesiHcn5gsK5eW6mvLma8u8meeQyufcnP6dKKKijq3J7m1V2Sj0K7alHGOTxz2qEXk19IUhVlQ4BbFFFKNSU5KL2CVOMYuSLckkVqfIt0y68u3vj1qvK7JASQAT3zRRTk3r5EJK68zS8Sa7aXvw7srG0G1oJo0cdzjcSfzrmNJODhs7frRRXlYHRv1PTxWy9DVigm3LJb5UryCTiiiivTlG2x53Nrqf//Z", "kim": "data:image/jpeg;base64,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", "morten": "data:image/jpeg;base64,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", "jes": "data:image/jpeg;base64,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", "jan": "data:image/jpeg;base64,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", "torben": "data:image/jpeg;base64,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"};
+const PLAYERS = [{"id": "henrik", "name": "Henrik Holtegaard", "club": "The Scandinavian", "hcp": 15.5, "login": "hh"}, {"id": "jan", "name": "Jan Westergaard", "club": "Simons GK", "hcp": 15.7, "login": "jw"}, {"id": "jes", "name": "Jes Frydendall", "club": "Fures\u00f8 GK", "hcp": 20.8, "login": "jf"}, {"id": "kim", "name": "Kim Kehlet Johansen", "club": "The Scandinavian", "hcp": 18.9, "login": "kkj"}, {"id": "morten", "name": "Morten Axel", "club": "The Scandinavian", "hcp": 8.8, "login": "ma"}, {"id": "torben", "name": "Torben Jensen", "club": "Simons GK", "hcp": 13.1, "login": "tj"}, {"id": "thomas", "name": "Thomas Friisn\u00e6s", "club": "The Scandinavian", "hcp": 10.6, "login": "tf"}];
+const COLORS = {"thomas": "#c9a84c", "morten": "#5bb8a0", "henrik": "#6b9fd4", "kim": "#c47a5a", "jes": "#a07ac4", "jan": "#7ac4a0", "torben": "#c47aa0"};
+
+// ── TIMING ───────────────────────────────────────────────────────────
+// Page unlocks 1 week before first tee time
+// First tee time: 30 April 2026 12:20 CEST (UTC+2)
+const UNLOCK_DATE  = new Date('2026-04-23T10:20:00Z'); // 12:20 CEST = 10:20 UTC
+const FIRST_TEE    = new Date('2026-04-30T10:20:00Z'); // 12:20 CEST = 10:20 UTC
+
+// ── AUTH ─────────────────────────────────────────────────────────────
+const LOCK_ID = 'riviera';
+const LOCK_PW = 'riviera';
+
+function checkLock() {
+  const id = document.getElementById('lockId').value.trim().toLowerCase();
+  const pw = document.getElementById('lockPw').value.trim().toLowerCase();
+  if (id === LOCK_ID && pw === LOCK_PW) {
+    sessionStorage.setItem('rivieraUnlocked','1');
+    unlock();
+  } else {
+    document.getElementById('lockErr').style.display = 'block';
+    document.getElementById('lockId').value = '';
+    document.getElementById('lockPw').value = '';
+  }
+}
+
+function unlock() {
+  document.getElementById('lockScreen').style.display = 'none';
+  document.getElementById('mainContent').style.display = 'block';
+  init();
+}
+
+// Allow Enter key on inputs
+document.addEventListener('DOMContentLoaded', () => {
+  ['lockId','lockPw'].forEach(id => {
+    document.getElementById(id).addEventListener('keydown', e => {
+      if (e.key === 'Enter') checkLock();
+    });
+  });
+  // Check session
+  if (sessionStorage.getItem('rivieraUnlocked') === '1') unlock();
+  else startLockCountdown();
+});
+
+// ── LOCK SCREEN COUNTDOWN ────────────────────────────────────────────
+function startLockCountdown() {
+  const wrap = document.getElementById('lockCountdownWrap');
+  const daDays = ['søn','man','tir','ons','tor','fre','lør'];
+
+  function update() {
+    const now = new Date();
+    const diff = UNLOCK_DATE - now;
+
+    if (diff <= 0) {
+      wrap.innerHTML = `<div class="lock-open-msg">Siden er åben — men stadig beskyttet 🔒</div>`;
+      return;
+    }
+
+    const days  = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins  = Math.floor((diff % 3600000) / 60000);
+    const secs  = Math.floor((diff % 60000) / 1000);
+
+    wrap.innerHTML = `
+      <div class="lock-countdown-label">Åbner om</div>
+      <div class="lock-countdown">
+        <div class="lc-unit"><span class="lc-num">${days}</span><span class="lc-lbl">dag</span></div>
+        <span class="lc-sep">·</span>
+        <div class="lc-unit"><span class="lc-num">${String(hours).padStart(2,'0')}</span><span class="lc-lbl">timer</span></div>
+        <span class="lc-sep">·</span>
+        <div class="lc-unit"><span class="lc-num">${String(mins).padStart(2,'0')}</span><span class="lc-lbl">min</span></div>
+        <span class="lc-sep">·</span>
+        <div class="lc-unit"><span class="lc-num">${String(secs).padStart(2,'0')}</span><span class="lc-lbl">sek</span></div>
+      </div>
+      <div style="font-size:0.72em;color:var(--muted);margin-bottom:20px;letter-spacing:0.08em">
+        Siden åbner 23. april 2026 kl. 12:20
+      </div>`;
+  }
+  update();
+  setInterval(update, 1000);
+}
+
+// ── HERO COUNTDOWN (inside page) ─────────────────────────────────────
+function startHeroCountdown() {
+  const el = document.getElementById('heroCountdown');
+
+  function update() {
+    const now  = new Date();
+    const diff = FIRST_TEE - now;
+
+    if (diff <= 0) {
+      el.innerHTML = `<div class="hc-started">Turneringen er i gang — forza GUCCI! 🏌️</div>`;
+      return;
+    }
+
+    const days  = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins  = Math.floor((diff % 3600000) / 60000);
+    const secs  = Math.floor((diff % 60000) / 1000);
+
+    el.innerHTML = `
+      <div class="hc-label" style="margin-top:20px">Første teetid om</div>
+      <div class="hc-digits">
+        <div class="hc-unit"><span class="hc-num">${days}</span><span class="hc-lbl">dag</span></div>
+        <span class="hc-sep">·</span>
+        <div class="hc-unit"><span class="hc-num">${String(hours).padStart(2,'0')}</span><span class="hc-lbl">timer</span></div>
+        <span class="hc-sep">·</span>
+        <div class="hc-unit"><span class="hc-num">${String(mins).padStart(2,'0')}</span><span class="hc-lbl">min</span></div>
+        <span class="hc-sep">·</span>
+        <div class="hc-unit"><span class="hc-num">${String(secs).padStart(2,'0')}</span><span class="hc-lbl">sek</span></div>
+      </div>
+      <div style="font-size:0.72em;color:var(--muted);margin-top:8px">Royal Mougins · 30. april kl. 12:20</div>`;
+  }
+  update();
+  setInterval(update, 1000);
+}
+
+// ── COMPETITION DATA ──────────────────────────────────────────────────
+const DAYS = [
+  {
+    day:1, course:'Royal Mougins', date:'Torsdag 30. april',
+    teeTimes:['12:20','12:30'],
+    pot:70, betPool:70, carryover:0,
+    results:[], bets:{}
+  },
+  {
+    day:2, course:'Terre Blanche', date:'Fredag 1. maj',
+    teeTimes:['12:30','12:40'],
+    pot:70, betPool:70, carryover:0,
+    results:[], bets:{}
+  },
+  {
+    day:3, course:'Cannes Mougins', date:'Lørdag 2. maj',
+    teeTimes:['12:00','12:10'],
+    pot:70, betPool:70, carryover:0,
+    results:[], bets:{}
+  },
+  {
+    day:4, course:'Old Course Mandelieu', date:'Søndag 3. maj',
+    teeTimes:['11:04','11:12'],
+    pot:70, betPool:70, carryover:0,
+    results:[], bets:{}
+  }
+];
+
+function playerById(id) { return PLAYERS.find(p => p.id === id); }
+
+function renderPlayers() {
+  document.getElementById('playerGrid').innerHTML = PLAYERS.map(p =>
+    `<div class="player-card">
+      <img class="player-photo" src="${PHOTOS[p.id]}" alt="${p.name}" style="border-color:${COLORS[p.id]}">
+      <div class="player-card-name">${p.name}</div>
+      <div class="player-card-club">${p.club}</div>
+      <div><span class="hcp-badge">${p.hcp.toFixed(1)}</span><span class="hcp-label">HCP</span></div>
+    </div>`
+  ).join('');
+}
+
+function calcOverallWinner() {
+  // Pulje 3: total stbf over all played days
+  const totStbf = {};
+  PLAYERS.forEach(p => totStbf[p.id] = 0);
+  DAYS.forEach(day => {
+    (day.results||[]).forEach(r => { if(totStbf[r.player]!=null) totStbf[r.player] += r.stbf; });
+  });
+  return totStbf;
+}
+
+function calcWinnings() {
+  const totals = {};
+  const playedDays = DAYS.filter(d => d.results.length > 0);
+  // Every player pays 30€ per played day (10 daily + 10 bet + 10 overall)
+  PLAYERS.forEach(p => { totals[p.id] = {paid: playedDays.length * 30, won: 0, wonBreakdown:[]}; });
+
+  // Pulje 1 — daily winner
+  DAYS.forEach(day => {
+    if (!day.results.length) return;
+    const sorted = [...day.results].sort((a,b) => b.stbf - a.stbf);
+    const maxStbf = sorted[0].stbf;
+    const winners = sorted.filter(r => r.stbf === maxStbf).map(r => r.player);
+    const share = day.pot / winners.length;
+    winners.forEach(w => {
+      if(totals[w]) { totals[w].won += share; totals[w].wonBreakdown.push(`Dag ${day.day} dagsvinder: +${share.toFixed(0)}€`); }
+    });
+  });
+
+  // Pulje 2 — daily bets
+  DAYS.forEach(day => {
+    if (!day.results.length) return;
+    const sorted = [...day.results].sort((a,b) => b.stbf - a.stbf);
+    const winners = sorted.filter(r => r.stbf === sorted[0].stbf).map(r => r.player);
+    const totalBetPool = day.betPool + day.carryover;
+    const correctBettors = Object.entries(day.bets)
+      .filter(([,bet]) => winners.includes(bet)).map(([bettor]) => bettor);
+    if (correctBettors.length > 0) {
+      const share = totalBetPool / correctBettors.length;
+      correctBettors.forEach(b => {
+        if(totals[b]) { totals[b].won += share; totals[b].wonBreakdown.push(`Dag ${day.day} væddemål: +${share.toFixed(0)}€`); }
+      });
+    }
+  });
+
+  // Pulje 3 — overall winner (only after all 4 days played)
+  const allPlayed = DAYS.every(d => d.results.length > 0);
+  if (allPlayed) {
+    const totStbf = calcOverallWinner();
+    const maxTotal = Math.max(...Object.values(totStbf));
+    const overallWinners = Object.entries(totStbf).filter(([,v])=>v===maxTotal).map(([id])=>id);
+    const overallShare = 280 / overallWinners.length;
+    overallWinners.forEach(w => {
+      if(totals[w]) { totals[w].won += overallShare; totals[w].wonBreakdown.push(`Samlet vinder: +${overallShare.toFixed(0)}€`); }
+    });
+  }
+
+  Object.keys(totals).forEach(id => { totals[id].net = totals[id].won - totals[id].paid; });
+  return totals;
+}
+
+function renderDays() {
+  document.getElementById('dailyBlocks').innerHTML = DAYS.map(day => {
+    const totalPool = day.pot + day.betPool + day.carryover;
+    const hasResults = day.results.length > 0;
+    const sorted = hasResults ? [...day.results].sort((a,b)=>b.stbf-a.stbf) : [];
+    const maxStbf = sorted.length ? sorted[0].stbf : 0;
+    const winners = sorted.filter(r=>r.stbf===maxStbf).map(r=>r.player);
+    const teeStr = day.teeTimes.join(' &amp; ');
+
+    let tableHtml = hasResults
+      ? `<table class="stbf-table">
+          <thead><tr><th></th><th>Spiller</th><th>Stbf</th><th>Præmie</th></tr></thead>
+          <tbody>${sorted.map((r,i) => {
+            const p = playerById(r.player);
+            const isW = winners.includes(r.player);
+            const prize = isW ? (day.pot/winners.length).toFixed(0)+'€' : '–';
+            return `<tr class="${isW?'winner-row':''}">
+              <td><span class="rank-num${isW?' first':''}">${i+1}</span></td>
+              <td><img class="p-mini-photo" src="${PHOTOS[r.player]||''}" style="border-color:${COLORS[r.player]}">${p?.name||r.player}</td>
+              <td><span class="stbf-score">${r.stbf}</span></td>
+              <td class="${isW?'prize-won':''}">${isW?'🏆 '+prize:'–'}</td>
+            </tr>`;
+          }).join('')}</tbody>
+        </table>`
+      : `<div class="pending-box">Resultat indrapporteres efter dagens runde</div>`;
+
+    const betEntries = Object.entries(day.bets);
+    const carryBadge = day.carryover > 0 ? `<span class="carryover-badge">+${day.carryover}€ carryover</span>` : '';
+    let betHtml = `<div class="bet-section">
+      <div class="bet-title">Væddemål — pulje ${day.betPool + day.carryover}€${carryBadge}</div>`;
+    if (betEntries.length > 0) {
+      betHtml += `<div class="bet-chips">${betEntries.map(([bettor,bet]) => {
+        const bp = playerById(bettor), beton = playerById(bet);
+        return `<div class="bet-chip"><div class="bcp" style="background:${COLORS[bettor]}"></div>
+          ${bp?.name.split(' ')[0]||bettor}
+          <span style="color:var(--muted)">→</span>
+          <div class="bcp" style="background:${COLORS[bet]}"></div>
+          ${beton?.name.split(' ')[0]||bet}</div>`;
+      }).join('')}</div>`;
+    } else {
+      betHtml += `<div style="font-size:0.82em;color:var(--muted);font-style:italic">Væddemål registreres inden teetid</div>`;
+    }
+    betHtml += `</div>`;
+
+    return `<div class="day-block">
+      <div class="day-header">
+        <div class="day-num">${day.day}</div>
+        <div>
+          <div class="day-course-name">${day.course}</div>
+          <div class="day-date">${day.date}</div>
+          <div class="day-teetimes">⏱ ${teeStr}</div>
+
+        </div>
+        <div class="day-pool">
+          <div class="day-pool-amt">${totalPool}€</div>
+          <div class="day-pool-lbl">Dagens pulje</div>
+        </div>
+      </div>
+      ${tableHtml}${betHtml}
+    </div>`;
+  }).join('');
+}
+
+function renderOverall() {
+  const el = document.getElementById('overallBody');
+  if (!el) return;
+  const totStbf = calcOverallWinner();
+  const maxTotal = Math.max(...Object.values(totStbf));
+  const sorted = Object.entries(totStbf).sort((a,b)=>b[1]-a[1]);
+  const allPlayed = DAYS.every(d=>d.results.length>0);
+
+  el.innerHTML = sorted.map(([id, total], i) => {
+    const p = playerById(id);
+    const isLeader = total === maxTotal && total > 0;
+    const dayScores = DAYS.map(day => {
+      const r = day.results.find(x=>x.player===id);
+      return r ? `<td><span style="font-family:'Cormorant Garamond',serif;font-size:1.1em;font-weight:600;color:var(--white)">${r.stbf}</span></td>`
+               : `<td style="color:var(--muted)">–</td>`;
+    }).join('');
+    return `<tr class="${isLeader?'winner-row':''}">
+      <td><span class="rank-num${isLeader?' first':''}">${i+1}</span></td>
+      <td><img class="p-mini-photo" src="${PHOTOS[id]||''}" style="border-color:${COLORS[id]}">${p?.name||id}</td>
+      ${dayScores}
+      <td><span style="font-family:'Cormorant Garamond',serif;font-size:1.3em;font-weight:700;color:${isLeader?'var(--gold)':'var(--white)'}">${total > 0 ? total : '–'}</span>
+      ${isLeader && allPlayed ? '<span style="color:var(--gold);font-size:0.8em"> 🏆 280€</span>' : ''}</td>
+    </tr>`;
+  }).join('');
+}
+
+function renderTotals() {
+  const totals = calcWinnings();
+  const played = DAYS.filter(d=>d.results.length>0);
+  const sorted = Object.entries(totals).sort((a,b)=>b[1].net-a[1].net);
+
+  if (!played.length) {
+    document.getElementById('totalsBody').innerHTML =
+      `<tr><td colspan="4" style="text-align:center;padding:32px;font-style:italic;color:var(--muted);font-family:'Cormorant Garamond',serif">Turneringen starter 30. april</td></tr>`;
+    return;
+  }
+
+  document.getElementById('totalsBody').innerHTML = sorted.map(([id,t],i) => {
+    const p = playerById(id);
+    const cls = t.net>0?'pos':t.net<0?'neg':'zero';
+    const sign = t.net>0?'+':'';
+    const breakdown = t.wonBreakdown?.length
+      ? `<div style="font-size:0.65em;color:var(--muted);margin-top:3px">${t.wonBreakdown.join(' · ')}</div>` : '';
+    return `<tr class="${i===0&&t.net>0?'leader':''}">
+      <td><img class="p-mini-photo" src="${PHOTOS[id]||''}" style="border-color:${COLORS[id]}"><span class="tot-name">${p?.name||id}</span>${breakdown}</td>
+      <td style="color:var(--muted)">${t.paid}€</td>
+      <td style="color:var(--gold)">${t.won.toFixed(0)}€</td>
+      <td><span class="tot-amt ${cls}">${sign}${t.net.toFixed(0)}€</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function init() {
+  renderPlayers();
+  renderDays();
+  renderOverall();
+  renderTotals();
+  startHeroCountdown();
+}
+</script>
+</body>
+</html>
