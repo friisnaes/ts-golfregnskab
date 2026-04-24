@@ -1,0 +1,2535 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUCCI Golf — Sæson 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --dark:#0c1a0e; --dark-green:#142318; --green:#1a3a24;
+            --green-mid:#264d34; --green-light:#3a6b4a;
+            --gold:#c9a84c; --gold-light:#dfc06e; --gold-dim:#8a7233;
+            --text-light:#e8e4dc; --text-muted:#a8a29a; --white:#faf8f4;
+            --card-bg:rgba(255,255,255,0.04); --card-border:rgba(201,168,76,0.15);
+            --sc-birdie-bg:rgba(45,138,110,0.35); --sc-birdie-text:#7de8c4;
+            --sc-par-bg:rgba(255,255,255,0.05); --sc-par-text:#d4cfc4;
+            --sc-bogey-bg:rgba(180,110,40,0.22); --sc-bogey-text:#e8b880;
+            --sc-double-bg:rgba(180,55,55,0.28); --sc-double-text:#e89090;
+            --sc-triple-bg:rgba(140,20,20,0.35); --sc-triple-text:#e07070;
+        }
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:'Outfit',sans-serif;font-weight:400;font-size:17px;line-height:1.7;color:var(--text-light);background:var(--dark);min-height:100vh;}
+        body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 0%,rgba(26,58,36,0.6) 0%,transparent 60%),radial-gradient(ellipse at 80% 100%,rgba(26,58,36,0.3) 0%,transparent 50%);pointer-events:none;z-index:0;}
+        .page-wrapper{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:0 24px;}
+        .hero{position:relative;height:380px;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;}
+        .hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 60%;filter:brightness(0.55) saturate(1.1);}
+        .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(12,26,14,0.3) 0%,rgba(12,26,14,0.5) 50%,rgba(12,26,14,0.85) 100%);}
+        .hero-content{position:relative;z-index:2;padding:0 24px;animation:fadeDown 0.8s ease-out;}
+        header{border-bottom:1px solid var(--card-border);}
+        @keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+        h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:3.6em;letter-spacing:0.12em;text-transform:uppercase;color:var(--white);margin-bottom:8px;}
+        .tagline{font-family:'Cormorant Garamond',serif;font-size:1.15em;font-style:italic;color:var(--gold);letter-spacing:0.25em;text-transform:uppercase;}
+        .divider{width:60px;height:1px;background:var(--gold);margin:20px auto;opacity:0.5;}
+        .countdown-wrap{margin-top:16px;}
+        .countdown-course{font-size:0.82em;color:rgba(232,228,220,0.8);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;}
+        .countdown-course em{color:var(--gold-dim);font-style:normal;}
+        .countdown-digits{display:flex;align-items:baseline;justify-content:center;gap:6px;font-family:'Cormorant Garamond',serif;}
+        .cd-unit{display:flex;flex-direction:column;align-items:center;}
+        .cd-num{font-size:2.4em;font-weight:700;color:var(--white);line-height:1;letter-spacing:-0.02em;}
+        .cd-label{font-size:0.6em;color:var(--text-light);letter-spacing:0.12em;text-transform:uppercase;font-family:'Outfit',sans-serif;font-weight:400;}
+        .cd-sep{font-size:1.4em;color:var(--gold-dim);align-self:flex-end;margin-bottom:0.3em;opacity:0.5;}
+        .countdown-past{font-size:0.82em;font-style:italic;color:var(--gold-dim);font-family:'Cormorant Garamond',serif;}
+        section{padding:60px 0;}
+        h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:1.9em;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:40px;opacity:0;animation:fadeUp 0.6s ease-out forwards;}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+        .section-subtitle{font-size:0.92em;color:var(--text-light);letter-spacing:0.06em;margin-top:-30px;margin-bottom:36px;opacity:0.85;}
+        .leaderboard{display:flex;flex-direction:column;gap:12px;}
+        .player-card{background:var(--card-bg);border:1px solid var(--card-border);padding:22px 32px;border-radius:4px;display:flex;align-items:center;gap:24px;cursor:pointer;transition:all 0.35s cubic-bezier(0.25,0.46,0.45,0.94);opacity:0;animation:fadeUp 0.5s ease-out forwards;}
+        .player-card:nth-child(1){animation-delay:.1s}.player-card:nth-child(2){animation-delay:.2s}.player-card:nth-child(3){animation-delay:.3s}.player-card:nth-child(4){animation-delay:.4s}
+        .player-card:hover{background:rgba(201,168,76,0.06);border-color:rgba(201,168,76,0.35);transform:translateX(6px);}
+        .player-card.leader{border-color:rgba(201,168,76,0.4);background:linear-gradient(135deg,rgba(201,168,76,0.08) 0%,rgba(201,168,76,0.02) 100%);}
+        .rank{font-family:'Cormorant Garamond',serif;font-size:2em;font-weight:600;color:var(--gold-dim);min-width:48px;text-align:center;}
+        .player-card.leader .rank{color:var(--gold);}
+        .player-info{flex:1;min-width:0;}
+        .player-name{font-family:'Cormorant Garamond',serif;font-size:1.75em;font-weight:600;color:var(--white);letter-spacing:0.04em;padding-left:10px;border-left-width:3px;border-left-style:solid;}
+        .player-card.leader .player-name{color:var(--gold-light);}
+        .player-meta-row{display:flex;align-items:center;gap:12px;margin-top:5px;padding-left:10px;}
+        .player-stats{font-size:0.88em;color:var(--text-light);letter-spacing:0.04em;}
+        .form-guide{display:flex;gap:4px;align-items:center;}
+        .form-pip{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
+        .form-pip.win{background:rgba(45,138,110,0.35);color:#7de8c4;border:1px solid rgba(91,184,160,0.4);}
+        .form-pip.mid{background:rgba(201,168,76,0.15);color:var(--gold-dim);border:1px solid rgba(201,168,76,0.25);}
+        .form-pip.loss{background:rgba(180,55,55,0.25);color:#e89090;border:1px solid rgba(180,55,55,0.35);}
+        .form-pip.none{background:rgba(255,255,255,0.04);color:var(--text-muted);border:1px dashed rgba(255,255,255,0.1);}
+        .total-points{font-family:'Cormorant Garamond',serif;font-size:2.7em;font-weight:700;color:var(--white);min-width:88px;text-align:right;letter-spacing:-0.02em;}
+        .total-points .unit{font-size:0.4em;font-weight:400;color:var(--text-muted);letter-spacing:0.1em;vertical-align:super;margin-left:2px;}
+        .map-container{position:relative;border:1px solid var(--card-border);border-radius:4px;overflow:hidden;height:440px;}
+        #grand-tour-map{height:100%;width:100%;}
+        .leaflet-popup-content-wrapper{background:#142318!important;border:1px solid rgba(201,168,76,0.3)!important;border-radius:4px!important;box-shadow:0 12px 40px rgba(0,0,0,0.5)!important;padding:0!important;}
+        .leaflet-popup-content{margin:0!important;color:var(--text-light);}
+        .leaflet-popup-tip-container{display:none!important;}
+        .leaflet-popup-close-button{color:var(--text-muted)!important;font-size:18px!important;padding:8px 10px!important;right:4px!important;top:4px!important;}
+        .leaflet-popup-close-button:hover{color:var(--white)!important;}
+        .leaflet-control-attribution{display:none!important;}
+        .leaflet-control-zoom a{background:#142318!important;color:var(--gold)!important;border-color:rgba(201,168,76,0.2)!important;}
+        .gucci-popup{padding:20px 22px 18px;min-width:190px;}
+        .popup-expedition-badge{display:inline-block;font-size:0.62em;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--dark);background:var(--gold);padding:2px 8px;border-radius:2px;margin-bottom:10px;}
+        .popup-course{font-family:'Cormorant Garamond',serif;font-size:1.4em;font-weight:600;color:var(--white);letter-spacing:0.03em;line-height:1.2;margin-bottom:4px;}
+        .popup-date{font-size:0.82em;color:var(--text-light);letter-spacing:0.04em;margin-bottom:12px;}
+        .popup-winner{display:flex;align-items:center;gap:6px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:1.1em;color:var(--gold-light);}
+        .popup-meta{font-size:0.68em;color:var(--text-muted);margin-top:6px;letter-spacing:0.06em;text-transform:uppercase;}
+        .popup-photo{width:100%;margin-top:12px;border-radius:2px;object-fit:cover;max-height:100px;}
+        .popup-note{margin-top:10px;font-style:italic;font-size:0.82em;color:#8a8578;font-family:'Cormorant Garamond',serif;}
+        .map-pin-head{width:26px;height:26px;border-radius:50%;border:2px solid var(--gold);background:#1a3a24;display:flex;align-items:center;justify-content:center;font-size:13px;box-shadow:0 2px 8px rgba(0,0,0,0.5);}
+        .map-pin-head.abroad{background:var(--gold);border-color:#8a5e00;}
+        .map-pin-tail{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:8px solid #1a3a24;margin:0 auto;}
+        .map-pin-tail.abroad{border-top-color:var(--gold);}.map-pin-head.upcoming{background:transparent;border:2px dashed rgba(212,207,196,0.35);color:var(--text-muted);font-size:11px;}.map-pin-head.abroad-upcoming{background:rgba(201,168,76,0.15);border:2px dashed rgba(201,168,76,0.5);color:var(--gold-dim);font-size:11px;}.map-pin-tail.upcoming{border-top-color:rgba(212,207,196,0.25);}.map-pin-tail.abroad-upcoming{border-top-color:rgba(201,168,76,0.4);}
+        .map-legend{position:absolute;bottom:16px;right:16px;z-index:1000;background:rgba(20,35,24,0.92);border:1px solid rgba(201,168,76,0.2);border-radius:4px;padding:10px 14px;display:flex;flex-direction:column;gap:7px;}
+        .map-legend-item{display:flex;align-items:center;gap:8px;font-size:0.72em;color:var(--text-muted);letter-spacing:0.06em;}
+        .map-legend-dot{width:12px;height:12px;border-radius:50%;border:1.5px solid var(--gold);background:#1a3a24;flex-shrink:0;}
+        .map-legend-dot.abroad{background:var(--gold);}
+        .chart-container{background:var(--card-bg);border:1px solid var(--card-border);border-radius:4px;padding:28px 28px 20px;}
+        .chart-canvas-wrap{position:relative;height:320px;}
+        .player-color-legend{display:flex;flex-wrap:wrap;gap:18px;margin-bottom:24px;}
+        .pcl-item{display:flex;align-items:center;gap:8px;font-size:0.78em;color:var(--text-muted);}
+        .pcl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+        .h2h-wrap{overflow-x:auto;}
+        .h2h-table{border-collapse:separate;border-spacing:6px;margin:0 auto;}
+        .h2h-table th,.h2h-table td{border:none;padding:0;background:transparent;border-top:none;white-space:nowrap;}
+        .h2h-header-cell{padding:0 6px 16px!important;text-align:center;}
+        .h2h-player-tag{display:inline-flex;flex-direction:column;align-items:center;gap:4px;}
+        .h2h-player-name{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.05em;color:var(--white);letter-spacing:0.04em;}
+        .h2h-nemesis-tag{font-size:0.58em;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:2px 7px;border-radius:10px;opacity:0;}
+        .h2h-nemesis-tag.visible{opacity:1;background:rgba(180,55,55,0.7);color:#ffa0a0;}
+        .h2h-row-label{padding-right:12px!important;text-align:right!important;}
+        .h2h-cell{width:86px;height:64px;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;transition:transform 0.2s;cursor:default;}
+        .h2h-cell:hover{transform:scale(1.04);}
+        .h2h-cell.self{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);}
+        .self-dash{font-family:'Cormorant Garamond',serif;font-size:1.4em;color:rgba(255,255,255,0.12);}
+        .h2h-cell.no-data{background:rgba(255,255,255,0.02);border:1px dashed rgba(255,255,255,0.07);}
+        .no-data-dash{font-size:0.8em;color:rgba(255,255,255,0.15);letter-spacing:0.05em;text-align:center;}
+        .h2h-cell.winning{background:rgba(45,138,110,0.15);border:1px solid rgba(91,184,160,0.25);}
+        .h2h-cell.losing{background:rgba(180,55,55,0.12);border:1px solid rgba(180,55,55,0.2);}
+        .h2h-cell.even{background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.18);}
+        .h2h-score{display:flex;align-items:baseline;gap:4px;}
+        .h2h-w,.h2h-l{font-family:'Cormorant Garamond',serif;font-size:1.7em;font-weight:700;}
+        .h2h-sep{font-size:0.9em;color:var(--text-muted);}
+        .h2h-cell.winning .h2h-w{color:#7de8c4;}.h2h-cell.winning .h2h-l{color:var(--text-muted);}
+        .h2h-cell.losing .h2h-w{color:var(--text-muted);}.h2h-cell.losing .h2h-l{color:#e89090;}
+        .h2h-cell.even .h2h-w,.h2h-cell.even .h2h-l{color:var(--gold-light);}
+        .h2h-rounds-played{font-size:0.72em;color:var(--text-light);letter-spacing:0.04em;opacity:0.8;}
+        .h2h-footnote{margin-top:20px;font-size:0.84em;color:var(--text-light);letter-spacing:0.04em;text-align:center;font-style:italic;font-family:'Cormorant Garamond',serif;opacity:0.8;}
+        /* RECORDS ROOM */
+        .records-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+        .record-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:4px;padding:28px 28px 24px;position:relative;overflow:hidden;transition:border-color 0.3s;}
+        .record-card:hover{border-color:rgba(201,168,76,0.3);}
+        .record-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.4),transparent);}
+        .record-card.full-width{grid-column:1/-1;}
+        .record-icon{font-size:1.4em;margin-bottom:12px;display:block;opacity:0.8;}
+        .record-title{font-size:0.75em;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-light);margin-bottom:16px;opacity:0.8;}
+        .record-holder{font-family:'Cormorant Garamond',serif;font-size:1.9em;font-weight:600;letter-spacing:0.04em;margin-bottom:4px;}
+        .record-value{font-family:'Cormorant Garamond',serif;font-size:2.8em;font-weight:700;color:var(--white);line-height:1;letter-spacing:-0.02em;}
+        .record-value .rv-unit{font-size:0.38em;font-weight:400;color:var(--text-muted);letter-spacing:0.1em;vertical-align:super;margin-left:3px;}
+        .record-context{font-size:0.82em;color:var(--text-light);margin-top:10px;letter-spacing:0.04em;font-style:italic;font-family:'Cormorant Garamond',serif;opacity:0.85;}
+        .record-na{font-family:'Cormorant Garamond',serif;font-size:1.1em;font-style:italic;color:var(--text-muted);opacity:0.6;margin-top:8px;}
+        .hod-content{display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap;}
+        .hod-hole-num{font-family:'Cormorant Garamond',serif;font-size:4.5em;font-weight:700;color:rgba(180,55,55,0.7);line-height:1;letter-spacing:-0.04em;}
+        .hod-details{flex:1;}
+        .hod-avg{font-family:'Cormorant Garamond',serif;font-size:1.8em;font-weight:600;color:var(--sc-double-text);}
+        .hod-avg .hod-unit{font-size:0.45em;color:var(--text-muted);}
+        .hod-bar{display:flex;gap:4px;margin-top:8px;align-items:flex-end;height:32px;}
+        .hod-bar-seg{background:rgba(180,55,55,0.3);border-radius:2px 2px 0 0;width:18px;}
+        .hod-bar-seg.doom{background:rgba(180,55,55,0.75);}
+        .hod-bar-label{font-size:0.55em;text-align:center;color:var(--text-muted);margin-top:3px;}
+        /* ROUNDS */
+        .rounds-section{border-top:1px solid var(--card-border);}
+        .round{border:1px solid var(--card-border);border-radius:4px;margin:20px 0;overflow:hidden;opacity:0;animation:fadeUp 0.5s ease-out forwards;}
+        .round-header{display:flex;justify-content:space-between;align-items:baseline;padding:24px 28px 16px;}
+        .round-title{font-family:'Cormorant Garamond',serif;font-size:1.35em;font-weight:600;color:var(--white);letter-spacing:0.06em;}
+        .round-date{font-size:0.78em;color:var(--text-muted);letter-spacing:0.04em;}
+        .course{padding:0 28px 20px;font-size:1.0em;color:var(--gold-dim);font-style:italic;font-family:'Cormorant Garamond',serif;letter-spacing:0.03em;}
+        .course-meta{display:inline-flex;align-items:center;gap:12px;margin-left:12px;font-style:normal;}
+        .course-meta span{font-family:'Outfit',sans-serif;font-size:0.78em;font-weight:400;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-muted);}
+        table{width:100%;border-collapse:collapse;}
+        th{padding:13px 28px;text-align:left;font-size:0.78em;font-weight:600;color:var(--text-light);letter-spacing:0.12em;text-transform:uppercase;background:rgba(0,0,0,0.15);border-top:1px solid var(--card-border);}
+        td{padding:16px 28px;border-top:1px solid rgba(255,255,255,0.06);font-size:1.0em;}
+        tr:first-child td{border-top:none;}
+        .placement{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.1em;color:var(--white);}
+        .points{font-weight:500;color:var(--gold);font-size:1em;}
+        .scorecard-toggle{display:flex;align-items:center;gap:10px;padding:14px 28px;background:none;border:none;border-top:1px solid var(--card-border);width:100%;text-align:left;cursor:pointer;font-family:'Outfit',sans-serif;font-size:0.82em;font-weight:500;color:var(--gold-dim);letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s,background 0.2s;}
+        .scorecard-toggle:hover{color:var(--gold);background:rgba(201,168,76,0.04);}
+        .sc-toggle-icon{width:18px;height:18px;border:1px solid currentColor;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1em;transition:transform 0.3s,background 0.2s;}
+        .scorecard-toggle.open .sc-toggle-icon{transform:rotate(180deg);background:rgba(201,168,76,0.12);}
+        .sc-toggle-label{flex:1;}
+        .sc-toggle-hint{font-size:0.85em;opacity:0.6;font-style:italic;letter-spacing:0.04em;font-family:'Cormorant Garamond',serif;text-transform:none;font-weight:400;}
+        .scorecard-panel{max-height:0;overflow:hidden;transition:max-height 0.45s cubic-bezier(0.4,0,0.2,1);}
+        .scorecard-inner{border-top:1px solid rgba(201,168,76,0.1);background:rgba(0,0,0,0.18);padding:24px 20px 28px;}
+        .sc-player-cards{display:flex;flex-direction:column;gap:20px;}
+        .sc-player-block{background:rgba(255,255,255,0.025);border:1px solid rgba(201,168,76,0.1);border-radius:4px;overflow:hidden;}
+        .sc-player-header{display:flex;align-items:center;gap:16px;padding:14px 20px;background:rgba(0,0,0,0.15);border-bottom:1px solid rgba(201,168,76,0.08);}
+        .sc-player-header-name{font-family:'Cormorant Garamond',serif;font-size:1.15em;font-weight:600;color:var(--white);letter-spacing:0.04em;flex:1;}
+        .sc-hcp-badge{font-size:0.7em;color:var(--text-muted);letter-spacing:0.06em;}
+        .sc-total-badge{font-family:'Cormorant Garamond',serif;font-size:1.35em;font-weight:700;color:var(--gold-light);}
+        .sc-total-badge .sc-total-sub{font-size:0.5em;font-weight:400;color:var(--text-muted);letter-spacing:0.06em;}
+        .sc-diff-badge{font-size:0.75em;font-weight:600;padding:3px 8px;border-radius:12px;letter-spacing:0.03em;}
+        .sc-diff-badge.under{background:rgba(45,138,110,0.3);color:#7de8c4;}
+        .sc-diff-badge.even{background:rgba(255,255,255,0.08);color:var(--text-muted);}
+        .sc-diff-badge.over{background:rgba(180,55,55,0.25);color:#e89090;}
+        .sc-table-wrap{overflow-x:auto;}
+        .sc-table{border-collapse:collapse;width:100%;min-width:480px;}
+        .sc-table th,.sc-table td{text-align:center;padding:0;border:none;white-space:nowrap;border-top:none;}
+        .sc-row-holes th{padding:10px 8px 6px;font-size:0.68em;font-weight:600;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;background:transparent;border-top:none;}
+        .sc-row-holes .sc-label-cell{text-align:left;padding-left:20px;padding-right:12px;min-width:70px;color:var(--text-muted);font-size:0.62em;}
+        .sc-row-par td{padding:4px 8px;font-size:0.72em;color:var(--text-muted);background:rgba(0,0,0,0.1);}
+        .sc-row-par .sc-label-cell,.sc-row-hcp .sc-label-cell{text-align:left;padding-left:20px;font-size:0.7em;letter-spacing:0.06em;text-transform:uppercase;}
+        .sc-row-par .sc-total-col{font-weight:600;color:var(--text-light);}
+        .sc-row-hcp td{padding:3px 8px 8px;font-size:0.65em;color:var(--text-muted);opacity:0.5;background:rgba(0,0,0,0.1);}
+        .sc-divider td{height:1px;background:rgba(201,168,76,0.1);padding:0;}
+        .sc-hole-cell{padding:10px 6px!important;border-radius:3px;margin:2px;transition:transform 0.15s;position:relative;}
+        .sc-hole-cell:hover{transform:scale(1.08);z-index:2;}
+        .sc-gross{display:block;font-weight:600;font-size:0.95em;line-height:1.2;}
+        .sc-pts-small{display:block;font-size:0.6em;opacity:0.65;letter-spacing:0.04em;margin-top:1px;}
+        .sc-total-col{padding:10px 16px 10px 8px!important;}
+        .sc-label-cell{text-align:left!important;padding-left:20px!important;padding-right:12px!important;font-size:0.78em;font-weight:500;color:var(--text-light);}
+        .sc-eagle{background:rgba(201,168,76,0.35);color:var(--gold-light);}
+        .sc-birdie{background:var(--sc-birdie-bg);color:var(--sc-birdie-text);}
+        .sc-par{background:var(--sc-par-bg);color:var(--sc-par-text);}
+        .sc-bogey{background:var(--sc-bogey-bg);color:var(--sc-bogey-text);}
+        .sc-double{background:var(--sc-double-bg);color:var(--sc-double-text);}
+        .sc-triple{background:var(--sc-triple-bg);color:var(--sc-triple-text);}
+        .sc-zero-pts{opacity:0.6;}
+        /* EXPEDITIONS */
+        .exp-card{border:1px solid var(--card-border);border-radius:4px;overflow:hidden;margin-bottom:24px;background:var(--card-bg);}
+        .exp-hero{position:relative;height:180px;display:flex;align-items:flex-end;padding:24px 28px;}
+        .exp-hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.45) saturate(0.9);}
+        .exp-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(12,26,14,0.95) 0%,transparent 60%);}
+        .exp-hero-placeholder{position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,58,36,0.8) 0%,rgba(12,26,14,0.9) 100%);display:flex;align-items:center;justify-content:center;font-size:4em;opacity:0.15;}
+        .exp-hero-content{position:relative;z-index:2;}
+        .exp-flag{font-size:1.8em;margin-bottom:4px;display:block;}
+        .exp-title{font-family:'Cormorant Garamond',serif;font-size:2em;font-weight:600;color:var(--white);letter-spacing:0.08em;}
+        .exp-subtitle{font-size:0.78em;color:var(--gold-dim);letter-spacing:0.1em;text-transform:uppercase;margin-top:2px;}
+        .exp-body{padding:28px;}
+        .exp-narrative{font-family:'Cormorant Garamond',serif;font-size:1.05em;color:var(--text-light);line-height:1.8;margin-bottom:24px;font-style:italic;opacity:0.85;}
+        .exp-courses-title{font-size:0.68em;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;}
+        .exp-courses-list{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
+        .exp-course-chip{font-size:0.78em;padding:5px 12px;background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.2);border-radius:2px;color:var(--gold-dim);letter-spacing:0.04em;}
+        .exp-standings{background:rgba(0,0,0,0.15);border:1px solid rgba(201,168,76,0.1);border-radius:4px;overflow:hidden;margin-bottom:24px;}
+        .exp-standings-title{padding:14px 20px;font-size:0.68em;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-muted);border-bottom:1px solid rgba(201,168,76,0.08);}
+        .exp-standing-row{display:flex;align-items:center;gap:16px;padding:12px 20px;border-bottom:1px solid rgba(255,255,255,0.03);}
+        .exp-standing-row:last-child{border-bottom:none;}
+        .exp-standing-rank{font-family:'Cormorant Garamond',serif;font-size:1.2em;font-weight:600;color:var(--gold-dim);min-width:28px;}
+        .exp-standing-name{flex:1;font-family:'Cormorant Garamond',serif;font-size:1.1em;color:var(--white);}
+        .exp-standing-pts{font-family:'Cormorant Garamond',serif;font-size:1.3em;font-weight:700;color:var(--gold-light);}
+        .exp-parallel-toggle{display:flex;align-items:center;gap:10px;padding:14px 20px;background:none;border:none;border-top:1px solid var(--card-border);width:100%;text-align:left;cursor:pointer;font-family:'Outfit',sans-serif;font-size:0.72em;font-weight:500;color:var(--gold-dim);letter-spacing:0.12em;text-transform:uppercase;transition:color 0.2s,background 0.2s;}
+        .exp-parallel-toggle:hover{color:var(--gold);background:rgba(201,168,76,0.04);}
+        .exp-parallel-panel{max-height:0;overflow:hidden;transition:max-height 0.45s cubic-bezier(0.4,0,0.2,1);}
+        .exp-parallel-inner{border-top:1px solid rgba(201,168,76,0.1);background:rgba(0,0,0,0.15);padding:24px;}
+        .exp-parallel-name{font-family:'Cormorant Garamond',serif;font-size:1.3em;font-weight:600;color:var(--gold-light);margin-bottom:4px;}
+        .exp-parallel-sub{font-size:0.72em;color:var(--text-muted);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:20px;}
+        .exp-parallel-lb{display:flex;flex-direction:column;gap:8px;}
+        .exp-parallel-row{display:flex;align-items:center;gap:16px;padding:10px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);border-radius:3px;}
+        .exp-p-rank{font-family:'Cormorant Garamond',serif;font-size:1.2em;font-weight:600;color:var(--gold-dim);min-width:24px;}
+        .exp-p-name{flex:1;font-size:0.92em;color:var(--text-light);}
+        .exp-p-pts{font-family:'Cormorant Garamond',serif;font-size:1.3em;font-weight:700;color:var(--white);}
+        .exp-p-rounds{font-size:0.7em;color:var(--text-muted);}
+        .exp-placeholder{border:1px dashed rgba(201,168,76,0.2);border-radius:4px;padding:48px 32px;text-align:center;}
+        .exp-placeholder-icon{font-size:2.5em;margin-bottom:16px;opacity:0.4;}
+        .exp-placeholder-text{font-family:'Cormorant Garamond',serif;font-size:1.2em;font-style:italic;color:var(--text-muted);opacity:0.7;}
+        .exp-placeholder-sub{font-size:0.72em;color:var(--text-muted);margin-top:8px;letter-spacing:0.06em;text-transform:uppercase;opacity:0.5;}
+        /* THE VAULT */
+        .vault-empty{border:1px dashed rgba(201,168,76,0.15);border-radius:4px;padding:48px 32px;text-align:center;}
+        .vault-empty-icon{font-size:2.5em;margin-bottom:16px;opacity:0.3;}
+        .vault-empty-text{font-family:'Cormorant Garamond',serif;font-size:1.2em;font-style:italic;color:var(--text-muted);opacity:0.6;}
+        .vault-empty-sub{font-size:0.72em;color:var(--text-muted);margin-top:8px;letter-spacing:0.06em;text-transform:uppercase;opacity:0.4;}
+        .vault-season{border:1px solid var(--card-border);border-radius:4px;overflow:hidden;margin-bottom:20px;background:var(--card-bg);}
+        .vault-season-header{display:flex;align-items:center;gap:20px;padding:24px 28px;background:linear-gradient(135deg,rgba(201,168,76,0.08) 0%,rgba(201,168,76,0.02) 100%);border-bottom:1px solid var(--card-border);}
+        .vault-year{font-family:'Cormorant Garamond',serif;font-size:2.4em;font-weight:700;color:var(--gold);}
+        .vault-winner-label{font-size:0.65em;color:var(--text-muted);letter-spacing:0.12em;text-transform:uppercase;}
+        .vault-winner-name{font-family:'Cormorant Garamond',serif;font-size:1.9em;font-weight:600;color:var(--white);}
+        .vault-trophy{font-size:2em;margin-left:auto;}
+        .vault-season-body{padding:20px 28px;}
+        .vault-highlight{font-family:'Cormorant Garamond',serif;font-size:1em;font-style:italic;color:var(--text-muted);margin-bottom:16px;line-height:1.7;}
+        .vault-standings{display:flex;gap:24px;flex-wrap:wrap;}
+        .vault-s-item{display:flex;align-items:baseline;gap:8px;}
+        .vault-s-rank{font-size:0.7em;color:var(--text-muted);}
+        .vault-s-name{font-family:'Cormorant Garamond',serif;font-size:1.1em;font-weight:500;color:var(--text-light);}
+        .vault-s-pts{font-family:'Cormorant Garamond',serif;font-size:1.1em;font-weight:700;color:var(--gold-dim);}
+        /* MISC */
+        .empty-state{text-align:center;padding:60px 20px;color:var(--text-muted);font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1.1em;letter-spacing:0.04em;}
+        footer{text-align:center;padding:48px 0;border-top:1px solid var(--card-border);margin-top:20px;}
+        footer p{font-size:0.75em;color:var(--text-muted);letter-spacing:0.15em;text-transform:uppercase;}
+        .modal{display:none;position:fixed;z-index:1000;inset:0;background:rgba(0,0,0,0.75);overflow-y:auto;backdrop-filter:blur(4px);}
+        .modal.active{display:block;animation:fadeIn 0.25s ease-out;}
+        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+        .modal-content{background:var(--dark-green);border:1px solid var(--card-border);margin:60px auto;border-radius:6px;max-width:700px;width:90%;box-shadow:0 30px 80px rgba(0,0,0,0.5);animation:modalSlide 0.3s ease-out;}
+        @keyframes modalSlide{from{transform:translateY(-30px);opacity:0}to{transform:translateY(0);opacity:1}}
+        .modal-header{padding:32px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--card-border);}
+        .modal-header h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.8em;color:var(--white);letter-spacing:0.06em;margin:0;animation:none;opacity:1;text-transform:none;}
+        .close{color:var(--text-muted);font-size:1.8em;cursor:pointer;transition:color 0.2s;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;}
+        .close:hover{color:var(--white);background:rgba(255,255,255,0.06);}
+        .modal-body{padding:32px;}
+        .player-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:36px;}
+        .stat-box{text-align:center;padding:16px 8px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:4px;}
+        .stat-label{font-size:0.68em;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;}
+        .stat-value{font-family:'Cormorant Garamond',serif;font-size:1.8em;font-weight:700;color:var(--white);}
+        .rounds-list h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:1em;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--card-border);}
+        .round-item{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;margin:6px 0;border-radius:3px;border-left:3px solid transparent;transition:background 0.2s;}
+        .round-item:hover{background:rgba(255,255,255,0.02);}
+        .round-item.top15{background:rgba(201,168,76,0.05);border-left-color:var(--gold);}
+        .round-item.top15 .round-points{color:var(--gold);}
+        .round-info{flex:1;}
+        .round-course{font-weight:500;color:var(--text-light);font-size:0.92em;}
+        .modal .round-date{font-size:0.78em;color:var(--text-muted);margin-top:2px;}
+        .round-score{text-align:center;margin:0 20px;font-size:0.9em;color:var(--text-muted);}
+        .round-points{font-family:'Cormorant Garamond',serif;font-size:1.2em;font-weight:600;color:var(--text-light);min-width:60px;text-align:right;}
+        @media(max-width:768px){
+            h1{font-size:2.4em;}.hero{height:320px;}section{padding:40px 0;}h2{font-size:1.3em;margin-bottom:24px;}
+            .player-card{padding:18px 20px;gap:16px;}.rank{font-size:1.5em;min-width:36px;}.player-name{font-size:1.2em;}.total-points{font-size:1.8em;min-width:60px;}
+            .round-header{flex-direction:column;gap:4px;padding:18px 20px 12px;}.course{padding:0 20px 16px;}th,td{padding:10px 16px;}
+            .modal-content{margin:20px auto;width:94%;}.player-summary{grid-template-columns:repeat(2,1fr);}
+            .round-item{flex-direction:column;align-items:flex-start;gap:6px;}.round-score{margin:0;}.round-points{align-self:flex-end;}
+            .map-container{height:300px;}.chart-canvas-wrap{height:240px;}.h2h-cell{width:70px;height:55px;}.records-grid{grid-template-columns:1fr;}.record-card.full-width{grid-column:1;}
+        }
+        @media(max-width:480px){.page-wrapper{padding:0 16px;}h1{font-size:2em;}.player-card{padding:14px 16px;gap:12px;}.total-points{font-size:1.5em;min-width:50px;}table{font-size:0.85em;display:block;overflow-x:auto;}th,td{padding:10px 12px;white-space:nowrap;}}
+
+        /* ── Secret Lock ── */
+        .secret-section{position:relative;}
+        .secret-lock-overlay{position:absolute;inset:0;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:linear-gradient(to bottom,rgba(12,26,14,0.0) 0%,rgba(12,26,14,0.92) 30%,rgba(12,26,14,0.98) 100%);border-radius:4px;cursor:default;pointer-events:none;transition:opacity 0.4s;}
+        .secret-lock-overlay.unlocked{opacity:0;pointer-events:none;}
+        .secret-lock-icon{font-size:2.2em;filter:drop-shadow(0 0 12px rgba(201,168,76,0.4));transition:transform 0.3s;}
+        
+        .secret-lock-label{font-family:'Cormorant Garamond',serif;font-size:1.1em;font-style:italic;color:var(--gold-dim);letter-spacing:0.06em;text-align:center;max-width:260px;line-height:1.6;}
+        .secret-lock-hint{font-size:0.65em;color:var(--text-muted);letter-spacing:0.12em;text-transform:uppercase;margin-top:-6px;}
+        .secret-content{filter:blur(8px);pointer-events:none;user-select:none;transition:filter 0.6s;}
+        .secret-content.revealed{filter:none;pointer-events:auto;user-select:auto;}
+        .secret-pin-box{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:4px;}
+        .secret-pin-dots{display:flex;gap:8px;}
+        .secret-pin-dot{width:10px;height:10px;border-radius:50%;border:1.5px solid rgba(201,168,76,0.4);background:transparent;transition:background 0.2s;}
+        .secret-pin-dot.filled{background:var(--gold);}
+        .secret-pin-input{position:absolute;opacity:0;width:1px;height:1px;}
+
+        /* ── Analyse Engine ── */
+        .player-wrapper{display:flex;flex-direction:column;}
+        .player-card{border-radius:4px 4px 0 0!important;}
+        .player-card.standalone{border-radius:4px!important;}
+        .analyse-toggle{display:flex;align-items:center;gap:10px;padding:12px 28px;background:rgba(0,0,0,0.18);border:1px solid var(--card-border);border-top:none;border-radius:0 0 4px 4px;width:100%;text-align:left;cursor:pointer;font-family:'Outfit',sans-serif;font-size:0.8em;font-weight:500;color:var(--gold-dim);letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s,background 0.2s;margin-bottom:2px;}
+        .analyse-toggle:hover{color:var(--gold);background:rgba(201,168,76,0.05);}
+        .analyse-toggle.open{border-radius:0;color:var(--gold);background:rgba(201,168,76,0.05);}
+        .at-icon{width:16px;height:16px;border:1px solid currentColor;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;transition:transform 0.3s;flex-shrink:0;}
+        .analyse-toggle.open .at-icon{transform:rotate(180deg);}
+        .analyse-panel{max-height:0;overflow:hidden;transition:max-height 0.5s cubic-bezier(0.4,0,0.2,1);border:1px solid var(--card-border);border-top:none;border-radius:0 0 4px 4px;background:rgba(0,0,0,0.1);margin-bottom:10px;}
+        .analyse-panel.open{border-top:1px solid rgba(201,168,76,0.1);}
+        /* Tabs */
+        .an-tabs{display:flex;border-bottom:1px solid var(--card-border);}
+        .an-tab{flex:1;padding:14px 6px;text-align:center;font-size:0.7em;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-light);cursor:pointer;transition:all 0.2s;border-bottom:2px solid transparent;margin-bottom:-1px;}
+        .an-tab:hover{color:var(--text-light);}
+        .an-tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+        .an-pane{display:none;padding:20px 24px 24px;}
+        .an-pane.active{display:block;}
+        /* Quick stats */
+        .an-quickstats{display:flex;border-bottom:1px solid var(--card-border);}
+        .an-qs{flex:1;padding:14px 0;text-align:center;border-right:1px solid var(--card-border);}
+        .an-qs:last-child{border-right:none;}
+        .an-qs-val{font-family:'Cormorant Garamond',serif;font-size:1.7em;font-weight:700;color:var(--white);}
+        .an-qs-lbl{font-size:0.67em;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-light);margin-top:2px;opacity:0.8;}
+        /* Block label */
+        .an-block-lbl{font-size:0.7em;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-light);margin-bottom:14px;padding-bottom:9px;border-bottom:1px solid rgba(255,255,255,0.08);opacity:0.8;}
+        /* Hole rows */
+        .an-holes{display:flex;flex-direction:column;gap:7px;}
+        .an-hole{display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:10px;padding:10px 14px;background:rgba(0,0,0,0.12);border-radius:3px;border-left:3px solid transparent;}
+        .an-hole.strong{border-left-color:rgba(45,138,110,0.7);}
+        .an-hole.weak{border-left-color:rgba(200,80,80,0.7);}
+        .an-hole.neutral{border-left-color:rgba(180,140,40,0.4);}
+        .an-hnum{font-family:'Cormorant Garamond',serif;font-size:1.3em;font-weight:700;color:var(--text-muted);text-align:center;}
+        .an-hinfo{min-width:0;}
+        .an-htop{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:3px;}
+        .an-hsub{font-size:0.78em;color:var(--text-light);letter-spacing:0.03em;opacity:0.85;}
+        .an-vspar{font-family:'Cormorant Garamond',serif;font-size:1.15em;font-weight:600;}
+        .an-vspar.neg{color:#7de8c4;} .an-vspar.pos{color:#e89090;} .an-vspar.zer{color:var(--text-muted);}
+        /* Badges */
+        .an-badge{display:inline-flex;font-size:0.56em;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:2px 7px;border-radius:2px;white-space:nowrap;}
+        .an-badge.g{background:rgba(45,138,110,0.2);color:#7de8c4;border:1px solid rgba(45,138,110,0.2);}
+        .an-badge.r{background:rgba(200,80,80,0.15);color:#e89090;border:1px solid rgba(200,80,80,0.15);}
+        .an-badge.y{background:rgba(180,140,40,0.15);color:#e8c870;border:1px solid rgba(180,140,40,0.15);}
+        .an-badge.b{background:rgba(60,100,180,0.15);color:#90b8e8;border:1px solid rgba(60,100,180,0.15);}
+        /* Rate bars */
+        .an-rates{display:flex;align-items:center;gap:6px;margin-top:3px;}
+        .an-rate-lbl{font-size:0.6em;color:var(--text-muted);min-width:32px;}
+        .an-rate-bar{height:3px;border-radius:2px;min-width:2px;}
+        .an-rate-bar.p{background:rgba(45,138,110,0.7);}
+        .an-rate-bar.d{background:rgba(200,80,80,0.7);}
+        .an-rate-num{font-size:0.6em;color:var(--text-muted);min-width:26px;}
+        /* Stability */
+        .an-stab-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+        .an-stab-lbl{font-size:0.6em;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-muted);margin-bottom:9px;}
+        .an-stab-row{display:flex;align-items:center;gap:8px;padding:8px 12px;background:rgba(0,0,0,0.12);border-radius:3px;margin-bottom:5px;}
+        .an-stab-num{font-family:'Cormorant Garamond',serif;font-size:1.2em;font-weight:700;color:var(--text-muted);min-width:24px;text-align:center;}
+        .an-stab-bwrap{flex:1;height:5px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;}
+        .an-stab-bar{height:100%;border-radius:3px;}
+        .an-stab-bar.s{background:rgba(45,138,110,0.7);}
+        .an-stab-bar.v{background:rgba(200,80,80,0.65);}
+        .an-stab-spread{font-size:0.65em;color:var(--text-muted);min-width:38px;text-align:right;}
+        /* Patterns */
+        .an-patterns{display:flex;flex-direction:column;gap:9px;}
+        .an-pat{padding:12px 14px;background:rgba(0,0,0,0.12);border-radius:3px;}
+        .an-pat-top{display:flex;align-items:center;gap:9px;margin-bottom:4px;}
+        .an-pat-num{font-family:'Cormorant Garamond',serif;font-size:1.25em;font-weight:700;color:var(--text-muted);min-width:28px;}
+        .an-pat-desc{font-size:0.9em;color:var(--text-light);}
+        .an-pat-rec{font-size:0.82em;color:var(--text-light);font-style:italic;font-family:'Cormorant Garamond',serif;padding-left:37px;margin-top:2px;opacity:0.85;}
+        .an-pat-rec strong{color:var(--gold-dim);font-style:normal;font-weight:500;}
+        /* no data */
+        .an-nodata{text-align:center;padding:32px 16px;font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--text-muted);font-size:1.0em;}
+        @media(max-width:600px){
+          .an-stab-grid{grid-template-columns:1fr;}
+          .an-tabs .an-tab{font-size:0.56em;padding:10px 3px;}
+          .an-pane{padding:16px;}
+          .an-quickstats{flex-wrap:wrap;}
+          .an-qs{min-width:50%;}
+        }
+
+        /* ── Upcoming tee times ── */
+        .teetimes-section{border-top:1px solid var(--card-border);}
+        .teetime-grid{display:flex;flex-direction:column;gap:10px;}
+        .teetime-card{display:grid;grid-template-columns:90px 1fr auto;align-items:center;gap:16px;padding:18px 24px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:4px;transition:border-color 0.25s;}
+        .teetime-card:hover{border-color:rgba(201,168,76,0.3);}
+        .teetime-card.next{border-color:rgba(201,168,76,0.4);background:linear-gradient(135deg,rgba(201,168,76,0.07) 0%,rgba(201,168,76,0.02) 100%);}
+        .teetime-date-block{text-align:center;}
+        .teetime-weekday{font-size:0.68em;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:2px;}
+        .teetime-card.next .teetime-weekday{color:var(--gold-dim);}
+        .teetime-daynum{font-family:'Cormorant Garamond',serif;font-size:2.2em;font-weight:700;color:var(--white);line-height:1;}
+        .teetime-month{font-size:0.72em;color:var(--text-muted);letter-spacing:0.06em;text-transform:uppercase;margin-top:1px;}
+        .teetime-info{}
+        .teetime-course{font-family:'Cormorant Garamond',serif;font-size:1.25em;font-weight:600;color:var(--white);letter-spacing:0.03em;}
+        .teetime-card.next .teetime-course{color:var(--gold-light);}
+        .teetime-meta{font-size:0.8em;color:var(--text-muted);margin-top:3px;}
+        .teetime-time-block{text-align:right;}
+        .teetime-time{font-family:'Cormorant Garamond',serif;font-size:1.8em;font-weight:700;color:var(--white);}
+        .teetime-card.next .teetime-time{color:var(--gold);}
+        .teetime-next-badge{font-size:0.6em;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--dark);background:var(--gold);padding:2px 7px;border-radius:2px;display:inline-block;margin-top:4px;}
+        @media(max-width:600px){
+          .teetime-card{grid-template-columns:70px 1fr auto;gap:10px;padding:14px 16px;}
+          .teetime-daynum{font-size:1.8em;}
+          .teetime-time{font-size:1.5em;}
+          .teetime-course{font-size:1.05em;}
+        }
+
+        /* ── Match Play ── */
+        .mp-banner{margin:0 28px 0;padding:14px 20px;background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(201,168,76,0.04));border:1px solid rgba(201,168,76,0.35);border-top:none;border-radius:0 0 4px 4px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+        .mp-trophy{font-size:1.6em;}
+        .mp-label{font-size:0.65em;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-dim);}
+        .mp-teams{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+        .mp-team-win{font-family:'Cormorant Garamond',serif;font-size:1.25em;font-weight:700;color:var(--gold-light);}
+        .mp-vs{font-size:0.85em;color:var(--text-muted);}
+        .mp-team-lose{font-family:'Cormorant Garamond',serif;font-size:1.1em;font-weight:500;color:var(--text-muted);text-decoration:none;}
+        .mp-score{font-family:'Cormorant Garamond',serif;font-size:1.5em;font-weight:700;color:var(--gold);margin-left:4px;}
+        .mp-confetti{font-size:1.1em;animation:popIn 0.5s ease-out;}
+        @keyframes popIn{0%{transform:scale(0) rotate(-20deg);opacity:0}70%{transform:scale(1.2) rotate(5deg)}100%{transform:scale(1) rotate(0);opacity:1}}
+        /* Admin notes */
+        .admin-note-btn{font-size:0.7em;color:var(--text-muted);background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:3px;letter-spacing:0.08em;transition:color 0.2s;margin-left:auto;}
+        .admin-note-btn:hover{color:var(--gold-dim);}
+        .admin-modal{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);align-items:center;justify-content:center;}
+        .admin-modal.open{display:flex;}
+        .admin-box{background:var(--dark-green);border:1px solid var(--card-border);border-radius:6px;padding:32px;max-width:420px;width:90%;box-shadow:0 30px 80px rgba(0,0,0,0.6);}
+        .admin-box h3{font-family:'Cormorant Garamond',serif;font-size:1.4em;color:var(--white);margin-bottom:20px;letter-spacing:0.06em;}
+        .admin-input{width:100%;padding:12px 16px;background:rgba(0,0,0,0.3);border:1px solid var(--card-border);border-radius:3px;color:var(--white);font-family:'Outfit',sans-serif;font-size:1em;outline:none;transition:border-color 0.2s;margin-bottom:12px;}
+        .admin-input:focus{border-color:rgba(201,168,76,0.5);}
+        .admin-btn{padding:10px 24px;background:var(--gold);color:var(--dark);font-family:'Outfit',sans-serif;font-size:0.85em;font-weight:600;letter-spacing:0.1em;border:none;border-radius:3px;cursor:pointer;transition:background 0.2s;}
+        .admin-btn:hover{background:var(--gold-light);}
+        .admin-cancel{padding:10px 16px;background:none;border:1px solid var(--card-border);color:var(--text-muted);font-family:'Outfit',sans-serif;font-size:0.85em;border-radius:3px;cursor:pointer;margin-left:8px;}
+        .admin-err{font-size:0.78em;color:#e89090;margin-top:-4px;margin-bottom:10px;display:none;}
+        .admin-notes-list{list-style:none;padding:0;margin-top:4px;}
+        .admin-notes-list li{padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-size:0.92em;color:var(--text-light);display:flex;gap:10px;}
+        .admin-notes-list li::before{content:'⚠';font-size:0.9em;opacity:0.6;flex-shrink:0;}
+        .admin-note-close{margin-top:20px;}
+        /* Rich admin notes */
+        .an-section{margin-bottom:20px;}
+        .an-section-title{font-size:0.65em;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px;padding-bottom:7px;border-bottom:1px solid rgba(201,168,76,0.15);}
+        .an-stat-row{display:flex;align-items:baseline;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);}
+        .an-stat-label{font-size:0.88em;color:var(--text-light);}
+        .an-stat-val{font-family:'Cormorant Garamond',serif;font-size:1.3em;font-weight:700;color:var(--white);}
+        .an-hole-tag{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.07);border-radius:3px;margin:3px;font-size:0.82em;color:var(--text-light);}
+        .an-hole-num{font-family:'Cormorant Garamond',serif;font-size:1.2em;font-weight:700;color:var(--text-muted);}
+        .an-type-badge{font-size:0.65em;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:2px 6px;border-radius:2px;}
+        .an-type-hook{background:rgba(180,55,55,0.25);color:#e89090;}
+        .an-type-hook_water{background:rgba(60,100,180,0.25);color:#90b8e8;}
+        .an-type-slice{background:rgba(180,100,30,0.25);color:#e8b870;}
+        .an-type-putt{background:rgba(45,138,110,0.2);color:#7de8c4;}
+        .an-type-ob{background:rgba(140,20,20,0.3);color:#e07070;}
+        .an-type-default{background:rgba(180,140,40,0.2);color:#e8c870;}
+        .an-season-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px;}
+        .an-season-box{background:rgba(0,0,0,0.18);border:1px solid rgba(255,255,255,0.06);border-radius:3px;padding:12px 14px;text-align:center;}
+        .an-season-box-val{font-family:'Cormorant Garamond',serif;font-size:1.8em;font-weight:700;color:var(--white);}
+        .an-season-box-lbl{font-size:0.62em;color:var(--text-muted);letter-spacing:0.08em;text-transform:uppercase;margin-top:2px;}
+
+        /* ── Course-specific Hole of Doom ── */
+        .hod-course-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px;}
+        .hod-ctab{padding:6px 14px;font-size:0.68em;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.07);border-radius:3px;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+        .hod-ctab:hover{color:var(--text-light);border-color:rgba(255,255,255,0.15);}
+        .hod-ctab.active{color:var(--gold);background:rgba(201,168,76,0.1);border-color:rgba(201,168,76,0.3);}
+        .hod-ctab .hod-count{font-size:0.85em;opacity:0.6;margin-left:4px;}
+        .hod-course-pane{display:none;}
+        .hod-course-pane.active{display:block;}
+
+        /* ── Pre-round reminder ── */
+        .preround-box{background:linear-gradient(135deg,rgba(180,55,55,0.12),rgba(180,55,55,0.05));border:1px solid rgba(180,55,55,0.3);border-radius:4px;padding:16px 18px;margin-bottom:18px;}
+        .preround-title{font-size:0.72em;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#e89090;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+        .preround-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+        .preround-item:last-child{border-bottom:none;padding-bottom:0;}
+        .preround-hole{font-family:'Cormorant Garamond',serif;font-size:1.5em;font-weight:700;color:#e89090;min-width:36px;line-height:1.1;}
+        .preround-text{font-size:0.88em;color:var(--text-light);line-height:1.5;}
+        .preround-text strong{color:var(--white);font-weight:600;}
+        .preround-course-tag{font-size:0.6em;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);background:rgba(0,0,0,0.2);padding:2px 7px;border-radius:2px;display:inline-block;margin-bottom:3px;}
+        /* Hole timeline */
+        .hole-timeline{display:flex;flex-direction:column;gap:6px;margin-top:4px;}
+        .hole-tl-row{display:grid;grid-template-columns:44px 1fr;gap:10px;align-items:start;}
+        .hole-tl-num{font-family:'Cormorant Garamond',serif;font-size:1.6em;font-weight:700;text-align:center;line-height:1;padding-top:3px;}
+        .hole-tl-events{display:flex;flex-direction:column;gap:4px;}
+        .hole-tl-event{display:flex;align-items:center;gap:7px;padding:6px 10px;background:rgba(0,0,0,0.15);border-radius:3px;font-size:0.82em;color:var(--text-light);}
+        .hole-tl-date{font-size:0.7em;color:var(--text-muted);margin-left:auto;white-space:nowrap;}
+        .hole-tl-course{font-size:0.68em;color:var(--text-muted);font-style:italic;}
+
+        /* ── Private rounds ── */
+        .private-round{border-color:rgba(255,255,255,0.08)!important;opacity:0.85;}
+        .private-round .round-header{background:rgba(0,0,0,0.1);}
+        .private-badge{display:inline-flex;align-items:center;font-size:0.55em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-muted);background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);padding:2px 8px;border-radius:2px;vertical-align:middle;margin-right:4px;}
+        /* Extended stats in admin */
+        .ext-stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0;}
+        .ext-stat-box{background:rgba(0,0,0,0.18);border:1px solid rgba(255,255,255,0.07);border-radius:3px;padding:10px 8px;text-align:center;}
+        .ext-stat-val{font-family:'Cormorant Garamond',serif;font-size:1.5em;font-weight:700;color:var(--white);line-height:1;}
+        .ext-stat-lbl{font-size:0.58em;color:var(--text-muted);letter-spacing:0.08em;text-transform:uppercase;margin-top:3px;}
+        .putts-row{display:flex;gap:4px;margin-top:8px;align-items:flex-end;flex-wrap:wrap;}
+        .putts-cell{display:flex;flex-direction:column;align-items:center;gap:2px;}
+        .putts-bar{border-radius:2px 2px 0 0;width:18px;min-height:4px;}
+        .putts-num{font-size:0.6em;color:var(--text-muted);}
+        .putts-hole{font-size:0.55em;color:rgba(255,255,255,0.25);}
+        /* Private rounds in admin */
+        .private-rounds-section{border-top:1px dashed rgba(255,255,255,0.1);margin-top:16px;padding-top:16px;}
+        .private-round-item{padding:12px 14px;background:rgba(0,0,0,0.12);border-radius:3px;border-left:3px solid rgba(255,255,255,0.1);margin-bottom:8px;}
+        .priv-round-header{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+        .priv-round-title{font-family:'Cormorant Garamond',serif;font-size:1.1em;font-weight:600;color:var(--text-light);}
+        .priv-round-date{font-size:0.72em;color:var(--text-muted);}
+        @media(max-width:500px){.ext-stat-grid{grid-template-columns:repeat(2,1fr);}}
+
+        /* ── Player modal round cards ── */
+        .pm-round{border:1px solid var(--card-border);border-radius:4px;overflow:hidden;margin-bottom:12px;background:rgba(0,0,0,0.1);}
+        .pm-round.private-r{border-color:rgba(255,255,255,0.09);}
+        .pm-round-header{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;transition:background 0.2s;}
+        .pm-round-header:hover{background:rgba(255,255,255,0.03);}
+        .pm-round-course{font-family:'Cormorant Garamond',serif;font-size:1.15em;font-weight:600;color:var(--white);flex:1;}
+        .pm-round-date{font-size:0.78em;color:var(--text-muted);}
+        .pm-round-score{font-family:'Cormorant Garamond',serif;font-size:1.3em;font-weight:700;color:var(--white);}
+        .pm-round-pts{font-size:0.8em;color:var(--gold);min-width:36px;text-align:right;}
+        .pm-round-pts.private{color:var(--text-muted);}
+        .pm-round-body{max-height:0;overflow:hidden;transition:max-height 0.4s cubic-bezier(0.4,0,0.2,1);}
+        .pm-privbadge{font-size:0.55em;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);padding:2px 7px;border-radius:2px;vertical-align:middle;}
+        .pm-top15badge{font-size:0.55em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--dark);background:var(--gold);padding:2px 7px;border-radius:2px;vertical-align:middle;}
+        /* Private stats grid */
+        .pm-stat-grid{display:flex;flex-wrap:wrap;gap:8px;padding:12px 18px 4px;border-top:1px solid rgba(255,255,255,0.05);}
+        .pm-stat-box{background:rgba(0,0,0,0.15);border:1px solid rgba(255,255,255,0.06);border-radius:3px;padding:8px 12px;text-align:center;min-width:64px;}
+        .pm-stat-val{font-family:'Cormorant Garamond',serif;font-size:1.4em;font-weight:700;color:var(--white);}
+        .pm-stat-lbl{font-size:0.6em;color:var(--text-muted);letter-spacing:0.08em;text-transform:uppercase;margin-top:1px;}
+
+        /* ── Per-course stats section ── */
+        .course-stats-section{margin-bottom:24px;}
+        .course-stats-title{font-family:'Cormorant Garamond',serif;font-size:1.1em;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--card-border);}
+        .course-stat-card{border:1px solid var(--card-border);border-radius:4px;overflow:hidden;margin-bottom:14px;background:rgba(0,0,0,0.12);}
+        .course-stat-header{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(0,0,0,0.12);border-bottom:1px solid var(--card-border);cursor:pointer;transition:background 0.2s;}
+        .course-stat-header:hover{background:rgba(201,168,76,0.05);}
+        .course-stat-name{font-family:'Cormorant Garamond',serif;font-size:1.3em;font-weight:600;color:var(--white);flex:1;}
+        .course-stat-rounds{font-size:0.72em;color:var(--text-muted);letter-spacing:0.06em;}
+        .course-stat-body{padding:16px 18px 18px;}
+        /* KPI grid */
+        .csk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
+        .csk-box{background:rgba(0,0,0,0.15);border:1px solid rgba(255,255,255,0.06);border-radius:3px;padding:10px 10px 8px;text-align:center;}
+        .csk-val{font-family:'Cormorant Garamond',serif;font-size:1.5em;font-weight:700;color:var(--white);line-height:1;}
+        .csk-sub{font-size:0.58em;font-weight:400;color:var(--text-muted);display:block;margin-top:2px;}
+        .csk-lbl{font-size:0.6em;color:var(--text-muted);letter-spacing:0.08em;text-transform:uppercase;margin-top:4px;}
+        /* Per-hole avg mini bar */
+        .hole-avg-section{margin-top:12px;}
+        .hole-avg-title{font-size:0.62em;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;}
+        .hole-avg-row{display:flex;gap:3px;flex-wrap:wrap;align-items:flex-end;}
+        .hole-avg-cell{display:flex;flex-direction:column;align-items:center;gap:2px;}
+        .hole-avg-bar{width:22px;border-radius:2px 2px 0 0;min-height:4px;}
+        .hole-avg-score{font-size:0.65em;font-weight:600;color:var(--text-light);}
+        .hole-avg-num{font-size:0.55em;color:var(--text-muted);}
+        /* Penalty breakdown */
+        .penalty-breakdown{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
+        @media(max-width:500px){.csk-grid{grid-template-columns:repeat(2,1fr);}}
+
+        /* ── Pre-round briefing button + modal ── */
+        .briefing-btn{display:flex;align-items:center;gap:10px;padding:10px 28px;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);border-top:none;border-radius:0 0 4px 4px;width:100%;text-align:left;cursor:pointer;font-family:'Outfit',sans-serif;font-size:0.8em;font-weight:500;color:var(--gold-dim);letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s,background 0.2s;margin-bottom:2px;}
+        .briefing-btn:hover{color:var(--gold);background:rgba(201,168,76,0.1);}
+        .briefing-modal{position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:200;display:flex;align-items:flex-start;justify-content:center;padding:40px 16px;overflow-y:auto;opacity:0;pointer-events:none;transition:opacity 0.25s;}
+        .briefing-modal.active{opacity:1;pointer-events:all;}
+        .briefing-box{background:#0f2214;border:1px solid rgba(201,168,76,0.25);border-radius:4px;width:100%;max-width:600px;overflow:hidden;}
+        .briefing-header{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;background:rgba(0,0,0,0.2);border-bottom:1px solid rgba(201,168,76,0.15);}
+        .briefing-title{font-family:'Cormorant Garamond',serif;font-size:1.3em;font-weight:600;color:var(--gold-light);}
+        .briefing-close{font-size:1.4em;color:var(--text-muted);cursor:pointer;background:none;border:none;line-height:1;padding:0;}
+        .briefing-body{padding:24px;}
+        /* Course summary strip */
+        .br-course-strip{background:rgba(0,0,0,0.15);border:1px solid rgba(201,168,76,0.12);border-radius:3px;padding:12px 16px;margin-bottom:20px;display:flex;flex-wrap:wrap;gap:16px;}
+        .br-kpi{text-align:center;}
+        .br-kpi-val{font-family:'Cormorant Garamond',serif;font-size:1.6em;font-weight:700;color:var(--white);line-height:1;}
+        .br-kpi-lbl{font-size:0.6em;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-top:2px;}
+        /* Section titles */
+        .br-section{margin-bottom:20px;}
+        .br-section-title{font-size:0.62em;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid rgba(201,168,76,0.12);}
+        /* Hole grid */
+        .br-hole-grid{display:flex;flex-wrap:wrap;gap:6px;}
+        .br-hole{padding:6px 10px;border-radius:3px;text-align:center;min-width:42px;}
+        .br-hole-num{font-family:'Cormorant Garamond',serif;font-size:1.1em;font-weight:700;}
+        .br-hole-score{font-size:0.65em;letter-spacing:0.06em;text-transform:uppercase;margin-top:1px;}
+        /* Alert items */
+        .br-alert{display:flex;gap:12px;padding:10px 12px;background:rgba(180,55,55,0.08);border:1px solid rgba(180,55,55,0.2);border-left:3px solid rgba(200,80,80,0.6);border-radius:3px;margin-bottom:8px;}
+        .br-alert-hole{font-family:'Cormorant Garamond',serif;font-size:1.4em;font-weight:700;color:rgba(200,80,80,0.8);min-width:36px;}
+        .br-alert-content{flex:1;}
+        .br-alert-events{font-size:0.82em;color:var(--text-muted);margin-top:2px;}
+        .br-alert-advice{font-size:0.82em;color:#e8b880;margin-top:4px;font-style:italic;}
+
+        /* ── Weather widget ── */
+        .weather-strip{display:flex;align-items:center;gap:14px;padding:10px 16px;background:rgba(0,0,0,0.15);border:1px solid rgba(255,255,255,0.07);border-radius:3px;margin-top:10px;flex-wrap:wrap;}
+        .weather-icon{font-size:1.6em;line-height:1;}
+        .weather-temp{font-family:'Cormorant Garamond',serif;font-size:1.3em;font-weight:700;color:var(--white);}
+        .weather-desc{font-size:0.78em;color:var(--text-muted);margin-top:1px;}
+        .weather-detail{font-size:0.72em;color:var(--text-muted);display:flex;gap:10px;margin-top:3px;flex-wrap:wrap;}
+        .weather-loading{font-size:0.78em;color:var(--text-muted);font-style:italic;}
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+    <header>
+        <div class="hero">
+            <img class="hero-img" src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=1400&q=80&auto=format" alt="Golf course">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1>GUCCI Golf</h1>
+                <div class="divider"></div>
+                <p class="tagline">Sæson 2026</p>
+                <div class="countdown-wrap" id="countdownWrap"></div>
+            </div>
+        </div>
+    </header>
+    <section><h2>Samlet Stilling</h2><p class="section-subtitle">Baseret på de 15 bedste runder for hver spiller</p><div id="leaderboard" class="leaderboard"><div class="empty-state">Indlæser...</div></div></section>
+    <section class="teetimes-section"><h2>Kommende Teetider</h2>
+        <p class="section-subtitle">Scandinavian Golf Club — bookede starttider</p>
+        <div class="teetime-grid" id="teetimeGrid"></div>
+    </section>
+    <section style="border-top:1px solid var(--card-border)"><h2>The Grand Tour</h2><p class="section-subtitle">Sæsonens baner — klik på en pin for detaljer</p><div class="map-container"><div id="grand-tour-map"></div><div class="map-legend"><div class="map-legend-item"><div class="map-legend-dot"></div><span>Runde</span></div><div class="map-legend-item"><div class="map-legend-dot abroad"></div><span>Ekspedition</span></div></div></div></section>
+    <section style="border-top:1px solid var(--card-border);position:relative" class="secret-section" id="secret-timeline">
+        <div class="secret-lock-overlay" id="lock-timeline" >
+            <div class="secret-lock-icon">🔒</div>
+            <div class="secret-lock-label">Hemmeligheder der åbnes løbende 😉</div>
+            
+        </div>
+        <div class="secret-content" id="content-timeline">
+            <h2>Sæsonens Forløb</h2><p class="section-subtitle">Kumulative ligapoint runde for runde</p><div class="chart-container"><div class="player-color-legend" id="colorLegend"></div><div class="chart-canvas-wrap"><canvas id="timelineChart"></canvas></div></div>
+        </div>
+    </section>
+    <section style="border-top:1px solid var(--card-border);position:relative" class="secret-section" id="secret-h2h">
+        <div class="secret-lock-overlay" id="lock-h2h" >
+            <div class="secret-lock-icon">🔒</div>
+            <div class="secret-lock-label">Hemmeligheder der åbnes løbende 😉</div>
+            
+        </div>
+        <div class="secret-content" id="content-h2h">
+            <h2>Head-to-Head</h2><p class="section-subtitle">Indbyrdes optegnelse — runder I har spillet sammen</p><div class="h2h-wrap"><div id="h2h-matrix"></div></div>
+        </div>
+    </section>
+    <section style="border-top:1px solid var(--card-border)"><h2>The Records Room</h2><p class="section-subtitle">Sæsonens bedrifter — opdateres automatisk</p><div class="records-grid" id="recordsGrid"></div></section>
+    <section class="rounds-section"><h2>Spillede Runder</h2><div id="rounds"><div class="empty-state">Indlæser...</div></div></section>
+    <section style="border-top:1px solid var(--card-border)"><h2>Ekspeditioner</h2><p class="section-subtitle">Sæsonens udlandsrejser — GUCCI Tour og åbne turneringer</p>
+    <div id="expeditions"></div>
+    <div style="margin-top:20px;text-align:center">
+      <a href="riviera.html" style="display:inline-flex;align-items:center;gap:10px;padding:14px 28px;background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(201,168,76,0.04));border:1px solid rgba(201,168,76,0.4);border-radius:4px;text-decoration:none;font-family:'Cormorant Garamond',serif;font-size:1.15em;font-weight:600;color:var(--gold-light);letter-spacing:0.06em;transition:all 0.25s">
+        🇫🇷 &nbsp;Riviera Open 2026 — Åbn konkurrenceside →
+      </a>
+    </div>
+    </section>
+    <section style="border-top:1px solid var(--card-border)"><h2>The Vault</h2><p class="section-subtitle">Afsluttede sæsoner — historiens dom</p><div id="vault"></div></section>
+    <!-- Pre-round briefing modal -->
+<div id="briefingModal" class="briefing-modal" onclick="if(event.target===this)closeBriefing()">
+  <div class="briefing-box">
+    <div class="briefing-header">
+      <div class="briefing-title" id="briefingTitle">🎯 Pre-round Briefing</div>
+      <button class="briefing-close" onclick="closeBriefing()">×</button>
+    </div>
+    <div id="briefingLoginView" class="briefing-body">
+      <p style="font-size:0.9em;color:var(--text-muted);margin-bottom:20px;font-family:'Cormorant Garamond',serif;font-style:italic">Log ind med dit spiller-ID for at se din personlige briefing</p>
+      <input class="admin-input" type="text" id="briefingId" placeholder="Spiller-ID" autocomplete="off">
+      <input class="admin-input" type="password" id="briefingPw" placeholder="Password" autocomplete="off">
+      <div class="admin-err" id="briefingErr" style="display:none">Forkert kode</div>
+      <button class="admin-btn" onclick="checkBriefingLogin()">Åbn briefing</button>
+      <button class="admin-cancel" onclick="closeBriefing()">Annuller</button>
+    </div>
+    <div id="briefingContent" style="display:none"></div>
+  </div>
+</div>
+<!-- Player stats modal -->
+<div id="playerLoginModal" class="modal" onclick="if(event.target===this)closePlayerLogin()">
+  <div class="modal-content" style="max-width:420px">
+    <div class="modal-header">
+      <h2 id="playerLoginTitle">Spillerstatistik</h2>
+      <span class="close" onclick="closePlayerLogin()">&times;</span>
+    </div>
+    <div class="modal-body">
+      <div id="playerLoginView">
+        <p style="font-size:0.9em;color:var(--text-muted);margin-bottom:20px;font-family:'Cormorant Garamond',serif;font-style:italic">Indtast dit spiller-ID for at se dine fulde stats inkl. private runder</p>
+        <input class="admin-input" type="text" id="playerLoginId" placeholder="Spiller-ID" autocomplete="off">
+        <input class="admin-input" type="password" id="playerLoginPw" placeholder="Password" autocomplete="off">
+        <div class="admin-err" id="playerLoginErr" style="display:none">Forkert kode</div>
+        <button class="admin-btn" onclick="checkPlayerLogin()">Åbn</button>
+        <button class="admin-cancel" onclick="closePlayerLogin()">Annuller</button>
+      </div>
+      <div id="playerStatsView" style="display:none">
+        <div id="playerCourseStats" style="margin-bottom:4px"></div>
+        <div class="player-summary" id="playerSummaryFull"></div>
+        <div class="rounds-list"><h3>Alle runder <span id="playerRoundsLabel" style="font-size:0.8em;color:var(--text-muted);font-weight:400"></span></h3>
+        <div id="playerRoundsFull"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Admin notes modal -->
+<div id="adminModal" class="admin-modal" onclick="if(event.target===this)closeAdminNotes()">
+  <div class="admin-box">
+    <h3 id="adminTitle">Rundenoter 🔒</h3>
+    <div id="adminLoginView">
+      <input class="admin-input" type="text" id="adminId" placeholder="Bruger-ID" autocomplete="off">
+      <input class="admin-input" type="password" id="adminPw" placeholder="Password" autocomplete="off">
+      <div class="admin-err" id="adminErr">Forkert kode — prøv igen</div>
+      <button class="admin-btn" onclick="checkAdminLogin()">Åbn noter</button>
+      <button class="admin-cancel" onclick="closeAdminNotes()">Annuller</button>
+    </div>
+    <div id="adminNotesView" style="display:none">
+      <div id="adminNotesList"></div>
+      <button class="admin-btn admin-note-close" onclick="closeAdminNotes()">Luk</button>
+    </div>
+  </div>
+</div>
+<footer><p>&copy; 2026 GUCCI Golf &mdash; Hvor præcision møder passion</p></footer>
+</div>
+<div id="playerModal" class="modal"><div class="modal-content"><div class="modal-header"><h2 id="modalPlayerName"></h2><span class="close">&times;</span></div><div class="modal-body"><div class="player-summary" id="playerSummary"></div><div class="rounds-list"><h3>Alle runder</h3><div id="playerRounds"></div></div></div></div></div>
+<script>
+const PLAYERS=['Thomas','Henrik','Kim','Morten'];
+const PLAYER_COLORS={Thomas:'#c9a84c',Henrik:'#5bb8a0',Kim:'#6b9fd4',Morten:'#c47a5a'};
+const NEXT_ROUND={datetime:'2026-04-26T09:50:00',course:'New Course',tee:57,lat:55.83428967088613,lng:12.339822779286978,players:['Thomas','Henrik','Morten'],abroad:false};
+const EXPEDITIONS=[
+  {
+    id:'cote-dazur-2026',
+    title:"Côte d'Azur 2026",
+    subtitle:'Rivieraen · 4 baner · 4 dage',
+    dates:'30. april – 3. maj 2026',
+    flag:'🇫🇷',
+    narrative:null,
+    coverPhoto:null,
+    courses:['Royal Mougins','Terre Blanche','Cannes Mougins','Old Course Mandelieu'],
+    parallelTournament:{
+      name:"Riviera Open 2026",
+      players:['Thomas','Henrik','Kim','Morten','Jes','Torben','Jan'],
+      rounds:[]
+    }
+  }
+];
+const PREVIOUS_SEASONS=[
+  {year:2025,winner:'Thomas',totalRounds:null,standings:[],highlight:'Thomas gentager bedriften fra 2022 og sikrer sin anden sæsontitel.'},
+  {year:2024,winner:'Morten',totalRounds:null,standings:[],highlight:'Morten snupper titlen for anden gang og skriver sig ind i historien som den mest vindende GUCCI-spiller.'},
+  {year:2023,winner:'Henrik',totalRounds:null,standings:[],highlight:'Henrik bryder Thomas og Mortens dominans og sikrer sig sin første og hidtil eneste sæsontitel.'},
+  {year:2022,winner:'Thomas',totalRounds:null,standings:[],highlight:'Thomas tager sin første sæsontitel i GUCCI Golf.'},
+  {year:2021,winner:'Morten',totalRounds:null,standings:[],highlight:'Morten vinder sæsonens første titel og sætter standarden for de kommende år.'},
+];
+const ROUNDS_DATA=[{course:"Old Course",date:"2026-04-10",tee:56,holes:9,cr:72.3,slope:139,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:null,photo:null,counting:true,holeData:[{hole:1,par:4,hcp:11},{hole:2,par:5,hcp:5},{hole:3,par:4,hcp:13},{hole:4,par:4,hcp:1},{hole:5,par:3,hcp:15},{hole:6,par:4,hcp:9},{hole:7,par:4,hcp:3},{hole:8,par:3,hcp:17},{hole:9,par:5,hcp:7}],results:[{player:'Thomas',score:21,points:2,placement:1,tied:false},{player:'Henrik',score:18,points:1,placement:2,tied:false},{player:'Kim',score:13,points:0,placement:3,tied:false}],scorecards:[{player:'Thomas',hcp:11.6,phcp:15,scores:[4,6,6,4,4,4,4,4,5],points:[3,2,1,3,2,3,3,1,3],slag:41,grossDiff:-3},{player:'Henrik',hcp:15.4,phcp:19,scores:[4,6,4,6,4,7,5,3,7],points:[3,2,3,2,2,0,2,3,1],slag:46,grossDiff:0},{player:'Kim',hcp:18.9,phcp:24,scores:[5,9,5,6,6,5,7,4,6],points:[2,0,2,2,0,2,1,2,2],slag:53,grossDiff:5}]},
+  {course:"Royal Mougins 🇫🇷",date:"2026-04-30",time:"12:20",tee:null,holes:18,cr:null,slope:null,lat:43.59365672710108,lng:6.971199740482849,abroad:true,expId:'cote-dazur-2026',note:"Riviera Open · Dag 1 — teetider 12:20 & 12:30",photo:null,players:["Henrik","Jan","Jes","Kim","Morten","Thomas","Torben"],holeData:[],results:[],scorecards:[]},
+  {course:"Terre Blanche 🇫🇷",date:"2026-05-01",time:"12:30",tee:null,holes:18,cr:null,slope:null,lat:43.590996455254526,lng:6.7318169771288305,abroad:true,expId:'cote-dazur-2026',note:"Riviera Open · Dag 2 — teetider 12:30 & 12:40",photo:null,players:["Henrik","Jan","Jes","Kim","Morten","Thomas","Torben"],holeData:[],results:[],scorecards:[]},
+  {course:"Cannes Mougins 🇫🇷",date:"2026-05-02",time:"12:00",tee:null,holes:18,cr:null,slope:null,lat:43.60336212800996,lng:7.0222162730074285,abroad:true,expId:'cote-dazur-2026',note:"Riviera Open · Dag 3 — teetider 12:00 & 12:10",photo:null,players:["Henrik","Jan","Jes","Kim","Morten","Thomas","Torben"],holeData:[],results:[],scorecards:[]},
+  {course:"Old Course Mandelieu 🇫🇷",date:"2026-05-03",time:"11:04",tee:null,holes:18,cr:null,slope:null,lat:43.53194492695571,lng:6.9403454828098115,abroad:true,expId:'cote-dazur-2026',note:"Riviera Open · Dag 4 — teetider 11:04 & 11:12",photo:null,players:["Henrik","Jan","Jes","Kim","Morten","Thomas","Torben"],holeData:[],results:[],scorecards:[]},
+  {course:"Old Course",date:"2026-04-12",time:"10:00",tee:56,holes:18,cr:72.3,slope:139,
+  lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,
+  note:null,photo:null,
+  counting:true,matchPlay:{teams:[['Thomas','Morten'],['Henrik','Kim']],result:'6-5',winner:['Thomas','Morten']},
+  adminNotes:{hash:'tf',
+    putts:35,
+    lostBalls:[
+      {hole:15, reason:'Hook i skov'}
+    ],
+    penalties:[
+      {hole:15, reason:'Hook i skov', type:'hook'},
+      {hole:18, reason:'Hook i vand', type:'hook_water'}
+    ]
+  },
+  holeData:[
+    {hole:1,par:4,hcp:11},{hole:2,par:5,hcp:5},{hole:3,par:4,hcp:13},{hole:4,par:4,hcp:1},
+    {hole:5,par:3,hcp:15},{hole:6,par:4,hcp:9},{hole:7,par:4,hcp:3},{hole:8,par:3,hcp:17},
+    {hole:9,par:5,hcp:7},{hole:10,par:5,hcp:8},{hole:11,par:4,hcp:2},{hole:12,par:3,hcp:16},
+    {hole:13,par:4,hcp:6},{hole:14,par:3,hcp:14},{hole:15,par:4,hcp:12},{hole:16,par:3,hcp:18},
+    {hole:17,par:5,hcp:4},{hole:18,par:5,hcp:10}
+  ],
+  results:[
+    {player:'Thomas',score:35,points:3,placement:1,tied:false},
+    {player:'Morten',score:31,points:2,placement:2,tied:false},
+    {player:'Henrik',score:26,points:1,placement:3,tied:false},
+    {player:'Kim',   score:23,points:0,placement:4,tied:false}
+  ],
+  scorecards:[
+    {player:'Thomas',hcp:11.2,phcp:14,
+     scores:[5,6,5,5,3,5,5,2,6, 6,5,4,4,5,6,2,6,7],
+     points:[2,2,2,2,2,2,2,3,2, 2,2,1,3,1,1,3,2,1],
+     slag:87,grossDiff:15},
+    {player:'Morten',hcp:8.7,phcp:11,
+     scores:[5,7,5,5,3,4,4,3,6, 7,4,3,5,5,6,5,6,5],
+     points:[2,1,1,2,2,3,3,2,2, 1,3,2,2,0,0,0,2,3],
+     slag:88,grossDiff:16},
+    {player:'Henrik',hcp:15.4,phcp:19,
+     scores:[7,5,5,7,3,6,6,3,7, 8,6,4,5,6,7,4,6,6],
+     points:[0,3,2,1,3,1,1,3,1, 0,1,2,2,0,0,2,2,2],
+     slag:101,grossDiff:29},
+    {player:'Kim',hcp:18.9,phcp:24,
+     scores:[6,8,5,7,4,5,6,6,8, 7,6,4,6,6,7,4,7,7],
+     points:[1,1,2,1,2,2,2,0,0, 1,2,2,2,0,0,2,2,1],
+     slag:109,grossDiff:37}
+  ]},
+  {course:"Old Course",date:"2026-04-14",time:"13:40",tee:56,holes:9,cr:72.3,slope:139,
+  lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,
+  note:null,photo:null,
+  private:true,
+  holeData:[
+    {hole:1,par:4,hcp:11},{hole:2,par:5,hcp:5},{hole:3,par:4,hcp:13},
+    {hole:4,par:4,hcp:1},{hole:5,par:3,hcp:15},{hole:6,par:4,hcp:9},
+    {hole:7,par:4,hcp:3},{hole:8,par:3,hcp:17},{hole:9,par:5,hcp:7}
+  ],
+  results:[
+    {player:'Thomas',score:21,points:1,placement:1,tied:false},
+    {player:'Kim',   score:13,points:0,placement:2,tied:false}
+  ],
+  scorecards:[
+    {player:'Thomas',hcp:11.2,phcp:14,
+     scores:[4,4,5,6,4,4,5,3,5],points:[3,4,2,1,1,3,2,2,3],slag:40,grossDiff:-3},
+    {player:'Kim',hcp:18.9,phcp:24,
+     scores:[5,9,7,6,4,5,6,4,7],points:[2,0,0,2,2,2,2,2,1],slag:53,grossDiff:5}
+  ],
+  adminNotes:{
+    users:{
+      'tf':{
+        player:'Thomas',
+        putts:17,
+        puttsPerHole:[2,1,2,2,3,2,2,2,1],
+        fairways:{hit:6,total:7},
+        gir:{hit:5,total:9},
+        bunkers:1,
+        chips:3,
+        lostBalls:[],
+        penalties:[]
+      },
+      'kkj':{
+        player:'Kim',
+        putts:null,
+        puttsPerHole:null,
+        fairways:null,
+        gir:null,
+        bunkers:null,
+        chips:null,
+        lostBalls:[],
+        penalties:[]
+      }
+    }
+  }},
+  {course:"New Course",date:"2026-04-16",time:"14:00",tee:57,holes:18,cr:72.5,slope:141,
+  lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,note:null,photo:null,
+  counting:true,
+  players:["Thomas","Henrik","Morten"],
+  holeData:[
+    {hole:1,par:5,hcp:5},{hole:2,par:3,hcp:17},{hole:3,par:4,hcp:9},{hole:4,par:5,hcp:3},
+    {hole:5,par:3,hcp:15},{hole:6,par:4,hcp:1},{hole:7,par:5,hcp:7},{hole:8,par:4,hcp:11},{hole:9,par:3,hcp:13},
+    {hole:10,par:4,hcp:4},{hole:11,par:4,hcp:8},{hole:12,par:5,hcp:2},{hole:13,par:3,hcp:18},
+    {hole:14,par:4,hcp:12},{hole:15,par:4,hcp:14},{hole:16,par:4,hcp:10},{hole:17,par:3,hcp:16},{hole:18,par:5,hcp:6}
+  ],
+  results:[
+    {player:'Henrik',score:31,points:2,placement:1,tied:false},
+    {player:'Thomas',score:30,points:1,placement:2,tied:false},
+    {player:'Morten',score:29,points:0,placement:3,tied:false}
+  ],
+  adminNotes:{hash:'TF',
+    putts:34,
+    puttsPerHole:[2,1,2,2,1,1,2,2,1,3,2,2,2,2,2,2,2,3],
+    fairways:{hit:5,total:13},
+    gir:{hit:3,total:18},
+    bunkers:5,
+    chips:12,
+    lostBalls:[
+      {hole:10,reason:'Hook i vand — drive'},
+      {hole:12,reason:'Slice i skov'},
+      {hole:12,reason:'Hook i vand'}
+    ],
+    penalties:[
+      {hole:10,reason:'Hook i vand — drive',type:'hook_water'},
+      {hole:12,reason:'Slice i skov',type:'slice'},
+      {hole:12,reason:'Hook i vand',type:'hook_water'}
+    ]
+  },
+  scorecards:[
+    {player:'Thomas',hcp:10.8,phcp:14,
+     scores:[6,3,4,6,3,5,8,6,3, 7,4,8,4,5,5,5,3,7],
+     points:[2,2,3,2,2,2,0,1,3, 0,3,0,1,2,2,2,2,1],
+     slag:92,grossDiff:20},
+    {player:'Morten',hcp:8.9,phcp:12,
+     scores:[5,3,4,7,4,5,6,5,4, 5,5,8,3,5,5,4,5,8],
+     points:[3,2,3,1,1,2,2,2,1, 2,2,0,2,2,1,3,0,0],
+     slag:91,grossDiff:19},
+    {player:'Henrik',hcp:15.4,phcp:20,
+     scores:[7,4,8,8,3,6,7,7,4, 7,5,5,4,3,6,3,3,8],
+     points:[1,2,0,0,3,2,1,0,2, 0,2,4,2,4,1,4,3,0],
+     slag:98,grossDiff:26}
+  ]},
+  {course:"New Course",date:"2026-04-19",time:"10:00",tee:57,holes:18,cr:72.5,slope:141,
+  lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,note:null,photo:null,
+  counting:true,
+  players:["Thomas","Henrik","Kim","Morten"],
+  holeData:[
+    {hole:1,par:5,hcp:5},{hole:2,par:3,hcp:17},{hole:3,par:4,hcp:9},{hole:4,par:5,hcp:3},
+    {hole:5,par:3,hcp:15},{hole:6,par:4,hcp:1},{hole:7,par:5,hcp:7},{hole:8,par:4,hcp:11},{hole:9,par:3,hcp:13},
+    {hole:10,par:4,hcp:4},{hole:11,par:4,hcp:8},{hole:12,par:5,hcp:2},{hole:13,par:3,hcp:18},
+    {hole:14,par:4,hcp:12},{hole:15,par:4,hcp:14},{hole:16,par:4,hcp:10},{hole:17,par:3,hcp:16},{hole:18,par:5,hcp:6}
+  ],
+  results:[
+    {player:'Morten',score:36,points:3,placement:1,tied:false},
+    {player:'Thomas',score:34,points:2,placement:2,tied:false},
+    {player:'Henrik',score:15,points:1,placement:3,tied:false},
+    {player:'Kim',   score:12,points:0,placement:4,tied:false,nr:true,nrNote:'NR — stoppede efter 9 huller med ondt i ryggen 🙏'}
+  ],
+  adminNotes:{hash:'TF',
+    putts:34,
+    puttsPerHole:[2,1,2,2,3,1,1,2,1,2,2,2,2,2,3,3,2,2],
+    fairways:{hit:9,total:13},
+    gir:{hit:8,total:18},
+    bunkers:1,
+    chips:12,
+    lostBalls:[
+      {hole:10,reason:'Hook i søen'},
+      {hole:14,reason:'Hook i søen'}
+    ],
+    penalties:[
+      {hole:9, reason:'Tee-shot i søen — ingen bold fundet',type:'vand'},
+      {hole:10,reason:'Hook i søen — lostball',type:'hook_water'},
+      {hole:14,reason:'Hook i søen — lostball',type:'hook_water'}
+    ]
+  },
+  scorecards:[
+    {player:'Thomas',hcp:10.8,phcp:14,
+     scores:[5,2,4,7,4,4,5,4,4, 7,5,8,4,4,6,6,4,5],
+     points:[3,3,3,1,1,3,3,3,2, 0,2,0,1,3,1,1,1,3],
+     slag:88,grossDiff:16},
+    {player:'Morten',hcp:8.9,phcp:12,
+     scores:[4,5,5,6,4,5,6,4,3, 5,4,5,4,5,5,5,4,5],
+     points:[4,0,2,2,1,2,2,3,2, 2,3,3,1,2,1,2,1,3],
+     slag:84,grossDiff:12},
+    {player:'Henrik',hcp:15.4,phcp:20,
+     scores:[7,5,4,7,3,8,7,7,6, 7,7,9,5,6,7,5,5,8],
+     points:[1,1,3,1,3,0,1,0,0, 0,0,0,1,1,0,2,1,0],
+     slag:113,grossDiff:41},
+    {player:'Kim',hcp:18.9,phcp:24,
+     scores:[8,5,6,8,5,6,6,7,3],
+     points:[1,1,1,1,1,2,2,0,3],
+     slag:54,grossDiff:18,nr:true,
+     nrNote:'NR — måtte stoppe efter 9 huller med ondt i ryggen 🙏'}
+  ]},
+  {course:"New Course",date:"2026-04-23",time:"13:50",tee:57,holes:18,cr:72.5,slope:141,
+  lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,
+  note:"Vi er kun 3 i dag — Morten er på smuttur i udlandet 🌍",photo:null,
+  counting:true,
+  players:["Thomas","Henrik","Kim"],
+  holeData:[
+    {hole:1,par:5,hcp:5},{hole:2,par:3,hcp:17},{hole:3,par:4,hcp:9},{hole:4,par:5,hcp:3},
+    {hole:5,par:3,hcp:15},{hole:6,par:4,hcp:1},{hole:7,par:5,hcp:7},{hole:8,par:4,hcp:11},{hole:9,par:3,hcp:13},
+    {hole:10,par:4,hcp:4},{hole:11,par:4,hcp:8},{hole:12,par:5,hcp:2},{hole:13,par:3,hcp:18},
+    {hole:14,par:4,hcp:12},{hole:15,par:4,hcp:14},{hole:16,par:4,hcp:10},{hole:17,par:3,hcp:16},{hole:18,par:5,hcp:6}
+  ],
+  results:[
+    {player:'Thomas',score:30,points:2,placement:1,tied:false},
+    {player:'Kim',   score:26,points:1,placement:2,tied:false},
+    {player:'Henrik',score:23,points:0,placement:3,tied:false}
+  ],
+  adminNotes:{hash:'TF',
+    putts:35,
+    puttsPerHole:[2,2,2,2,2,2,1,3,2, 2,2,2,2,2,1,2,2,2],
+    fairways:{hit:8,total:12},
+    gir:{hit:3,total:18},
+    bunkers:1,
+    chips:10,
+    lostBalls:[
+      {hole:12,reason:'Flækket 6-jern i vand'},
+      {hole:14,reason:'Mistet bold ved green — kunne ikke finde den'},
+      {hole:15,reason:'Hooket drive i søen'}
+    ],
+    penalties:[
+      {hole:1, reason:'Shank til højre',              type:'slice'},
+      {hole:12,reason:'Flækket 6-jern i vand',        type:'hook_water'},
+      {hole:14,reason:'Hooket drive i skov',           type:'hook'},
+      {hole:14,reason:'Mistet bold ved green',         type:'default'},
+      {hole:15,reason:'Hooket drive i søen',           type:'hook_water'}
+    ]
+  },
+  scorecards:[
+    {player:'Thomas',hcp:10.6,phcp:14,
+     scores:[7,3,5,6,4,5,5,6,4, 5,5,8,4,7,5,4,3,6],
+     points:[1,2,2,2,1,2,3,1,2, 2,2,0,1,0,2,3,2,2],
+     slag:92,grossDiff:20},
+    {player:'Kim',hcp:18.9,phcp:24,
+     scores:[7,3,4,8,4,8,7,4,3, 8,7,7,6,6,6,5,4,9],
+     points:[2,3,3,1,2,0,1,3,3, 0,0,2,0,1,1,2,2,0],
+     slag:106,grossDiff:34},
+    {player:'Henrik',hcp:15.5,phcp:20,
+     scores:[7,4,7,6,4,6,7,7,5, 7,5,8,5,5,4,6,4,8],
+     points:[1,2,0,2,2,2,1,0,1, 0,2,1,1,2,3,1,2,0],
+     slag:105,grossDiff:33}
+  ]},
+  {course:"New Course",date:"2026-04-26",time:"09:50",tee:57,holes:18,cr:null,slope:null,lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,note:null,photo:null,players:["Henrik","Morten","Thomas"],holeData:[],results:[],scorecards:[]},
+  {course:"Old Course",date:"2026-05-07",time:"14:00",tee:57,holes:18,cr:null,slope:null,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:null,photo:null,players:["Henrik","Kim","Morten","Thomas"],holeData:[],results:[],scorecards:[]},
+  {course:"New Course",date:"2026-05-10",time:"09:30",tee:57,holes:18,cr:null,slope:null,lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,note:null,photo:null,players:["Henrik","Morten","Thomas"],holeData:[],results:[],scorecards:[]},
+  {course:"New Course",date:"2026-05-14",time:"09:30",tee:57,holes:18,cr:null,slope:null,lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,note:null,photo:null,players:["Henrik","Morten","Thomas"],holeData:[],results:[],scorecards:[]},
+  {course:"New Course",date:"2026-05-17",time:"09:30",tee:57,holes:18,cr:null,slope:null,lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,note:null,photo:null,players:["Henrik","Morten","Thomas"],holeData:[],results:[],scorecards:[]},
+  {course:"Hornbæk",date:"2026-05-18",tee:56,holes:null,cr:null,slope:null,lat:56.04626623479083,lng:12.436857584786646,abroad:false,expId:null,note:null,photo:null,holeData:[],results:[],scorecards:[]}
+];
+let allRounds=[],playerData={},countingRounds=[];
+const PLAYER_LOGINS={'tf':'Thomas','hh':'Henrik','kkj':'Kim','ma':'Morten'};
+async function fetchWeather(lat, lng, targetDate, elId) {
+  const el = document.getElementById(elId);
+  if (!el) return;
+  el.innerHTML = '<span class="weather-loading">⛅ Henter vejrudsigt...</span>';
+  try {
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max,weathercode&timezone=auto&forecast_days=14`;
+    const res = await fetch(url);
+    const data = await res.json();
+    const dates = data.daily.time;
+    const idx = dates.indexOf(targetDate);
+    if (idx < 0) { el.innerHTML = '<span class="weather-loading">Vejrudsigt ikke tilgængelig for denne dato</span>'; return; }
+    const wcode  = data.daily.weathercode[idx];
+    const tmax   = Math.round(data.daily.temperature_2m_max[idx]);
+    const tmin   = Math.round(data.daily.temperature_2m_min[idx]);
+    const rain   = data.daily.precipitation_sum[idx].toFixed(1);
+    const wind   = Math.round(data.daily.windspeed_10m_max[idx]);
+    const {icon, desc} = wmoCode(wcode);
+    el.innerHTML = `<div class="weather-strip">
+      <span class="weather-icon">${icon}</span>
+      <div>
+        <div class="weather-temp">${tmax}° <span style="font-weight:400;font-size:0.8em;color:var(--text-muted)">/ ${tmin}°</span></div>
+        <div class="weather-desc">${desc}</div>
+        <div class="weather-detail">
+          <span>🌧 ${rain} mm</span>
+          <span>💨 ${wind} km/t</span>
+        </div>
+      </div>
+    </div>`;
+  } catch(e) {
+    el.innerHTML = '<span class="weather-loading">Vejrudsigt ikke tilgængelig</span>';
+  }
+}
+
+function wmoCode(code) {
+  const map = {
+    0:  {icon:'☀️',  desc:'Klart'},
+    1:  {icon:'🌤',  desc:'Overvejende klart'},
+    2:  {icon:'⛅',  desc:'Delvist skyet'},
+    3:  {icon:'☁️',  desc:'Overskyet'},
+    45: {icon:'🌫',  desc:'Tåge'},
+    48: {icon:'🌫',  desc:'Rimtåge'},
+    51: {icon:'🌦',  desc:'Let støvregn'},
+    53: {icon:'🌦',  desc:'Støvregn'},
+    55: {icon:'🌧',  desc:'Kraftig støvregn'},
+    61: {icon:'🌧',  desc:'Let regn'},
+    63: {icon:'🌧',  desc:'Regn'},
+    65: {icon:'🌧',  desc:'Kraftig regn'},
+    71: {icon:'🌨',  desc:'Let sne'},
+    73: {icon:'🌨',  desc:'Sne'},
+    80: {icon:'🌦',  desc:'Byger'},
+    81: {icon:'🌧',  desc:'Kraftige byger'},
+    82: {icon:'⛈',  desc:'Voldsomme byger'},
+    95: {icon:'⛈',  desc:'Torden'},
+    99: {icon:'⛈',  desc:'Torden med hagl'},
+  };
+  const base = map[code] || map[Object.keys(map).reverse().find(k => Number(k) <= code)] || {icon:'⛅', desc:'Variabelt'};
+  return base;
+}
+
+function initCountdown(){const w=document.getElementById('countdownWrap');if(!w||!NEXT_ROUND.datetime)return;const t=new Date(NEXT_ROUND.datetime);const ps=NEXT_ROUND.players;const pstr=ps.length===4?'Alle fire':ps.slice(0,-1).join(', ')+' & '+ps.slice(-1)[0];function u(){const n=new Date(),d=t-n;if(d<=0){w.innerHTML=`<div class="countdown-past">Runden på ${NEXT_ROUND.course} er afholdt</div>`;return;}const dd=Math.floor(d/86400000),hh=Math.floor((d%86400000)/3600000),mm=Math.floor((d%3600000)/60000),ss=Math.floor((d%60000)/1000);w.innerHTML=`<div class="countdown-course"><em>${NEXT_ROUND.course}</em>${NEXT_ROUND.tee?" · Tee "+NEXT_ROUND.tee:""} · ${pstr}</div><div class="countdown-digits"><div class="cd-unit"><span class="cd-num">${dd}</span><span class="cd-label">dag</span></div><span class="cd-sep">·</span><div class="cd-unit"><span class="cd-num">${String(hh).padStart(2,'0')}</span><span class="cd-label">timer</span></div><span class="cd-sep">·</span><div class="cd-unit"><span class="cd-num">${String(mm).padStart(2,'0')}</span><span class="cd-label">min</span></div><span class="cd-sep">·</span><div class="cd-unit"><span class="cd-num">${String(ss).padStart(2,'0')}</span><span class="cd-label">sek</span></div></div>`;}u();setInterval(u,1000);}
+function getFormGuide(name,rounds){
+  // Only counting rounds affect form guide
+  const countingOnly=rounds.filter(r=>r.counting!==false);
+  const s=[...countingOnly].sort((a,b)=>new Date(a.date)-new Date(b.date));
+  const g=[];
+  s.forEach(r=>{const res=r.results.find(x=>x.player===name);if(!res)return;const n=r.results.length;let cls,label;if(res.placement===1){cls='win';label='▲';}else if(res.placement===n){cls='loss';label='▼';}else{cls='mid';label='—';}g.push({cls,label});});
+  return g.slice(-3);
+}
+function renderFormGuide(g){const p=[...Array(Math.max(0,3-g.length)).fill({cls:'none',label:'·'}),...g];return p.map(x=>`<div class="form-pip ${x.cls}">${x.label}</div>`).join('');}
+function calculateLeaderboard(rounds){const pl={};PLAYERS.forEach(n=>{pl[n]={name:n,allPoints:[],allRounds:[],totalRounds:0};});rounds.forEach(r=>{r.results.forEach(x=>{if(!pl[x.player])return;pl[x.player].allPoints.push(x.points);pl[x.player].allRounds.push({course:r.course,date:r.date,score:x.score,points:x.points,placement:x.placement});pl[x.player].totalRounds++;});});Object.values(pl).forEach(p=>{p.allPoints.sort((a,b)=>b-a);p.best15=p.allPoints.slice(0,15);p.total=p.best15.reduce((s,v)=>s+v,0);});playerData=pl;return Object.values(pl).sort((a,b)=>b.total-a.total);}
+function displayLeaderboard(lb){const c=document.getElementById('leaderboard');if(lb.every(p=>p.totalRounds===0)){c.innerHTML='<div class="empty-state">Sæsonen er ikke startet endnu</div>';return;}c.innerHTML=lb.map((p,i)=>{const avg=p.best15.length>0?(p.total/p.best15.length).toFixed(1):'–';const isL=i===0&&p.total>0;const col=PLAYER_COLORS[p.name]||'#fff';const form=getFormGuide(p.name,countingRounds);const hasData=buildPlayerHoleData(p.name,allRounds).length>0;return`<div class="player-wrapper"><div class="player-card ${isL?'leader':''}" onclick="openPlayerLogin('${p.name}')"><div class="rank">${i+1}</div><div class="player-info"><div class="player-name" style="border-left-color:${col}">${p.name}</div><div class="player-meta-row"><span class="player-stats">${p.totalRounds} runder${p.totalRounds>0?` · Gns. ${avg} pt`:''}</span><div class="form-guide">${renderFormGuide(form)}</div></div></div><div class="total-points">${p.total.toFixed(1)}<span class="unit">pt</span></div></div><button class="analyse-toggle" id="at-${p.name}" onclick="toggleAnalysis('${p.name}')"><div class="at-icon">▾</div><span style="flex:1">Analyse</span><span style="opacity:0.5;font-style:italic;font-size:0.9em;font-family:'Cormorant Garamond',serif;text-transform:none;font-weight:400;letter-spacing:0.04em">${hasData?'Hul-for-hul indsigt':'Afventer scorecard-data'}</span></button><div class="analyse-panel" id="ap-${p.name}" style="max-height:0"><div id="ap-inner-${p.name}"></div></div>${p.name==='Thomas'?`<button class="briefing-btn" onclick="openBriefing()">🎯 <span style="flex:1">Pre-round Briefing</span><span style="opacity:0.5;font-style:italic;font-family:'Cormorant Garamond',serif;text-transform:none;font-weight:400;font-size:1.1em">Næste runde: ${NEXT_ROUND.course}</span></button>`:''}</div>`;}).join('');}
+function initMap(rounds){const valid=rounds.filter(r=>r.lat&&r.lng);if(!valid.length)return;const map=L.map('grand-tour-map',{zoomControl:true,scrollWheelZoom:false});try{L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{attribution:'',maxZoom:19,subdomains:'abcd'}).addTo(map);}catch(e){L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'',maxZoom:19}).addTo(map);}const bounds=[];valid.forEach(r=>{const ia=r.abroad===true;const isPlayed=r.results&&r.results.length>0;const pinClass=isPlayed?(ia?'abroad':''):(ia?'abroad-upcoming':'upcoming');const pinEmoji=ia?(isPlayed?'✦':'✧'):(isPlayed?'⛳':'○');const tailClass=ia&&isPlayed?'abroad':ia?'abroad-upcoming':isPlayed?'':'upcoming';const icon=L.divIcon({className:'',html:`<div><div class="map-pin-head ${pinClass}">${pinEmoji}</div><div class="map-pin-tail ${tailClass}"></div></div>`,iconSize:[26,36],iconAnchor:[13,36],popupAnchor:[0,-38]});const w=r.results.find(x=>x.placement===1);const t=r.results.filter(x=>x.placement===1).length>1;const wn=isPlayed?(w?(t?'Delt 1.':w.player):'–'):'Ikke spillet endnu';const fd=new Date(r.date).toLocaleDateString('da-DK',{weekday:'long',day:'numeric',month:'long',year:'numeric'});const meta=[r.holes?r.holes+' hul':'',r.cr?'CR '+r.cr:'',r.slope?'Slope '+r.slope:''].filter(Boolean).join(' · ');const pop=`<div class="gucci-popup">${ia&&isPlayed?'<div class="popup-expedition-badge">✦ Ekspedition</div>':ia&&!isPlayed?'<div class="popup-expedition-badge" style="background:rgba(201,168,76,0.3);color:var(--gold)">✧ Planlagt ekspedition</div>':!isPlayed?'<div class="popup-expedition-badge" style="background:rgba(255,255,255,0.12);color:var(--text-muted)">Planlagt</div>':''}<div class="popup-course">${r.course}</div><div class="popup-date">${fd}</div><div class="popup-winner"><span>🏆</span> ${wn}</div><div class="popup-meta">${meta}</div>${r.note?'<div class="popup-note">"'+r.note+'"</div>':''}${r.photo?'<img src="'+r.photo+'" class="popup-photo" alt="">':''}</div>`;L.marker([r.lat,r.lng],{icon}).addTo(map).bindPopup(pop,{maxWidth:260,minWidth:190});bounds.push([r.lat,r.lng]);});bounds.length===1?map.setView(bounds[0],12):map.fitBounds(bounds,{padding:[50,50]});}
+function initTimeline(rounds){const cv=document.getElementById('timelineChart');if(!cv)return;const s=[...rounds].sort((a,b)=>new Date(a.date)-new Date(b.date));const labels=['Start'];const c={};const ser={};PLAYERS.forEach(p=>{c[p]=0;ser[p]=[0];});s.forEach((r,i)=>{labels.push('R'+(i+1));PLAYERS.forEach(p=>{const res=r.results.find(x=>x.player===p);if(res)c[p]+=res.points;ser[p].push(c[p]);});});document.getElementById('colorLegend').innerHTML=PLAYERS.map(p=>`<div class="pcl-item"><div class="pcl-dot" style="background:${PLAYER_COLORS[p]}"></div><span>${p}</span></div>`).join('');new Chart(cv,{type:'line',data:{labels,datasets:PLAYERS.map(p=>({label:p,data:ser[p],borderColor:PLAYER_COLORS[p],backgroundColor:PLAYER_COLORS[p]+'18',borderWidth:2.5,pointBackgroundColor:PLAYER_COLORS[p],pointBorderColor:'#0c1a0e',pointBorderWidth:2,pointRadius:5,pointHoverRadius:7,tension:0.35,fill:false}))},options:{responsive:true,maintainAspectRatio:false,animation:{duration:1200,easing:'easeInOutQuart'},interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(20,35,24,0.95)',borderColor:'rgba(201,168,76,0.3)',borderWidth:1,titleColor:'#dfc06e',bodyColor:'#d4cfc4',padding:12,titleFont:{family:"'Cormorant Garamond',serif",size:14,weight:'600'},bodyFont:{family:"'Outfit',sans-serif",size:12},callbacks:{label:ctx=>` ${ctx.dataset.label}: ${ctx.raw} pt`}}},scales:{x:{grid:{color:'rgba(201,168,76,0.07)'},ticks:{color:'#8a8578',font:{family:"'Outfit',sans-serif",size:11}}},y:{grid:{color:'rgba(201,168,76,0.07)'},ticks:{color:'#8a8578',font:{family:"'Outfit',sans-serif",size:11},stepSize:1,callback:v=>v+' pt'},beginAtZero:true}}}});}
+function computeH2H(rounds){const h={};PLAYERS.forEach(a=>{h[a]={};PLAYERS.forEach(b=>{h[a][b]={wins:0,losses:0,ties:0,rounds:0};});});rounds.forEach(r=>{const pts=r.results.map(x=>x.player).filter(p=>PLAYERS.includes(p));for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const pa=pts[i],pb=pts[j];const ra=r.results.find(x=>x.player===pa),rb=r.results.find(x=>x.player===pb);if(!ra||!rb)continue;h[pa][pb].rounds++;h[pb][pa].rounds++;if(ra.placement<rb.placement){h[pa][pb].wins++;h[pb][pa].losses++;}else if(rb.placement<ra.placement){h[pb][pa].wins++;h[pa][pb].losses++;}else{h[pa][pb].ties++;h[pb][pa].ties++;}}});return h;}
+function displayH2H(h){const c=document.getElementById('h2h-matrix');const active=PLAYERS.filter(p=>PLAYERS.some(o=>o!==p&&h[p][o].rounds>0));if(active.length<2){c.innerHTML='<div class="empty-state">Mindst 2 spillere skal have spillet sammen for at vise head-to-head</div>';return;}const nem={};active.forEach(p=>{let best=null,mx=0;active.forEach(o=>{if(o===p)return;const r=h[p][o];if(r.rounds>0&&r.losses>r.wins&&r.losses>mx){mx=r.losses;best=o;}});nem[p]=best;});let html='<table class="h2h-table"><thead><tr><th></th>';active.forEach(p=>{html+=`<th class="h2h-header-cell"><div class="h2h-player-tag"><span class="h2h-player-name" style="color:${PLAYER_COLORS[p]}">${p}</span><span class="h2h-nemesis-tag${nem[p]?' visible':''}">${nem[p]?'Nemesis: '+nem[p]:''}</span></div></th>`;});html+='</tr></thead><tbody>';active.forEach(row=>{html+=`<tr><td class="h2h-row-label"><div class="h2h-player-tag"><span class="h2h-player-name" style="color:${PLAYER_COLORS[row]}">${row}</span></div></td>`;active.forEach(col=>{if(row===col){html+=`<td><div class="h2h-cell self"><span class="self-dash">—</span></div></td>`;return;}const r=h[row][col];if(r.rounds===0){html+=`<td><div class="h2h-cell no-data"><span class="no-data-dash">ingen<br>runder</span></div></td>`;return;}const cls=r.wins>r.losses?'winning':r.wins<r.losses?'losing':'even';html+=`<td><div class="h2h-cell ${cls}"><div class="h2h-score"><span class="h2h-w">${r.wins}</span><span class="h2h-sep">–</span><span class="h2h-l">${r.losses}</span></div><div class="h2h-rounds-played">${r.rounds} runde${r.rounds!==1?'r':''}</div></div></td>`;});html+='</tr>';});html+='</tbody></table><p class="h2h-footnote">Læs: rækken slår kolonnen · grøn = flest sejre · rød = flest nederlag</p>';c.innerHTML=html;}
+function computeHodByCourse(rounds) {
+  // Returns Map: courseName -> {doom, holeBarData, roundCount}
+  const byCourse = {};
+  rounds.forEach(r => {
+    if (!r.scorecards || !r.holeData || !r.holeData.length) return;
+    const key = r.course;
+    if (!byCourse[key]) byCourse[key] = {hPts:{}, hCnt:{}, roundCount:0};
+    byCourse[key].roundCount++;
+    r.scorecards.forEach(sc => {
+      sc.points.forEach((pts, i) => {
+        const h = r.holeData[i]?.hole;
+        if (!h) return;
+        byCourse[key].hPts[h] = (byCourse[key].hPts[h]||0) + pts;
+        byCourse[key].hCnt[h] = (byCourse[key].hCnt[h]||0) + 1;
+      });
+    });
+  });
+  const result = {};
+  Object.entries(byCourse).forEach(([course, data]) => {
+    const {hPts, hCnt, roundCount} = data;
+    if (!Object.keys(hPts).length) return;
+    let doom = null;
+    Object.keys(hPts).forEach(h => {
+      const avg = hPts[h]/hCnt[h];
+      if (!doom || avg < doom.avg) doom = {hole:Number(h), avg, count:hCnt[h]};
+    });
+    const hn = Object.keys(hPts).map(Number).sort((a,b)=>a-b);
+    const avgs = hn.map(h => hPts[h]/hCnt[h]);
+    const mx = Math.max(...avgs);
+    const holeBarData = hn.map((h,i) => ({hole:h, avg:avgs[i], rel:avgs[i]/mx, isDoom:h===doom?.hole}));
+    result[course] = {doom, holeBarData, roundCount};
+  });
+  return result;
+}
+
+function computeRecords(rounds){
+  const sorted=[...rounds].sort((a,b)=>new Date(a.date)-new Date(b.date));
+  let bestRound=null;
+  rounds.forEach(r=>{r.results.forEach(x=>{if(!bestRound||x.score>bestRound.score)bestRound={player:x.player,score:x.score,course:r.course,date:r.date};});});
+  let bestPar=null;
+  rounds.forEach(r=>{if(!r.scorecards)return;r.scorecards.forEach(sc=>{if(bestPar===null||Math.abs(sc.grossDiff)<Math.abs(bestPar.grossDiff))bestPar={player:sc.player,grossDiff:sc.grossDiff,course:r.course,date:r.date};});});
+  const curStr={},maxStr={};
+  PLAYERS.forEach(p=>{curStr[p]=0;maxStr[p]={count:0,lastCourse:'',lastDate:''};});
+  sorted.forEach(r=>{const w1=r.results.filter(x=>x.placement===1);PLAYERS.forEach(p=>{if(w1.some(x=>x.player===p)){curStr[p]++;if(curStr[p]>=maxStr[p].count)maxStr[p]={count:curStr[p],lastCourse:r.course,lastDate:r.date};}else if(r.results.some(x=>x.player===p)){curStr[p]=0;}});});
+  let bestStreak=null;
+  PLAYERS.forEach(p=>{if(!bestStreak||maxStr[p].count>bestStreak.count)bestStreak={player:p,...maxStr[p]};});
+  let bestMargin=null;
+  rounds.forEach(r=>{const s=[...r.results].sort((a,b)=>b.score-a.score);if(s.length>=2){const m=s[0].score-s[s.length-1].score;if(!bestMargin||m>bestMargin.margin)bestMargin={player:s[0].player,margin:m,course:r.course,date:r.date};}});
+  let bestComeback=null;
+  const cum={};
+  PLAYERS.forEach(p=>cum[p]=0);
+  sorted.forEach((r,i)=>{if(i>0){const inRound=r.results.map(x=>x.player);const sb=Object.entries(cum).filter(([p])=>inRound.includes(p)).sort((a,b)=>b[1]-a[1]);const w=r.results.find(x=>x.placement===1);if(w){const wi=sb.findIndex(([p])=>p===w.player);if(wi>0){const def=sb[0][1]-cum[w.player];if(!bestComeback||def>bestComeback.deficit)bestComeback={player:w.player,deficit:def,course:r.course,date:r.date,rankBefore:wi+1};}}}r.results.forEach(x=>{if(PLAYERS.includes(x.player))cum[x.player]+=x.points;});});
+  const hodByCourse = computeHodByCourse(rounds);
+  return{bestRound,bestPar,bestStreak,bestMargin,bestComeback,hodByCourse};
+}
+function fd(d){return new Date(d).toLocaleDateString('da-DK',{day:'numeric',month:'short',year:'numeric'});}
+function cn(n){return`<span style="color:${PLAYER_COLORS[n]||'var(--white)'}">${n}</span>`;}
+function renderHodPane(courseKey, data) {
+  const {doom, holeBarData, roundCount} = data;
+  const bar = holeBarData.map(h =>
+    `<div>
+      <div class="hod-bar-seg ${h.isDoom?'doom':''}" style="height:${Math.round(h.rel*24)+4}px"></div>
+      <div class="hod-bar-label">${h.hole}</div>
+    </div>`).join('');
+  return `<div class="hod-content">
+    <div class="hod-hole-num">${doom.hole}</div>
+    <div class="hod-details">
+      <div class="hod-avg">${doom.avg.toFixed(2)}<span class="hod-unit"> pt i snit · ${doom.count} målinger</span></div>
+      <div class="record-context" style="margin-top:4px">Baseret på ${roundCount} runde${roundCount!==1?'r':''} på ${courseKey}</div>
+      <div class="hod-bar">${bar}</div>
+    </div>
+  </div>`;
+}
+
+function displayRecords(rec){
+  const c=document.getElementById('recordsGrid');
+  if(!c)return;
+  const{bestRound,bestPar,bestStreak,bestComeback,hodByCourse}=rec;
+  const cards=[];
+
+  cards.push(`<div class="record-card"><span class="record-icon">🏆</span><div class="record-title">Bedste runde</div>${bestRound?`<div class="record-holder">${cn(bestRound.player)}</div><div class="record-value">${bestRound.score}<span class="rv-unit">stbf</span></div><div class="record-context">${bestRound.course} · ${fd(bestRound.date)}</div>`:'<div class="record-na">Ingen data endnu</div>'}</div>`);
+
+  cards.push(`<div class="record-card"><span class="record-icon">🎯</span><div class="record-title">Nærmest par</div>${bestPar?`<div class="record-holder">${cn(bestPar.player)}</div><div class="record-value">${bestPar.grossDiff===0?'E':bestPar.grossDiff<0?bestPar.grossDiff:'+'+bestPar.grossDiff}<span class="rv-unit">slag</span></div><div class="record-context">${bestPar.course} · ${fd(bestPar.date)}</div>`:'<div class="record-na">Ingen data endnu</div>'}</div>`);
+
+  cards.push(`<div class="record-card"><span class="record-icon">🔥</span><div class="record-title">Longest Streak</div>${bestStreak&&bestStreak.count>0?`<div class="record-holder">${cn(bestStreak.player)}</div><div class="record-value">${bestStreak.count}<span class="rv-unit">sejr${bestStreak.count!==1?'e':''} i træk</span></div><div class="record-context">Senest: ${bestStreak.lastCourse} · ${fd(bestStreak.lastDate)}</div>`:'<div class="record-na">Endnu ingen stræk</div>'}</div>`);
+
+  cards.push(`<div class="record-card"><span class="record-icon">🚀</span><div class="record-title">Størst Comeback</div>${bestComeback?`<div class="record-holder">${cn(bestComeback.player)}</div><div class="record-value">${bestComeback.deficit.toFixed(1)}<span class="rv-unit">pt bagud → vandt</span></div><div class="record-context">${bestComeback.course} · ${fd(bestComeback.date)} · Nr. ${bestComeback.rankBefore} i stilling</div>`:'<div class="record-na">Kræver mindst 2 runder</div>'}</div>`);
+
+  // Course-specific HoD
+  const courseEntries = Object.entries(hodByCourse);
+  if (courseEntries.length === 0) {
+    cards.push(`<div class="record-card full-width"><span class="record-icon">💀</span><div class="record-title">Hole of Doom — pr. bane</div><div class="record-na">Kræver scorecard-data</div></div>`);
+  } else {
+    const firstCourse = courseEntries[0][0];
+    const tabs = courseEntries.map(([course, data], i) =>
+      `<div class="hod-ctab${i===0?' active':''}" onclick="switchHodTab('${course.replace(/'/g,'')}',this)">
+        ${course}<span class="hod-count">${data.roundCount}×</span>
+      </div>`).join('');
+
+    const panes = courseEntries.map(([course, data], i) =>
+      `<div class="hod-course-pane${i===0?' active':''}" id="hod-pane-${course.replace(/[^a-zA-Z0-9]/g,'')}">
+        ${renderHodPane(course, data)}
+      </div>`).join('');
+
+    cards.push(`<div class="record-card full-width">
+      <span class="record-icon">💀</span>
+      <div class="record-title">Hole of Doom — pr. bane · akkumuleret gennemsnit</div>
+      <div class="hod-course-tabs">${tabs}</div>
+      ${panes}
+    </div>`);
+  }
+
+  c.innerHTML=cards.join('');
+}
+
+function switchHodTab(courseKey, el) {
+  // Find parent card
+  const card = el.closest('.record-card');
+  card.querySelectorAll('.hod-ctab').forEach(t => t.classList.remove('active'));
+  card.querySelectorAll('.hod-course-pane').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  const safeKey = courseKey.replace(/[^a-zA-Z0-9]/g,'');
+  const pane = document.getElementById('hod-pane-'+safeKey);
+  if (pane) pane.classList.add('active');
+}
+function displayExpeditions(){const c=document.getElementById('expeditions');if(!c)return;if(!EXPEDITIONS||!EXPEDITIONS.length){c.innerHTML=`<div class="exp-placeholder"><div class="exp-placeholder-icon">✈️</div><div class="exp-placeholder-text">Sæsonens ekspeditioner er endnu ikke planlagt</div><div class="exp-placeholder-sub">Tilføj rejser i EXPEDITIONS-arrayet i koden</div></div>`;return;}c.innerHTML=EXPEDITIONS.map((exp,ei)=>{const er=allRounds.filter(r=>r.expId===exp.id);const gt={};PLAYERS.forEach(p=>gt[p]=0);er.forEach(r=>r.results.forEach(x=>{if(PLAYERS.includes(x.player))gt[x.player]+=x.points;}));const gr=Object.entries(gt).filter(([,v])=>v>0).sort((a,b)=>b[1]-a[1]);const sh=gr.length>0?`<div class="exp-standings"><div class="exp-standings-title">GUCCI-stilling på rejsen</div>${gr.map(([p,pts],i)=>`<div class="exp-standing-row"><div class="exp-standing-rank">${i+1}</div><div class="exp-standing-name" style="color:${PLAYER_COLORS[p]||'var(--white)'}">${p}</div><div class="exp-standing-pts">${pts} pt</div></div>`).join('')}</div>`:'';let ph='';if(exp.parallelTournament){const pt=exp.parallelTournament;const ptt={};pt.players.forEach(p=>ptt[p]=0);pt.rounds.forEach(r=>r.results.forEach(x=>{ptt[x.player]=(ptt[x.player]||0)+x.points;}));const ptr=Object.entries(ptt).sort((a,b)=>b[1]-a[1]);ph=`<button class="exp-parallel-toggle" id="pt-btn-${ei}" onclick="toggleParallel(${ei})"><div class="sc-toggle-icon">▾</div><span style="flex:1">${pt.name}</span><span style="opacity:0.6;font-style:italic;font-size:0.9em;font-family:'Cormorant Garamond',serif;text-transform:none;font-weight:400">${pt.players.length} spillere · ${pt.rounds.length} runder</span></button><div class="exp-parallel-panel" id="pt-${ei}"><div class="exp-parallel-inner"><div class="exp-parallel-name">${pt.name}</div><div class="exp-parallel-sub">${pt.players.length} spillere · ${pt.rounds.length} runder</div><div class="exp-parallel-lb">${ptr.map(([p,pts],i)=>`<div class="exp-parallel-row"><div class="exp-p-rank">${i+1}</div><div class="exp-p-name" style="color:${PLAYER_COLORS[p]||'var(--text-light)'}">${p}</div><div class="exp-p-pts">${pts}</div><div class="exp-p-rounds">pt</div></div>`).join('')}</div></div></div>`;}const ch=((exp.courses)||er.map(r=>r.course).filter(Boolean)).map(co=>`<div class="exp-course-chip">${co}</div>`).join('');return`<div class="exp-card"><div class="exp-hero">${exp.coverPhoto?`<img src="${exp.coverPhoto}" class="exp-hero-bg" alt="">`:`<div class="exp-hero-placeholder">${exp.flag||'🌍'}</div>`}<div class="exp-hero-overlay"></div><div class="exp-hero-content"><span class="exp-flag">${exp.flag||''}</span><div class="exp-title">${exp.title}</div><div class="exp-subtitle">${exp.subtitle||''} · ${exp.dates||''}</div></div></div><div class="exp-body">${exp.narrative?`<div class="exp-narrative">${exp.narrative}</div>`:''}<div class="exp-courses-title">Baner</div><div class="exp-courses-list">${ch}</div>${sh}</div>${ph}</div>`;}).join('');}
+function toggleParallel(i){const p=document.getElementById(`pt-${i}`),b=document.getElementById(`pt-btn-${i}`);if(!p)return;if(p.classList.contains('open')){p.style.maxHeight='0';p.classList.remove('open');b.classList.remove('open');}else{p.classList.add('open');b.classList.add('open');p.style.maxHeight=p.scrollHeight+'px';}}
+function displayVault(){const c=document.getElementById('vault');if(!c)return;if(!PREVIOUS_SEASONS||!PREVIOUS_SEASONS.length){c.innerHTML=`<div class="vault-empty"><div class="vault-empty-icon">🏛️</div><div class="vault-empty-text">Ingen afsluttede sæsoner endnu</div><div class="vault-empty-sub">2026 er første kapitel — The Vault åbner til næste sæson</div></div>`;return;}c.innerHTML=[...PREVIOUS_SEASONS].sort((a,b)=>b.year-a.year).map(s=>`<div class="vault-season"><div class="vault-season-header"><div><div class="vault-year">${s.year}</div><div class="vault-winner-label">Sæsonvinder</div><div class="vault-winner-name" style="color:${PLAYER_COLORS[s.winner]||'var(--white)'}">${s.winner}</div></div><div class="vault-trophy">🏆</div></div><div class="vault-season-body">${s.highlight?`<div class="vault-highlight">${s.highlight}</div>`:''}<div class="vault-standings">${s.standings.map((st,i)=>`<div class="vault-s-item"><span class="vault-s-rank">${i+1}.</span><span class="vault-s-name" style="color:${PLAYER_COLORS[st.player]||'var(--text-light)'}">${st.player}</span><span class="vault-s-pts">${st.points} pt</span></div>`).join('')}</div></div></div>`).join('');}
+function scoreClass(g,p){const d=g-p;if(d<=-2)return'sc-eagle';if(d===-1)return'sc-birdie';if(d===0)return'sc-par';if(d===1)return'sc-bogey';if(d===2)return'sc-double';return'sc-triple';}
+function renderScorecard(r,idx){if(!r.scorecards||!r.holeData||!r.scorecards.length)return'';const holes=r.holeData,pars=holes.map(h=>h.par),tp=pars.reduce((a,b)=>a+b,0);const blocks=r.scorecards.map(sc=>{const ts=sc.scores.reduce((a,b)=>a+b,0),tpt=sc.points.reduce((a,b)=>a+b,0);const ds=sc.grossDiff===0?'E':sc.grossDiff<0?sc.grossDiff:'+'+sc.grossDiff;const dc=sc.grossDiff<0?'under':sc.grossDiff===0?'even':'over';const nrBadge=sc.nr?`<span style="font-size:0.68em;font-weight:700;letter-spacing:0.1em;background:rgba(180,55,55,0.25);color:#e89090;padding:2px 8px;border-radius:2px;margin-left:4px">NR</span>`:'';
+const nrNoteHtml=sc.nrNote?`<div style="font-size:0.78em;color:var(--text-muted);font-style:italic;font-family:'Cormorant Garamond',serif;padding:8px 20px;border-top:1px solid rgba(255,255,255,0.05)">${sc.nrNote}</div>`:'';const cells=sc.scores.map((g,i)=>`<td><div class="sc-hole-cell ${scoreClass(g,pars[i])}${sc.points[i]===0?' sc-zero-pts':''}"><span class="sc-gross">${g}</span><span class="sc-pts-small">${sc.points[i]}pt</span></div></td>`).join('');return`<div class="sc-player-block"><div class="sc-player-header"><div class="sc-player-header-name">${sc.player}${nrBadge}</div><span class="sc-hcp-badge">HCP ${sc.hcp} (PHCP ${sc.phcp})</span><span class="sc-diff-badge ${dc}">${ds}</span><div class="sc-total-badge">${tpt}<span class="sc-total-sub"> pt</span></div></div><div class="sc-table-wrap"><table class="sc-table"><thead><tr class="sc-row-holes"><th class="sc-label-cell">Hul</th>${holes.map(h=>`<th>${h.hole}</th>`).join('')}<th>I alt</th></tr><tr class="sc-row-par"><td class="sc-label-cell">Par</td>${pars.map(p=>`<td>${p}</td>`).join('')}<td class="sc-total-col" style="font-weight:600;color:var(--text-light)">${tp}</td></tr><tr class="sc-row-hcp"><td class="sc-label-cell">HCP</td>${holes.map(h=>`<td>${h.hcp}</td>`).join('')}<td></td></tr></thead><tbody><tr class="sc-divider"><td colspan="${holes.length+2}"></td></tr><tr><td class="sc-label-cell">${sc.player}</td>${cells}<td class="sc-total-col"><span class="sc-gross" style="font-family:'Cormorant Garamond',serif;font-size:1.2em;font-weight:700;color:var(--white)">${ts}</span><span class="sc-pts-small" style="color:var(--gold);font-size:0.7em;font-weight:500;opacity:1">${tpt} pt</span></td></tr></tbody></table></div>${nrNoteHtml}</div>`;}).join('');return`<button class="scorecard-toggle" id="sc-btn-${idx}" onclick="toggleScorecard(${idx})"><div class="sc-toggle-icon">▾</div><span class="sc-toggle-label">Scorekort</span><span class="sc-toggle-hint">Vis hulvis scorecard</span></button><div class="scorecard-panel" id="sc-${idx}"><div class="scorecard-inner"><div class="sc-player-cards">${blocks}</div></div></div>`;}
+function toggleScorecard(idx){const p=document.getElementById(`sc-${idx}`),b=document.getElementById(`sc-btn-${idx}`);if(!p)return;if(p.classList.contains('open')){p.style.maxHeight='0';p.classList.remove('open');b.classList.remove('open');}else{p.classList.add('open');b.classList.add('open');p.style.maxHeight=p.scrollHeight+'px';}}
+function displayRounds(rounds){const c=document.getElementById('rounds');if(!rounds.length){c.innerHTML='<div class="empty-state">Ingen runder spillet endnu</div>';return;}const s=[...rounds].sort((a,b)=>new Date(b.date)-new Date(a.date));c.innerHTML=s.map((r,i)=>{const n=s.length-i;const fd=new Date(r.date).toLocaleDateString('da-DK',{weekday:'long',year:'numeric',month:'long',day:'numeric'});const sr=[...r.results].sort((a,b)=>a.placement-b.placement);const meta=[r.holes?r.holes+' huller':'',r.tee?'Tee '+r.tee:'',r.cr?'CR '+r.cr:'',r.slope?'Slope '+r.slope:''].filter(Boolean);const mh=meta.length?`<span class="course-meta">${meta.map(m=>`<span>${m}</span>`).join('')}</span>`:'';const rows=sr.map(x=>{
+  const nrNote = x.nr ? `<span style="font-size:0.68em;color:var(--text-muted);font-style:italic;font-family:'Cormorant Garamond',serif;margin-left:6px">${x.nrNote||'NR'}</span>` : '';
+  const scoreCell = x.nr ? `${x.score} <span style="font-size:0.7em;color:#e89090;font-weight:600">NR</span>` : x.score;
+  return `<tr><td class="placement">${x.tied?x.placement+'=':x.placement+'.'}</td><td>${x.player}${nrNote}</td><td>${scoreCell}</td><td class="points">${x.points%1===0?x.points:x.points.toFixed(1)}</td></tr>`;
+}).join('');
+  // Admin notes button only (matchPlay is private — only shown inside admin notes)
+  let mpHtml = '';
+  if (r.adminNotes) {
+    mpHtml = `<div style="padding:8px 28px 12px;"><button class="admin-note-btn" onclick="openAdminNotes('${r.date}')">🔒 Rundenoter</button></div>`;
+  }
+  return`<div class="round" style="animation-delay:${i*0.1}s"><div class="round-header"><div class="round-title">Runde ${n}</div><div class="round-date">${fd}</div></div><div class="course">${r.course}${mh}</div><table><thead><tr><th>Plac.</th><th>Spiller</th><th>Stableford</th><th>Point</th></tr></thead><tbody>${rows}</tbody></table>${renderScorecard(r,i)}${mpHtml}</div>`;}).join('');}
+function showPlayerDetails(name){const modal=document.getElementById('playerModal'),p=playerData[name];if(!p)return;document.getElementById('modalPlayerName').textContent=name;const avg=p.best15.length>0?(p.total/p.best15.length).toFixed(1):'0.0';const allAvg=p.allRounds.length>0?(p.allRounds.reduce((s,r)=>s+r.points,0)/p.allRounds.length).toFixed(1):'0.0';document.getElementById('playerSummary').innerHTML=`<div class="stat-box"><div class="stat-label">Total</div><div class="stat-value">${p.total.toFixed(1)}</div></div><div class="stat-box"><div class="stat-label">Runder</div><div class="stat-value">${p.allRounds.length}</div></div><div class="stat-box"><div class="stat-label">Top15 gns.</div><div class="stat-value">${avg}</div></div><div class="stat-box"><div class="stat-label">Alle gns.</div><div class="stat-value">${allAvg}</div></div>`;const t15=new Set(p.best15);document.getElementById('playerRounds').innerHTML=[...p.allRounds].sort((a,b)=>b.points-a.points).map((r,i)=>`<div class="round-item ${t15.has(r.points)&&i<15?'top15':''}"><div class="round-info"><div class="round-course">${r.course}</div><div class="round-date">${new Date(r.date).toLocaleDateString('da-DK',{day:'numeric',month:'short',year:'numeric'})}</div></div><div class="round-score">${r.score} stbf</div><div class="round-points">${r.points.toFixed(1)} pt</div></div>`).join('');modal.classList.add('active');}
+document.addEventListener('DOMContentLoaded',()=>{const m=document.getElementById('playerModal');document.querySelector('.close').onclick=()=>m.classList.remove('active');window.onclick=e=>{if(e.target===m)m.classList.remove('active');};document.addEventListener('keydown',e=>{if(e.key==='Escape'){m.classList.remove('active');closePlayerLogin();closeBriefing();}});document.getElementById('briefingPw').addEventListener('keydown',e=>{if(e.key==='Enter')checkBriefingLogin();});});
+function unlockSecret(id){
+    const overlay=document.getElementById('lock-'+id);
+    const content=document.getElementById('content-'+id);
+    overlay.classList.add('unlocked');
+    content.classList.add('revealed');
+    setTimeout(()=>{overlay.style.display='none';},500);
+}
+
+// ═══════════════════════════════════════════════
+//  ANALYSE ENGINE
+// ═══════════════════════════════════════════════
+
+function buildPlayerHoleData(name, rounds) {
+  const res = [];
+  rounds.forEach(r => {
+    if (!r.scorecards || !r.holeData || !r.holeData.length) return;
+    const sc = r.scorecards.find(s => s.player === name);
+    if (!sc || !sc.scores || !sc.scores.length) return;
+    const holes = sc.scores.map((strokes, i) => ({
+      hole: r.holeData[i]?.hole,
+      par:  r.holeData[i]?.par,
+      strokes
+    })).filter(h => h.hole && h.par);
+    if (holes.length) res.push({ date: r.date, course: r.course, holes });
+  });
+  return res;
+}
+
+function calculateStats(playerRounds) {
+  const holeMap = {};
+  playerRounds.forEach(round => {
+    round.holes.forEach(h => {
+      if (!holeMap[h.hole]) holeMap[h.hole] = { par: h.par, strokes: [] };
+      holeMap[h.hole].strokes.push(h.strokes);
+    });
+  });
+  const stats = {};
+  Object.entries(holeMap).forEach(([hNum, data]) => {
+    const { par, strokes } = data;
+    const n = strokes.length;
+    if (!n) return;
+    const avg = strokes.reduce((a,b) => a+b, 0) / n;
+    const min = Math.min(...strokes);
+    const max = Math.max(...strokes);
+    stats[hNum] = {
+      hole: Number(hNum), par, strokes, n, avg, min, max,
+      spread: max - min,
+      scoreVsPar: avg - par,
+      doubleRate: strokes.filter(s => s >= par + 2).length / n,
+      parOrBetterRate: strokes.filter(s => s <= par).length / n,
+    };
+  });
+  return stats;
+}
+
+function classifyHoles(stats) {
+  return Object.values(stats).map(s => {
+    let primary;
+    if (s.doubleRate >= 0.5)                             primary = 'catastrophe';
+    else if (s.parOrBetterRate >= 0.5)                   primary = 'opportunity';
+    else if (s.scoreVsPar <= 0.3 && s.parOrBetterRate >= 0.25) primary = 'strong';
+    else if (s.scoreVsPar >= 1.5 || s.doubleRate >= 0.3) primary = 'weak';
+    else                                                  primary = 'neutral';
+    const stable = s.spread <= 2 ? 'stable' : s.spread >= 4 ? 'volatile' : 'mixed';
+    return { ...s, primary, stable };
+  });
+}
+
+function generateInsights(classified) {
+  return classified.map(h => {
+    let rec;
+    if (h.primary === 'catastrophe')
+      rec = 'Fjern risiko — spil for bogey, undgå store fejl';
+    else if (h.stable === 'volatile' && h.primary !== 'opportunity')
+      rec = 'Spil konservativt — ustabilt hul, undgå de store fejl';
+    else if (h.stable === 'stable' && (h.primary === 'weak' || h.primary === 'catastrophe'))
+      rec = 'Her taber du konsekvent slag — kræver målrettet fokus';
+    else if (h.primary === 'opportunity')
+      rec = 'Her kan du hente slag — spil mere offensivt';
+    else if (h.primary === 'strong')
+      rec = 'Dit scoringshul — bevar strategien';
+    else if (h.stable === 'stable')
+      rec = 'Forudsigeligt hul — acceptér den gennemsnitlige præstation';
+    else
+      rec = 'Hold fokus — neutralt hul med lidt variation';
+    return { ...h, rec };
+  });
+}
+
+function anBadges(primary, stable) {
+  const b = [];
+  if (primary === 'catastrophe')  b.push({c:'r', t:'Katastrofe'});
+  else if (primary === 'opportunity') b.push({c:'g', t:'Mulighedshul'});
+  else if (primary === 'strong')  b.push({c:'g', t:'Scoringshul'});
+  else if (primary === 'weak')    b.push({c:'r', t:'Svagt hul'});
+  else                             b.push({c:'y', t:'Neutralt'});
+  if (stable === 'stable')   b.push({c:'b', t:'Stabilt'});
+  if (stable === 'volatile') b.push({c:'y', t:'Volatilt'});
+  return b.map(x => `<span class="an-badge ${x.c}">${x.t}</span>`).join('');
+}
+
+function anHoleClass(primary) {
+  if (primary === 'strong' || primary === 'opportunity') return 'strong';
+  if (primary === 'weak'   || primary === 'catastrophe') return 'weak';
+  return 'neutral';
+}
+
+function anVsParFmt(v) {
+  if (Math.abs(v) < 0.05) return {txt:'E', cls:'zer'};
+  return {txt:(v>0?'+':'')+v.toFixed(2), cls:v<0?'neg':'pos'};
+}
+
+function renderAnalysisHTML(name, played) {
+  const pRounds = buildPlayerHoleData(name, played);
+  if (!pRounds.length) return `<div class="an-nodata">Ingen scorecard-data endnu — tilføj hulvise scores for at aktivere analyse</div>`;
+
+  const stats = calculateStats(pRounds);
+  const classified = classifyHoles(stats);
+  const insights = generateInsights(classified);
+  const sorted = [...insights].sort((a,b) => a.hole - b.hole);
+
+  // Quick stats
+  const strongN = insights.filter(h => h.primary === 'strong' || h.primary === 'opportunity').length;
+  const weakN   = insights.filter(h => h.primary === 'weak'   || h.primary === 'catastrophe').length;
+  const allStrokes = pRounds.flatMap(r => r.holes.map(h => h.strokes));
+  const allPars    = pRounds.flatMap(r => r.holes.map(h => h.par));
+  const totalVsPar = allStrokes.reduce((a,b)=>a+b,0) - allPars.reduce((a,b)=>a+b,0);
+  const avgVsParPerRound = (totalVsPar / pRounds.length).toFixed(1);
+  const vsParFmt = anVsParFmt(Number(avgVsParPerRound));
+
+  // Top 5 strong (lowest scoreVsPar)
+  const strong5 = [...insights].sort((a,b)=>a.scoreVsPar-b.scoreVsPar).slice(0,5);
+  // Top 5 weak (highest scoreVsPar)
+  const weak5   = [...insights].sort((a,b)=>b.scoreVsPar-a.scoreVsPar).slice(0,5);
+  // Stability
+  const stabSorted = [...insights].sort((a,b)=>a.spread-b.spread);
+  const stable5    = stabSorted.slice(0,5);
+  const volatile5  = [...stabSorted].reverse().slice(0,5);
+  const maxSpread  = Math.max(...insights.map(h=>h.spread), 1);
+
+  function holeRow(h) {
+    const vp = anVsParFmt(h.scoreVsPar);
+    const maxW = 80;
+    return `<div class="an-hole ${anHoleClass(h.primary)}">
+      <div class="an-hnum">${h.hole}</div>
+      <div class="an-hinfo">
+        <div class="an-htop">${anBadges(h.primary, h.stable)}</div>
+        <div class="an-hsub">Gns. ${h.avg.toFixed(2)} · Par ${h.par} · ${h.n} runder</div>
+        <div class="an-rates">
+          <span class="an-rate-lbl">par+</span>
+          <div class="an-rate-bar p" style="width:${Math.round(h.parOrBetterRate*maxW)}px"></div>
+          <span class="an-rate-num">${Math.round(h.parOrBetterRate*100)}%</span>
+          <span class="an-rate-lbl" style="margin-left:4px">dbl+</span>
+          <div class="an-rate-bar d" style="width:${Math.round(h.doubleRate*maxW)}px"></div>
+          <span class="an-rate-num">${Math.round(h.doubleRate*100)}%</span>
+        </div>
+      </div>
+      <div class="an-vspar ${vp.cls}">${vp.txt}</div>
+    </div>`;
+  }
+
+  function stabRow(h, barCls) {
+    return `<div class="an-stab-row">
+      <div class="an-stab-num">${h.hole}</div>
+      <div class="an-stab-bwrap"><div class="an-stab-bar ${barCls}" style="width:${Math.round((h.spread/maxSpread)*100)}%"></div></div>
+      <div class="an-stab-spread">${h.min}–${h.max}</div>
+    </div>`;
+  }
+
+  const n = name.replace(/[^a-zA-Z]/g,'');
+
+  return `
+    <div class="an-quickstats">
+      <div class="an-qs"><div class="an-qs-val">${pRounds.length}</div><div class="an-qs-lbl">Runder</div></div>
+      <div class="an-qs"><div class="an-qs-val ${vsParFmt.cls}" style="font-size:1.3em">${vsParFmt.txt}</div><div class="an-qs-lbl">Pr. runde vs par</div></div>
+      <div class="an-qs"><div class="an-qs-val" style="color:#7de8c4">${strongN}</div><div class="an-qs-lbl">Stærke huller</div></div>
+      <div class="an-qs"><div class="an-qs-val" style="color:#e89090">${weakN}</div><div class="an-qs-lbl">Svage huller</div></div>
+    </div>
+    <div class="an-tabs" id="an-tabs-${n}">
+      <div class="an-tab active" onclick="switchAnalysisTab('${n}','strong',this)">Stærke</div>
+      <div class="an-tab" onclick="switchAnalysisTab('${n}','weak',this)">Svage</div>
+      <div class="an-tab" onclick="switchAnalysisTab('${n}','stab',this)">Stabilitet</div>
+      <div class="an-tab" onclick="switchAnalysisTab('${n}','pat',this)">Mønstre</div>
+    </div>
+    <div id="an-${n}-strong" class="an-pane active">
+      <div class="an-block-lbl">Top 5 — bedste huller</div>
+      <div class="an-holes">${strong5.map(holeRow).join('')}</div>
+    </div>
+    <div id="an-${n}-weak" class="an-pane">
+      <div class="an-block-lbl">Top 5 — svagest præsterende huller</div>
+      <div class="an-holes">${weak5.map(holeRow).join('')}</div>
+    </div>
+    <div id="an-${n}-stab" class="an-pane">
+      <div class="an-block-lbl">Variation og forudsigelighed pr. hul</div>
+      <div class="an-stab-grid">
+        <div><div class="an-stab-lbl">Mest stabile <span class="an-badge b" style="margin-left:4px">Forudsigelig</span></div>${stable5.map(h=>stabRow(h,'s')).join('')}</div>
+        <div><div class="an-stab-lbl">Mest volatile <span class="an-badge y" style="margin-left:4px">Volatile</span></div>${volatile5.map(h=>stabRow(h,'v')).join('')}</div>
+      </div>
+    </div>
+    <div id="an-${n}-pat" class="an-pane">
+      <div class="an-block-lbl">Hul-for-hul mønstre og anbefalinger</div>
+      <div class="an-patterns">${sorted.map(h => {
+        let desc = `Gns. ${h.avg.toFixed(1)} slag`;
+        if (h.spread >= 3) desc += ` · variation ${h.min}–${h.max}`;
+        else desc += ` · stabil ${h.min}–${h.max}`;
+        if (h.doubleRate >= 0.3) desc += ` · dobbelt+ ${Math.round(h.doubleRate*100)}%`;
+        if (h.parOrBetterRate >= 0.4) desc += ` · par+ ${Math.round(h.parOrBetterRate*100)}%`;
+        return `<div class="an-pat">
+          <div class="an-pat-top">
+            <div class="an-pat-num">${h.hole}</div>
+            <div style="flex:1"><div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:2px">${anBadges(h.primary,h.stable)}</div><div class="an-pat-desc">${desc}</div></div>
+          </div>
+          <div class="an-pat-rec">→ <strong>${h.rec}</strong></div>
+        </div>`;
+      }).join('')}</div>
+    </div>
+  `;
+}
+
+function switchAnalysisTab(n, tab, el) {
+  document.querySelectorAll(`#an-tabs-${n} .an-tab`).forEach(t => t.classList.remove('active'));
+  ['strong','weak','stab','pat'].forEach(t => {
+    const p = document.getElementById(`an-${n}-${t}`);
+    if (p) p.classList.remove('active');
+  });
+  el.classList.add('active');
+  const pane = document.getElementById(`an-${n}-${tab}`);
+  if (pane) pane.classList.add('active');
+}
+
+function toggleAnalysis(name) {
+  const panel  = document.getElementById(`ap-${name}`);
+  const btn    = document.getElementById(`at-${name}`);
+  const inner  = document.getElementById(`ap-inner-${name}`);
+  if (!panel) return;
+  const isOpen = panel.classList.contains('open');
+  if (isOpen) {
+    panel.style.maxHeight = panel.scrollHeight + 'px';
+    requestAnimationFrame(() => { panel.style.maxHeight = '0'; });
+    panel.classList.remove('open');
+    btn.classList.remove('open');
+  } else {
+    // Lazy render on first open
+    if (!inner.dataset.rendered) {
+      inner.innerHTML = renderAnalysisHTML(name, allRounds);
+      inner.dataset.rendered = '1';
+    }
+    panel.classList.add('open');
+    btn.classList.add('open');
+    panel.style.maxHeight = 'none'; // allow dynamic height
+    const h = panel.scrollHeight;
+    panel.style.maxHeight = '0';
+    requestAnimationFrame(() => { panel.style.maxHeight = h + 'px';
+      setTimeout(() => { if(panel.classList.contains('open')) panel.style.maxHeight='none'; }, 520);
+    });
+  }
+}
+
+
+function displayTeeTimes() {
+  const c = document.getElementById('teetimeGrid');
+  if (!c) return;
+  const now = new Date();
+  const upcoming = allRounds
+    .filter(r => r.time && !r.results?.length)
+    .map(r => ({...r, dt: new Date(r.date + 'T' + r.time)}))
+    .filter(r => r.dt >= now)
+    .sort((a,b) => a.dt - b.dt);
+
+  if (!upcoming.length) {
+    c.innerHTML = '<div class="empty-state">Ingen kommende tider registreret</div>';
+    return;
+  }
+
+  const daDays = ['Søndag','Mandag','Tirsdag','Onsdag','Torsdag','Fredag','Lørdag'];
+  const daMon  = ['jan','feb','mar','apr','maj','jun','jul','aug','sep','okt','nov','dec'];
+
+  c.innerHTML = upcoming.map((r, i) => {
+    const isNext = i === 0;
+    const wd  = daDays[r.dt.getDay()];
+    const day = r.dt.getDate();
+    const mon = daMon[r.dt.getMonth()];
+    const meta = [r.holes ? r.holes + ' huller' : null].filter(Boolean).join(' · ');
+
+    // Player message
+    const roundPlayers = r.players || PLAYERS;
+    const missing = PLAYERS.filter(p => !roundPlayers.includes(p));
+    const totalPlayers = roundPlayers.length;
+
+    let playerMsg = '';
+    if (totalPlayers === 7) {
+      playerMsg = `<div style="margin-top:6px;font-size:0.88em;color:#7de8c4;font-family:'Cormorant Garamond',serif;font-style:italic">Alle 7 på Rivieraen ✈️</div>`;
+    } else if (missing.length === 0) {
+      playerMsg = `<div style="margin-top:6px;font-size:0.88em;color:#7de8c4;font-family:'Cormorant Garamond',serif;font-style:italic">Hurra — vi spiller alle 4 ♥️</div>`;
+    } else {
+      const missingNames = missing.join(' og ');
+      playerMsg = `<div style="margin-top:6px;font-size:0.84em;color:#e8b880;font-family:'Cormorant Garamond',serif;font-style:italic">${missingNames} deltager desværre ikke 😭</div>`;
+    }
+
+    return `<div class="teetime-card${isNext?' next':''}">
+      <div class="teetime-date-block">
+        <div class="teetime-weekday">${wd}</div>
+        <div class="teetime-daynum">${day}</div>
+        <div class="teetime-month">${mon}</div>
+      </div>
+      <div class="teetime-info">
+        <div class="teetime-course">${r.course}</div>
+        <div class="teetime-meta">${meta}</div>
+        ${playerMsg}
+        ${r.note ? `<div style="margin-top:5px;font-size:0.84em;color:var(--text-light);font-family:'Cormorant Garamond',serif;font-style:italic;opacity:0.85">${r.note}</div>` : ''}
+      </div>
+      <div class="teetime-time-block">
+        <div class="teetime-time">${r.time}</div>
+        ${isNext ? '<div class="teetime-next-badge">Næste runde</div>' : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+
+
+let _playerLoginTarget = null;
+
+function openPlayerLogin(name) {
+  _playerLoginTarget = name;
+  // Full reset
+  document.getElementById('playerLoginTitle').textContent = name;
+  document.getElementById('playerLoginId').value = '';
+  document.getElementById('playerLoginPw').value = '';
+  document.getElementById('playerLoginErr').style.display = 'none';
+  document.getElementById('playerLoginView').style.display = 'block';
+  document.getElementById('playerStatsView').style.display = 'none';
+  // Clear previous player's content
+  document.getElementById('playerCourseStats').innerHTML = '';
+  document.getElementById('playerSummaryFull').innerHTML = '';
+  document.getElementById('playerRoundsFull').innerHTML = '';
+  document.getElementById('playerRoundsLabel').textContent = '';
+  document.getElementById('playerLoginModal').classList.add('active');
+}
+
+function closePlayerLogin() {
+  document.getElementById('playerLoginModal').classList.remove('active');
+}
+
+function checkPlayerLogin() {
+  const id = document.getElementById('playerLoginId').value.trim().toLowerCase();
+  const pw = document.getElementById('playerLoginPw').value.trim().toLowerCase();
+  // Any valid GUCCI member login unlocks — stats shown are for the CLICKED player
+  const loginValid = PLAYER_LOGINS[id] && id === pw;
+  if (!loginValid) {
+    document.getElementById('playerLoginErr').style.display = 'block';
+    return;
+  }
+  const targetName = _playerLoginTarget; // the player whose name was clicked
+  document.getElementById('playerLoginView').style.display = 'none';
+  document.getElementById('playerStatsView').style.display = 'block';
+  document.getElementById('playerLoginTitle').textContent = targetName;
+  renderPlayerStats(targetName);
+}
+
+function getHoleFactor(r) {
+  // Normalisation factor to scale 9-hole stats up to 18-hole equivalent
+  const holesPlayed = r.holes || (r.holeData?.length) || 18;
+  return 18 / holesPlayed;
+}
+
+function buildCourseStats(name, allPlayed) {
+  // Group rounds by course, compute per-course aggregates
+  const courses = {};
+  allPlayed.forEach(r => {
+    const c = r.course;
+    if (!courses[c]) courses[c] = {name:c, rounds:[], scorecards:[], adminData:[]};
+    courses[c].rounds.push(r);
+
+    const sc = r.scorecards?.find(s => s.player === name);
+    if (sc) courses[c].scorecards.push({sc, holeData: r.holeData || [], factor: getHoleFactor(r)});
+
+    const loginKey = Object.keys(PLAYER_LOGINS).find(k => PLAYER_LOGINS[k] === name);
+    const ud = r.adminNotes?.users?.[loginKey]
+            || (r.adminNotes?.hash && PLAYER_LOGINS[r.adminNotes.hash.toLowerCase()]===name ? r.adminNotes : null);
+    if (ud) courses[c].adminData.push({ud, factor: getHoleFactor(r)});
+  });
+
+  // Compute stats per course — all averages normalised to 18 holes
+  return Object.values(courses).sort((a,b) => b.rounds.length - a.rounds.length).map(c => {
+    const n = c.rounds.length;
+
+    // Stableford — scale up 9-hole rounds × 2
+    const stbfNorm = c.rounds.map(r => {
+      const score = r.results.find(x=>x.player===name)?.score;
+      if (score == null) return null;
+      return score * getHoleFactor(r);
+    }).filter(v=>v!=null);
+    const avgStbf  = stbfNorm.length ? (stbfNorm.reduce((a,b)=>a+b,0)/stbfNorm.length).toFixed(1) : '–';
+    const bestStbf = stbfNorm.length ? Math.max(...stbfNorm).toFixed(1) : null;
+    const hasNorm  = c.rounds.some(r => getHoleFactor(r) > 1); // any 9-hole rounds present
+
+    // Slag totals — normalised to 18 holes
+    const slagNorm = c.scorecards.map(({sc, factor}) => sc.slag != null ? sc.slag * factor : null).filter(v=>v!=null);
+    const avgSlag = slagNorm.length ? (slagNorm.reduce((a,b)=>a+b,0)/slagNorm.length).toFixed(1) : '–';
+
+    // Putts — normalised to 18 holes
+    const puttsNorm = c.adminData.map(({ud,factor}) => ud.putts != null ? ud.putts * factor : null).filter(v=>v!=null);
+    const totalPuttsNorm = puttsNorm.reduce((a,b)=>a+b,0);
+    const avgPutts = puttsNorm.length ? (totalPuttsNorm/puttsNorm.length).toFixed(1) : '–';
+
+    // Lost balls — raw count (actual, not normalised) + normalised avg/round
+    const lbRaw   = c.adminData.map(({ud}) => ud.lostBalls?.length||0);
+    const lbNorm  = c.adminData.map(({ud,factor}) => (ud.lostBalls?.length||0) * factor);
+    const totalLB = lbRaw.reduce((a,b)=>a+b,0);
+    const avgLB   = lbNorm.length ? (lbNorm.reduce((a,b)=>a+b,0)/lbNorm.length).toFixed(2) : '–';
+
+    // Penalties — raw count + normalised avg/round
+    const penRaw  = c.adminData.map(({ud}) => ud.penalties?.length||0);
+    const penNorm = c.adminData.map(({ud,factor}) => (ud.penalties?.length||0) * factor);
+    const totalPen = penRaw.reduce((a,b)=>a+b,0);
+    const avgPen   = penNorm.length ? (penNorm.reduce((a,b)=>a+b,0)/penNorm.length).toFixed(2) : '–';
+
+    // Penalty by type
+    const penByType = {};
+    c.adminData.forEach(({ud}) => {
+      (ud.penalties||[]).forEach(p => { penByType[p.type]=(penByType[p.type]||0)+1; });
+    });
+
+    // Chronological events per hole — sorted by round date, then hole number
+    // holeEvents: { holeNum: [{kind, type, reason, date}] }
+    const holeEventLog = {};
+    c.rounds.forEach(r => {
+      const loginKey = Object.keys(PLAYER_LOGINS).find(k => PLAYER_LOGINS[k] === name);
+      const ud = r.adminNotes?.users?.[loginKey]
+              || (r.adminNotes?.hash && PLAYER_LOGINS[r.adminNotes.hash?.toLowerCase()]===name ? r.adminNotes : null);
+      if (!ud) return;
+      const dateStr = new Date(r.date).toLocaleDateString('da-DK',{day:'numeric',month:'short',year:'numeric'});
+      (ud.lostBalls||[]).forEach(lb => {
+        const h = lb.hole;
+        if (!holeEventLog[h]) holeEventLog[h] = [];
+        holeEventLog[h].push({kind:'lostball', type:'lostball', reason:lb.reason||'', date:r.date, dateStr});
+      });
+      (ud.penalties||[]).forEach(p => {
+        const h = p.hole;
+        if (!holeEventLog[h]) holeEventLog[h] = [];
+        holeEventLog[h].push({kind:'penalty', type:p.type||'default', reason:p.reason||'', date:r.date, dateStr});
+      });
+    });
+    // Sort each hole's events chronologically
+    Object.values(holeEventLog).forEach(evs => evs.sort((a,b)=>new Date(a.date)-new Date(b.date)));
+    // Holes sorted by total event count desc
+    const holeEventsSorted = Object.entries(holeEventLog)
+      .map(([h,evs]) => ({hole:Number(h), events:evs}))
+      .sort((a,b) => b.events.length - a.events.length);
+
+    const penByHole = {};
+    holeEventsSorted.forEach(({hole,events}) => { penByHole[hole] = events.length; });
+    const worstHoles = holeEventsSorted.slice(0,3)
+      .map(({hole,events})=>`Hul ${hole} (${events.length}×)`).join(' · ') || '–';
+
+    // Per-hole avg score
+    const holeAvgs = {};
+    const holePars = {};
+    c.scorecards.forEach(({sc, holeData}) => {
+      sc.scores.forEach((g, i) => {
+        const h = holeData[i]?.hole;
+        const p = holeData[i]?.par;
+        if (!h) return;
+        if (!holeAvgs[h]) holeAvgs[h] = {total:0,count:0,par:p};
+        holeAvgs[h].total += g;
+        holeAvgs[h].count++;
+      });
+    });
+    const holeAvgArr = Object.entries(holeAvgs)
+      .sort((a,b)=>Number(a[0])-Number(b[0]))
+      .map(([h,v]) => ({hole:Number(h), avg:v.total/v.count, par:v.par}));
+
+    const hasAdminData = c.adminData.some(({ud}) => ud.putts!=null||ud.lostBalls?.length||ud.penalties?.length);
+    return {name:c.name, n, hasNorm, hasAdminData, avgStbf, bestStbf, avgSlag, avgPutts, totalPuttsNorm,
+            totalLB, avgLB, totalPen, avgPen, penByType, worstHoles, holeEventsSorted, holeAvgArr};
+  });
+}
+
+function renderCourseStats(stats, typeLabel) {
+  if (!stats.length) return '';
+
+  const typeColorMap = {
+    hook:'#e89090',hook_water:'#90b8e8',slice:'#e8b870',
+    slice_water:'#b8d8e8',lostball:'#f4a261',ob:'#e07070',
+    vand:'#90b8e8',skov:'#c8a870',sand:'#d4b080',default:'#e8c870'
+  };
+
+  return `<div class="course-stats-section">
+    <div class="course-stats-title">⛳ Stats pr. bane</div>
+    ${stats.map((c, ci) => {
+      // Per-hole bar chart
+      let holeHtml = '';
+      if (c.holeAvgArr.length) {
+        const maxAvg = Math.max(...c.holeAvgArr.map(h=>h.avg));
+        const minAvg = Math.min(...c.holeAvgArr.map(h=>h.avg));
+        const cells = c.holeAvgArr.map(h => {
+          const vspar = h.avg - h.par;
+          const col = vspar < -0.3 ? 'rgba(45,138,110,0.7)'
+                    : vspar < 0.3  ? 'rgba(201,168,76,0.4)'
+                    : vspar < 1.0  ? 'rgba(180,110,40,0.6)'
+                    :                'rgba(180,55,55,0.65)';
+          const barH = Math.round(((h.avg - minAvg) / (maxAvg - minAvg + 0.001)) * 28) + 8;
+          const sign = vspar > 0 ? '+' : '';
+          return `<div class="hole-avg-cell">
+            <div class="hole-avg-score">${h.avg.toFixed(1)}</div>
+            <div class="hole-avg-bar" style="height:${barH}px;background:${col}"></div>
+            <div class="hole-avg-num">${h.hole}</div>
+          </div>`;
+        }).join('');
+        holeHtml = `<div class="hole-avg-section">
+          <div class="hole-avg-title">Gns. score pr. hul (${c.n} runde${c.n!==1?'r':''})</div>
+          <div class="hole-avg-row">${cells}</div>
+        </div>`;
+      }
+
+      // Penalty type badges
+      const penBadges = Object.entries(c.penByType).sort((a,b)=>b[1]-a[1]).map(([t,n]) =>
+        `<span class="an-type-badge an-type-${t}" style="margin:2px">${typeLabel(t)} ${n}×</span>`
+      ).join('');
+
+      return `<div class="course-stat-card">
+        <div class="course-stat-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+          <div>
+            <div class="course-stat-name">${c.name}</div>
+            <div class="course-stat-rounds">${c.n} runde${c.n!==1?'r':''} · Klik for detaljer</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.4em;font-weight:700;color:var(--gold-light)">${c.avgStbf}</div>
+            <div style="font-size:0.65em;color:var(--text-muted)">gns. stbf (18 hul)</div>
+          </div>
+        </div>
+        <div class="course-stat-body" style="display:none">
+          <div class="csk-grid">
+            <div class="csk-box"><div class="csk-val">${c.avgStbf}<span class="csk-sub">gns./runde (18 hul)</span></div><div class="csk-lbl">Stableford</div></div>
+            ${c.bestStbf!=null?`<div class="csk-box"><div class="csk-val">${c.bestStbf}<span class="csk-sub">bedste runde</span></div><div class="csk-lbl">Stbf</div></div>`:''}
+            <div class="csk-box"><div class="csk-val">${c.avgSlag}<span class="csk-sub">gns./runde (18 hul)</span></div><div class="csk-lbl">Slag total</div></div>
+          </div>
+          ${c.hasAdminData ? `<div class="csk-grid" style="margin-top:0">
+            <div class="csk-box"><div class="csk-val">${c.avgPutts}<span class="csk-sub">gns./runde (18 hul)</span></div><div class="csk-lbl">Putts</div></div>
+            <div class="csk-box"><div class="csk-val">${c.totalLB}<span class="csk-sub">${c.avgLB !== '–' ? c.avgLB+'/runde (18 hul)' : '–'}</span></div><div class="csk-lbl">Lost balls</div></div>
+            <div class="csk-box"><div class="csk-val">${c.totalPen}<span class="csk-sub">${c.avgPen !== '–' ? c.avgPen+'/runde (18 hul)' : '–'}</span></div><div class="csk-lbl">Strafslag</div></div>
+          </div>` : ''}
+          ${c.hasAdminData && c.holeEventsSorted?.length ? `
+            <div style="margin-top:10px">
+              <div style="font-size:0.62em;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px">Problemhuller — kronologisk</div>
+              ${c.holeEventsSorted.map(({hole,events}) => {
+                const colorMap = {
+                  hook:'#e89090', hook_water:'#90b8e8', slice:'#e8b870',
+                  slice_water:'#b8d8e8', lostball:'#f4a261', ob:'#e07070',
+                  vand:'#90b8e8', skov:'#c8a870', sand:'#d4b080', default:'#e8c870'
+                };
+                const rows = events.map(e => {
+                  const col = colorMap[e.type] || colorMap.default;
+                  const icon = e.kind === 'lostball' ? '🔴' : '⚠️';
+                  const label = e.kind === 'lostball' ? 'Lost ball' : typeLabel(e.type);
+                  return `<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04)">
+                    <span style="font-size:0.9em">${icon}</span>
+                    <span style="font-size:0.78em;font-weight:600;color:${col};min-width:90px">${label}</span>
+                    <span style="font-size:0.78em;color:var(--text-light);flex:1">${e.reason}</span>
+                    <span style="font-size:0.68em;color:var(--text-muted);white-space:nowrap">${e.dateStr}</span>
+                  </div>`;
+                }).join('');
+                return `<div style="margin-bottom:10px;padding:10px 12px;background:rgba(0,0,0,0.15);border-radius:3px;border-left:3px solid rgba(180,55,55,${Math.min(0.3+events.length*0.15,0.75)})">
+                  <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+                    <span style="font-family:'Cormorant Garamond',serif;font-size:1.6em;font-weight:700;color:rgba(200,80,80,0.8)">Hul ${hole}</span>
+                    <span style="font-size:0.68em;color:var(--text-muted)">${events.length} hændelse${events.length!==1?'r':''}</span>
+                  </div>
+                  ${rows}
+                </div>`;
+              }).join('')}
+              ${penBadges ? `<div class="penalty-breakdown" style="margin-top:8px">${penBadges}</div>` : ''}
+            </div>
+          ` : ''}
+          ${holeHtml}
+        </div>
+      </div>`;
+    }).join('')}
+  </div>`;
+}
+
+function renderPlayerStats(name) {
+  const allPlayed = allRounds.filter(r =>
+    r.results && r.results.length > 0 && r.results.some(x => x.player === name)
+  );
+  const countingPlayed = allPlayed.filter(r => !r.private && r.counting !== false);
+  const privatePlayed  = allPlayed.filter(r => r.private);
+
+  const countingPts = countingPlayed.map(r => r.results.find(x=>x.player===name)?.points || 0);
+  const sortedPts   = [...countingPts].sort((a,b)=>b-a);
+  const best15      = sortedPts.slice(0,15);
+  const totalPts    = best15.reduce((s,v)=>s+v,0);
+  const avgPts      = best15.length ? (totalPts/best15.length).toFixed(1) : '–';
+
+  document.getElementById('playerSummaryFull').innerHTML = `
+    <div class="stat-box"><div class="stat-label">Liga total</div><div class="stat-value">${totalPts.toFixed(1)}</div></div>
+    <div class="stat-box"><div class="stat-label">Tæll. runder</div><div class="stat-value">${countingPlayed.length}</div></div>
+    <div class="stat-box"><div class="stat-label">Gns. (top15)</div><div class="stat-value">${avgPts}</div></div>
+    <div class="stat-box"><div class="stat-label">Private runder</div><div class="stat-value">${privatePlayed.length}</div></div>`;
+
+  document.getElementById('playerRoundsLabel').textContent =
+    `(${countingPlayed.length} tællende · ${privatePlayed.length} private)`;
+
+  // Course stats section
+  const courseStats = buildCourseStats(name, allPlayed);
+  const csEl = document.getElementById('playerCourseStats');
+  if (csEl) {
+    csEl.innerHTML = renderCourseStats(courseStats, typeLabel);
+  }
+
+  const sorted = [...allPlayed].sort((a,b) => new Date(b.date) - new Date(a.date));
+  const best15set = new Set(best15);
+
+  document.getElementById('playerRoundsFull').innerHTML = sorted.map((r, idx) => {
+    const res = r.results.find(x => x.player === name);
+    if (!res) return '';
+    const isPrivate = r.private === true;
+    const isCounting = !isPrivate && r.counting !== false;
+    const inTop15 = isCounting && best15set.has(res.points);
+    const fd = new Date(r.date).toLocaleDateString('da-DK',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+
+    // Scorecard for this player
+    const sc = r.scorecards?.find(s => s.player === name);
+    const holes = r.holeData || [];
+    let scHtml = '';
+    if (sc && sc.scores && sc.scores.length && holes.length) {
+      const pars = holes.map(h=>h.par);
+      const scoreColorFn = (g, p) => {
+        const d=g-p;
+        if(d<=-2) return 'background:rgba(201,168,76,0.35);color:#dfc06e';
+        if(d===-1) return 'background:rgba(45,138,110,0.35);color:#7de8c4';
+        if(d===0)  return 'background:rgba(255,255,255,0.05);color:#d4cfc4';
+        if(d===1)  return 'background:rgba(180,110,40,0.22);color:#e8b880';
+        if(d===2)  return 'background:rgba(180,55,55,0.28);color:#e89090';
+        return 'background:rgba(140,20,20,0.35);color:#e07070';
+      };
+      const cells = sc.scores.map((g,i) =>
+        `<div style="display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 4px;border-radius:3px;min-width:28px;${scoreColorFn(g,pars[i])}">
+          <span style="font-weight:700;font-size:0.9em">${g}</span>
+          <span style="font-size:0.58em;opacity:0.7">${holes[i]?.hole}</span>
+        </div>`).join('');
+      const diffSign = sc.grossDiff===0?'E':sc.grossDiff<0?sc.grossDiff:'+'+sc.grossDiff;
+      scHtml = `
+        <div style="padding:12px 18px 14px;border-top:1px solid rgba(255,255,255,0.05)">
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">${cells}</div>
+          <div style="font-size:0.75em;color:var(--text-muted);margin-top:4px">
+            ${sc.slag} slag · Vs par: ${diffSign} · HCP ${sc.hcp} (PHCP ${sc.phcp})
+          </div>
+        </div>`;
+    }
+
+    // Admin stats (putts, fairways, etc.) for private rounds
+    let statsHtml = '';
+    const an = r.adminNotes;
+    if (an) {
+      // find this player's user data
+      const loginKey = Object.keys(PLAYER_LOGINS).find(k => PLAYER_LOGINS[k] === name);
+      const ud = an.users?.[loginKey] || (an.hash && PLAYER_LOGINS[an.hash?.toLowerCase()]===name ? an : null);
+      if (ud && (ud.putts!=null || ud.fairways || ud.gir || ud.lostBalls?.length || ud.penalties?.length)) {
+        const fw = ud.fairways;
+        const gir = ud.gir;
+        statsHtml = `<div class="pm-stat-grid">
+          ${ud.putts!=null?`<div class="pm-stat-box"><div class="pm-stat-val">${ud.putts}</div><div class="pm-stat-lbl">Putts</div></div>`:''}
+          ${fw?`<div class="pm-stat-box"><div class="pm-stat-val">${fw.hit}/${fw.total}</div><div class="pm-stat-lbl">Fairways</div></div>`:''}
+          ${gir?`<div class="pm-stat-box"><div class="pm-stat-val">${gir.hit}/${gir.total}</div><div class="pm-stat-lbl">GIR</div></div>`:''}
+          ${ud.bunkers!=null?`<div class="pm-stat-box"><div class="pm-stat-val">${ud.bunkers}</div><div class="pm-stat-lbl">Bunkers</div></div>`:''}
+          ${ud.lostBalls?.length?`<div class="pm-stat-box"><div class="pm-stat-val">${ud.lostBalls.length}</div><div class="pm-stat-lbl">Lost balls</div></div>`:''}
+          ${ud.penalties?.length?`<div class="pm-stat-box"><div class="pm-stat-val">${ud.penalties.length}</div><div class="pm-stat-val" style="font-size:0.7em"></div><div class="pm-stat-lbl">Strafslag</div></div>`:''}
+        </div>`;
+      }
+    }
+
+    const badge = isPrivate ? `<span class="pm-privbadge">Privat</span> ` : '';
+    const top15b = inTop15 ? `<span class="pm-top15badge">Top 15</span> ` : '';
+    const toggleId = `pm-body-${idx}`;
+
+    return `<div class="pm-round${isPrivate?' private-r':''}">
+      <div class="pm-round-header" onclick="this.nextElementSibling.style.maxHeight=this.nextElementSibling.style.maxHeight?null:this.nextElementSibling.scrollHeight+'px'">
+        <div style="flex:1">
+          <div class="pm-round-course">${badge}${top15b}${r.course}</div>
+          <div class="pm-round-date">${fd}</div>
+        </div>
+        <div class="pm-round-score">${res.score} stbf</div>
+        <div class="pm-round-pts ${isPrivate?'private':''}">${isCounting ? res.points.toFixed(1)+' pt' : '–'}</div>
+      </div>
+      <div class="pm-round-body">
+        ${statsHtml}${scHtml}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+
+function openBriefing() {
+  document.getElementById('briefingId').value = '';
+  document.getElementById('briefingPw').value = '';
+  document.getElementById('briefingErr').style.display = 'none';
+  document.getElementById('briefingLoginView').style.display = 'block';
+  document.getElementById('briefingContent').style.display = 'none';
+  document.getElementById('briefingModal').classList.add('active');
+}
+
+function closeBriefing() {
+  document.getElementById('briefingModal').classList.remove('active');
+}
+
+function checkBriefingLogin() {
+  const id = document.getElementById('briefingId').value.trim().toLowerCase();
+  const pw = document.getElementById('briefingPw').value.trim().toLowerCase();
+  if (id !== 'id' || pw !== 'pw') {
+    document.getElementById('briefingErr').style.display = 'block';
+    return;
+  }
+  document.getElementById('briefingLoginView').style.display = 'none';
+  document.getElementById('briefingContent').style.display = 'block';
+  renderBriefing(NEXT_ROUND.course);
+}
+
+function renderBriefing(course) {
+  const el = document.getElementById('briefingContent');
+  document.getElementById('briefingTitle').textContent = '🎯 Pre-round Briefing — ' + course;
+
+  // All rounds on this course with Thomas's data
+  const courseRounds = allRounds.filter(r =>
+    r.course === course && r.results && r.scorecards
+  ).sort((a,b) => new Date(b.date) - new Date(a.date));
+
+  const holeData = courseRounds[0]?.holeData || [];
+
+  // ── Course history stats ─────────────────────────────────────────
+  const thomasRounds = courseRounds.filter(r => r.results.some(x=>x.player==='Thomas'));
+  const scores = thomasRounds.map(r => r.results.find(x=>x.player==='Thomas')?.score).filter(Boolean);
+  const slags  = thomasRounds.map(r => r.scorecards?.find(s=>s.player==='Thomas')?.slag).filter(Boolean);
+  const avgStbf = scores.length ? (scores.reduce((a,b)=>a+b,0)/scores.length).toFixed(1) : '–';
+  const bestStbf = scores.length ? Math.max(...scores) : '–';
+  const avgSlag = slags.length ? (slags.reduce((a,b)=>a+b,0)/slags.length).toFixed(1) : '–';
+
+  // Last round on this course
+  const lastRound = thomasRounds[0];
+  const lastSc = lastRound?.scorecards?.find(s=>s.player==='Thomas');
+  const lastRes = lastRound?.results?.find(x=>x.player==='Thomas');
+
+  // ── Per-hole analysis across all rounds ─────────────────────────
+  const holeStats = {}; // hole# → {scores:[], pars:[], points:[]}
+  thomasRounds.forEach(r => {
+    const sc = r.scorecards?.find(s=>s.player==='Thomas');
+    const hd = r.holeData || [];
+    if (!sc) return;
+    sc.scores.forEach((g, i) => {
+      const h = hd[i]?.hole;
+      const p = hd[i]?.par;
+      const pts = sc.points?.[i];
+      if (!h) return;
+      if (!holeStats[h]) holeStats[h] = {scores:[], pars:[], points:[]};
+      holeStats[h].scores.push(g);
+      holeStats[h].pars.push(p);
+      holeStats[h].points.push(pts);
+    });
+  });
+
+  // Classify each hole
+  const holeResults = Object.entries(holeStats).sort((a,b)=>Number(a[0])-Number(b[0])).map(([h, v]) => {
+    const avgScore = v.scores.reduce((a,b)=>a+b,0)/v.scores.length;
+    const par = v.pars[0] || 4;
+    const vspar = avgScore - par;
+    const avgPts = v.points.reduce((a,b)=>a+b,0)/v.points.length;
+    return {hole:Number(h), avgScore, par, vspar, avgPts, rounds:v.scores.length};
+  });
+
+  // Best holes (avg ≤ par) and worst holes (avg > par+1)
+  const birdiesAndPars = holeResults.filter(h => h.vspar <= 0).sort((a,b)=>a.vspar-b.vspar);
+  const weakHoles = holeResults.filter(h => h.vspar > 1).sort((a,b)=>b.vspar-a.vspar);
+
+  // ── Admin notes: lost balls + penalties ─────────────────────────
+  const alerts = {}; // hole# → {events:[]}
+  thomasRounds.forEach(r => {
+    const an = r.adminNotes;
+    if (!an) return;
+    const ud = an.users?.tf || (an.hash?.toLowerCase()==='tf' ? an : null);
+    if (!ud) return;
+    const dateStr = new Date(r.date).toLocaleDateString('da-DK',{day:'numeric',month:'short',year:'numeric'});
+    (ud.lostBalls||[]).forEach(lb => {
+      if (!alerts[lb.hole]) alerts[lb.hole] = [];
+      alerts[lb.hole].push({kind:'lostball', type:'lostball', reason:lb.reason||'', dateStr});
+    });
+    (ud.penalties||[]).forEach(p => {
+      if (!alerts[p.hole]) alerts[p.hole] = [];
+      alerts[p.hole].push({kind:'penalty', type:p.type||'default', reason:p.reason||'', dateStr});
+    });
+  });
+
+  const alertHoles = Object.entries(alerts)
+    .sort((a,b)=>Number(a[0])-Number(b[0]))
+    .map(([h,evs]) => ({hole:Number(h), events:evs}));
+
+  // Generate advice
+  // Hard holes where bogey is a good result
+  const BOGEY_HOLES = [10, 12];
+
+  function holeAdvice(hole) {
+    const evs = alerts[hole]||[];
+    const hasWater = evs.some(e=>e.type?.includes('water'));
+    const hasHook  = evs.some(e=>e.type?.includes('hook'));
+    const hasSlice = evs.some(e=>e.type?.includes('slice'));
+    const n = evs.length;
+    const isBogeyHole = BOGEY_HOLES.includes(hole);
+
+    // Specific technique advice first
+    let advice = '';
+    if (hasWater && hasHook)
+      advice = 'Du hooker konsekvent ud i vandet her — tag en kort klub eller fairwaywood, spil ud mod midten';
+    else if (hasWater && n>=2)
+      advice = 'Spil VÆK fra vandet — tag loft og ret sigtet mod rough i stedet';
+    else if (hasHook && n>=2)
+      advice = 'Du trækker konsekvent til venstre — åbn stance og sigte mod højre side';
+    else if (hasSlice && n>=2)
+      advice = 'Du skyder til højre — luk stance og sigte mod venstre side';
+    else if (n>=2)
+      advice = 'Du har fejlet her ' + n + ' gange — spil safe, glem birdie-forsøget';
+    else
+      advice = 'Vær ekstra fokuseret på dette hul';
+
+    // Append bogey-target recommendation for hard holes
+    if (isBogeyHole) {
+      advice += ' · Mål: bogey er et godt resultat her — optjen dine point på de nemmere huller';
+    } else if (n >= 2) {
+      advice += ' · Bogey er fuldt acceptabelt her';
+    }
+    return advice;
+  }
+
+  // ── Scorecard for last round ─────────────────────────────────────
+  let lastRoundHtml = '';
+  if (lastSc && lastRound && holeData.length) {
+    const pars = holeData.map(h=>h.par);
+    const colorFn = (g,p) => {
+      const d=g-p;
+      if(d<=-2) return {bg:'rgba(201,168,76,0.3)',col:'#dfc06e',lbl:'Eagle'};
+      if(d===-1) return {bg:'rgba(45,138,110,0.3)',col:'#7de8c4',lbl:'Birdie'};
+      if(d===0)  return {bg:'rgba(255,255,255,0.06)',col:'#d4cfc4',lbl:'Par'};
+      if(d===1)  return {bg:'rgba(180,110,40,0.2)',col:'#e8b880',lbl:'Bogey'};
+      if(d===2)  return {bg:'rgba(180,55,55,0.22)',col:'#e89090',lbl:'Dbl'};
+      return {bg:'rgba(140,20,20,0.3)',col:'#e07070',lbl:'+'+(d)};
+    };
+    const lastDate = new Date(lastRound.date).toLocaleDateString('da-DK',{day:'numeric',month:'long',year:'numeric'});
+    const cells = lastSc.scores.map((g,i)=>{
+      const c = colorFn(g, pars[i]);
+      return `<div style="display:flex;flex-direction:column;align-items:center;padding:6px 4px;border-radius:3px;min-width:30px;background:${c.bg}">
+        <span style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1em;color:${c.col}">${g}</span>
+        <span style="font-size:0.5em;color:${c.col};opacity:0.8;letter-spacing:0.05em">${holeData[i]?.hole}</span>
+      </div>`;
+    }).join('');
+    const an = lastRound.adminNotes;
+    const ud = an?.users?.tf || (an?.hash?.toLowerCase()==='tf' ? an : null);
+    lastRoundHtml = `<div class="br-section">
+      <div class="br-section-title">Seneste runde på denne bane · ${lastDate}</div>
+      <div class="br-course-strip" style="margin-bottom:12px">
+        <div class="br-kpi"><div class="br-kpi-val">${lastRes?.score||'–'}</div><div class="br-kpi-lbl">Stbf</div></div>
+        <div class="br-kpi"><div class="br-kpi-val">${lastSc.slag}</div><div class="br-kpi-lbl">Slag</div></div>
+        ${ud?.putts!=null?`<div class="br-kpi"><div class="br-kpi-val">${ud.putts}</div><div class="br-kpi-lbl">Putts</div></div>`:''}
+        ${ud?.fairways?`<div class="br-kpi"><div class="br-kpi-val">${ud.fairways.hit}/${ud.fairways.total}</div><div class="br-kpi-lbl">Fairways</div></div>`:''}
+        ${ud?.gir?`<div class="br-kpi"><div class="br-kpi-val">${ud.gir.hit}/${ud.gir.total}</div><div class="br-kpi-lbl">GIR</div></div>`:''}
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px">${cells}</div>
+      <div style="font-size:0.72em;color:var(--text-muted);margin-top:8px">HCP ${lastSc.hcp} (PHCP ${lastSc.phcp}) · vs par: ${lastSc.grossDiff===0?'E':lastSc.grossDiff<0?lastSc.grossDiff:'+'+lastSc.grossDiff}</div>
+    </div>`;
+  }
+
+  // ── Build HTML ───────────────────────────────────────────────────
+  let html = '';
+
+  // Overall stats strip
+  if (thomasRounds.length > 1) {
+    html += `<div class="br-section" style="padding:0 24px;padding-top:20px">
+      <div class="br-section-title">Historik på ${course} (${thomasRounds.length} runder)</div>
+      <div class="br-course-strip">
+        <div class="br-kpi"><div class="br-kpi-val">${avgStbf}</div><div class="br-kpi-lbl">Gns. stbf</div></div>
+        <div class="br-kpi"><div class="br-kpi-val">${bestStbf}</div><div class="br-kpi-lbl">Bedste</div></div>
+        <div class="br-kpi"><div class="br-kpi-val">${avgSlag}</div><div class="br-kpi-lbl">Gns. slag</div></div>
+      </div>
+    </div>`;
+  }
+
+  // Last round scorecard
+  if (lastRoundHtml) html += `<div style="padding:0 24px">${lastRoundHtml}</div>`;
+
+  // Birdies & pars
+  if (birdiesAndPars.length) {
+    const chips = birdiesAndPars.map(h => {
+      const col = h.vspar < 0 ? '#7de8c4' : 'rgba(201,168,76,0.8)';
+      const lbl = h.vspar < -0.3 ? '🐦' : '●';
+      return `<div style="display:inline-flex;align-items:center;gap:5px;padding:4px 10px;background:rgba(45,138,110,0.1);border:1px solid rgba(45,138,110,0.2);border-radius:20px;font-size:0.82em;margin:2px">
+        <span style="color:${col}">${lbl}</span>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:1.1em;font-weight:600;color:var(--white)">Hul ${h.hole}</span>
+        <span style="color:var(--text-muted);font-size:0.85em">${h.avgScore.toFixed(1)} snit</span>
+      </div>`;
+    }).join('');
+    html += `<div class="br-section" style="padding:0 24px">
+      <div class="br-section-title">💚 Stærke huller — gns. på/under par</div>
+      <div>${chips}</div>
+    </div>`;
+  }
+
+  // Alert holes
+  if (alertHoles.length) {
+    const items = alertHoles.map(({hole, events}) => {
+      const eventList = events.map(e => {
+        const icon = e.kind==='lostball'?'🔴':'⚠️';
+        const lbl = e.kind==='lostball'?'Lost ball':typeLabel(e.type);
+        return `${icon} ${lbl}${e.reason?' — '+e.reason:''} <span style="color:var(--text-muted);font-size:0.88em">(${e.dateStr})</span>`;
+      }).join('<br>');
+      return `<div class="br-alert">
+        <div class="br-alert-hole">${hole}</div>
+        <div class="br-alert-content">
+          <div class="br-alert-events">${eventList}</div>
+          <div class="br-alert-advice">→ ${holeAdvice(hole)}</div>
+        </div>
+      </div>`;
+    }).join('');
+    html += `<div class="br-section" style="padding:0 24px">
+      <div class="br-section-title">🚨 Problemhuller — vær ekstra skarp her</div>
+      ${items}
+    </div>`;
+  }
+
+  // Weak holes without admin data
+  if (weakHoles.length && thomasRounds.length > 1) {
+    const chips = weakHoles.map(h => `<div style="display:inline-flex;align-items:center;gap:5px;padding:4px 10px;background:rgba(180,55,55,0.08);border:1px solid rgba(180,55,55,0.2);border-radius:20px;font-size:0.82em;margin:2px">
+      <span style="color:#e89090">●</span>
+      <span style="font-family:'Cormorant Garamond',serif;font-size:1.1em;font-weight:600;color:var(--white)">Hul ${h.hole}</span>
+      <span style="color:var(--text-muted);font-size:0.85em">+${h.vspar.toFixed(1)} snit</span>
+    </div>`).join('');
+    html += `<div class="br-section" style="padding:0 24px">
+      <div class="br-section-title">📊 Svage huller — gns. over par</div>
+      <div>${chips}</div>
+    </div>`;
+  }
+
+  if (!html) {
+    html = `<div style="padding:32px 24px;text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--text-muted)">Ingen historik fundet for ${course} endnu</div>`;
+  }
+
+  html += `<div style="height:20px"></div>`;
+  el.innerHTML = html;
+}
+let _adminRoundDate = null;
+function openAdminNotes(date) {
+  _adminRoundDate = date;
+  document.getElementById('adminId').value = '';
+  document.getElementById('adminPw').value = '';
+  document.getElementById('adminErr').style.display = 'none';
+  document.getElementById('adminLoginView').style.display = 'block';
+  document.getElementById('adminNotesView').style.display = 'none';
+  document.getElementById('adminTitle').textContent = 'Rundenoter 🔒';
+  document.getElementById('adminModal').classList.add('open');
+}
+function closeAdminNotes() {
+  document.getElementById('adminModal').classList.remove('open');
+}
+function typeLabel(type) {
+  const map = {
+    hook:'Hook', hook_water:'Hook i vand', slice:'Slice',
+    slice_water:'Slice i vand', putt:'Puttfejl', ob:'OB',
+    vand:'Vand', skov:'Skov', sand:'Sand', default:'Straf'
+  };
+  return map[type] || map.default;
+}
+
+function buildSeasonStats() {
+  // Returns comprehensive per-hole, per-course, per-type stats
+  let totalPutts=0, totalLostBalls=0, totalPenalties=0, puttRounds=0;
+  // holeEvents: { 'Old Course|15': [{type,reason,date,course,eventType:'penalty'|'lostball'}] }
+  const holeEvents = {};
+  const penaltyByType = {};
+  const byCourse = {};
+
+  allRounds.forEach(r => {
+    if (!r.adminNotes) return;
+    const course = r.course || 'Ukendt';
+
+    if (!byCourse[course]) byCourse[course] = {
+      putts:0, puttRounds:0, lostBalls:[], penalties:[], roundsPlayed:0
+    };
+    byCourse[course].roundsPlayed++;
+
+    if (r.adminNotes.putts != null) {
+      totalPutts += r.adminNotes.putts; puttRounds++;
+      byCourse[course].putts += r.adminNotes.putts;
+      byCourse[course].puttRounds++;
+    }
+
+    (r.adminNotes.lostBalls || []).forEach(lb => {
+      totalLostBalls++;
+      const key = course + '|' + lb.hole;
+      if (!holeEvents[key]) holeEvents[key] = [];
+      holeEvents[key].push({type:'lostball', reason:lb.reason, date:r.date, course});
+      byCourse[course].lostBalls.push({hole:lb.hole, reason:lb.reason, date:r.date});
+    });
+
+    (r.adminNotes.penalties || []).forEach(p => {
+      totalPenalties++;
+      penaltyByType[p.type] = (penaltyByType[p.type]||0) + 1;
+      const key = course + '|' + p.hole;
+      if (!holeEvents[key]) holeEvents[key] = [];
+      holeEvents[key].push({type:p.type, reason:p.reason, date:r.date, course});
+      byCourse[course].penalties.push({hole:p.hole, type:p.type, reason:p.reason, date:r.date});
+    });
+  });
+
+  const puttAvg = puttRounds ? (totalPutts/puttRounds).toFixed(1) : '–';
+  const worstType = Object.entries(penaltyByType).sort((a,b)=>b[1]-a[1])[0];
+
+  // Sort holeEvents by frequency descending
+  const sortedHoles = Object.entries(holeEvents)
+    .sort((a,b) => b[1].length - a[1].length);
+
+  return {totalPutts, puttAvg, totalLostBalls, totalPenalties,
+          penaltyByType, worstType, byCourse, holeEvents, sortedHoles};
+}
+
+function generatePreRoundReminder(course, season) {
+  // Find all problem holes on this course from history
+  const courseHoles = Object.entries(season.holeEvents)
+    .filter(([key]) => key.startsWith(course + '|'))
+    .map(([key, events]) => {
+      const hole = key.split('|')[1];
+      const types = events.map(e => e.type);
+      const hookCount   = types.filter(t => t && t.includes('hook')).length;
+      const sliceCount  = types.filter(t => t && t.includes('slice')).length;
+      const waterCount  = types.filter(t => t && t.includes('water')).length;
+      const lostCount   = types.filter(t => t === 'lostball').length;
+      return {hole: Number(hole), events, hookCount, sliceCount, waterCount, lostCount, total: events.length};
+    })
+    .filter(h => h.total > 0)
+    .sort((a,b) => b.total - a.total);
+
+  if (!courseHoles.length) return '';
+
+  const items = courseHoles.slice(0, 5).map(h => {
+    const parts = [];
+    if (h.hookCount)  parts.push(`hooker (${h.hookCount}×)`);
+    if (h.sliceCount) parts.push(`slicer (${h.sliceCount}×)`);
+    if (h.waterCount) parts.push(`i vand (${h.waterCount}×)`);
+    if (h.lostCount)  parts.push(`lost ball (${h.lostCount}×)`);
+    const pattern = parts.join(', ');
+
+    // Generate specific recommendation
+    let advice;
+    const dominant = h.hookCount >= h.sliceCount ? 'hook' : 'slice';
+    if (h.waterCount > 0 && h.total >= 2)
+      advice = 'Spil fra rought — undgå vand for enhver pris';
+    else if (h.hookCount >= 2)
+      advice = 'Åbn stance lidt — du trækker konsekvent til venstre her';
+    else if (h.lostCount >= 2)
+      advice = 'Tag mere fairway-klub — en bold i spil er altid bedre';
+    else if (h.total >= 2)
+      advice = 'Spil konservativt — du har fejlet her ' + h.total + ' gange';
+    else
+      advice = 'Vær ekstra fokuseret på dette hul';
+
+    return `<div class="preround-item">
+      <div class="preround-hole">${h.hole}</div>
+      <div class="preround-text">
+        <div><strong>${pattern}</strong></div>
+        <div style="color:var(--text-muted);font-size:0.9em;margin-top:2px">→ ${advice}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  return `<div class="preround-box">
+    <div class="preround-title">🎯 Pre-round Reminder — ${course}</div>
+    ${items}
+  </div>`;
+}
+
+function renderHoleTimeline(season) {
+  if (!season.sortedHoles.length) return '';
+  let html = `<div class="an-section"><div class="an-section-title">Problem-huller — alle baner · kronologisk</div>
+    <div class="hole-timeline">`;
+
+  season.sortedHoles.forEach(([key, events]) => {
+    const [course, hole] = key.split('|');
+    const colorMap = {hook:'#e89090',hook_water:'#90b8e8',slice:'#e8b870',
+      slice_water:'#b8d8e8',lostball:'#f4a261',ob:'#e07070',vand:'#90b8e8',default:'#e8c870'};
+
+    const eventRows = events.map(e => {
+      const col = colorMap[e.type] || colorMap.default;
+      const typeStr = e.type === 'lostball' ? '🔴 Lost ball' : '⚠️ ' + typeLabel(e.type);
+      return `<div class="hole-tl-event">
+        <span style="color:${col};font-size:0.9em">${typeStr}</span>
+        <span>${e.reason}</span>
+        <span class="hole-tl-date">${new Date(e.date).toLocaleDateString('da-DK',{day:'numeric',month:'short'})}</span>
+      </div>`;
+    }).join('');
+
+    const holeColor = events.length >= 3 ? '#e89090' : events.length >= 2 ? '#e8c870' : 'var(--text-muted)';
+    html += `<div class="hole-tl-row">
+      <div class="hole-tl-num" style="color:${holeColor}">${hole}</div>
+      <div class="hole-tl-events">
+        <div class="hole-tl-course">${course} · ${events.length} hændelse${events.length!==1?'r':''}</div>
+        ${eventRows}
+      </div>
+    </div>`;
+  });
+
+  html += `</div></div>`;
+  return html;
+}
+
+function checkAdminLogin() {
+  const id = document.getElementById('adminId').value.trim().toLowerCase();
+  const pw = document.getElementById('adminPw').value.trim().toLowerCase();
+  if (!id || !pw) return;
+
+  const round = allRounds.find(r => r.date === _adminRoundDate);
+  if (!round || !round.adminNotes) return;
+
+  // Multi-user: check users object first, fallback to legacy hash
+  let userData = null;
+  let playerName = null;
+  if (round.adminNotes.users) {
+    if (round.adminNotes.users[id] && id === pw) {
+      userData = round.adminNotes.users[id];
+      playerName = userData.player;
+    }
+  } else if (round.adminNotes.hash && id === round.adminNotes.hash.toLowerCase() && pw === round.adminNotes.hash.toLowerCase()) {
+    // Legacy single-user round (Apr 12)
+    userData = round.adminNotes;
+    playerName = 'Thomas';
+  }
+
+  if (!userData) {
+    document.getElementById('adminErr').style.display = 'block';
+    return;
+  }
+
+  document.getElementById('adminLoginView').style.display = 'none';
+  document.getElementById('adminNotesView').style.display = 'block';
+  const course = round.course || '';
+  const d = new Date(round.date).toLocaleDateString('da-DK',{day:'numeric',month:'long',year:'numeric'});
+  const privateLabel = round.private ? ' · Privat runde' : '';
+  document.getElementById('adminTitle').textContent = '🔒 ' + course + ' · ' + d + privateLabel;
+
+  const season = buildSeasonStats();
+  let html = '';
+
+  // ── MATCHPLAY (privat — kun synlig her) ──
+  if (round.matchPlay?.winner) {
+    const mp = round.matchPlay;
+    const lTeam = mp.teams.find(t => t[0] !== mp.winner[0]);
+    html += `<div style="background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(201,168,76,0.04));border:1px solid rgba(201,168,76,0.35);border-radius:4px;padding:14px 16px;margin-bottom:18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <span style="font-size:1.4em">🏆</span>
+      <div><div style="font-size:0.62em;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:4px">Hulspil 2v2 — privat</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.2em;font-weight:700;color:var(--gold-light)">${mp.winner.join(' & ')} <span style="color:var(--gold)">${mp.result}</span> <span style="font-weight:400;color:var(--text-muted)">mod ${lTeam.join(' & ')}</span></div></div>
+      <span style="font-size:1.1em;margin-left:auto">🎉</span></div>`;
+  }
+
+  // ── PRE-ROUND REMINDER (bane-specifikt) ──
+  const reminder = generatePreRoundReminder(course, season);
+  if (reminder) html += reminder;
+
+  // ── SENESTE RUNDE — nøgletal ──
+  const isPrivate = round.counting === false || round.private === true;
+  html += `<div class="an-section"><div class="an-section-title">📋 Seneste runde${isPrivate?' · <span style="font-size:0.85em;color:var(--text-muted);font-weight:400">ikke tællende</span>':''}</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:1.05em;color:var(--gold-dim);margin-bottom:10px">${course} · ${d}</div>`;
+
+  // Extended stats grid
+  const hasExtended = userData.putts != null || userData.fairways || userData.gir || userData.bunkers != null;
+  if (hasExtended) {
+    const fw = userData.fairways;
+    const gir = userData.gir;
+    html += `<div class="ext-stat-grid">
+      ${userData.putts != null ? `<div class="ext-stat-box"><div class="ext-stat-val">${userData.putts}</div><div class="ext-stat-lbl">Putts</div></div>` : ''}
+      ${fw ? `<div class="ext-stat-box"><div class="ext-stat-val">${fw.hit}/${fw.total}</div><div class="ext-stat-lbl">Fairways</div></div>` : ''}
+      ${gir ? `<div class="ext-stat-box"><div class="ext-stat-val">${gir.hit}/${gir.total}</div><div class="ext-stat-lbl">GIR</div></div>` : ''}
+      ${userData.bunkers != null ? `<div class="ext-stat-box"><div class="ext-stat-val">${userData.bunkers}</div><div class="ext-stat-lbl">Bunkers</div></div>` : ''}
+      ${userData.chips != null ? `<div class="ext-stat-box"><div class="ext-stat-val">${userData.chips}</div><div class="ext-stat-lbl">Chips</div></div>` : ''}
+      ${userData.lostBalls?.length >= 0 ? `<div class="ext-stat-box"><div class="ext-stat-val">${userData.lostBalls?.length||0}</div><div class="ext-stat-lbl">Lost balls</div></div>` : ''}
+      ${userData.penalties?.length >= 0 ? `<div class="ext-stat-box"><div class="ext-stat-val">${userData.penalties?.length||0}</div><div class="ext-stat-lbl">Strafslag</div></div>` : ''}
+    </div>`;
+
+    // Putts per hole bar chart
+    if (userData.puttsPerHole?.length) {
+      const maxP = Math.max(...userData.puttsPerHole);
+      html += `<div style="margin-top:12px"><div style="font-size:0.6em;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px">Putts pr. hul</div>
+        <div class="putts-row">`;
+      userData.puttsPerHole.forEach((p, i) => {
+        const h = Math.round((p/maxP)*28)+4;
+        const col = p >= 3 ? 'rgba(200,80,80,0.65)' : p === 1 ? 'rgba(45,138,110,0.7)' : 'rgba(201,168,76,0.5)';
+        html += `<div class="putts-cell">
+          <div class="putts-num">${p}</div>
+          <div class="putts-bar" style="height:${h}px;background:${col}"></div>
+          <div class="putts-hole">${i+1}</div>
+        </div>`;
+      });
+      html += `</div></div>`;
+    }
+  }
+  html += `</div>`;
+
+  // ── HUL FOR HUL events ──
+  const allEvents = [
+    ...(userData.lostBalls||[]).map(lb => ({...lb, eventType:'lostball'})),
+    ...(userData.penalties||[]).map(p  => ({...p,  eventType:'penalty'}))
+  ].sort((a,b) => a.hole - b.hole);
+
+  if (allEvents.length) {
+    html += `<div class="an-section"><div class="an-section-title">Hul for hul — ${course}</div>
+      <div class="hole-timeline">`;
+    const byHole = {};
+    allEvents.forEach(e => { if(!byHole[e.hole]) byHole[e.hole]=[]; byHole[e.hole].push(e); });
+    const colorMap = {hook:'#e89090',hook_water:'#90b8e8',slice:'#e8b870',lostball:'#f4a261',ob:'#e07070',vand:'#90b8e8',default:'#e8c870'};
+    Object.entries(byHole).sort((a,b)=>Number(a[0])-Number(b[0])).forEach(([hole,evs]) => {
+      html += `<div class="hole-tl-row">
+        <div class="hole-tl-num" style="color:${evs.length>=2?'#e89090':'var(--text-muted)'}">${hole}</div>
+        <div class="hole-tl-events">${evs.map(e => {
+          const col = colorMap[e.type||e.eventType]||colorMap.default;
+          const lbl = e.eventType==='lostball'?'🔴 Lost ball':'⚠️ '+typeLabel(e.type);
+          return `<div class="hole-tl-event"><span style="color:${col}">${lbl}</span><span>${e.reason||''}</span></div>`;
+        }).join('')}</div>
+      </div>`;
+    });
+    html += `</div></div>`;
+  } else {
+    html += `<div class="an-section"><div class="an-section-title">Hul for hul — ${course}</div>
+      <div style="font-size:0.84em;color:var(--text-muted);padding:8px 0;font-style:italic">Ingen strafslag eller lost balls denne runde 👍</div></div>`;
+  }
+
+  // ── SÆSON — altid vist (inkluderer alle runder, tællende og ikke-tællende) ──
+  {
+    html += `<div class="an-section"><div class="an-section-title">📊 Sæson 2026 — akkumuleret (alle runder)</div>
+      <div class="an-season-grid">
+        <div class="an-season-box"><div class="an-season-box-val">${season.totalPutts}</div><div class="an-season-box-lbl">Putts total</div></div>
+        <div class="an-season-box"><div class="an-season-box-val">${season.puttAvg}</div><div class="an-season-box-lbl">Putts pr. runde</div></div>
+        <div class="an-season-box"><div class="an-season-box-val">${season.totalLostBalls}</div><div class="an-season-box-lbl">Lost balls</div></div>
+        <div class="an-season-box"><div class="an-season-box-val">${season.totalPenalties}</div><div class="an-season-box-lbl">Strafslag</div></div>
+      </div></div>`;
+    html += renderHoleTimeline(season);
+    // Per-course breakdown
+    const courseKeys = Object.keys(season.byCourse);
+    if (courseKeys.length > 0) {
+      html += `<div class="an-section"><div class="an-section-title">Fordeling pr. bane</div>`;
+      courseKeys.forEach(c => {
+        const bc = season.byCourse[c];
+        const pAvg = bc.puttRounds ? (bc.putts/bc.puttRounds).toFixed(1) : '–';
+        const holeCounts = {};
+        [...bc.lostBalls,...bc.penalties].forEach(e => { holeCounts[e.hole]=(holeCounts[e.hole]||0)+1; });
+        const holeList = Object.entries(holeCounts).sort((a,b)=>b[1]-a[1])
+          .map(([h,n]) => `<span style="display:inline-flex;align-items:center;gap:4px;margin:2px;padding:3px 8px;background:rgba(180,55,55,${0.1+n*0.08});border-radius:2px;font-size:0.8em;color:var(--text-light)"><span style="font-family:'Cormorant Garamond',serif;font-size:1.2em;font-weight:700">Hul ${h}</span><span style="color:var(--text-muted)">${n}×</span></span>`).join('');
+        const typeList = {};
+        bc.penalties.forEach(p => { typeList[p.type]=(typeList[p.type]||0)+1; });
+        const typeBadges = Object.entries(typeList).sort((a,b)=>b[1]-a[1]).map(([t,n])=>`<span class="an-type-badge an-type-${t}" style="margin:2px">${typeLabel(t)} ${n}×</span>`).join('');
+        html += `<div style="margin-bottom:16px;padding:14px 16px;background:rgba(0,0,0,0.15);border-radius:3px;border-left:3px solid rgba(201,168,76,0.25)">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.15em;font-weight:600;color:var(--gold-light);margin-bottom:10px">${c}</div>
+          <div class="an-stat-row"><span class="an-stat-label">Putts gns.</span><span class="an-stat-val" style="font-size:1.1em">${pAvg}</span></div>
+          <div class="an-stat-row"><span class="an-stat-label">Lost balls</span><span class="an-stat-val" style="font-size:1.1em">${bc.lostBalls.length}</span></div>
+          <div class="an-stat-row"><span class="an-stat-label">Strafslag</span><span class="an-stat-val" style="font-size:1.1em">${bc.penalties.length}</span></div>
+          ${holeList?`<div style="margin-top:8px">${holeList}</div>`:''}
+          ${typeBadges?`<div style="margin-top:6px">${typeBadges}</div>`:''}
+        </div>`;
+      });
+      html += `</div>`;
+    }
+  }
+
+  // ── PRIVATE RUNDER (samlet oversigt) ──
+  const privateRounds = allRounds.filter(r => r.private && r.adminNotes?.users?.[id]);
+  if (privateRounds.length) {
+    html += `<div class="an-section private-rounds-section">
+      <div class="an-section-title">Private runder — ikke tællende (${privateRounds.length})</div>`;
+    privateRounds.sort((a,b)=>new Date(b.date)-new Date(a.date)).forEach(pr => {
+      const pu = pr.adminNotes.users[id];
+      const pd = new Date(pr.date).toLocaleDateString('da-DK',{weekday:'short',day:'numeric',month:'short'});
+      const sc = pr.scorecards?.find(s => s.player === pu.player);
+      html += `<div class="private-round-item">
+        <div class="priv-round-header">
+          <div class="priv-round-title">${pr.course}</div>
+          <div class="priv-round-date">${pd}</div>
+          ${sc ? `<div style="margin-left:auto;font-family:'Cormorant Garamond',serif;font-size:1.2em;font-weight:700;color:var(--gold-light)">${sc.slag} slag · ${pr.results.find(r=>r.player===pu.player)?.score||'–'} stbf</div>` : ''}
+        </div>
+        <div class="ext-stat-grid">
+          ${pu.putts != null ? `<div class="ext-stat-box"><div class="ext-stat-val">${pu.putts}</div><div class="ext-stat-lbl">Putts</div></div>` : ''}
+          ${pu.fairways ? `<div class="ext-stat-box"><div class="ext-stat-val">${pu.fairways.hit}/${pu.fairways.total}</div><div class="ext-stat-lbl">Fairways</div></div>` : ''}
+          ${pu.gir ? `<div class="ext-stat-box"><div class="ext-stat-val">${pu.gir.hit}/${pu.gir.total}</div><div class="ext-stat-lbl">GIR</div></div>` : ''}
+          ${pu.bunkers != null ? `<div class="ext-stat-box"><div class="ext-stat-val">${pu.bunkers}</div><div class="ext-stat-lbl">Bunkers</div></div>` : ''}
+          ${pu.chips != null ? `<div class="ext-stat-box"><div class="ext-stat-val">${pu.chips}</div><div class="ext-stat-lbl">Chips</div></div>` : ''}
+        </div>
+        ${pu.puttsPerHole?.length ? (() => {
+          const mp = Math.max(...pu.puttsPerHole);
+          return `<div class="putts-row">${pu.puttsPerHole.map((p,i)=>{
+            const h=Math.round((p/mp)*28)+4;
+            const col=p>=3?'rgba(200,80,80,0.65)':p===1?'rgba(45,138,110,0.7)':'rgba(201,168,76,0.5)';
+            return `<div class="putts-cell"><div class="putts-num">${p}</div><div class="putts-bar" style="height:${h}px;background:${col}"></div><div class="putts-hole">${i+1}</div></div>`;
+          }).join('')}</div>`;
+        })() : ''}
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  document.getElementById('adminNotesList').innerHTML = html;
+}
+
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeAdminNotes(); });
+
+function init(){allRounds=ROUNDS_DATA;const played=allRounds.filter(r=>r.results&&r.results.length>0&&!r.private);const counting=played.filter(r=>r.counting!==false);countingRounds=counting;countingRounds=counting;const lb=calculateLeaderboard(counting);displayLeaderboard(lb);displayRounds(played);initCountdown();displayTeeTimes();
+  // Fetch weather for next round
+  if (NEXT_ROUND && NEXT_ROUND.datetime) {
+    const date = NEXT_ROUND.datetime.split('T')[0];
+    const lat  = NEXT_ROUND.lat  || 55.83428967088613;
+    const lng  = NEXT_ROUND.lng  || 12.339822779286978;
+    fetchWeather(lat, lng, date, 'nextRoundWeather');
+  }initMap(allRounds);initTimeline(counting);const h2h=computeH2H(counting);displayH2H(h2h);displayRecords(computeRecords(counting));displayExpeditions();displayVault();}
+init();
+</script>
+</body>
+</html>
