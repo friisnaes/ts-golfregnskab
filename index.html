@@ -792,7 +792,7 @@ function toggleIdxSec(id) {
 <script>
 const PLAYERS=['Thomas','Henrik','Kim','Morten'];
 const PLAYER_COLORS={Thomas:'#c9a84c',Henrik:'#5bb8a0',Kim:'#6b9fd4',Morten:'#c47a5a'};
-const NEXT_ROUND={datetime:'2026-05-14T09:30:00',course:'New Course',tee:57,lat:55.83428967088613,lng:12.339822779286978,players:['Thomas','Henrik','Morten'],abroad:false};
+const NEXT_ROUND={datetime:'2026-05-17T09:30:00',course:'New Course',tee:57,lat:55.83428967088613,lng:12.339822779286978,players:['Thomas','Henrik','Morten'],abroad:false};
 const EXPEDITIONS=[
   {
     id:'cote-dazur-2026',
@@ -1293,7 +1293,55 @@ const ROUNDS_DATA=[{course:"Old Course",date:"2026-04-10",tee:56,holes:9,cr:72.3
       points:[0,2,1,0,2,2,1,1,2, 2,3,2,0,2,2,3,3,2],
       slag:90,grossDiff:18}
    ]},
-  {course:"New Course",date:"2026-05-14",time:"09:30",tee:57,holes:18,cr:null,slope:null,lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,note:null,photo:null,players:["Henrik","Morten","Thomas"],holeData:[],results:[],scorecards:[]},
+  {course:"New Course",date:"2026-05-14",time:"09:30",tee:57,holes:18,cr:72.5,slope:141,
+   lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,note:null,photo:null,
+   counting:true,
+   players:["Henrik","Morten","Thomas"],
+   holeData:[
+     {hole:1,par:5,hcp:5},{hole:2,par:3,hcp:17},{hole:3,par:4,hcp:9},
+     {hole:4,par:5,hcp:3},{hole:5,par:3,hcp:15},{hole:6,par:4,hcp:1},
+     {hole:7,par:5,hcp:7},{hole:8,par:4,hcp:11},{hole:9,par:3,hcp:13},
+     {hole:10,par:4,hcp:4},{hole:11,par:4,hcp:8},{hole:12,par:5,hcp:2},
+     {hole:13,par:3,hcp:18},{hole:14,par:4,hcp:12},{hole:15,par:4,hcp:14},
+     {hole:16,par:4,hcp:10},{hole:17,par:3,hcp:16},{hole:18,par:5,hcp:6}
+   ],
+   results:[
+     {player:'Morten',score:41,points:2,placement:1,tied:false},
+     {player:'Thomas',score:28,points:1,placement:2,tied:false},
+     {player:'Henrik',score:17,points:0,placement:3,tied:false,nr:true,nrNote:'NR — stoppede efter 9 huller'}
+   ],
+   adminNotes:{users:{
+     'tf':{
+       player:'Thomas',
+       putts:null,
+       puttsF9:21,
+       fairways:{hit:4,total:6},
+       gir:{hit:5,total:9},
+       bunkers:0,
+       chips:4,
+       lostBalls:[],
+       penalties:[
+         {hole:4,reason:'2 strafslag',type:'straf'},
+         {hole:9,reason:'2 strafslag',type:'straf'}
+       ],
+       statsNote:'Kun forni-detaljer registreret (putts F9: 21)'
+     }
+   }},
+   scorecards:[
+     {player:'Morten',hcp:9.0,phcp:12,
+      scores:[4,3,4,5,3,5,8,5,3, 5,5,4,4,5,4,4,2,6],
+      points:[4,2,3,3,2,2,0,2,2, 2,2,4,1,2,2,3,3,2],
+      slag:79,grossDiff:7},
+     {player:'Thomas',hcp:10.1,phcp:13,
+      scores:[5,3,6,8,4,4,6,5,6, 4,7,7,4,4,5,5,5,5],
+      points:[3,2,1,0,1,3,2,2,0, 3,0,1,1,3,1,2,0,3],
+      slag:93,grossDiff:14},
+     {player:'Henrik',hcp:16.1,phcp:21,
+      scores:[7,4,5,6,5,5,5,6,5],
+      points:[1,2,2,3,1,3,3,1,1],
+      slag:48,grossDiff:12,nr:true,
+      nrNote:'NR — stoppede efter 9 huller'}
+   ]},
   {course:"New Course",date:"2026-05-17",time:"09:30",tee:57,holes:18,cr:null,slope:null,lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,note:null,photo:null,players:["Henrik","Morten","Thomas"],holeData:[],results:[],scorecards:[]},
   {course:"Hornbæk Golfklub 🏆",date:"2026-05-18",time:"09:00",tee:null,holes:18,cr:null,slope:null,lat:56.04626623479083,lng:12.436857584786646,abroad:false,expId:null,note:"CRK Charity Golf 2026 — holdturnering",photo:null,counting:true,players:["Henrik","Kim","Morten","Thomas"],holeData:[],results:[],scorecards:[]},
   {course:"Old Course",date:"2026-05-24",time:"09:30",tee:57,holes:18,cr:null,slope:null,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:null,photo:null,players:["Henrik","Kim","Morten","Thomas"],holeData:[],results:[],scorecards:[]},
