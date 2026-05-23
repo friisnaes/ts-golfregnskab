@@ -792,7 +792,7 @@ function toggleIdxSec(id) {
 <script>
 const PLAYERS=['Thomas','Henrik','Kim','Morten'];
 const PLAYER_COLORS={Thomas:'#c9a84c',Henrik:'#5bb8a0',Kim:'#6b9fd4',Morten:'#c47a5a'};
-const NEXT_ROUND={datetime:'2026-05-18T09:00:00',course:'Hornbæk Golfklub 🏆',tee:null,lat:56.04626623479083,lng:12.436857584786646,players:['Thomas','Henrik','Kim','Morten'],abroad:false};
+const NEXT_ROUND={datetime:'2026-05-24T09:30:00',course:'Old Course',tee:57,lat:55.83334253035411,lng:12.333272244585064,players:['Thomas','Henrik','Kim','Morten'],abroad:false};
 const EXPEDITIONS=[
   {
     id:'cote-dazur-2026',
@@ -1344,7 +1344,7 @@ const ROUNDS_DATA=[{course:"Old Course",date:"2026-04-10",tee:56,holes:9,cr:72.3
    ]},
   {course:"New Course",date:"2026-05-17",time:"09:30",tee:57,holes:18,cr:72.5,slope:141,
    lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,
-   note:"Kun 2 deltagere — Thomas spillede ikke",photo:null,
+   note:"Kun 2 deltagere — Thomas spillede ikke. Henrik NR efter 9 huller.",photo:null,
    counting:true,
    players:["Henrik","Morten"],
    holeData:[
@@ -1356,20 +1356,26 @@ const ROUNDS_DATA=[{course:"Old Course",date:"2026-04-10",tee:56,holes:9,cr:72.3
      {hole:16,par:4,hcp:10},{hole:17,par:3,hcp:16},{hole:18,par:5,hcp:6}
    ],
    results:[
-     {player:'Henrik',score:36,points:1,placement:1,tied:false},
-     {player:'Morten',score:27,points:0,placement:2,tied:false}
+     {player:'Morten',score:27,points:1,placement:1,tied:false},
+     {player:'Henrik',score:20,points:0,placement:2,tied:false,nr:true,nrNote:'NR — stoppede efter 9 huller'}
    ],
    scorecards:[
-     {player:'Henrik',hcp:16.1,phcp:21,
-      scores:[7,3,5,6,3,6,5,7,3, 6,6,6,4,6,5,5,4,6],
-      points:[1,3,2,3,3,2,3,0,3, 1,1,3,2,1,2,2,2,2],
-      slag:93,grossDiff:21},
      {player:'Morten',hcp:8.0,phcp:11,
       scores:[7,3,5,6,4,6,6,6,3, 4,6,7,5,6,4,5,3,6],
       points:[1,2,2,2,1,1,2,1,2, 3,1,1,0,0,2,2,2,2],
-      slag:92,grossDiff:20}
+      slag:92,grossDiff:20},
+     {player:'Henrik',hcp:16.1,phcp:21,
+      scores:[7,3,5,6,3,6,5,7,3],
+      points:[1,3,2,3,3,2,3,0,3],
+      slag:45,grossDiff:9,nr:true,
+      nrNote:'NR — stoppede efter 9 huller'}
    ]},
-  {course:"Hornbæk Golfklub 🏆",date:"2026-05-18",time:"09:00",tee:null,holes:18,cr:null,slope:null,lat:56.04626623479083,lng:12.436857584786646,abroad:false,expId:null,note:"CRK Charity Golf 2026 — holdturnering",photo:null,counting:true,players:["Henrik","Kim","Morten","Thomas"],holeData:[],results:[],scorecards:[]},
+  {course:"Hornbæk Golfklub 🏆",date:"2026-05-18",time:"09:00",tee:null,holes:18,cr:null,slope:null,lat:56.04626623479083,lng:12.436857584786646,abroad:false,expId:null,note:"CRK Charity Golf 2026 — holdturnering. Scorekort ikke registreret — kun placeringer.",photo:null,counting:true,players:["Henrik","Kim","Morten","Thomas"],holeData:[],results:[
+    {player:'Morten',score:null,points:3,placement:1,tied:false},
+    {player:'Henrik',score:null,points:2,placement:2,tied:false},
+    {player:'Thomas',score:null,points:1,placement:3,tied:false},
+    {player:'Kim',   score:null,points:0,placement:4,tied:false}
+  ],scorecards:[]},
   {course:"Old Course",date:"2026-05-24",time:"09:30",tee:57,holes:18,cr:null,slope:null,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:null,photo:null,players:["Henrik","Kim","Morten","Thomas"],holeData:[],results:[],scorecards:[]},
   {course:"New Course",date:"2026-05-28",time:"15:00",tee:57,holes:18,cr:null,slope:null,lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,note:null,photo:null,players:["Henrik","Kim","Morten","Thomas"],holeData:[],results:[],scorecards:[]},
   {course:"Old Course",date:"2026-05-31",time:"09:30",tee:57,holes:18,cr:null,slope:null,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:null,photo:null,players:["Kim","Morten","Thomas"],holeData:[],results:[],scorecards:[]}
@@ -1519,7 +1525,7 @@ function computeRecords(rounds){
   let bestStreak=null;
   PLAYERS.forEach(p=>{if(!bestStreak||maxStr[p].count>bestStreak.count)bestStreak={player:p,...maxStr[p]};});
   let bestMargin=null;
-  rounds.forEach(r=>{const s=[...r.results].sort((a,b)=>b.score-a.score);if(s.length>=2){const m=s[0].score-s[s.length-1].score;if(!bestMargin||m>bestMargin.margin)bestMargin={player:s[0].player,margin:m,course:r.course,date:r.date};}});
+  rounds.forEach(r=>{if(r.results.some(x=>x.score==null))return;const s=[...r.results].sort((a,b)=>b.score-a.score);if(s.length>=2){const m=s[0].score-s[s.length-1].score;if(!bestMargin||m>bestMargin.margin)bestMargin={player:s[0].player,margin:m,course:r.course,date:r.date};}});
   let bestComeback=null;
   const cum={};
   PLAYERS.forEach(p=>cum[p]=0);
@@ -1625,12 +1631,12 @@ function displayRounds(rounds){const c=document.getElementById('rounds');if(!rou
       <div class="round-summary-course">${r.course}</div>
       <div class="round-summary-date">${fdShort}</div>
     </div>
-    ${winner?`<div style="text-align:right"><div class="round-summary-winner">🏆 ${winner.player}</div><div class="round-summary-pts">${winner.score}<span style="font-size:0.55em;font-weight:400;color:var(--text-muted)"> stbf</span></div></div>`:''}
+    ${winner?`<div style="text-align:right"><div class="round-summary-winner">🏆 ${winner.player}</div><div class="round-summary-pts">${winner.score != null ? winner.score : '—'}<span style="font-size:0.55em;font-weight:400;color:var(--text-muted)"> stbf</span></div></div>`:''}
     <div class="round-summary-chevron">▼</div>
   </div>`;
   const rows=sr.map(x=>{
   const nrNote = x.nr ? `<span style="font-size:0.68em;color:var(--text-muted);font-style:italic;font-family:'Cormorant Garamond',serif;margin-left:6px">${x.nrNote||'NR'}</span>` : '';
-  const scoreCell = x.nr ? `${x.score} <span style="font-size:0.7em;color:#e89090;font-weight:600">NR</span>` : x.score;
+  const scoreCell = x.score == null ? '—' : (x.nr ? `${x.score} <span style="font-size:0.7em;color:#e89090;font-weight:600">NR</span>` : x.score);
   return `<tr><td class="placement">${x.tied?x.placement+'=':x.placement+'.'}</td><td>${x.player}${nrNote}</td><td>${scoreCell}</td><td class="points">${x.points%1===0?x.points:x.points.toFixed(1)}</td></tr>`;
 }).join('');
   // Admin notes button only (matchPlay is private — only shown inside admin notes)
@@ -1649,7 +1655,7 @@ function displayRounds(rounds){const c=document.getElementById('rounds');if(!rou
       </div>
     </div>
   </div>`;}).join('');}
-function showPlayerDetails(name){const modal=document.getElementById('playerModal'),p=playerData[name];if(!p)return;document.getElementById('modalPlayerName').textContent=name;const avg=p.best15.length>0?(p.total/p.best15.length).toFixed(1):'0.0';const allAvg=p.allRounds.length>0?(p.allRounds.reduce((s,r)=>s+r.points,0)/p.allRounds.length).toFixed(1):'0.0';document.getElementById('playerSummary').innerHTML=`<div class="stat-box"><div class="stat-label">Total</div><div class="stat-value">${p.total.toFixed(1)}</div></div><div class="stat-box"><div class="stat-label">Runder</div><div class="stat-value">${p.allRounds.length}</div></div><div class="stat-box"><div class="stat-label">Top15 gns.</div><div class="stat-value">${avg}</div></div><div class="stat-box"><div class="stat-label">Alle gns.</div><div class="stat-value">${allAvg}</div></div>`;const t15=new Set(p.best15);document.getElementById('playerRounds').innerHTML=[...p.allRounds].sort((a,b)=>b.points-a.points).map((r,i)=>`<div class="round-item ${t15.has(r.points)&&i<15?'top15':''}"><div class="round-info"><div class="round-course">${r.course}</div><div class="round-date">${new Date(r.date).toLocaleDateString('da-DK',{day:'numeric',month:'short',year:'numeric'})}</div></div><div class="round-score">${r.score} stbf</div><div class="round-points">${r.points.toFixed(1)} pt</div></div>`).join('');modal.classList.add('active');}
+function showPlayerDetails(name){const modal=document.getElementById('playerModal'),p=playerData[name];if(!p)return;document.getElementById('modalPlayerName').textContent=name;const avg=p.best15.length>0?(p.total/p.best15.length).toFixed(1):'0.0';const allAvg=p.allRounds.length>0?(p.allRounds.reduce((s,r)=>s+r.points,0)/p.allRounds.length).toFixed(1):'0.0';document.getElementById('playerSummary').innerHTML=`<div class="stat-box"><div class="stat-label">Total</div><div class="stat-value">${p.total.toFixed(1)}</div></div><div class="stat-box"><div class="stat-label">Runder</div><div class="stat-value">${p.allRounds.length}</div></div><div class="stat-box"><div class="stat-label">Top15 gns.</div><div class="stat-value">${avg}</div></div><div class="stat-box"><div class="stat-label">Alle gns.</div><div class="stat-value">${allAvg}</div></div>`;const t15=new Set(p.best15);document.getElementById('playerRounds').innerHTML=[...p.allRounds].sort((a,b)=>b.points-a.points).map((r,i)=>`<div class="round-item ${t15.has(r.points)&&i<15?'top15':''}"><div class="round-info"><div class="round-course">${r.course}</div><div class="round-date">${new Date(r.date).toLocaleDateString('da-DK',{day:'numeric',month:'short',year:'numeric'})}</div></div><div class="round-score">${r.score != null ? r.score + ' stbf' : '—'}</div><div class="round-points">${r.points.toFixed(1)} pt</div></div>`).join('');modal.classList.add('active');}
 document.addEventListener('DOMContentLoaded',()=>{const m=document.getElementById('playerModal');document.querySelector('.close').onclick=()=>m.classList.remove('active');window.onclick=e=>{if(e.target===m)m.classList.remove('active');};document.addEventListener('keydown',e=>{if(e.key==='Escape'){m.classList.remove('active');closePlayerLogin();closeBriefing();}});document.getElementById('briefingPw').addEventListener('keydown',e=>{if(e.key==='Enter')checkBriefingLogin();});});
 function unlockSecret(id){
     const overlay=document.getElementById('lock-'+id);
@@ -2333,7 +2339,7 @@ function renderPlayerStats(name) {
           <div class="pm-round-course">${badge}${top15b}${r.course}</div>
           <div class="pm-round-date">${fd}</div>
         </div>
-        <div class="pm-round-score">${res.score} stbf</div>
+        <div class="pm-round-score">${res.score != null ? res.score + ' stbf' : '— stbf'}</div>
         <div class="pm-round-pts ${isPrivate?'private':''}">${isCounting ? res.points.toFixed(1)+' pt' : '–'}</div>
       </div>
       <div class="pm-round-body">
