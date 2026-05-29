@@ -45,6 +45,14 @@
         .cd-label{font-size:0.6em;color:var(--text-light);letter-spacing:0.12em;text-transform:uppercase;font-family:'Outfit',sans-serif;font-weight:400;}
         .cd-sep{font-size:1.4em;color:var(--gold-dim);align-self:flex-end;margin-bottom:0.3em;opacity:0.5;}
         .countdown-past{font-size:0.82em;font-style:italic;color:var(--gold-dim);font-family:'Cormorant Garamond',serif;}
+        .countdown-suspended{display:flex;flex-direction:column;align-items:center;gap:6px;padding:18px 20px;margin-top:8px;background:rgba(201,168,76,0.04);border:1px solid rgba(201,168,76,0.15);border-radius:12px;}
+        .countdown-suspended .cs-icon{font-size:1.4em;opacity:0.7;margin-bottom:2px;}
+        .countdown-suspended .cs-title{font-family:'Cormorant Garamond',serif;font-size:1.2em;color:var(--gold-light);letter-spacing:0.02em;}
+        .countdown-suspended .cs-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.92em;color:var(--text-muted);}
+        .teetimes-suspended{display:flex;flex-direction:column;align-items:center;gap:8px;padding:28px 24px;background:rgba(201,168,76,0.03);border:1px solid rgba(201,168,76,0.12);border-radius:10px;}
+        .teetimes-suspended .ts-icon{font-size:1.6em;opacity:0.55;}
+        .teetimes-suspended .ts-title{font-family:'Cormorant Garamond',serif;font-size:1.25em;color:var(--gold-light);letter-spacing:0.02em;}
+        .teetimes-suspended .ts-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.95em;color:var(--text-muted);text-align:center;max-width:380px;}
         .latest-round{max-width:760px;margin:0 auto;padding:22px 26px 24px;background:linear-gradient(135deg,rgba(201,168,76,0.06),rgba(201,168,76,0.02));border:1px solid rgba(201,168,76,0.18);border-radius:14px;margin-top:-8px;margin-bottom:36px;}
         .latest-round-label{font-family:'Outfit',sans-serif;font-size:0.7em;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
         .latest-round-label::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold-light);box-shadow:0 0 8px var(--gold-light);}
@@ -289,6 +297,15 @@
         .round-item:hover{background:rgba(255,255,255,0.02);}
         .round-item.top15{background:rgba(201,168,76,0.05);border-left-color:var(--gold);}
         .round-item.top15 .round-points{color:var(--gold);}
+        .round-item.dropped{opacity:0.45;}
+        .round-item.dropped .round-points{text-decoration:line-through;color:var(--text-muted);}
+        .round-item.dropped .round-course::after{content:' · droppet';font-style:italic;font-size:0.85em;color:var(--text-muted);font-weight:400;}
+        .dropped-strip{margin:6px 12px 0;padding:8px 12px 10px;background:rgba(255,255,255,0.015);border:1px solid rgba(255,255,255,0.04);border-radius:8px;display:flex;flex-direction:column;gap:4px;}
+        .dropped-strip .ds-label{font-family:'Outfit',sans-serif;font-size:0.62em;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-muted);opacity:0.65;margin-bottom:3px;}
+        .dropped-strip .ds-item{display:flex;align-items:baseline;gap:10px;font-size:0.8em;opacity:0.55;text-decoration:line-through;font-family:'Cormorant Garamond',serif;}
+        .dropped-strip .ds-date{color:var(--text-muted);font-style:italic;min-width:54px;}
+        .dropped-strip .ds-course{flex:1;color:var(--text);}
+        .dropped-strip .ds-pts{color:var(--text-muted);font-variant-numeric:tabular-nums;}
         .round-info{flex:1;}
         .round-course{font-weight:500;color:var(--text-light);font-size:0.92em;}
         .modal .round-date{font-size:0.78em;color:var(--text-muted);margin-top:2px;}
@@ -799,12 +816,21 @@ function toggleIdxSec(id) {
 <script>
 const PLAYERS=['Thomas','Henrik','Kim','Morten'];
 const PLAYER_COLORS={Thomas:'#c9a84c',Henrik:'#5bb8a0',Kim:'#6b9fd4',Morten:'#c47a5a'};
-const NEXT_ROUND={datetime:'2026-05-28T15:00:00',course:'New Course',tee:57,lat:55.83428967088613,lng:12.339822779286978,players:['Thomas','Henrik','Morten'],abroad:false};
+// SUSPENSION: skjuler kun "Næste runde"-listen mens Thomas er væk.
+// De andre spiller videre — Thomas opdaterer scores remote fra Italien.
+const SUSPENSION={
+  active:true,
+  from:'2026-05-30',
+  to:'2026-06-06',
+  message:'"Næste runde"-listen er på pause 🇮🇹',
+  subtitle:'Thomas er i Italien — listen opdateres ikke før 7. juni. De andre spiller videre.'
+};
+const NEXT_ROUND={datetime:'2026-05-31T09:30:00',course:'Old Course',tee:57,lat:55.83334253035411,lng:12.333272244585064,players:['Thomas','Kim','Morten'],abroad:false};
 
 // Opdater denne efter hver runde. story: brug <strong>...</strong> for guld-fremhævning. Sæt til null for at skjule boksen.
 const LATEST_ROUND={
-  meta:'25. maj · Old Course · Ekstra runde, 2 spillere',
-  story:'<strong>Morten</strong> spiller til handicap (36 stbf, E netto) og henter endnu et point — nu kun 6 point bag Thomas, og de har spillet lige mange runder (14 hver). Mortens maj er stærk: efter Thomas\u2019s føring på 7 point ved månedens start har han bidt sig fast. Henrik fik en hård dag med 9\u2019er på hul 18 igen.'
+  meta:'28. maj · New Course · 3 spillere',
+  story:'Et identisk gennemslag i brutto — <strong>Thomas</strong> og <strong>Morten</strong> begge 86 slag — men netto-matematikken adskiller dem: 35 mod 33 stableford giver Thomas runden og udvider føringen til 7 point igen. Mortens momentum fra maj-måneden blev mødt med modstand: en dobbeltbogey på hul 9 (5 over par) lukkede en ellers stærk forni på 16 pt. <strong>Henrik</strong> spillede sin bedste forni i lang tid med 19 pt, men en 9\u2019er på hul 12 punkterede bagni totalt (12 pt). Thomas og Morten har nu begge ramt loftet på 15 tællende runder — herfra bliver det <em>tag-på-tag</em>: en god runde kan kun give point hvis den slår en af de hidtidige 15. Henrik har allerede 17 runder, hvor de to dårligste (begge 0-point) er droppet.'
 };
 const EXPEDITIONS=[
   {
@@ -1467,7 +1493,54 @@ const ROUNDS_DATA=[{course:"Old Course",date:"2026-04-10",tee:56,holes:9,cr:72.3
       points:[0,3,1,2,1,4,3,1,3, 3,1,3,1,0,1,2,2,0],
       slag:97,grossDiff:25}
    ]},
-  {course:"New Course",date:"2026-05-28",time:"15:00",tee:57,holes:18,cr:null,slope:null,lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,note:null,photo:null,players:["Henrik","Morten","Thomas"],holeData:[],results:[],scorecards:[]},
+  {course:"New Course",date:"2026-05-28",time:"15:00",tee:57,holes:18,cr:72.5,slope:141,
+   lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,
+   note:null,photo:null,
+   counting:true,
+   players:["Henrik","Morten","Thomas"],
+   adminNotes:{users:{
+     'tf':{
+       player:'Thomas',
+       putts:38,
+       puttsF9:19,
+       puttsB9:19,
+       fairways:{hit:6,total:12},
+       gir:{hit:6,total:18},
+       bunkers:4,
+       chips:10,
+       lostBalls:[],
+       penalties:[
+         {hole:1,reason:'2 strafslag',type:'straf'}
+       ]
+     }
+   }},
+   holeData:[
+     {hole:1,par:5,hcp:5},{hole:2,par:3,hcp:17},{hole:3,par:4,hcp:9},
+     {hole:4,par:5,hcp:3},{hole:5,par:3,hcp:15},{hole:6,par:4,hcp:1},
+     {hole:7,par:5,hcp:7},{hole:8,par:4,hcp:11},{hole:9,par:3,hcp:13},
+     {hole:10,par:4,hcp:4},{hole:11,par:4,hcp:8},{hole:12,par:5,hcp:2},
+     {hole:13,par:3,hcp:18},{hole:14,par:4,hcp:12},{hole:15,par:4,hcp:14},
+     {hole:16,par:4,hcp:10},{hole:17,par:3,hcp:16},{hole:18,par:5,hcp:6}
+   ],
+   results:[
+     {player:'Thomas',score:35,points:2,placement:1,tied:false},
+     {player:'Morten',score:33,points:1,placement:2,tied:false},
+     {player:'Henrik',score:31,points:0,placement:3,tied:false}
+   ],
+   scorecards:[
+     {player:'Thomas',hcp:10.4,phcp:13,
+      scores:[7,4,6,7,4,5,5,4,4, 5,4,6,3,4,4,4,3,7],
+      points:[1,1,1,1,1,2,3,3,2, 2,3,2,2,3,2,3,2,1],
+      slag:86,grossDiff:14},
+     {player:'Morten',hcp:8.0,phcp:11,
+      scores:[7,2,5,6,3,5,7,4,5, 7,4,5,3,5,6,4,3,5],
+      points:[1,3,2,2,2,2,1,3,0, 0,3,3,2,1,0,3,2,3],
+      slag:86,grossDiff:14},
+     {player:'Henrik',hcp:15.4,phcp:20,
+      scores:[7,3,5,8,4,5,5,5,3, 7,5,9,3,4,6,7,4,7],
+      points:[1,3,2,0,2,3,3,2,3, 0,2,0,3,3,1,0,2,1],
+      slag:97,grossDiff:25}
+   ]},
   {course:"Old Course",date:"2026-05-31",time:"09:30",tee:57,holes:18,cr:null,slope:null,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:null,photo:null,players:["Kim","Morten","Thomas"],holeData:[],results:[],scorecards:[]}
 ];
 let allRounds=[],playerData={},countingRounds=[];
@@ -1544,7 +1617,8 @@ function wmoCode(code) {
 }
 
 function displayLatestRound(){const el=document.getElementById('latestRoundBox');if(!el)return;if(!LATEST_ROUND||!LATEST_ROUND.story){el.innerHTML='';return;}el.innerHTML=`<div class="latest-round"><div class="latest-round-label">Seneste runde</div>${LATEST_ROUND.meta?`<div class="latest-round-meta">${LATEST_ROUND.meta}</div>`:''}<div class="latest-round-story">${LATEST_ROUND.story}</div></div>`;}
-function initCountdown(){const w=document.getElementById('countdownWrap');if(!w||!NEXT_ROUND.datetime)return;const t=new Date(NEXT_ROUND.datetime);const ps=NEXT_ROUND.players;const pstr=ps.length===7?'Alle 7 på Rivieraen ✈️':ps.length===4?'Alle fire 🏌️':ps.slice(0,-1).join(', ')+' & '+ps.slice(-1)[0];function u(){const n=new Date(),d=t-n;if(d<=0){w.innerHTML=`<div class="countdown-past">Runden på ${NEXT_ROUND.course} er afholdt</div>`;return;}const dd=Math.floor(d/86400000),hh=Math.floor((d%86400000)/3600000),mm=Math.floor((d%3600000)/60000),ss=Math.floor((d%60000)/1000);w.innerHTML=`<div class="countdown-course"><em>${NEXT_ROUND.course}</em>${NEXT_ROUND.tee?' · Tee '+NEXT_ROUND.tee:''} · ${pstr}</div><div class="countdown-digits"><div class="cd-unit"><span class="cd-num">${dd}</span><span class="cd-label">dag</span></div><span class="cd-sep">·</span><div class="cd-unit"><span class="cd-num">${String(hh).padStart(2,'0')}</span><span class="cd-label">timer</span></div><span class="cd-sep">·</span><div class="cd-unit"><span class="cd-num">${String(mm).padStart(2,'0')}</span><span class="cd-label">min</span></div><span class="cd-sep">·</span><div class="cd-unit"><span class="cd-num">${String(ss).padStart(2,'0')}</span><span class="cd-label">sek</span></div></div>`;}u();setInterval(u,1000);}
+function isSuspended(){if(!SUSPENSION||!SUSPENSION.active)return false;const today=new Date();today.setHours(0,0,0,0);const from=new Date(SUSPENSION.from);from.setHours(0,0,0,0);const to=new Date(SUSPENSION.to);to.setHours(23,59,59,999);return today>=from&&today<=to;}
+function initCountdown(){const w=document.getElementById('countdownWrap');if(!w||!NEXT_ROUND.datetime)return;if(isSuspended()){w.innerHTML=`<div class="countdown-suspended"><div class="cs-icon">⏸</div><div class="cs-title">${SUSPENSION.message}</div><div class="cs-sub">${SUSPENSION.subtitle}</div></div>`;return;}const t=new Date(NEXT_ROUND.datetime);const ps=NEXT_ROUND.players;const pstr=ps.length===7?'Alle 7 på Rivieraen ✈️':ps.length===4?'Alle fire 🏌️':ps.slice(0,-1).join(', ')+' & '+ps.slice(-1)[0];function u(){const n=new Date(),d=t-n;if(d<=0){w.innerHTML=`<div class="countdown-past">Runden på ${NEXT_ROUND.course} er afholdt</div>`;return;}const dd=Math.floor(d/86400000),hh=Math.floor((d%86400000)/3600000),mm=Math.floor((d%3600000)/60000),ss=Math.floor((d%60000)/1000);w.innerHTML=`<div class="countdown-course"><em>${NEXT_ROUND.course}</em>${NEXT_ROUND.tee?' · Tee '+NEXT_ROUND.tee:''} · ${pstr}</div><div class="countdown-digits"><div class="cd-unit"><span class="cd-num">${dd}</span><span class="cd-label">dag</span></div><span class="cd-sep">·</span><div class="cd-unit"><span class="cd-num">${String(hh).padStart(2,'0')}</span><span class="cd-label">timer</span></div><span class="cd-sep">·</span><div class="cd-unit"><span class="cd-num">${String(mm).padStart(2,'0')}</span><span class="cd-label">min</span></div><span class="cd-sep">·</span><div class="cd-unit"><span class="cd-num">${String(ss).padStart(2,'0')}</span><span class="cd-label">sek</span></div></div>`;}u();setInterval(u,1000);}
 function getFormGuide(name,rounds){
   // Only counting rounds affect form guide
   const countingOnly=rounds.filter(r=>r.counting!==false);
@@ -1554,8 +1628,14 @@ function getFormGuide(name,rounds){
   return g.slice(-3);
 }
 function renderFormGuide(g){const p=[...Array(Math.max(0,3-g.length)).fill({cls:'none',label:'·'}),...g];return p.map(x=>`<div class="form-pip ${x.cls}">${x.label}</div>`).join('');}
-function calculateLeaderboard(rounds){const pl={};PLAYERS.forEach(n=>{pl[n]={name:n,allPoints:[],allRounds:[],totalRounds:0};});rounds.forEach(r=>{r.results.forEach(x=>{if(!pl[x.player])return;pl[x.player].allPoints.push(x.points);pl[x.player].allRounds.push({course:r.course,date:r.date,score:x.score,points:x.points,placement:x.placement});pl[x.player].totalRounds++;});});Object.values(pl).forEach(p=>{p.allPoints.sort((a,b)=>b-a);p.best15=p.allPoints.slice(0,15);p.total=p.best15.reduce((s,v)=>s+v,0);});playerData=pl;return Object.values(pl).sort((a,b)=>b.total-a.total);}
-function displayLeaderboard(lb){const c=document.getElementById('leaderboard');if(lb.every(p=>p.totalRounds===0)){c.innerHTML='<div class="empty-state">Sæsonen er ikke startet endnu</div>';return;}c.innerHTML=lb.map((p,i)=>{const avg=p.best15.length>0?(p.total/p.best15.length).toFixed(1):'–';const isL=i===0&&p.total>0;const col=PLAYER_COLORS[p.name]||'#fff';const form=getFormGuide(p.name,countingRounds);const hasData=buildPlayerHoleData(p.name,allRounds).length>0;return`<div class="player-wrapper"><div class="player-card ${isL?'leader':''}" onclick="openPlayerLogin('${p.name}')"><div class="rank">${i+1}</div><div class="player-info"><div class="player-name" style="border-left-color:${col}">${p.name}</div><div class="player-meta-row"><span class="player-stats">${p.totalRounds} runder${p.totalRounds>0?` · Gns. ${avg} pt`:''}</span><div class="form-guide">${renderFormGuide(form)}</div></div></div><div class="total-points">${p.total.toFixed(1)}<span class="unit">pt</span></div></div><button class="analyse-toggle" id="at-${p.name}" onclick="toggleAnalysis('${p.name}')"><div class="at-icon">▾</div><span style="flex:1">Analyse</span><span style="opacity:0.5;font-style:italic;font-size:0.9em;font-family:'Cormorant Garamond',serif;text-transform:none;font-weight:400;letter-spacing:0.04em">${hasData?'Hul-for-hul indsigt':'Afventer scorecard-data'}</span></button><div class="analyse-panel" id="ap-${p.name}" style="max-height:0"><div id="ap-inner-${p.name}"></div></div>${p.name==='Thomas'?`<button class="briefing-btn" onclick="openBriefing()">🎯 <span style="flex:1">Pre-round Briefing</span><span style="opacity:0.5;font-style:italic;font-family:'Cormorant Garamond',serif;text-transform:none;font-weight:400;font-size:1.1em">Næste runde: ${NEXT_ROUND.course}</span></button>`:''}</div>`;}).join('');}
+function calculateLeaderboard(rounds){const pl={};PLAYERS.forEach(n=>{pl[n]={name:n,allPoints:[],allRounds:[],totalRounds:0};});rounds.forEach(r=>{r.results.forEach(x=>{if(!pl[x.player])return;pl[x.player].allPoints.push(x.points);pl[x.player].allRounds.push({course:r.course,date:r.date,score:x.score,points:x.points,placement:x.placement});pl[x.player].totalRounds++;});});Object.values(pl).forEach(p=>{p.allPoints.sort((a,b)=>b-a);p.best15=p.allPoints.slice(0,15);p.total=p.best15.reduce((s,v)=>s+v,0);
+// Compute which rounds are NOT in top-15 (chronologically) — match points greedily so duplicate point-values are handled correctly
+const top15Counts={};p.best15.forEach(v=>{top15Counts[v]=(top15Counts[v]||0)+1;});
+const droppedRounds=[];[...p.allRounds].forEach(r=>{if(top15Counts[r.points]>0){top15Counts[r.points]--;}else{droppedRounds.push(r);}});
+p.recentDropped=droppedRounds.sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,2);
+});playerData=pl;return Object.values(pl).sort((a,b)=>b.total-a.total);}
+function renderDroppedStrip(p){if(!p.recentDropped||!p.recentDropped.length)return '';const items=p.recentDropped.map(r=>{const d=new Date(r.date).toLocaleDateString('da-DK',{day:'numeric',month:'short'});return `<div class="ds-item"><span class="ds-date">${d}</span><span class="ds-course">${r.course}</span><span class="ds-pts">${r.points.toFixed(1)} pt</span></div>`;}).join('');return `<div class="dropped-strip"><div class="ds-label">Seneste ude af top-15</div>${items}</div>`;}
+function displayLeaderboard(lb){const c=document.getElementById('leaderboard');if(lb.every(p=>p.totalRounds===0)){c.innerHTML='<div class="empty-state">Sæsonen er ikke startet endnu</div>';return;}c.innerHTML=lb.map((p,i)=>{const avg=p.best15.length>0?(p.total/p.best15.length).toFixed(1):'–';const isL=i===0&&p.total>0;const col=PLAYER_COLORS[p.name]||'#fff';const form=getFormGuide(p.name,countingRounds);const hasData=buildPlayerHoleData(p.name,allRounds).length>0;return`<div class="player-wrapper"><div class="player-card ${isL?'leader':''}" onclick="openPlayerLogin('${p.name}')"><div class="rank">${i+1}</div><div class="player-info"><div class="player-name" style="border-left-color:${col}">${p.name}</div><div class="player-meta-row"><span class="player-stats">${p.totalRounds} runder${p.totalRounds>0?` · Gns. ${avg} pt`:''}</span><div class="form-guide">${renderFormGuide(form)}</div></div></div><div class="total-points">${p.total.toFixed(1)}<span class="unit">pt</span></div></div>${renderDroppedStrip(p)}<button class="analyse-toggle" id="at-${p.name}" onclick="toggleAnalysis('${p.name}')"><div class="at-icon">▾</div><span style="flex:1">Analyse</span><span style="opacity:0.5;font-style:italic;font-size:0.9em;font-family:'Cormorant Garamond',serif;text-transform:none;font-weight:400;letter-spacing:0.04em">${hasData?'Hul-for-hul indsigt':'Afventer scorecard-data'}</span></button><div class="analyse-panel" id="ap-${p.name}" style="max-height:0"><div id="ap-inner-${p.name}"></div></div>${p.name==='Thomas'?`<button class="briefing-btn" onclick="openBriefing()">🎯 <span style="flex:1">Pre-round Briefing</span><span style="opacity:0.5;font-style:italic;font-family:'Cormorant Garamond',serif;text-transform:none;font-weight:400;font-size:1.1em">Næste runde: ${NEXT_ROUND.course}</span></button>`:''}</div>`;}).join('');}
 function initMap(rounds){const valid=rounds.filter(r=>r.lat&&r.lng);if(!valid.length)return;const map=L.map('grand-tour-map',{zoomControl:true,scrollWheelZoom:false});try{L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{attribution:'',maxZoom:19,subdomains:'abcd'}).addTo(map);}catch(e){L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'',maxZoom:19}).addTo(map);}const bounds=[];valid.forEach(r=>{const ia=r.abroad===true;const isPlayed=r.results&&r.results.length>0;const pinClass=isPlayed?(ia?'abroad':''):(ia?'abroad-upcoming':'upcoming');const pinEmoji=ia?(isPlayed?'✦':'✧'):(isPlayed?'⛳':'○');const tailClass=ia&&isPlayed?'abroad':ia?'abroad-upcoming':isPlayed?'':'upcoming';const icon=L.divIcon({className:'',html:`<div><div class="map-pin-head ${pinClass}">${pinEmoji}</div><div class="map-pin-tail ${tailClass}"></div></div>`,iconSize:[26,36],iconAnchor:[13,36],popupAnchor:[0,-38]});const w=r.results.find(x=>x.placement===1);const t=r.results.filter(x=>x.placement===1).length>1;const wn=isPlayed?(w?(t?'Delt 1.':w.player):'–'):'Ikke spillet endnu';const fd=new Date(r.date).toLocaleDateString('da-DK',{weekday:'long',day:'numeric',month:'long',year:'numeric'});const meta=[r.holes?r.holes+' hul':'',r.cr?'CR '+r.cr:'',r.slope?'Slope '+r.slope:''].filter(Boolean).join(' · ');const pop=`<div class="gucci-popup">${ia&&isPlayed?'<div class="popup-expedition-badge">✦ Ekspedition</div>':ia&&!isPlayed?'<div class="popup-expedition-badge" style="background:rgba(201,168,76,0.3);color:var(--gold)">✧ Planlagt ekspedition</div>':!isPlayed?'<div class="popup-expedition-badge" style="background:rgba(255,255,255,0.12);color:var(--text-muted)">Planlagt</div>':''}<div class="popup-course">${r.course}</div><div class="popup-date">${fd}</div><div class="popup-winner"><span>🏆</span> ${wn}</div><div class="popup-meta">${meta}</div>${r.note?'<div class="popup-note">"'+r.note+'"</div>':''}${r.photo?'<img src="'+r.photo+'" class="popup-photo" alt="">':''}</div>`;L.marker([r.lat,r.lng],{icon}).addTo(map).bindPopup(pop,{maxWidth:260,minWidth:190});bounds.push([r.lat,r.lng]);});bounds.length===1?map.setView(bounds[0],12):map.fitBounds(bounds,{padding:[50,50]});}
 function initTimeline(rounds, showAll){
   const cv=document.getElementById('timelineChart');if(!cv)return;
@@ -1746,7 +1826,7 @@ function displayRounds(rounds){const c=document.getElementById('rounds');if(!rou
       </div>
     </div>
   </div>`;}).join('');}
-function showPlayerDetails(name){const modal=document.getElementById('playerModal'),p=playerData[name];if(!p)return;document.getElementById('modalPlayerName').textContent=name;const avg=p.best15.length>0?(p.total/p.best15.length).toFixed(1):'0.0';const allAvg=p.allRounds.length>0?(p.allRounds.reduce((s,r)=>s+r.points,0)/p.allRounds.length).toFixed(1):'0.0';document.getElementById('playerSummary').innerHTML=`<div class="stat-box"><div class="stat-label">Total</div><div class="stat-value">${p.total.toFixed(1)}</div></div><div class="stat-box"><div class="stat-label">Runder</div><div class="stat-value">${p.allRounds.length}</div></div><div class="stat-box"><div class="stat-label">Top15 gns.</div><div class="stat-value">${avg}</div></div><div class="stat-box"><div class="stat-label">Alle gns.</div><div class="stat-value">${allAvg}</div></div>`;const t15=new Set(p.best15);document.getElementById('playerRounds').innerHTML=[...p.allRounds].sort((a,b)=>b.points-a.points).map((r,i)=>`<div class="round-item ${t15.has(r.points)&&i<15?'top15':''}"><div class="round-info"><div class="round-course">${r.course}</div><div class="round-date">${new Date(r.date).toLocaleDateString('da-DK',{day:'numeric',month:'short',year:'numeric'})}</div></div><div class="round-score">${r.score != null ? r.score + ' stbf' : '—'}</div><div class="round-points">${r.points.toFixed(1)} pt</div></div>`).join('');modal.classList.add('active');}
+function showPlayerDetails(name){const modal=document.getElementById('playerModal'),p=playerData[name];if(!p)return;document.getElementById('modalPlayerName').textContent=name;const avg=p.best15.length>0?(p.total/p.best15.length).toFixed(1):'0.0';const allAvg=p.allRounds.length>0?(p.allRounds.reduce((s,r)=>s+r.points,0)/p.allRounds.length).toFixed(1):'0.0';document.getElementById('playerSummary').innerHTML=`<div class="stat-box"><div class="stat-label">Total</div><div class="stat-value">${p.total.toFixed(1)}</div></div><div class="stat-box"><div class="stat-label">Runder</div><div class="stat-value">${p.allRounds.length}</div></div><div class="stat-box"><div class="stat-label">Top15 gns.</div><div class="stat-value">${avg}</div></div><div class="stat-box"><div class="stat-label">Alle gns.</div><div class="stat-value">${allAvg}</div></div>`;const t15=new Set(p.best15);document.getElementById('playerRounds').innerHTML=[...p.allRounds].sort((a,b)=>b.points-a.points).map((r,i)=>`<div class="round-item ${i<15?'top15':'dropped'}"><div class="round-info"><div class="round-course">${r.course}</div><div class="round-date">${new Date(r.date).toLocaleDateString('da-DK',{day:'numeric',month:'short',year:'numeric'})}</div></div><div class="round-score">${r.score != null ? r.score + ' stbf' : '—'}</div><div class="round-points">${r.points.toFixed(1)} pt</div></div>`).join('');modal.classList.add('active');}
 document.addEventListener('DOMContentLoaded',()=>{const m=document.getElementById('playerModal');document.querySelector('.close').onclick=()=>m.classList.remove('active');window.onclick=e=>{if(e.target===m)m.classList.remove('active');};document.addEventListener('keydown',e=>{if(e.key==='Escape'){m.classList.remove('active');closePlayerLogin();closeBriefing();}});document.getElementById('briefingPw').addEventListener('keydown',e=>{if(e.key==='Enter')checkBriefingLogin();});});
 function unlockSecret(id){
     const overlay=document.getElementById('lock-'+id);
@@ -2010,6 +2090,12 @@ function toggleAnalysis(name) {
 function displayTeeTimes() {
   const c = document.getElementById('teetimeGrid');
   if (!c) return;
+  if (isSuspended()) {
+    c.innerHTML = `<div class="teetimes-suspended"><div class="ts-icon">⏸</div><div class="ts-title">${SUSPENSION.message}</div><div class="ts-sub">${SUSPENSION.subtitle}</div></div>`;
+    const w = document.getElementById('nextRoundWeather');
+    if (w) w.innerHTML = '';
+    return;
+  }
   const now = new Date();
   const upcoming = allRounds
     .filter(r => r.time && !r.results?.length)
@@ -3216,8 +3302,8 @@ function checkAdminLogin() {
 document.addEventListener('keydown', e => { if(e.key==='Escape') closeAdminNotes(); });
 
 function init(){allRounds=ROUNDS_DATA;const played=allRounds.filter(r=>r.results&&r.results.length>0&&!r.private);const counting=played.filter(r=>r.counting!==false);countingRounds=counting;countingRounds=counting;const lb=calculateLeaderboard(counting);displayLeaderboard(lb);displayRounds(played);initCountdown();displayLatestRound();displayTeeTimes();
-  // Fetch weather for next round
-  if (NEXT_ROUND && NEXT_ROUND.datetime) {
+  // Fetch weather for next round (skip during suspension)
+  if (NEXT_ROUND && NEXT_ROUND.datetime && !isSuspended()) {
     const date = NEXT_ROUND.datetime.split('T')[0];
     const lat  = NEXT_ROUND.lat  || 55.83428967088613;
     const lng  = NEXT_ROUND.lng  || 12.339822779286978;
