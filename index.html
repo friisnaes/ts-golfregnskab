@@ -829,8 +829,8 @@ const NEXT_ROUND={datetime:'2026-05-31T09:30:00',course:'Old Course',tee:57,lat:
 
 // Opdater denne efter hver runde. story: brug <strong>...</strong> for guld-fremhævning. Sæt til null for at skjule boksen.
 const LATEST_ROUND={
-  meta:'28. maj · New Course · 3 spillere',
-  story:'Et identisk gennemslag i brutto — <strong>Thomas</strong> og <strong>Morten</strong> begge 86 slag — men netto-matematikken adskiller dem: 35 mod 33 stableford giver Thomas runden og udvider føringen til 7 point igen. Mortens momentum fra maj-måneden blev mødt med modstand: en dobbeltbogey på hul 9 (5 over par) lukkede en ellers stærk forni på 16 pt. <strong>Henrik</strong> spillede sin bedste forni i lang tid med 19 pt, men en 9\u2019er på hul 12 punkterede bagni totalt (12 pt). Thomas og Morten har nu begge ramt loftet på 15 tællende runder — herfra bliver det <em>tag-på-tag</em>: en god runde kan kun give point hvis den slår en af de hidtidige 15. Henrik har allerede 17 runder, hvor de to dårligste (begge 0-point) er droppet.'
+  meta:'31. maj · Old Course · 2 spillere (Thomas i Italien)',
+  story:'<strong>Kim</strong> spiller til handicap og slår Mortens 35 stbf med ét point — 36 stbf, E netto. Mortens 16. runde dropper dermed ud af hans top-15 (hidtidigt minimum: 1 point), så best-15-summen står stille på 21. Kim derimod henter sit andet point i sæsonen efter Cannes Mougins og rykker fra 9 til 10 — gabet til <strong>Henrik</strong>s 13 er nu kun 3 point med 4 runder i underskud. Stillingen i toppen er uændret mens Thomas er i Italien: Thomas 28 · Morten 21 · Henrik 13 · Kim 10.'
 };
 const EXPEDITIONS=[
   {
@@ -1541,7 +1541,32 @@ const ROUNDS_DATA=[{course:"Old Course",date:"2026-04-10",tee:56,holes:9,cr:72.3
       points:[1,3,2,0,2,3,3,2,3, 0,2,0,3,3,1,0,2,1],
       slag:97,grossDiff:25}
    ]},
-  {course:"Old Course",date:"2026-05-31",time:"09:30",tee:57,holes:18,cr:null,slope:null,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:null,photo:null,players:["Kim","Morten","Thomas"],holeData:[],results:[],scorecards:[]}
+  {course:"Old Course",date:"2026-05-31",time:"09:30",tee:57,holes:18,cr:72.3,slope:139,
+   lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,
+   note:"Thomas i Italien — kun 2 deltagere",photo:null,
+   counting:true,
+   players:["Kim","Morten"],
+   holeData:[
+     {hole:1,par:4,hcp:11},{hole:2,par:5,hcp:5},{hole:3,par:4,hcp:13},{hole:4,par:4,hcp:1},
+     {hole:5,par:3,hcp:15},{hole:6,par:4,hcp:9},{hole:7,par:4,hcp:3},{hole:8,par:3,hcp:17},
+     {hole:9,par:5,hcp:7},{hole:10,par:5,hcp:8},{hole:11,par:4,hcp:2},{hole:12,par:3,hcp:16},
+     {hole:13,par:4,hcp:6},{hole:14,par:3,hcp:14},{hole:15,par:4,hcp:12},{hole:16,par:3,hcp:18},
+     {hole:17,par:5,hcp:4},{hole:18,par:5,hcp:10}
+   ],
+   results:[
+     {player:'Kim',   score:36,points:1,placement:1,tied:false},
+     {player:'Morten',score:35,points:0,placement:2,tied:false}
+   ],
+   scorecards:[
+     {player:'Kim',hcp:20.0,phcp:25,
+      scores:[6,6,6,6,4,7,5,3,8, 6,5,3,6,3,6,3,8,6],
+      points:[1,3,1,2,2,0,3,3,1, 2,3,3,2,3,1,3,1,2],
+      slag:97,grossDiff:25},
+     {player:'Morten',hcp:8.0,phcp:11,
+      scores:[4,7,5,6,3,5,4,3,6, 5,5,3,6,3,4,4,4,7],
+      points:[3,1,1,1,2,2,3,2,2, 3,2,2,1,2,2,1,4,1],
+      slag:84,grossDiff:12}
+   ]}
 ];
 let allRounds=[],playerData={},countingRounds=[];
 const PLAYER_LOGINS={'tf':'Thomas','hh':'Henrik','kkj':'Kim','ma':'Morten'};
