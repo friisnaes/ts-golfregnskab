@@ -829,8 +829,8 @@ const NEXT_ROUND={datetime:'2026-05-31T09:30:00',course:'Old Course',tee:57,lat:
 
 // Opdater denne efter hver runde. story: brug <strong>...</strong> for guld-fremhævning. Sæt til null for at skjule boksen.
 const LATEST_ROUND={
-  meta:'31. maj · Old Course · 2 spillere (Thomas i Italien)',
-  story:'<strong>Kim</strong> spiller til handicap og slår Mortens 35 stbf med ét point — 36 stbf, E netto. Mortens 16. runde dropper dermed ud af hans top-15 (hidtidigt minimum: 1 point), så best-15-summen står stille på 21. Kim derimod henter sit andet point i sæsonen efter Cannes Mougins og rykker fra 9 til 10 — gabet til <strong>Henrik</strong>s 13 er nu kun 3 point med 4 runder i underskud. Stillingen i toppen er uændret mens Thomas er i Italien: Thomas 28 · Morten 21 · Henrik 13 · Kim 10.'
+  meta:'4. juni · Old Course · 2 spillere (Thomas i Italien)',
+  story:'Mens Thomas nyder Perinaldo, leverer <strong>Kim</strong> og <strong>Morten</strong> sæsonens hidtil bedste duel på Old Course — begge under netto par. Kim med 39 stableford (-3 netto), Morten med 38 (-2 netto). Kim henter sit andet point på to runder og rykker fra 10 til 11. Mortens 38 stbf er hans bedste runde i sæsonen, men best-15-loftet bider — det er hans 17. runde og dropper ud uden at flytte totalen. <strong>Henrik</strong>s 13 point ligger nu kun 2 foran Kim, der har 3 runder i underskud. Toppen er uforandret: Thomas 28 · Morten 21 · Henrik 13 · Kim 11.'
 };
 const EXPEDITIONS=[
   {
@@ -1566,6 +1566,32 @@ const ROUNDS_DATA=[{course:"Old Course",date:"2026-04-10",tee:56,holes:9,cr:72.3
       scores:[4,7,5,6,3,5,4,3,6, 5,5,3,6,3,4,4,4,7],
       points:[3,1,1,1,2,2,3,2,2, 3,2,2,1,2,2,1,4,1],
       slag:84,grossDiff:12}
+   ]},
+  {course:"Old Course",date:"2026-06-04",time:"09:30",tee:57,holes:18,cr:72.3,slope:139,
+   lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,
+   note:"Thomas i Italien — kun 2 deltagere",photo:null,
+   counting:true,
+   players:["Kim","Morten"],
+   holeData:[
+     {hole:1,par:4,hcp:11},{hole:2,par:5,hcp:5},{hole:3,par:4,hcp:13},{hole:4,par:4,hcp:1},
+     {hole:5,par:3,hcp:15},{hole:6,par:4,hcp:9},{hole:7,par:4,hcp:3},{hole:8,par:3,hcp:17},
+     {hole:9,par:5,hcp:7},{hole:10,par:5,hcp:8},{hole:11,par:4,hcp:2},{hole:12,par:3,hcp:16},
+     {hole:13,par:4,hcp:6},{hole:14,par:3,hcp:14},{hole:15,par:4,hcp:12},{hole:16,par:3,hcp:18},
+     {hole:17,par:5,hcp:4},{hole:18,par:5,hcp:10}
+   ],
+   results:[
+     {player:'Kim',   score:39,points:1,placement:1,tied:false},
+     {player:'Morten',score:38,points:0,placement:2,tied:false}
+   ],
+   scorecards:[
+     {player:'Kim',hcp:20.0,phcp:25,
+      scores:[5,5,4,6,4,5,7,3,6, 7,6,3,6,6,6,3,5,7],
+      points:[2,4,3,2,2,2,1,3,3, 1,2,3,2,0,1,3,4,1],
+      slag:94,grossDiff:22},
+     {player:'Morten',hcp:8.0,phcp:11,
+      scores:[5,5,4,5,3,4,4,5,5, 5,5,3,4,4,4,2,8,6],
+      points:[2,3,2,2,2,3,3,0,3, 3,2,2,3,1,2,3,0,2],
+      slag:81,grossDiff:9}
    ]}
 ];
 let allRounds=[],playerData={},countingRounds=[];
