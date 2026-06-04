@@ -819,18 +819,18 @@ const PLAYER_COLORS={Thomas:'#c9a84c',Henrik:'#5bb8a0',Kim:'#6b9fd4',Morten:'#c4
 // SUSPENSION: skjuler kun "Næste runde"-listen mens Thomas er væk.
 // De andre spiller videre — Thomas opdaterer scores remote fra Italien.
 const SUSPENSION={
-  active:true,
+  active:false,
   from:'2026-05-30',
   to:'2026-06-06',
   message:'"Næste runde"-listen er på pause 🇮🇹',
   subtitle:'Thomas er i Italien — listen opdateres ikke før 7. juni. De andre spiller videre.'
 };
-const NEXT_ROUND={datetime:'2026-05-31T09:30:00',course:'Old Course',tee:57,lat:55.83334253035411,lng:12.333272244585064,players:['Thomas','Kim','Morten'],abroad:false};
+const NEXT_ROUND={datetime:'2026-06-07T09:00:00',course:'Old Course',tee:57,lat:55.83334253035411,lng:12.333272244585064,players:['Thomas','Henrik','Kim','Morten'],abroad:false};
 
 // Opdater denne efter hver runde. story: brug <strong>...</strong> for guld-fremhævning. Sæt til null for at skjule boksen.
 const LATEST_ROUND={
-  meta:'4. juni · Old Course · 2 spillere (Thomas i Italien)',
-  story:'Mens Thomas nyder Perinaldo, leverer <strong>Kim</strong> og <strong>Morten</strong> sæsonens hidtil bedste duel på Old Course — begge under netto par. Kim med 39 stableford (-3 netto), Morten med 38 (-2 netto). Kim henter sit andet point på to runder og rykker fra 10 til 11. Mortens 38 stbf er hans bedste runde i sæsonen, men best-15-loftet bider — det er hans 17. runde og dropper ud uden at flytte totalen. <strong>Henrik</strong>s 13 point ligger nu kun 2 foran Kim, der har 3 runder i underskud. Toppen er uforandret: Thomas 28 · Morten 21 · Henrik 13 · Kim 11.'
+  meta:'Thomas tilbage fra Italien · sæsonen genoptaget',
+  story:'Mens <strong>Thomas</strong> har været i Perinaldo, har Kim og Morten holdt liv i regnskabet med to runder på Old Course. Kim henter 2 point fordelt på to runder (36 stbf E netto · 39 stbf -3 netto) og rykker fra 9 til 11. Mortens to runder gav 35 og 38 stableford — 38 var hans bedste i sæsonen — men best-15-loftet betød ingen flytning af totalen. Søndag 7. juni samles alle fire igen på Old Course kl. 09:00, og kalenderen er fyldt med 7 runder frem til 28. juni. Stillingen ved retur: Thomas 28 · Morten 21 · Henrik 13 · Kim 11.'
 };
 const EXPEDITIONS=[
   {
@@ -1592,7 +1592,14 @@ const ROUNDS_DATA=[{course:"Old Course",date:"2026-04-10",tee:56,holes:9,cr:72.3
       scores:[5,5,4,5,3,4,4,5,5, 5,5,3,4,4,4,2,8,6],
       points:[2,3,2,2,2,3,3,0,3, 3,2,2,3,1,2,3,0,2],
       slag:81,grossDiff:9}
-   ]}
+   ]},
+  {course:"Old Course",date:"2026-06-07",time:"09:00",tee:57,holes:18,cr:null,slope:null,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:null,photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
+  {course:"New Course",date:"2026-06-11",time:"13:50",tee:57,holes:18,cr:null,slope:null,lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,note:null,photo:null,players:["Thomas","Henrik"],holeData:[],results:[],scorecards:[]},
+  {course:"Old Course",date:"2026-06-14",time:"09:00",tee:57,holes:18,cr:null,slope:null,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:null,photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
+  {course:"Old Course",date:"2026-06-18",time:"13:50",tee:57,holes:18,cr:null,slope:null,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:null,photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
+  {course:"Old Course",date:"2026-06-21",time:"09:00",tee:57,holes:18,cr:null,slope:null,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:null,photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
+  {course:"New Course",date:"2026-06-25",time:"13:50",tee:57,holes:18,cr:null,slope:null,lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,note:null,photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
+  {course:"Old Course",date:"2026-06-28",time:"09:00",tee:57,holes:18,cr:null,slope:null,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:null,photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]}
 ];
 let allRounds=[],playerData={},countingRounds=[];
 const PLAYER_LOGINS={'tf':'Thomas','hh':'Henrik','kkj':'Kim','ma':'Morten'};
