@@ -825,12 +825,12 @@ const SUSPENSION={
   message:'"Næste runde"-listen er på pause 🇮🇹',
   subtitle:'Thomas er i Italien — listen opdateres ikke før 7. juni. De andre spiller videre.'
 };
-const NEXT_ROUND={datetime:'2026-06-07T09:00:00',course:'Old Course',tee:57,lat:55.83334253035411,lng:12.333272244585064,players:['Thomas','Henrik','Kim','Morten'],abroad:false};
+const NEXT_ROUND={datetime:'2026-06-11T13:50:00',course:'New Course',tee:57,lat:55.83428967088613,lng:12.339822779286978,players:['Thomas','Henrik'],abroad:false};
 
 // Opdater denne efter hver runde. story: brug <strong>...</strong> for guld-fremhævning. Sæt til null for at skjule boksen.
 const LATEST_ROUND={
-  meta:'Thomas tilbage fra Italien · sæsonen genoptaget',
-  story:'Mens <strong>Thomas</strong> har været i Perinaldo, har Kim og Morten holdt liv i regnskabet med to runder på Old Course. Kim henter 2 point fordelt på to runder (36 stbf E netto · 39 stbf -3 netto) og rykker fra 9 til 11. Mortens to runder gav 35 og 38 stableford — 38 var hans bedste i sæsonen — men best-15-loftet betød ingen flytning af totalen. Søndag 7. juni samles alle fire igen på Old Course kl. 09:00, og kalenderen er fyldt med 7 runder frem til 28. juni. Stillingen ved retur: Thomas 28 · Morten 21 · Henrik 13 · Kim 11.'
+  meta:'7. juni · Old Course · Alle fire samlet igen',
+  story:'Sæsonens første alle-fire-runde siden Riviera-turen i april — og det blev <strong>Morten</strong>s dag. 39 stableford, sit bedste i sæsonen, drevet af to birdies (hul 6 og 10) og en stærk forni på 24 pt. <strong>Thomas</strong> kom tilbage fra Italien og spillede sin egen variant af genrejsning: 10 pt forni efter våde 5\u2019ere og 6\u2019ere, men 20 pt bagni inkl. birdie på hul 9, hvilket sikrede 2.-pladsen med 30 stbf. <strong>Henrik</strong> og <strong>Kim</strong> nåede ikke i mål og noterede NR efter ni huller — de delte 3.-pladsen og det ene point. Stillingen: Thomas 30 · Morten 24 · Henrik 13.5 · Kim 11.5. Næste runde: torsdag 11/6, kun Thomas og Henrik på New Course.'
 };
 const EXPEDITIONS=[
   {
@@ -1593,7 +1593,50 @@ const ROUNDS_DATA=[{course:"Old Course",date:"2026-04-10",tee:56,holes:9,cr:72.3
       points:[2,3,2,2,2,3,3,0,3, 3,2,2,3,1,2,3,0,2],
       slag:81,grossDiff:9}
    ]},
-  {course:"Old Course",date:"2026-06-07",time:"09:00",tee:57,holes:18,cr:null,slope:null,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:null,photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
+  {course:"Old Course",date:"2026-06-07",time:"09:00",tee:56,holes:18,cr:72.3,slope:139,
+   lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,
+   note:"Henrik og Kim NR efter 9 huller — deler 3.-4. plads (0.5 pt hver)",photo:null,
+   counting:true,
+   players:["Thomas","Henrik","Kim","Morten"],
+   adminNotes:{users:{
+     'tf':{
+       player:'Thomas',
+       putts:34,
+       fairways:{hit:8,total:12},
+       gir:{hit:6,total:18}
+     }
+   }},
+   holeData:[
+     {hole:1,par:4,hcp:11},{hole:2,par:5,hcp:5},{hole:3,par:4,hcp:13},{hole:4,par:4,hcp:1},
+     {hole:5,par:3,hcp:15},{hole:6,par:4,hcp:9},{hole:7,par:4,hcp:3},{hole:8,par:3,hcp:17},
+     {hole:9,par:5,hcp:7},{hole:10,par:5,hcp:8},{hole:11,par:4,hcp:2},{hole:12,par:3,hcp:16},
+     {hole:13,par:4,hcp:6},{hole:14,par:3,hcp:14},{hole:15,par:4,hcp:12},{hole:16,par:3,hcp:18},
+     {hole:17,par:5,hcp:4},{hole:18,par:5,hcp:10}
+   ],
+   results:[
+     {player:'Morten',score:39,points:3,placement:1,tied:false},
+     {player:'Thomas',score:30,points:2,placement:2,tied:false},
+     {player:'Henrik',score:13,points:0.5,placement:3,tied:true,nr:true},
+     {player:'Kim',   score:13,points:0.5,placement:3,tied:true,nr:true}
+   ],
+   scorecards:[
+     {player:'Morten',hcp:8.2,phcp:10,
+      scores:[4,5,3,5,3,3,4,3,5, 4,7,5,6,4,5,3,5,5],
+      points:[2,3,3,2,2,4,3,2,3, 4,0,0,1,1,1,2,3,3],
+      slag:79,grossDiff:7},
+     {player:'Thomas',hcp:10.4,phcp:13,
+      scores:[6,7,5,7,5,6,6,5,4, 6,6,4,4,3,4,3,5,5],
+      points:[1,1,2,0,0,1,1,0,4, 2,1,1,3,2,3,2,3,3],
+      slag:91,grossDiff:19},
+     {player:'Henrik',hcp:15.7,phcp:20,nr:true,
+      scores:[6,8,5,7,3,7,5,3,7],
+      points:[1,0,2,1,3,0,2,3,1],
+      slag:51,grossDiff:null,note:'NR efter 9 huller — F9: 51 slag / 13 stbf'},
+     {player:'Kim',hcp:19.4,phcp:24,nr:true,
+      scores:[7,9,4,9,4,5,7,2,7],
+      points:[0,0,3,0,2,2,1,4,1],
+      slag:54,grossDiff:null,note:'NR efter 9 huller — F9: 54 slag / 13 stbf'}
+   ]},
   {course:"New Course",date:"2026-06-11",time:"13:50",tee:57,holes:18,cr:null,slope:null,lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,note:null,photo:null,players:["Thomas","Henrik"],holeData:[],results:[],scorecards:[]},
   {course:"Old Course",date:"2026-06-14",time:"09:00",tee:57,holes:18,cr:null,slope:null,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:null,photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
   {course:"Old Course",date:"2026-06-18",time:"13:50",tee:57,holes:18,cr:null,slope:null,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:null,photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
