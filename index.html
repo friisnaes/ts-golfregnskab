@@ -53,6 +53,8 @@
         .teetimes-suspended .ts-icon{font-size:1.6em;opacity:0.55;}
         .teetimes-suspended .ts-title{font-family:'Cormorant Garamond',serif;font-size:1.25em;color:var(--gold-light);letter-spacing:0.02em;}
         .teetimes-suspended .ts-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.95em;color:var(--text-muted);text-align:center;max-width:380px;}
+        .teetime-invitation-link{display:inline-block;margin-top:8px;padding:5px 12px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.25);border-radius:6px;color:var(--gold-light);text-decoration:none;font-family:'Outfit',sans-serif;font-size:0.78em;letter-spacing:0.06em;transition:all 0.2s;}
+        .teetime-invitation-link:hover{background:rgba(201,168,76,0.15);border-color:rgba(201,168,76,0.45);color:var(--gold);}
         .latest-round{max-width:760px;margin:0 auto;padding:22px 26px 24px;background:linear-gradient(135deg,rgba(201,168,76,0.06),rgba(201,168,76,0.02));border:1px solid rgba(201,168,76,0.18);border-radius:14px;margin-top:-8px;margin-bottom:36px;}
         .latest-round-label{font-family:'Outfit',sans-serif;font-size:0.7em;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
         .latest-round-label::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold-light);box-shadow:0 0 8px var(--gold-light);}
@@ -1692,7 +1694,7 @@ const ROUNDS_DATA=[{course:"Old Course",date:"2026-04-10",tee:56,holes:9,cr:72.3
    ]},
   {course:"Old Course",date:"2026-06-18",time:"13:50",tee:57,holes:18,cr:null,slope:null,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:"Henrik ikke med",photo:null,players:["Thomas","Kim","Morten"],holeData:[],results:[],scorecards:[]},
   {course:"Old Course",date:"2026-06-21",time:"09:00",tee:57,holes:18,cr:null,slope:null,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:"Morten ikke med",photo:null,players:["Thomas","Henrik","Kim"],holeData:[],results:[],scorecards:[]},
-  {course:"Dragør Golfklub 🏆",date:"2026-06-25",time:"13:30",tee:null,holes:18,cr:null,slope:null,lat:55.59039,lng:12.66460,abroad:false,expId:null,note:"Mini Round Table Golf Challenge — 3-bolde mod Oscar Holm (+7,0 hcp, Clemson College golf). Velkomst 13:30, første bold 14:00, burgers kl. 19. Henrik ikke med.",photo:null,players:["Thomas","Kim","Morten"],holeData:[],results:[],scorecards:[]},
+  {course:"Dragør Golfklub 🏆",date:"2026-06-25",time:"13:30",tee:null,holes:18,cr:null,slope:null,lat:55.59039,lng:12.66460,abroad:false,expId:null,note:"Mini Round Table Golf Challenge — 3-bolde mod Oscar Holm (+7,0 hcp, Clemson College golf). Velkomst 13:30, første bold 14:00, burgers kl. 19. Henrik ikke med.",invitationUrl:"invitation_25_06_2026_Dragor.pdf",photo:null,players:["Thomas","Kim","Morten"],holeData:[],results:[],scorecards:[]},
   {course:"Old Course",date:"2026-06-28",time:"09:00",tee:57,holes:18,cr:null,slope:null,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:"Henrik ikke med",photo:null,players:["Thomas","Kim","Morten"],holeData:[],results:[],scorecards:[]},
   {course:"Old Course",date:"2026-07-02",time:"13:50",tee:57,holes:18,cr:null,slope:null,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:null,photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
   {course:"Old Course",date:"2026-07-09",time:"13:50",tee:57,holes:18,cr:null,slope:null,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:"Kim ikke med",photo:null,players:["Thomas","Henrik","Morten"],holeData:[],results:[],scorecards:[]}
@@ -2298,6 +2300,7 @@ function displayTeeTimes() {
         <div class="teetime-meta">${meta}</div>
         ${playerMsg}
         ${r.note ? `<div style="margin-top:5px;font-size:0.84em;color:var(--text-light);font-family:'Cormorant Garamond',serif;font-style:italic;opacity:0.85">${r.note}</div>` : ''}
+        ${r.invitationUrl ? `<a href="${r.invitationUrl}" target="_blank" rel="noopener" class="teetime-invitation-link" onclick="event.stopPropagation()">📄 Se invitation</a>` : ''}
       </div>
       <div class="teetime-time-block">
         <div class="teetime-time">${r.time}</div>
