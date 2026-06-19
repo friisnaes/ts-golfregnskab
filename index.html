@@ -827,12 +827,12 @@ const SUSPENSION={
   message:'"Næste runde"-listen er på pause 🇮🇹',
   subtitle:'Thomas er i Italien — listen opdateres ikke før 7. juni. De andre spiller videre.'
 };
-const NEXT_ROUND={datetime:'2026-06-18T13:50:00',course:'Old Course',tee:57,lat:55.83334253035411,lng:12.333272244585064,players:['Thomas','Henrik','Kim','Morten'],abroad:false};
+const NEXT_ROUND={datetime:'2026-06-21T09:00:00',course:'Old Course',tee:57,lat:55.83334253035411,lng:12.333272244585064,players:['Thomas','Henrik','Kim'],abroad:false};
 
 // Opdater denne efter hver runde. story: brug <strong>...</strong> for guld-fremhævning. Sæt til null for at skjule boksen.
 const LATEST_ROUND={
-  meta:'14. juni · Old Course · 3 spillere (Kim ikke med)',
-  story:'<strong>Morten</strong> bekræfter formen fra sidste uge — 34 stableford og sin anden sejr i træk. <strong>Henrik</strong> spillede stabilt med 31 stbf og henter sit første hele point siden 28/5. <strong>Thomas</strong> havde en hård dag på kontoret: 11 strafslag (heraf 7 på bagni), 5 GIR ud af 18, og kun 26 stbf — en runde der dropper direkte ud af top-15. Mortens 2 point flytter ham fra 24 til 26 — hans 2-pointer skubber en gammel 0\u2019er ud af top-15. Henriks 1 pt skubber tilsvarende en 0\u2019er ud og rykker ham fra 13.5 til 14.5. Stillingen: Thomas 30 · Morten 26 · Henrik 14.5 · Kim 11.5. Næste runde: torsdag 18/6 kl. 13:50, Old Course — kun Thomas, Kim og Morten (Henrik ikke med).'
+  meta:'18. juni · New Course · 3 spillere (Kim ikke med)',
+  story:'<strong>Henrik</strong>s første sejr i ligaen i denne sæson — 32 stableford og 2 point. To tætte forni og bagni (16/16) på en bane hvor han ellers har haft vanskeligheder. Hans 2-pointer skubber en gammel 0\u2019er ud af top-15 og rykker ham fra 14.5 til 16.5. <strong>Thomas</strong> og <strong>Morten</strong> spillede begge 93 slag brutto, men nettoforskel gav Thomas 29 mod Mortens 25 — Thomas tager 2.-pladsen. Begges nye runder dropper ud af top-15 (Thomas\u2019s nye 1-pointer slår ikke hans hidtidige laveste; samme for Morten med 0). Stillingen i toppen er uændret: Thomas 30 · Morten 26 · Henrik 16.5 · Kim 11.5. Næste runde: søndag 21/6 kl. 09:00, Old Course — Thomas, Henrik, Kim (Morten ikke med).'
 };
 const EXPEDITIONS=[
   {
@@ -1692,7 +1692,56 @@ const ROUNDS_DATA=[{course:"Old Course",date:"2026-04-10",tee:56,holes:9,cr:72.3
       points:[0,0,2,2,2,2,2,3,0, 3,0,1,2,3,3,0,1,0],
       slag:97,grossDiff:25}
    ]},
-  {course:"Old Course",date:"2026-06-18",time:"13:50",tee:57,holes:18,cr:null,slope:null,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:"Henrik ikke med",photo:null,players:["Thomas","Kim","Morten"],holeData:[],results:[],scorecards:[]},
+  {course:"New Course",date:"2026-06-18",time:"13:50",tee:56,holes:18,cr:72.5,slope:141,
+   lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,
+   note:"Kim ikke med",photo:null,
+   counting:true,
+   players:["Thomas","Henrik","Morten"],
+   adminNotes:{users:{
+     'tf':{
+       player:'Thomas',
+       putts:40,
+       puttsF9:19,
+       puttsB9:21,
+       fairways:{hit:6,total:13},
+       gir:{hit:5,total:18},
+       bunkers:3,
+       chips:8,
+       lostBalls:[],
+       penalties:[
+         {hole:12,reason:'1 strafslag',type:'straf'},
+         {hole:15,reason:'1 strafslag',type:'straf'},
+         {hole:16,reason:'2 strafslag',type:'straf'}
+       ]
+     }
+   }},
+   holeData:[
+     {hole:1,par:5,hcp:5},{hole:2,par:3,hcp:17},{hole:3,par:4,hcp:9},
+     {hole:4,par:5,hcp:3},{hole:5,par:3,hcp:15},{hole:6,par:4,hcp:1},
+     {hole:7,par:5,hcp:7},{hole:8,par:4,hcp:11},{hole:9,par:3,hcp:13},
+     {hole:10,par:4,hcp:4},{hole:11,par:4,hcp:8},{hole:12,par:5,hcp:2},
+     {hole:13,par:3,hcp:18},{hole:14,par:4,hcp:12},{hole:15,par:4,hcp:14},
+     {hole:16,par:4,hcp:10},{hole:17,par:3,hcp:16},{hole:18,par:5,hcp:6}
+   ],
+   results:[
+     {player:'Henrik',score:32,points:2,placement:1,tied:false},
+     {player:'Thomas',score:29,points:1,placement:2,tied:false},
+     {player:'Morten',score:25,points:0,placement:3,tied:false}
+   ],
+   scorecards:[
+     {player:'Henrik',hcp:15.7,phcp:20,
+      scores:[7,3,5,7,4,7,7,5,3, 5,4,6,4,6,6,6,3,8],
+      points:[1,3,2,1,2,1,1,2,3, 2,3,3,2,1,1,1,3,0],
+      slag:96,grossDiff:24},
+     {player:'Thomas',hcp:10.4,phcp:14,
+      scores:[6,4,4,7,4,5,5,4,4, 4,5,7,4,6,6,7,5,6],
+      points:[2,1,3,1,1,2,3,3,2, 3,2,1,1,1,1,0,0,2],
+      slag:93,grossDiff:21},
+     {player:'Morten',hcp:8.2,phcp:10,
+      scores:[5,3,5,6,3,7,6,4,4, 6,6,8,5,5,5,5,3,7],
+      points:[3,2,2,2,2,0,2,2,1, 1,1,0,0,1,1,2,2,1],
+      slag:93,grossDiff:21}
+   ]},
   {course:"Old Course",date:"2026-06-21",time:"09:00",tee:57,holes:18,cr:null,slope:null,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:"Morten ikke med",photo:null,players:["Thomas","Henrik","Kim"],holeData:[],results:[],scorecards:[]},
   {course:"Dragør Golfklub 🏆",date:"2026-06-25",time:"13:30",tee:null,holes:18,cr:null,slope:null,lat:55.59039,lng:12.66460,abroad:false,expId:null,note:"Mini Round Table Golf Challenge — 3-bolde mod Oscar Holm (+7,0 hcp, Clemson College golf). Velkomst 13:30, første bold 14:00, burgers kl. 19. Henrik ikke med.",invitationUrl:"invitation_25_06_2026_Dragor.pdf",photo:null,players:["Thomas","Kim","Morten"],holeData:[],results:[],scorecards:[]},
   {course:"Old Course",date:"2026-06-28",time:"09:00",tee:57,holes:18,cr:null,slope:null,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:"Henrik ikke med",photo:null,players:["Thomas","Kim","Morten"],holeData:[],results:[],scorecards:[]},
