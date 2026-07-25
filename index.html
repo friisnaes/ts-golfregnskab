@@ -827,12 +827,12 @@ const SUSPENSION={
   message:'"Næste runde"-listen er på pause 🇮🇹',
   subtitle:'Thomas er i Italien — listen opdateres ikke før 7. juni. De andre spiller videre.'
 };
-const NEXT_ROUND={datetime:'2026-07-02T13:50:00',course:'Old Course',tee:57,lat:55.83334253035411,lng:12.333272244585064,players:['Thomas','Henrik','Kim','Morten'],abroad:false};
+const NEXT_ROUND={datetime:'2026-08-06T13:50:00',course:'Old Course',tee:57,lat:55.83334253035411,lng:12.333272244585064,players:['Thomas','Henrik'],abroad:false};
 
 // Opdater denne efter hver runde. story: brug <strong>...</strong> for guld-fremhævning. Sæt til null for at skjule boksen.
 const LATEST_ROUND={
-  meta:'28. juni · Old Course · 3 spillere (Henrik ikke med)',
-  story:'Mellem 21/6 og 28/6 var <strong>Thomas</strong>, <strong>Kim</strong> og <strong>Morten</strong> til Mini Round Table Golf Challenge på Dragør torsdag 25/6 — en god dag med Oscar Holm, men da det ikke var meldt tydeligt ud som tællende GUCCI-runde inden start, indgår den ikke i ligaregnskabet. <strong>Morten</strong> bekræfter sin form på Old Course søndag med sæsonens bedste netto: 39 stableford, -3 netto, drevet af en eksplosiv forni med 22 stbf inkl. tre 4-pointere. Hans 2-pointer skubber en gammel 0\u2019er ud og rykker ham fra 26 til 28 — gabet til Thomas er nu kun 3 point. <strong>Kim</strong> spiller igen til en stbf-værdi over 33 — 35 stbf og +1 netto. Det er hans 15. runde, så han har nu nået best-15-loftet og er på 13.5. <strong>Thomas</strong> oplevede sin sværeste dag i sæsonen: 101 slag brutto, kun 21 stbf, 11 strafslag, og 0 fairways på bagni. Hans nye runde dropper ud uden konsekvens for top-15-summen. Stillingen: Thomas 31 · Morten 28 · Henrik 19.5 · Kim 13.5. Næste runde: torsdag 2/7 kl. 13:50, Old Course, alle fire.'
+  meta:'5. juli & 9. juli · Old Course · to runder på fem dage',
+  story:'To korte notater fra juli: Søndag <strong>5. juli</strong> mødtes <strong>Henrik</strong> og <strong>Morten</strong> til en 9-hullers duel — Morten vandt og hentede 1 point, Henrik 0. Torsdag <strong>9. juli</strong> spillede <strong>Thomas</strong>, <strong>Henrik</strong> og <strong>Morten</strong> 18 huller på Old Course, hvor Thomas og Henrik delte 1.-pladsen og fik 1.5 point hver — Morten på tredjepladsen med 0. Henrik rykker mest med +1.5 (ny 1.5 skubber en 0\u2019er ud), Thomas +0.5 (1.5 skubber en 1\u2019er ud), Morten og Kim uændret. Stillingen: Thomas 31.5 · Morten 28 · Henrik 21 · Kim 13.5. Efter en golf-pause i juli forventes næste turneringsdag <strong>torsdag 6. august</strong> — vistnok kun Henrik og Thomas.'
 };
 const EXPEDITIONS=[
   {
@@ -1847,8 +1847,28 @@ const ROUNDS_DATA=[{course:"Old Course",date:"2026-04-10",tee:56,holes:9,cr:72.3
       points:[3,2,0,0,2,2,1,2,2, 0,2,1,0,0,0,2,0,2],
       slag:101,grossDiff:29}
    ]},
-  {course:"Old Course",date:"2026-07-02",time:"13:50",tee:57,holes:18,cr:null,slope:null,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:null,photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
-  {course:"Old Course",date:"2026-07-09",time:"13:50",tee:57,holes:18,cr:null,slope:null,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:"Kim ikke med",photo:null,players:["Thomas","Henrik","Morten"],holeData:[],results:[],scorecards:[]}
+  {course:"Old Course",date:"2026-07-05",time:"09:00",tee:56,holes:9,cr:null,slope:null,
+   lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,
+   note:"Kun 9 huller — 2 spillere · scorekort ikke tilgængelige",photo:null,
+   counting:true,
+   players:["Henrik","Morten"],
+   results:[
+     {player:'Morten',score:null,points:1,placement:1,tied:false},
+     {player:'Henrik',score:null,points:0,placement:2,tied:false}
+   ],
+   scorecards:[]},
+  {course:"Old Course",date:"2026-07-09",time:"13:50",tee:57,holes:18,cr:72.3,slope:139,
+   lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,
+   note:"Kim ikke med — Henrik og Thomas delt 1.-plads (1.5 pt hver)",photo:null,
+   counting:true,
+   players:["Thomas","Henrik","Morten"],
+   results:[
+     {player:'Henrik',score:null,points:1.5,placement:1,tied:true},
+     {player:'Thomas',score:null,points:1.5,placement:1,tied:true},
+     {player:'Morten',score:null,points:0,placement:3,tied:false}
+   ],
+   scorecards:[]},
+  {course:"Old Course",date:"2026-08-06",time:"13:50",tee:57,holes:18,cr:null,slope:null,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:"Forventet — kun Henrik og Thomas",photo:null,players:["Thomas","Henrik"],holeData:[],results:[],scorecards:[]}
 ];
 let allRounds=[],playerData={},countingRounds=[];
 const PLAYER_LOGINS={'tf':'Thomas','hh':'Henrik','kkj':'Kim','ma':'Morten'};
