@@ -827,12 +827,12 @@ const SUSPENSION={
   message:'"Næste runde"-listen er på pause 🇮🇹',
   subtitle:'Thomas er i Italien — listen opdateres ikke før 7. juni. De andre spiller videre.'
 };
-const NEXT_ROUND={datetime:'2026-08-06T13:50:00',course:'Old Course',tee:57,lat:55.83334253035411,lng:12.333272244585064,players:['Thomas','Henrik'],abroad:false};
+const NEXT_ROUND={datetime:'2026-08-13T13:40:00',course:'Old Course',tee:57,lat:55.83334253035411,lng:12.333272244585064,players:['Thomas','Henrik','Kim','Morten'],abroad:false};
 
 // Opdater denne efter hver runde. story: brug <strong>...</strong> for guld-fremhævning. Sæt til null for at skjule boksen.
 const LATEST_ROUND={
-  meta:'5. juli & 9. juli · Old Course · to runder på fem dage',
-  story:'To korte notater fra juli: Søndag <strong>5. juli</strong> mødtes <strong>Henrik</strong> og <strong>Morten</strong> til en 9-hullers duel — Morten vandt og hentede 1 point, Henrik 0. Torsdag <strong>9. juli</strong> spillede <strong>Thomas</strong>, <strong>Henrik</strong> og <strong>Morten</strong> 18 huller på Old Course, hvor Thomas og Henrik delte 1.-pladsen og fik 1.5 point hver — Morten på tredjepladsen med 0. Henrik rykker mest med +1.5 (ny 1.5 skubber en 0\u2019er ud), Thomas +0.5 (1.5 skubber en 1\u2019er ud), Morten og Kim uændret. Stillingen: Thomas 31.5 · Morten 28 · Henrik 21 · Kim 13.5. Efter en golf-pause i juli forventes næste turneringsdag <strong>torsdag 6. august</strong> — vistnok kun Henrik og Thomas.'
+  meta:'6. & 9. august · Old Course · to runder på fire dage',
+  story:'Sæsonen genoptaget efter sommerpausen: Torsdag <strong>6. august</strong> mødtes <strong>Henrik</strong> og <strong>Thomas</strong> til 18 huller på Old Course fra tee 57. <strong>Henrik vandt med 33 stableford-point</strong> (95 slag) mod Thomas\u2019 28 (94 slag) og tog rundens ene point. Thomas lå ellers lunt i svinget frem til hul 15, men afslutningen kostede dyrt: 6 strafslag og scores på 5-8-8 på hul 16-18 gav 0 point på de sidste tre huller. Henrik lukkede omvendt med en iskold par på 18. Revanchen kom prompte: Søndag <strong>9. august</strong> stillede <strong>Thomas</strong>, <strong>Henrik</strong> og <strong>Morten</strong> op på Old Course, og her tog <strong>Thomas sejren med 30 stableford-point</strong> (93 slag) foran Henrik (27) og Morten (25) — båret af rundens højdepunkt: <strong>birdie på par 5-hul 2</strong> til hele 4 point. Henrik svarede igen med birdie på 13, Morten med birdie på 17, men det rakte ikke. Thomas rykker +1 (2\u2019eren skubber en 1\u2019er ud), Henrik +0.5 og Morten uændret. Stillingen: Thomas 32.5 · Morten 28 · Henrik 22.5 · Kim 13.5.'
 };
 const EXPEDITIONS=[
   {
@@ -1868,7 +1868,108 @@ const ROUNDS_DATA=[{course:"Old Course",date:"2026-04-10",tee:56,holes:9,cr:72.3
      {player:'Morten',score:null,points:0,placement:3,tied:false}
    ],
    scorecards:[]},
-  {course:"Old Course",date:"2026-08-06",time:"13:50",tee:57,holes:18,cr:null,slope:null,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:"Forventet — kun Henrik og Thomas",photo:null,players:["Thomas","Henrik"],holeData:[],results:[],scorecards:[]}
+  {course:"Old Course",date:"2026-08-06",time:"13:50",tee:57,holes:18,cr:72.3,slope:139,
+   lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,
+   note:"Kun Henrik og Thomas — Henrik vandt med 33 stbf",photo:null,
+   counting:true,
+   players:["Thomas","Henrik"],
+   adminNotes:{users:{
+     'tf':{
+       player:'Thomas',
+       putts:39,
+       puttsF9:19,
+       puttsB9:20,
+       puttsPerHole:[2,3,2,2,2,2,2,2,2, 2,2,3,2,2,2,1,3,3],
+       fairways:{hit:8,total:13},
+       gir:{hit:6,total:18},
+       bunkers:5,
+       chips:9,
+       lostBalls:[],
+       penalties:[
+         {hole:4,reason:'2 strafslag',type:'straf'},
+         {hole:16,reason:'2 strafslag',type:'straf'},
+         {hole:17,reason:'2 strafslag',type:'straf'},
+         {hole:18,reason:'2 strafslag',type:'straf'}
+       ]
+     }
+   }},
+   holeData:[
+     {hole:1,par:4,hcp:11},{hole:2,par:5,hcp:5},{hole:3,par:4,hcp:13},{hole:4,par:4,hcp:1},
+     {hole:5,par:3,hcp:15},{hole:6,par:4,hcp:9},{hole:7,par:4,hcp:3},{hole:8,par:3,hcp:17},
+     {hole:9,par:5,hcp:7},{hole:10,par:5,hcp:8},{hole:11,par:4,hcp:2},{hole:12,par:3,hcp:16},
+     {hole:13,par:4,hcp:6},{hole:14,par:3,hcp:14},{hole:15,par:4,hcp:12},{hole:16,par:3,hcp:18},
+     {hole:17,par:5,hcp:4},{hole:18,par:5,hcp:10}
+   ],
+   results:[
+     {player:'Henrik',score:33,points:1,placement:1,tied:false},
+     {player:'Thomas',score:28,points:0,placement:2,tied:false}
+   ],
+   scorecards:[
+     {player:'Henrik',hcp:15.4,phcp:20,
+      scores:[4,7,4,4,6,5,6,3,6, 6,6,4,5,6,6,4,8,5],
+      points:[3,1,3,4,0,2,1,3,2, 2,2,2,2,0,1,2,0,3],
+      slag:95,grossDiff:23},
+     {player:'Thomas',hcp:10.4,phcp:14,
+      scores:[5,6,4,7,3,5,4,4,5, 7,5,4,5,4,5,5,8,8],
+      points:[2,2,3,0,2,2,3,1,3, 1,2,1,2,2,2,0,0,0],
+      slag:94,grossDiff:22}
+   ]},
+  {course:"Old Course",date:"2026-08-09",time:"09:30",tee:57,holes:18,cr:72.3,slope:139,
+   lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,
+   note:"Thomas vandt med 30 stbf — birdie på hul 2. Kim ikke med.",photo:null,
+   counting:true,
+   players:["Thomas","Henrik","Morten"],
+   adminNotes:{users:{
+     'tf':{
+       player:'Thomas',
+       putts:36,
+       puttsF9:15,
+       puttsB9:21,
+       puttsPerHole:[1,1,2,2,1,2,2,2,2, 2,2,3,3,2,2,2,3,2],
+       fairways:{hit:9,total:13},
+       gir:{hit:7,total:18},
+       bunkers:5,
+       chips:11,
+       lostBalls:[],
+       penalties:[
+         {hole:1,reason:'2 strafslag',type:'straf'},
+         {hole:4,reason:'1 strafslag',type:'straf'},
+         {hole:7,reason:'2 strafslag',type:'straf'},
+         {hole:9,reason:'1 strafslag',type:'straf'},
+         {hole:11,reason:'3 strafslag',type:'straf'},
+         {hole:17,reason:'1 strafslag',type:'straf'}
+       ]
+     }
+   }},
+   holeData:[
+     {hole:1,par:4,hcp:11},{hole:2,par:5,hcp:5},{hole:3,par:4,hcp:13},{hole:4,par:4,hcp:1},
+     {hole:5,par:3,hcp:15},{hole:6,par:4,hcp:9},{hole:7,par:4,hcp:3},{hole:8,par:3,hcp:17},
+     {hole:9,par:5,hcp:7},{hole:10,par:5,hcp:8},{hole:11,par:4,hcp:2},{hole:12,par:3,hcp:16},
+     {hole:13,par:4,hcp:6},{hole:14,par:3,hcp:14},{hole:15,par:4,hcp:12},{hole:16,par:3,hcp:18},
+     {hole:17,par:5,hcp:4},{hole:18,par:5,hcp:10}
+   ],
+   results:[
+     {player:'Thomas',score:30,points:2,placement:1,tied:false},
+     {player:'Henrik',score:27,points:1,placement:2,tied:false},
+     {player:'Morten',score:25,points:0,placement:3,tied:false}
+   ],
+   scorecards:[
+     {player:'Thomas',hcp:10.4,phcp:14,
+      scores:[6,4,5,6,3,4,7,3,7, 5,8,4,5,4,4,4,8,6],
+      points:[1,4,2,1,2,3,0,2,1, 3,0,1,2,2,3,1,0,2],
+      slag:93,grossDiff:21},
+     {player:'Henrik',hcp:15.4,phcp:20,
+      scores:[5,8,7,6,4,6,5,3,8, 6,8,3,3,6,7,4,5,7],
+      points:[2,0,0,2,2,1,2,3,0, 2,0,3,4,0,0,2,3,1],
+      slag:101,grossDiff:29},
+     {player:'Morten',hcp:8.2,phcp:11,
+      scores:[4,5,6,6,5,4,6,5,5, 6,6,5,6,4,5,4,4,8],
+      points:[3,3,0,1,0,3,1,0,3, 2,1,0,1,1,1,1,4,0],
+      slag:94,grossDiff:22}
+   ]},
+  {course:"Old Course",date:"2026-08-13",time:"13:40",tee:57,holes:18,cr:72.3,slope:139,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:"Alle fire — bagefter går turen i byen for at traktere den samlede 2025-vinder",photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
+  {course:"New Course",date:"2026-08-16",time:"09:50",tee:57,holes:18,cr:72.5,slope:141,lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,note:"Alle fire — tømmermændsrunde efter 60 års fødselsdag hhv. sølvbryllup lørdag",photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
+  {course:"New Course",date:"2026-08-20",time:"15:10",tee:57,holes:18,cr:72.5,slope:141,lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,note:"Kun Morten og Thomas",photo:null,players:["Thomas","Morten"],holeData:[],results:[],scorecards:[]}
 ];
 let allRounds=[],playerData={},countingRounds=[];
 const PLAYER_LOGINS={'tf':'Thomas','hh':'Henrik','kkj':'Kim','ma':'Morten'};
