@@ -756,8 +756,9 @@ function toggleIdxSec(id) {
     <div id="expeditions"></div>
     <div style="margin-top:20px;text-align:center">
       <a href="riviera.html" style="display:inline-flex;align-items:center;gap:10px;padding:14px 28px;background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(201,168,76,0.04));border:1px solid rgba(201,168,76,0.4);border-radius:4px;text-decoration:none;font-family:'Cormorant Garamond',serif;font-size:1.15em;font-weight:600;color:var(--gold-light);letter-spacing:0.06em;transition:all 0.25s">
-        🇫🇷 &nbsp;Riviera Open 2026 — Åbn konkurrenceside →
+        🇫🇷 &nbsp;Riviera Open Efterår 2026 — Åbn konkurrenceside →
       </a>
+      <div style="margin-top:12px"><a href="riviera-foraar-2026.html" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.95em;color:var(--text-muted);text-decoration:none">📦 Riviera Open Forår 2026 — se arkivet →</a></div>
     </div>
     </div></section>
     <section style="border-top:1px solid var(--card-border)" class="idx-sec"><div class="idx-sec-hdr" onclick="toggleIdxSec('vault')"><h2 style="border:none;padding:0;margin:0">The Vault</h2><span class="idx-sec-chev" id="idx-chev-vault">▼</span></div><div class="idx-sec-body" id="idx-sec-vault" style="max-height:0px" data-open="false"><p class="section-subtitle">Afsluttede sæsoner — historiens dom</p><div id="vault"></div></div></section>
@@ -844,6 +845,21 @@ const LATEST_ROUND={
   story:'Efter lørdagens dobbeltprogram med <strong>60 års fødselsdag og sølvbryllup</strong> stillede alle fire søndag morgen kl. 09:50 til den varslede <strong>tømmermændsrunde</strong> på New Course — og den vendte op og ned på alt: <strong>Morten vandt med 30 stableford-point</strong> og dagens suverænt færreste slag (90), krydret med rundens perle: <strong>birdie på hul 10 til 4 point</strong> og tre iskolde par på par 3-hullerne 2, 5 og 9 — manden var simpelthen immun over for lørdagens udskejelser. <strong>Henrik</strong> fulgte tappert efter med 29 (stærke 17 point på back nine), mens <strong>Thomas</strong> måtte nøjes med 24 og <strong>Kim</strong> — torsdagens strålende mester med 35 point — landede med et brag på jorden: <strong>22 point og sidstepladsen</strong>. Fra champagne til paracetamol på tre dage. Morten rykker +2 (3\u2019eren skubber en 1\u2019er ud), Henrik +1, Thomas og Kim uændret. Stillingen strammer til i toppen: <strong>Thomas 33 · Morten 30 · Henrik 23.5 · Kim 16.5</strong>. Næste runde: torsdag 20. august kl. 15:10 på New Course — en ren duel mellem de to øverste, Thomas mod Morten, med kun 3 point imellem.'
 };
 const EXPEDITIONS=[
+  {
+    id:'cote-dazur-efteraar-2026',
+    title:"Côte d'Azur · Efterår 2026",
+    subtitle:'Rivieraen · 4 baner · 4 dage',
+    dates:'1. – 4. oktober 2026',
+    flag:'🇫🇷',
+    narrative:null,
+    coverPhoto:null,
+    courses:['Château Taulane','Royal Mougins','Monte Carlo Golf','Old Course Mandelieu'],
+    parallelTournament:{
+      name:"Riviera Open Efterår 2026",
+      players:['Thomas','Henrik','Kim','Morten','Jes','Torben','Jan'],
+      rounds:[]
+    }
+  },
   {
     id:'cote-dazur-2026',
     title:"Côte d'Azur 2026",
@@ -2048,7 +2064,11 @@ const ROUNDS_DATA=[{course:"Old Course",date:"2026-04-10",tee:56,holes:9,cr:72.3
       points:[3,2,1,1,2,2,3,0,1, 1,1,0,1,1,1,0,2,0],
       slag:112,grossDiff:40}
    ]},
-  {course:"New Course",date:"2026-08-20",time:"15:10",tee:57,holes:18,cr:72.5,slope:141,lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,note:"Kun Morten og Thomas",photo:null,players:["Thomas","Morten"],holeData:[],results:[],scorecards:[]}
+  {course:"New Course",date:"2026-08-20",time:"15:10",tee:57,holes:18,cr:72.5,slope:141,lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,note:"Kun Morten og Thomas",photo:null,players:["Thomas","Morten"],holeData:[],results:[],scorecards:[]},
+  {course:"Château Taulane 🇫🇷",date:"2026-10-01",time:"11:40",tee:null,holes:18,cr:null,slope:null,lat:43.7793442,lng:6.6271859,abroad:true,expId:'cote-dazur-efteraar-2026',note:"Riviera Open Efterår · Dag 1 — Gary Players bane i 1.000 m højde · teetider 11:40 & 11:50",photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
+  {course:"Royal Mougins 🇫🇷",date:"2026-10-02",time:"10:00",tee:null,holes:18,cr:72.2,slope:136,lat:43.59365672710108,lng:6.971199740482849,abroad:true,expId:'cote-dazur-efteraar-2026',note:"Riviera Open Efterår · Dag 2 — gensynet med Saut de l'Ange · teetider 10:00 & 10:10",photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
+  {course:"Monte Carlo Golf 🇫🇷",date:"2026-10-03",time:"11:00",tee:null,holes:18,cr:null,slope:null,lat:43.762757,lng:7.413907,abroad:true,expId:'cote-dazur-efteraar-2026',note:"Riviera Open Efterår · Dag 3 — Willie Park Jr. 1911, 900 m.o.h. · teetider 11:00 & 11:10",photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
+  {course:"Old Course Mandelieu 🇫🇷",date:"2026-10-04",time:"11:04",tee:null,holes:18,cr:69.6,slope:124,lat:43.53194492695571,lng:6.9403454828098115,abroad:true,expId:'cote-dazur-efteraar-2026',note:"Riviera Open Efterår · Dag 4 — finalen på Storfyrstens bane fra 1891 · teetider 11:04 & 11:12",photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]}
 ];
 let allRounds=[],playerData={},countingRounds=[];
 const PLAYER_LOGINS={'tf':'Thomas','hh':'Henrik','kkj':'Kim','ma':'Morten'};
