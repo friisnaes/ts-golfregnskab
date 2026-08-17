@@ -369,6 +369,14 @@ h1{font-family:'Cormorant Garamond',serif;font-size:3em;font-weight:600;letter-s
     <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--muted);font-size:0.9em;margin-bottom:16px">Live time-for-time vejrudsigt fra banens lokation · Hentes ved hvert sidebesøg</p>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
       <div style="background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden">
+        <div style="padding:14px 18px;background:rgba(0,0,0,0.12);border-bottom:1px solid var(--border)"><div style="font-size:0.62em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:3px">Dag 1 &middot; 1. oktober</div><div style="font-family:'Cormorant Garamond',serif;font-size:1.15em;font-weight:600;color:var(--white)">Ch&acirc;teau Taulane</div><div style="font-size:0.7em;color:var(--muted)">Teetider 11:40 &amp; 11:50 &middot; 1.000 m.o.h.</div></div>
+        <div id="wx-day1" style="padding:12px 18px"><span style="font-size:0.78em;color:var(--muted);font-style:italic">Henter...</span></div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden">
+        <div style="padding:14px 18px;background:rgba(0,0,0,0.12);border-bottom:1px solid var(--border)"><div style="font-size:0.62em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:3px">Dag 2 &middot; 2. oktober</div><div style="font-family:'Cormorant Garamond',serif;font-size:1.15em;font-weight:600;color:var(--white)">Royal Mougins</div><div style="font-size:0.7em;color:var(--muted)">Teetider 10:00 &amp; 10:10</div></div>
+        <div id="wx-day2" style="padding:12px 18px"><span style="font-size:0.78em;color:var(--muted);font-style:italic">Henter...</span></div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden">
         <div style="padding:14px 18px;background:rgba(0,0,0,0.12);border-bottom:1px solid var(--border)"><div style="font-size:0.62em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:3px">Dag 3 &middot; 3. oktober</div><div style="font-family:'Cormorant Garamond',serif;font-size:1.15em;font-weight:600;color:var(--white)">Monte Carlo Golf</div><div style="font-size:0.7em;color:var(--muted)">Teetider 11:00 &amp; 11:10 &middot; 900 m.o.h.</div></div>
         <div id="wx-day3" style="padding:12px 18px"><span style="font-size:0.78em;color:var(--muted);font-style:italic">Henter...</span></div>
       </div>
@@ -843,6 +851,10 @@ async function fetchHourlyTable(lat, lng, date, startHour, endHour, elId) {
 }
 
 function fetchDedicatedWeather() {
+  // Day 1: Château Taulane (1.000 m), show 10-18
+  fetchHourlyTable(43.7793442, 6.6271859, '2026-10-01', 10, 18, 'wx-day1');
+  // Day 2: Royal Mougins, show 09-17
+  fetchHourlyTable(43.59365672710108, 6.971199740482849, '2026-10-02', 9, 17, 'wx-day2');
   // Day 3: Monte Carlo Golf (Mont Agel, 900 m), show 09-17
   fetchHourlyTable(43.762757, 7.413907, '2026-10-03', 9, 17, 'wx-day3');
   // Day 4: Old Course Mandelieu, show 09-17
