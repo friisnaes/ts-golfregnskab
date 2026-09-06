@@ -837,12 +837,12 @@ const SUSPENSION={
   message:'"Næste runde"-listen er på pause 🇮🇹',
   subtitle:'Thomas er i Italien — listen opdateres ikke før 7. juni. De andre spiller videre.'
 };
-const NEXT_ROUND={datetime:'2026-09-03T13:40:00',course:'New Course',tee:57,lat:55.83428967088613,lng:12.339822779286978,players:['Thomas','Henrik','Kim','Morten'],abroad:false};
+const NEXT_ROUND={datetime:'2026-10-01T11:40:00',course:'Château Taulane 🇫🇷',tee:null,lat:43.7793442,lng:6.6271859,players:['Thomas','Henrik','Kim','Morten'],abroad:true};
 
 // Opdater denne efter hver runde. story: brug <strong>...</strong> for guld-fremhævning. Sæt til null for at skjule boksen.
 const LATEST_ROUND={
-  meta:'27. & 30. august · dødt løb i toppen — 33-33',
-  story:'Ugens to kapitler har sat sæsonen på den anden ende. Torsdag <strong>27. august</strong> tog <strong>Henrik</strong> duelsejren over Thomas på New Course og pointet med hjem. Og søndag morgen — <strong>30. august</strong>, i silende regn og med kun tre mand på Old Course (Henrik sad over) — fortsatte <strong>Morten</strong> sin ustoppelige stime: <strong>36 stableford-point og 84 slag — NETTO PAR</strong> — hans fjerde sejr i træk og anden monsterrunde på en uge. <strong>Thomas</strong> bed fra sig med 33 point og rundens to flotteste slag: <strong>gross-birdie-2\u2019ere på BEGGE de korte par 3-huller, 8 og 12 — uden tildelte slag!</strong> Men det rakte kun til andenpladsen, mens <strong>Kim</strong> kæmpede med vandet og landede på 28. Og så er der dét, alle taler om: I regnskabet giver Mortens 2\u2019er +1 og Thomas\u2019 1\u2019er intet — så toppen står nu i <strong>DØDT LØB: Thomas 33 · Morten 33</strong> · Henrik 24.5 · Kim 16.5. Fire runder tilbage før Rivieraen afgør det hele. PS: Morten og Thomas er draget mod Kerteminde og Great Northern til årets optik-golfturnering — de runder står uden for regnskabet, men formen tager de med.'
+  meta:'6. september · New Course · magtskiftet — Morten overtager føringen',
+  story:'Så skete det, der har luret i ugevis: Søndag <strong>6. september</strong> vandt <strong>Morten</strong> sin <strong>FEMTE runde i træk</strong> — 32 stableford-point og 88 slag, krydret med en iskold <strong>2\u2019er på par 3-hul 13</strong> — og overtager dermed <strong>førstepladsen i sæsonregnskabet for første gang i 2026</strong>. <strong>Henrik</strong> spillede solidt til 30 point med en stærk afslutning, mens <strong>Thomas</strong> oplevede en runde i to verdener: fine 17 point på front nine — og så et kollaps på back nine med kun 8 point, hvor intet ville lykkes... lige indtil hul 18, hvor han lukkede med rundens smukkeste slag: <strong>gross-birdie-4\u2019er på par 5-hullet til 4 point</strong>. En trøst, men en dyr dag: Mortens 2\u2019er giver +1 i regnskabet, og førertrøjen — båret af Thomas siden sæsonstart — skifter hænder: <strong>Morten 34 · Thomas 33</strong> · Henrik 24.5 · Kim 16.5. Nu står alt på spidsen: Næste stop er <strong>Rivieraen 1.-4. oktober</strong>, hvor fire runder i træk kan afgøre det hele. Kassemesteren har momentum, mesterskabet og pengekassen — men Thomas har fire franske baner til at slå igen.'
 };
 const EXPEDITIONS=[
   {
@@ -2167,7 +2167,37 @@ const ROUNDS_DATA=[{course:"Old Course",date:"2026-04-10",tee:56,holes:9,cr:72.3
       slag:104,grossDiff:32}
    ]},
   {course:"New Course",date:"2026-09-03",time:"13:40",tee:57,holes:18,cr:72.5,slope:141,lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,note:"Alle fire",photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
-  {course:"New Course",date:"2026-09-06",time:"09:00",tee:57,holes:18,cr:72.5,slope:141,lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,note:"Henrik, Thomas og Morten",photo:null,players:["Thomas","Henrik","Morten"],holeData:[],results:[],scorecards:[]},
+  {course:"New Course",date:"2026-09-06",time:"09:00",tee:57,holes:18,cr:72.5,slope:141,
+   lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,
+   note:"Mortens femte sejr i træk — og førertrøjen skifter hænder for første gang i 2026",photo:null,
+   counting:true,
+   players:["Thomas","Henrik","Morten"],
+   holeData:[
+     {hole:1,par:5,hcp:5},{hole:2,par:3,hcp:17},{hole:3,par:4,hcp:9},{hole:4,par:5,hcp:3},
+     {hole:5,par:3,hcp:15},{hole:6,par:4,hcp:1},{hole:7,par:5,hcp:7},{hole:8,par:4,hcp:11},
+     {hole:9,par:3,hcp:13},{hole:10,par:4,hcp:4},{hole:11,par:4,hcp:8},{hole:12,par:5,hcp:2},
+     {hole:13,par:3,hcp:18},{hole:14,par:4,hcp:12},{hole:15,par:4,hcp:14},{hole:16,par:4,hcp:10},
+     {hole:17,par:3,hcp:16},{hole:18,par:5,hcp:6}
+   ],
+   results:[
+     {player:'Morten',score:32,points:2,placement:1,tied:false},
+     {player:'Henrik',score:30,points:1,placement:2,tied:false},
+     {player:'Thomas',score:25,points:0,placement:3,tied:false}
+   ],
+   scorecards:[
+     {player:'Morten',hcp:9.5,phcp:12,
+      scores:[5,4,4,6,4,6,7,4,5, 5,4,7,2,5,6,6,3,5],
+      points:[3,1,3,2,1,1,1,3,0, 2,3,1,3,2,0,1,2,3],
+      slag:88,grossDiff:16},
+     {player:'Henrik',hcp:17.0,phcp:21,
+      scores:[7,4,5,6,4,7,6,7,5, 5,6,8,3,7,4,4,4,7],
+      points:[1,2,2,3,2,1,2,0,1, 2,1,1,3,0,3,3,2,1],
+      slag:99,grossDiff:27},
+     {player:'Thomas',hcp:12.3,phcp:16,
+      scores:[6,4,4,7,3,4,6,7,4, 7,7,8,5,5,8,7,4,4],
+      points:[2,1,3,1,3,3,2,0,2, 0,0,0,0,2,0,0,2,4],
+      slag:100,grossDiff:28}
+   ]},
   {course:"Château Taulane 🇫🇷",date:"2026-10-01",time:"11:40",tee:null,holes:18,cr:null,slope:null,lat:43.7793442,lng:6.6271859,abroad:true,expId:'cote-dazur-efteraar-2026',note:"Riviera Open Efterår · Dag 1 — Gary Players bane i 1.000 m højde · teetider 11:40 & 11:50",photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
   {course:"Royal Mougins 🇫🇷",date:"2026-10-02",time:"10:00",tee:null,holes:18,cr:72.2,slope:136,lat:43.59365672710108,lng:6.971199740482849,abroad:true,expId:'cote-dazur-efteraar-2026',note:"Riviera Open Efterår · Dag 2 — gensynet med Saut de l'Ange · teetider 10:00 & 10:10",photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
   {course:"Monte Carlo Golf 🇫🇷",date:"2026-10-03",time:"11:00",tee:null,holes:18,cr:null,slope:null,lat:43.762757,lng:7.413907,abroad:true,expId:'cote-dazur-efteraar-2026',note:"Riviera Open Efterår · Dag 3 — Willie Park Jr. 1911, 900 m.o.h. · teetider 11:00 & 11:10",photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
