@@ -841,8 +841,8 @@ const NEXT_ROUND={datetime:'2026-10-01T11:40:00',course:'Château Taulane 🇫�
 
 // Opdater denne efter hver runde. story: brug <strong>...</strong> for guld-fremhævning. Sæt til null for at skjule boksen.
 const LATEST_ROUND={
-  meta:'6. september · New Course · magtskiftet — Morten overtager føringen',
-  story:'Så skete det, der har luret i ugevis: Søndag <strong>6. september</strong> vandt <strong>Morten</strong> sin <strong>FEMTE runde i træk</strong> — 32 stableford-point og 88 slag, krydret med en iskold <strong>2\u2019er på par 3-hul 13</strong> — og overtager dermed <strong>førstepladsen i sæsonregnskabet for første gang i 2026</strong>. <strong>Henrik</strong> spillede solidt til 30 point med en stærk afslutning, mens <strong>Thomas</strong> oplevede en runde i to verdener: fine 17 point på front nine — og så et kollaps på back nine med kun 8 point, hvor intet ville lykkes... lige indtil hul 18, hvor han lukkede med rundens smukkeste slag: <strong>gross-birdie-4\u2019er på par 5-hullet til 4 point</strong>. En trøst, men en dyr dag: Mortens 2\u2019er giver +1 i regnskabet, og førertrøjen — båret af Thomas siden sæsonstart — skifter hænder: <strong>Morten 34 · Thomas 33</strong> · Henrik 24.5 · Kim 16.5. Nu står alt på spidsen: Næste stop er <strong>Rivieraen 1.-4. oktober</strong>, hvor fire runder i træk kan afgøre det hele. Kassemesteren har momentum, mesterskabet og pengekassen — men Thomas har fire franske baner til at slå igen.'
+  meta:'10. september · Old Course · Henrik knækker stimen',
+  story:'Alle stimer får en ende — og det blev <strong>Henrik</strong>, der torsdag <strong>10. september</strong> gjorde det, ingen har kunnet siden midten af august: <strong>slå Morten</strong>. I duellen på Old Course leverede Henrik <strong>34 stableford-point</strong> (95 slag) med et forrygende front nine på 21 point — anført af hans nye kæphest: <strong>endnu en birdie-2\u2019er på par 3-hul 5 til 4 point</strong>, en tro kopi af bedriften fra 23. august. Hul 5 bør snart opkaldes efter manden. <strong>Morten</strong> fik aldrig fat med to tidlige 0\u2019ere og sluttede på 27 point (93 slag) — hans første nederlag efter <strong>fem sejre i træk</strong>. Pointet ændrer ikke regnskabet (Henriks 1\u2019er matchede hans 15.-bedste, Mortens 0\u2019er droppes), så stillingen står uforandret og dirrende: <strong>Morten 34 · Thomas 33</strong> · Henrik 24.5 · Kim 16.5. Men momentum-fortællingen er en anden nu: Kongen kan blødes. Om tre uger går turen til <strong>Rivieraen</strong>, hvor titlen for alvor skal forsvares — fire runder, fire franske baner, og en jagt der lige er blevet åben igen.'
 };
 const EXPEDITIONS=[
   {
@@ -2197,6 +2197,32 @@ const ROUNDS_DATA=[{course:"Old Course",date:"2026-04-10",tee:56,holes:9,cr:72.3
       scores:[6,4,4,7,3,4,6,7,4, 7,7,8,5,5,8,7,4,4],
       points:[2,1,3,1,3,3,2,0,2, 0,0,0,0,2,0,0,2,4],
       slag:100,grossDiff:28}
+   ]},
+  {course:"Old Course",date:"2026-09-10",time:null,tee:57,holes:18,cr:72.3,slope:139,
+   lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,
+   note:"Henrik stopper Mortens stime med 34 stbf — og endnu en birdie-2\u2019er på hul 5",photo:null,
+   counting:true,
+   players:["Henrik","Morten"],
+   holeData:[
+     {hole:1,par:4,hcp:11},{hole:2,par:5,hcp:5},{hole:3,par:4,hcp:13},{hole:4,par:4,hcp:1},
+     {hole:5,par:3,hcp:15},{hole:6,par:4,hcp:9},{hole:7,par:4,hcp:3},{hole:8,par:3,hcp:17},
+     {hole:9,par:5,hcp:7},{hole:10,par:5,hcp:8},{hole:11,par:4,hcp:2},{hole:12,par:3,hcp:16},
+     {hole:13,par:4,hcp:6},{hole:14,par:3,hcp:14},{hole:15,par:4,hcp:12},{hole:16,par:3,hcp:18},
+     {hole:17,par:5,hcp:4},{hole:18,par:5,hcp:10}
+   ],
+   results:[
+     {player:'Henrik',score:34,points:1,placement:1,tied:false},
+     {player:'Morten',score:27,points:0,placement:2,tied:false}
+   ],
+   scorecards:[
+     {player:'Henrik',hcp:17.0,phcp:21,
+      scores:[4,7,5,6,2,5,5,3,7, 8,5,3,6,4,6,5,6,8],
+      points:[3,1,2,2,4,2,3,3,1, 0,3,3,1,2,1,1,2,0],
+      slag:95,grossDiff:23},
+     {player:'Morten',hcp:9.5,phcp:12,
+      scores:[4,8,6,5,3,6,4,3,8, 5,5,4,6,5,4,4,6,7],
+      points:[3,0,0,2,2,1,3,2,0, 3,2,1,1,0,3,1,2,1],
+      slag:93,grossDiff:21}
    ]},
   {course:"Château Taulane 🇫🇷",date:"2026-10-01",time:"11:40",tee:null,holes:18,cr:null,slope:null,lat:43.7793442,lng:6.6271859,abroad:true,expId:'cote-dazur-efteraar-2026',note:"Riviera Open Efterår · Dag 1 — Gary Players bane i 1.000 m højde · teetider 11:40 & 11:50",photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
   {course:"Royal Mougins 🇫🇷",date:"2026-10-02",time:"10:00",tee:null,holes:18,cr:72.2,slope:136,lat:43.59365672710108,lng:6.971199740482849,abroad:true,expId:'cote-dazur-efteraar-2026',note:"Riviera Open Efterår · Dag 2 — gensynet med Saut de l'Ange · teetider 10:00 & 10:10",photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
