@@ -56,6 +56,7 @@
         .teetime-invitation-link{display:inline-block;margin-top:8px;padding:5px 12px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.25);border-radius:6px;color:var(--gold-light);text-decoration:none;font-family:'Outfit',sans-serif;font-size:0.78em;letter-spacing:0.06em;transition:all 0.2s;}
         .teetime-invitation-link:hover{background:rgba(201,168,76,0.15);border-color:rgba(201,168,76,0.45);color:var(--gold);}
         .latest-round{max-width:760px;margin:0 auto;padding:22px 26px 24px;background:linear-gradient(135deg,rgba(201,168,76,0.06),rgba(201,168,76,0.02));border:1px solid rgba(201,168,76,0.18);border-radius:14px;margin-top:-8px;margin-bottom:36px;}
+
         .latest-round-label{font-family:'Outfit',sans-serif;font-size:0.7em;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
         .latest-round-label::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold-light);box-shadow:0 0 8px var(--gold-light);}
         .latest-round-meta{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.92em;color:var(--text-muted);margin-bottom:12px;}
@@ -316,6 +317,62 @@
         .pb-sum{font-family:'Cormorant Garamond',serif;font-size:1.15em;font-weight:600;color:var(--gold-light);letter-spacing:0.02em;text-transform:none;}
         .pb-list{font-family:'Cormorant Garamond',serif;font-variant-numeric:tabular-nums;font-size:1.02em;line-height:1.6;color:var(--text-light);padding-left:12px;word-spacing:0.05em;}
         .pb-cut{color:var(--gold);font-weight:700;margin:0 3px;}
+        .endgame{margin:0 0 22px;padding:24px 22px 8px;background:linear-gradient(160deg,rgba(201,168,76,0.10),rgba(201,168,76,0.02) 40%,rgba(0,0,0,0.15));border:1px solid var(--gold);border-radius:6px;box-shadow:0 0 34px rgba(201,168,76,0.14), inset 0 0 60px rgba(201,168,76,0.04);position:relative;}
+        .endgame::before{content:'';position:absolute;inset:4px;border:1px solid rgba(201,168,76,0.25);border-radius:4px;pointer-events:none;}
+        .endgame{overflow:hidden;}
+        .endgame::after{content:'GAK OG GØGL';position:absolute;top:24px;right:-54px;width:220px;transform:rotate(45deg);background:linear-gradient(135deg,#f5d547,#e8b923);color:#2a1f05;font-family:'Outfit',sans-serif;font-size:0.68em;font-weight:800;letter-spacing:0.16em;text-align:center;padding:7px 0;box-shadow:0 3px 14px rgba(0,0,0,0.45);pointer-events:none;z-index:3;}
+        @media (max-width:600px){.endgame::after{top:18px;right:-60px;width:200px;font-size:0.58em;letter-spacing:0.12em;}}
+        .eg-title{font-family:'Outfit',sans-serif;font-size:1.05em;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);text-align:center;text-shadow:0 0 18px rgba(201,168,76,0.4);}
+        .eg-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.92em;color:var(--gold-dim);margin:6px 0 18px;text-align:center;}
+        .eg-row{padding:16px 4px;border-top:1px solid rgba(201,168,76,0.25);}
+        .eg-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+        .eg-name{font-family:'Outfit',sans-serif;font-size:0.9em;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--white,#fff);border-left:4px solid #fff;padding-left:10px;}
+        .eg-badge{font-family:'Outfit',sans-serif;font-size:0.6em;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:3px 10px;border-radius:999px;border:1px solid;}
+        .eg-badge.alive{color:var(--gold-light);border-color:rgba(201,168,76,0.5);background:rgba(201,168,76,0.08);}
+        .eg-badge.share{color:var(--text-light);border-color:rgba(255,255,255,0.25);background:rgba(255,255,255,0.04);}
+        .eg-badge.out{color:var(--text-muted);border-color:rgba(255,255,255,0.15);opacity:0.7;}
+        .eg-badge.champ{color:#0a1a10;background:var(--gold);border-color:var(--gold);}
+        .eg-hyldest{font-family:'Cormorant Garamond',serif;font-size:1.08em;line-height:1.7;color:var(--text-light);margin:0 0 8px;}
+        .eg-hyldest strong{color:var(--gold-light);}
+        .eg-line{font-family:'Cormorant Garamond',serif;font-size:0.98em;line-height:1.65;color:var(--text-light);padding-left:12px;border-left:2px solid rgba(201,168,76,0.3);margin:6px 0;}
+        .eg-line .lbl{font-family:'Outfit',sans-serif;font-size:0.68em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-dim);margin-right:8px;}
+        .eg-line .m{color:var(--gold-light);font-weight:600;}
+        .eg-prob{display:flex;align-items:center;gap:12px;margin:10px 0 12px;padding-left:12px;}
+        .eg-prob-num{font-family:'Cormorant Garamond',serif;font-size:2.1em;font-weight:700;line-height:1;color:var(--gold-light);min-width:92px;}
+        .eg-prob-num small{font-size:0.45em;font-weight:600;letter-spacing:0.02em;}
+        .eg-prob-meta{flex:1;}
+        .eg-prob-lbl{font-family:'Outfit',sans-serif;font-size:0.6em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:5px;}
+        .eg-bar{height:8px;background:rgba(255,255,255,0.07);border-radius:999px;overflow:hidden;}
+        .eg-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold-light));border-radius:999px;transition:width 0.6s ease;}
+        .press{position:relative;overflow:hidden;margin-top:16px;padding:20px 22px 18px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:4px;}
+        .press::after{content:'GAK OG GØGL';position:absolute;top:20px;right:-56px;width:220px;transform:rotate(45deg);background:linear-gradient(135deg,#f5d547,#e8b923);color:#2a1f05;font-family:'Outfit',sans-serif;font-size:0.66em;font-weight:800;letter-spacing:0.16em;text-align:center;padding:6px 0;box-shadow:0 3px 14px rgba(0,0,0,0.45);pointer-events:none;z-index:3;}
+        @media (max-width:600px){.press::after{top:16px;right:-62px;width:200px;font-size:0.56em;}}
+        .press-title{font-family:'Outfit',sans-serif;font-size:0.72em;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-dim);}
+        .press-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.85em;color:var(--text-muted);margin:4px 0 16px;}
+        .press-row{padding:13px 0;border-top:1px solid var(--card-border);}
+        .press-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+        .press-name{font-family:'Outfit',sans-serif;font-size:0.8em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-light);border-left:3px solid #fff;padding-left:9px;}
+        .press-verdict{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.02em;color:var(--gold-light);}
+        .press-gauge{position:relative;height:26px;background:linear-gradient(90deg,rgba(201,76,76,0.22),rgba(255,255,255,0.05) 50%,rgba(76,201,124,0.22));border-radius:999px;margin:6px 0 8px;}
+        .press-mid{position:absolute;left:50%;top:-3px;bottom:-3px;width:1px;background:rgba(255,255,255,0.35);}
+        .press-pin{position:absolute;top:50%;transform:translate(-50%,-50%);width:16px;height:16px;border-radius:50%;box-shadow:0 0 12px rgba(0,0,0,0.5);border:2px solid rgba(255,255,255,0.85);}
+        .press-scale{display:flex;justify-content:space-between;font-family:'Outfit',sans-serif;font-size:0.56em;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-top:-4px;}
+        .press-facts{font-family:'Cormorant Garamond',serif;font-size:0.95em;line-height:1.6;color:var(--text-light);padding-left:11px;border-left:2px solid rgba(201,168,76,0.25);}
+        .press-facts .m{color:var(--gold-light);font-weight:600;}
+        .gg-card{position:relative;overflow:hidden;margin-top:16px;padding:20px 22px 18px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:4px;}
+        .gg-card::after{content:'GAK OG GØGL';position:absolute;top:20px;right:-56px;width:220px;transform:rotate(45deg);background:linear-gradient(135deg,#f5d547,#e8b923);color:#2a1f05;font-family:'Outfit',sans-serif;font-size:0.66em;font-weight:800;letter-spacing:0.16em;text-align:center;padding:6px 0;box-shadow:0 3px 14px rgba(0,0,0,0.45);pointer-events:none;z-index:3;}
+        @media (max-width:600px){.gg-card::after{top:16px;right:-62px;width:200px;font-size:0.56em;}}
+        .gg-title{font-family:'Outfit',sans-serif;font-size:0.72em;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-dim);}
+        .gg-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.85em;color:var(--text-muted);margin:4px 0 14px;}
+        .gg-row{padding:11px 0;border-top:1px solid var(--card-border);font-family:'Cormorant Garamond',serif;font-size:0.98em;line-height:1.6;color:var(--text-light);}
+        .gg-row .nm{font-family:'Outfit',sans-serif;font-size:0.72em;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;border-left:3px solid #fff;padding-left:9px;margin-right:10px;color:var(--text-light);}
+        .gg-row .m{color:var(--gold-light);font-weight:600;}
+        .gg-note{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.85em;color:var(--text-muted);padding-top:10px;}
+        .gg-chart{width:100%;height:190px;display:block;margin:4px 0 6px;}
+        .gg-legend{display:flex;flex-wrap:wrap;gap:14px;font-family:'Outfit',sans-serif;font-size:0.6em;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);}
+        .gg-legend span{display:flex;align-items:center;gap:5px;}
+        .gg-legend i{width:14px;height:3px;border-radius:2px;display:inline-block;}
+        .eg-method{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.82em;color:var(--text-muted);text-align:center;padding:12px 4px 4px;border-top:1px solid rgba(201,168,76,0.25);margin-top:4px;}
         .pb-out{color:var(--text-muted);opacity:0.55;text-decoration:line-through;}
         .round-info{flex:1;}
         .round-course{font-weight:500;color:var(--text-light);font-size:0.92em;}
@@ -716,7 +773,7 @@ function toggleIdxSec(id) {
         </div>
     </header>
     <div id="latestRoundBox"></div>
-    <section class="idx-sec"><div class="idx-sec-hdr" onclick="toggleIdxSec('leaderboard')"><h2 style="border:none;padding:0;margin:0">Samlet Stilling</h2><span class="idx-sec-chev" id="idx-chev-leaderboard">▼</span></div><div class="idx-sec-body" id="idx-sec-leaderboard" style="max-height:0px" data-open="false"><p class="section-subtitle">Baseret på de 15 bedste runder for hver spiller</p><div id="leaderboard" class="leaderboard"><div class="empty-state">Indlæser...</div></div><div id="pointsBreakdown"></div></div></section>
+    <section class="idx-sec"><div class="idx-sec-hdr" onclick="toggleIdxSec('leaderboard')"><h2 style="border:none;padding:0;margin:0">Samlet Stilling</h2><span class="idx-sec-chev" id="idx-chev-leaderboard">▼</span></div><div class="idx-sec-body" id="idx-sec-leaderboard" style="max-height:0px" data-open="false"><p class="section-subtitle">Baseret på de 15 bedste runder for hver spiller</p><div id="endgame"></div><div id="leaderboard" class="leaderboard"><div class="empty-state">Indlæser...</div></div><div id="pointsBreakdown"></div><div id="pressure"></div><div id="momentum"></div><div id="ghost"></div><div id="clockwork"></div><div id="weatherProfile"></div><div id="twins"></div></div></section>
     <section class="teetimes-section idx-sec"><div class="idx-sec-hdr" onclick="toggleIdxSec('teetider')"><h2 style="border:none;padding:0;margin:0">Kommende Teetider</h2><span class="idx-sec-chev" id="idx-chev-teetider">▼</span></div><div class="idx-sec-body" id="idx-sec-teetider" style="max-height:0px" data-open="false">
         <p class="section-subtitle">Scandinavian Golf Club — bookede starttider</p>
         <div id="nextRoundWeather" style="margin-bottom:12px"></div><div class="teetime-grid" id="teetimeGrid"></div>
@@ -842,7 +899,7 @@ const NEXT_ROUND={datetime:'2026-09-20T09:00:00',course:'New Course',tee:57,lat:
 // Opdater denne efter hver runde. story: brug <strong>...</strong> for guld-fremhævning. Sæt til null for at skjule boksen.
 const LATEST_ROUND={
   meta:'17. september · New Course · Henrik i flammer — 37 point',
-  story:'Formkurven, der har peget opad i ugevis, eksploderede torsdag <strong>17. september</strong>: <strong>Henrik vandt suverænt med 37 stableford-point</strong> — hans klart bedste runde i 2026 og kun ét point fra Mortens sæsonrekord. Det er nu <strong>fem stærke runder i træk</strong> (34-30-32-32-37 med to sejre og en delt), og manden, der i foråret samlede 0\u2019ere, er pludselig ligaens farligste. <strong>Thomas</strong> fik 27 point og det ene point, der fulgte med andenpladsen, mens <strong>Kim</strong> måtte opgive og gik ind efter 9 huller (NR) — en tung optakt til Rivieraen for manden med sæsonens højeste enkeltrunde. I regnskabet henter Henrik et helt point (2\u2019eren skubber en 1\u2019er ud), mens Thomas\u2019 1\u2019er drukner i drop-bunken: <strong>Morten 34 · Thomas 33 · Henrik 26</strong> · Kim 16.5. Søndag mødes de tre øverste — Morten er tilbage efter hviledagen, og med Henriks form er det ikke længere kun en tvekamp, der tegner sig frem mod <strong>Rivieraen om to uger</strong>.'
+  story:'Formkurven, der har peget opad i ugevis, eksploderede torsdag <strong>17. september</strong>: <strong>Henrik vandt suverænt med 37 stableford-point</strong> — en tangering af hans egen sæsonbedste fra 21. juni. Det er nu <strong>fem stærke målinger i træk</strong> (35-30-34-32-37 med to sejre og en delt), og manden, der havde otte nulrunder før sommeren, er pludselig ligaens formstærkeste. <strong>Thomas</strong> fik 27 point og det ene point, der fulgte med andenpladsen, mens <strong>Kim</strong> måtte opgive og gik ind efter 9 huller (NR) — en tung optakt til Rivieraen for manden, der i juni lavede sæsonens næstbedste score. I regnskabet henter Henrik et helt point (2\u2019eren skubber en 1\u2019er ud), mens Thomas\u2019 1\u2019er drukner i drop-bunken: <strong>Morten 34 · Thomas 33 · Henrik 26</strong> · Kim 16.5. Søndag mødes de tre øverste — Morten er tilbage efter hviledagen, og med Henriks form er det ikke længere kun en tvekamp, der tegner sig frem mod <strong>Rivieraen om to uger</strong>.'
 };
 const EXPEDITIONS=[
   {
@@ -2366,7 +2423,195 @@ p.recentDropped=droppedRounds.sort((a,b)=>new Date(b.date)-new Date(a.date)).sli
 function renderDroppedStrip(p){if(!p.recentDropped||!p.recentDropped.length)return '';const items=p.recentDropped.map(r=>{const d=new Date(r.date).toLocaleDateString('da-DK',{day:'numeric',month:'short'});return `<div class="ds-item"><span class="ds-date">${d}</span><span class="ds-course">${r.course}</span><span class="ds-pts">${r.points.toFixed(1)} pt</span></div>`;}).join('');return `<div class="dropped-strip"><div class="ds-label">Seneste ude af top-15</div>${items}</div>`;}
 function displayLeaderboard(lb){const c=document.getElementById('leaderboard');if(lb.every(p=>p.totalRounds===0)){c.innerHTML='<div class="empty-state">Sæsonen er ikke startet endnu</div>';return;}c.innerHTML=lb.map((p,i)=>{const avg=p.best15.length>0?(p.total/p.best15.length).toFixed(1):'–';const isL=i===0&&p.total>0;const col=PLAYER_COLORS[p.name]||'#fff';const form=getFormGuide(p.name,countingRounds);return`<div class="player-wrapper"><div class="player-card ${isL?'leader':''}" onclick="openPlayerLogin('${p.name}')"><div class="rank">${i+1}</div><div class="player-info"><div class="player-name" style="border-left-color:${col}">${p.name}</div><div class="player-meta-row"><span class="player-stats">${p.totalRounds} runder${p.totalRounds>0?` · Gns. ${avg} pt`:''}</span><div class="form-guide">${renderFormGuide(form)}</div></div></div><div class="total-points">${p.total.toFixed(1)}<span class="unit">pt</span></div></div></div>`;}).join('');displayPointsBreakdown(lb);}
 function fmtPt(v){return Number.isInteger(v)?String(v):v.toFixed(1);}
-function displayPointsBreakdown(lb){const c=document.getElementById('pointsBreakdown');if(!c)return;const rows=lb.filter(p=>p.totalRounds>0).map(p=>{const col=PLAYER_COLORS[p.name]||'#fff';const inTop=p.allPoints.slice(0,15).map(fmtPt).join(', ');const out=p.allPoints.slice(15).map(fmtPt).join(', ');const listing=out?`${inTop} <span class="pb-cut">│</span> <span class="pb-out">${out}</span>`:inTop;return`<div class="pb-row"><div class="pb-name" style="border-left-color:${col}">${p.name}<span class="pb-sum">${p.total.toFixed(1)} pt</span></div><div class="pb-list">${listing}</div></div>`;}).join('');c.innerHTML=`<div class="pts-breakdown"><div class="pb-title">Tællende runder — pointlistning</div><div class="pb-sub">Sorteret bedste først · de 15 før den gyldne streg tæller · overstregede er ude af regnskabet</div>${rows}</div>`;}
+function ggHelpers(){const played=ROUNDS_DATA.filter(r=>!r.private&&(r.results||[]).length);return played;}
+function ggDate(s){const p=(s||'').split('-');return p.length===3?(+p[2])+'/'+(+p[1]):s;}
+function displayMomentum(){const c=document.getElementById('momentum');if(!c)return;
+const rounds=ggHelpers().filter(r=>r.counting!==false).sort((a,b)=>a.date<b.date?-1:1);
+const series={};rounds.forEach(r=>r.results.forEach(x=>{if(x.score!=null)(series[x.player]=series[x.player]||[]).push({d:r.date,s:x.score});}));
+const names=Object.keys(series).filter(n=>series[n].length>=6);if(!names.length){c.innerHTML='';return;}
+const W=680,H=190,PAD=26;
+const roll=n=>{const a=series[n],out=[];for(let i=4;i<a.length;i++){out.push({i:i,v:a.slice(i-4,i+1).reduce((s,x)=>s+x.s,0)/5,d:a[i].d});}return out;};
+const all=names.map(n=>({n:n,pts:roll(n)}));
+const maxLen=Math.max.apply(null,all.map(o=>o.pts.length));
+let lo=99,hi=0;all.forEach(o=>o.pts.forEach(p=>{lo=Math.min(lo,p.v);hi=Math.max(hi,p.v);}));
+lo=Math.floor(lo-1);hi=Math.ceil(hi+1);
+const x=i=>PAD+(maxLen<2?0:i*(W-PAD*2)/(maxLen-1));
+const y=v=>H-PAD-((v-lo)/(hi-lo))*(H-PAD*2);
+let svg='<svg class="gg-chart" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none">';
+[lo,(lo+hi)/2,hi].forEach(v=>{svg+='<line x1="'+PAD+'" y1="'+y(v)+'" x2="'+(W-PAD)+'" y2="'+y(v)+'" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>'
+ +'<text x="4" y="'+(y(v)+4)+'" fill="rgba(255,255,255,0.35)" font-size="10" font-family="Outfit,sans-serif">'+v.toFixed(0)+'</text>';});
+all.forEach(o=>{const col=PLAYER_COLORS[o.n]||'#fff';const off=maxLen-o.pts.length;
+ const dpts=o.pts.map((p,ix)=>(ix===0?'M':'L')+x(ix+off).toFixed(1)+' '+y(p.v).toFixed(1)).join(' ');
+ svg+='<path d="'+dpts+'" fill="none" stroke="'+col+'" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" opacity="0.9"/>';
+ const last=o.pts[o.pts.length-1];svg+='<circle cx="'+x(maxLen-1).toFixed(1)+'" cy="'+y(last.v).toFixed(1)+'" r="4" fill="'+col+'"/>';});
+svg+='</svg>';
+const leg=all.map(o=>{const col=PLAYER_COLORS[o.n]||'#fff';const p=o.pts,now=p[p.length-1].v,then=p[0].v;
+ const arrow=now-then>=1?'\u2197':(now-then<=-1?'\u2198':'\u2192');
+ return '<span><i style="background:'+col+'"></i>'+o.n+' '+now.toFixed(1)+' '+arrow+'</span>';}).join('');
+const top=all.slice().sort((a,b)=>b.pts[b.pts.length-1].v-a.pts[a.pts.length-1].v)[0];
+c.innerHTML='<div class="gg-card"><div class="gg-title">\ud83d\udcc8 Momentum-linjen</div><div class="gg-sub">Rullende snit af de seneste 5 runders stableford \u00b7 hele s\u00e6sonen fra venstre mod h\u00f8jre</div>'+svg+'<div class="gg-legend">'+leg+'</div><div class="gg-note">Varmest lige nu: <strong style="color:var(--gold-light)">'+top.n+'</strong> med '+top.pts[top.pts.length-1].v.toFixed(1)+' i snit over de seneste fem runder.</div></div>';}
+
+function displayGhost(){const c=document.getElementById('ghost');if(!c)return;
+const byC={};ROUNDS_DATA.filter(r=>!r.private&&(r.scorecards||[]).length&&(r.holeData||[]).length===18).forEach(r=>{
+ const o=byC[r.course]=byC[r.course]||{cards:0,sum:Array(18).fill(0),cnt:Array(18).fill(0),par:r.holeData.map(z=>z.par)};
+ r.scorecards.forEach(sc=>{if(sc.points&&sc.points.length===18){o.cards++;sc.points.forEach((p,ix)=>{o.sum[ix]+=p;o.cnt[ix]++;});}});});
+const list=Object.entries(byC).filter(x=>x[1].cards>=4).sort((a,b)=>b[1].cards-a[1].cards);
+if(!list.length){c.innerHTML='';return;}
+const rows=list.map(function(e){const cn=e[0],o=e[1];
+ const avg=o.sum.map(function(v,ix){return{h:ix+1,a:o.cnt[ix]?v/o.cnt[ix]:0,par:o.par[ix]};});
+ const sorted=avg.slice().sort(function(x,y){return x.a-y.a;});
+ const w=sorted[0],w2=sorted[1],b=sorted[sorted.length-1];
+ return '<div class="gg-row"><span class="nm">'+cn+'</span>\ud83d\udc7b Sp\u00f8gelseshullet er <span class="m">hul '+w.h+'</span> (par '+w.par+') med blot <span class="m">'+w.a.toFixed(2)+' point</span> i snit \u00b7 n\u00e6stv\u00e6rst hul '+w2.h+' ('+w2.a.toFixed(2)+') \u00b7 venligst er hul '+b.h+' ('+b.a.toFixed(2)+') \u00b7 '+o.cards+' scorekort</div>';}).join('');
+c.innerHTML='<div class="gg-card"><div class="gg-title">\ud83d\udc7b Hul-for-hul-sp\u00f8gelset</div><div class="gg-sub">Hullet hvor flest point er g\u00e5et tabt i 2026 \u2014 banernes egne gysere</div>'+rows+'</div>';}
+
+function displayClockwork(){const c=document.getElementById('clockwork');if(!c)return;
+const T={};ggHelpers().filter(r=>r.time).forEach(r=>{const hh=+r.time.split(':')[0];
+ const band=hh<11?'morgen':(hh<13?'formiddag':'eftermiddag');
+ r.results.forEach(x=>{if(x.score==null)return;const o=T[x.player]=T[x.player]||{};(o[band]=o[band]||[]).push(x.score);});});
+const names=Object.keys(T);if(!names.length){c.innerHTML='';return;}
+const av=a=>a.reduce((s,v)=>s+v,0)/a.length;
+const rows=names.map(function(n){const o=T[n];const parts=[];let best=null;
+ ['morgen','formiddag','eftermiddag'].forEach(function(b){if(o[b]&&o[b].length>=2){const m=av(o[b]);parts.push({b:b,m:m,k:o[b].length});if(!best||m>best.m)best={b:b,m:m};}});
+ if(!parts.length)return '';
+ const txt=parts.map(p=>p.b.charAt(0).toUpperCase()+p.b.slice(1)+' <span class="m">'+p.m.toFixed(1)+'</span> ('+p.k+')').join(' \u00b7 ');
+ const tag=best.b==='morgen'?'\u2615 morgenmand':(best.b==='eftermiddag'?'\ud83c\udf05 eftermiddagstype':'\ud83d\udd50 formiddagsspiller');
+ return '<div class="gg-row"><span class="nm" style="border-left-color:'+(PLAYER_COLORS[n]||'#fff')+'">'+n+'</span>'+txt+' \u2014 <strong style="color:var(--gold-light)">'+tag+'</strong></div>';}).join('');
+c.innerHTML='<div class="gg-card"><div class="gg-title">\u23f0 Ur-statistikken</div><div class="gg-sub">Gennemsnitlig stableford efter teetid \u00b7 morgen (f\u00f8r 11) \u00b7 formiddag (11\u201313) \u00b7 eftermiddag (efter 13)</div>'+rows+'<div class="gg-note">Rivieraens teetider ligger mellem 10:00 og 11:40 \u2014 formiddagsland.</div></div>';}
+
+function displayTwins(){const c=document.getElementById('twins');if(!c)return;
+const rounds=ggHelpers().filter(r=>r.results.filter(x=>x.score!=null).length>=3);
+let bp=null;
+for(let a=0;a<rounds.length;a++)for(let b=a+1;b<rounds.length;b++){const A=rounds[a],B=rounds[b];
+ const com=A.results.filter(x=>x.score!=null).map(x=>x.player).filter(p=>B.results.some(y=>y.player===p&&y.score!=null));
+ if(com.length<3)continue;let dif=0;
+ com.forEach(p=>{dif+=Math.abs(A.results.find(x=>x.player===p).score-B.results.find(x=>x.player===p).score);});
+ const avg=dif/com.length;
+ if(!bp||avg<bp.avg-0.0001||(Math.abs(avg-bp.avg)<0.0001&&com.length>bp.com.length))bp={A:A,B:B,avg:avg,com:com};}
+if(!bp){c.innerHTML='';return;}
+const line=(r)=>ggDate(r.date)+' \u00b7 '+r.course+': '+bp.com.map(p=>p+' <span class="m">'+r.results.find(x=>x.player===p).score+'</span>').join(' \u00b7 ');
+c.innerHTML='<div class="gg-card"><div class="gg-title">\ud83d\udc6f Tvillingerunden</div><div class="gg-sub">De to runder i s\u00e6sonen der lignede hinanden mest \u2014 samme spillere, n\u00e6sten samme scores</div>'
+ +'<div class="gg-row">'+line(bp.A)+'</div><div class="gg-row">'+line(bp.B)+'</div>'
+ +'<div class="gg-note">Gennemsnitlig forskel: blot <strong style="color:var(--gold-light)">'+bp.avg.toFixed(2)+' point</strong> pr. spiller p\u00e5 tv\u00e6rs af '+bp.com.length+' spillere. Uhyggeligt.</div></div>';}
+
+function displayWeatherProfile(){const c=document.getElementById('weatherProfile');if(!c)return;
+const rounds=ggHelpers().filter(r=>r.lat&&r.lng&&r.date&&r.results.some(x=>x.score!=null));
+if(rounds.length<6){c.innerHTML='';return;}
+c.innerHTML='<div class="gg-card"><div class="gg-title">\u2614 Vejrprofeten</div><div class="gg-sub">Henter historisk vejr for hver runde\u2026</div></div>';
+const groups={};rounds.forEach(r=>{const k=r.lat.toFixed(2)+','+r.lng.toFixed(2);(groups[k]=groups[k]||{lat:r.lat,lng:r.lng,rounds:[]}).rounds.push(r);});
+const jobs=Object.values(groups).map(function(g){
+ const ds=g.rounds.map(r=>r.date).sort();
+ const url='https://archive-api.open-meteo.com/v1/archive?latitude='+g.lat+'&longitude='+g.lng+'&start_date='+ds[0]+'&end_date='+ds[ds.length-1]+'&daily=precipitation_sum,temperature_2m_max,windspeed_10m_max&timezone=auto';
+ return fetch(url).then(x=>x.json()).then(function(j){const map={};
+  if(j&&j.daily&&j.daily.time)j.daily.time.forEach(function(t,ix){map[t]={p:j.daily.precipitation_sum[ix],tm:j.daily.temperature_2m_max[ix],w:j.daily.windspeed_10m_max[ix]};});
+  g.rounds.forEach(function(r){r.__wx=map[r.date]||null;});}).catch(function(){});});
+Promise.all(jobs).then(function(){
+ const S={};rounds.forEach(function(r){if(!r.__wx)return;const wet=r.__wx.p>=1.5,windy=r.__wx.w>=22,warm=r.__wx.tm>=19;
+  r.results.forEach(function(x){if(x.score==null)return;const o=S[x.player]=S[x.player]||{wet:[],dry:[],windy:[],calm:[],warm:[],cool:[]};
+   (wet?o.wet:o.dry).push(x.score);(windy?o.windy:o.calm).push(x.score);(warm?o.warm:o.cool).push(x.score);});});
+ const names=Object.keys(S);if(!names.length){c.innerHTML='';return;}
+ const av=a=>a.reduce((s,v)=>s+v,0)/a.length;
+ const rws=names.map(function(n){const o=S[n];const bits=[];let tag='';
+  if(o.wet.length>=2&&o.dry.length>=2){const dw=av(o.wet)-av(o.dry);bits.push('Regn <span class="m">'+av(o.wet).toFixed(1)+'</span> ('+o.wet.length+') mod t\u00f8rvejr <span class="m">'+av(o.dry).toFixed(1)+'</span> ('+o.dry.length+')');
+   if(dw>=1)tag='\ud83c\udf27\ufe0f regnspiller';else if(dw<=-3)tag='\u2600\ufe0f smelter i regnen';}
+  if(o.windy.length>=2&&o.calm.length>=2){const dwi=av(o.windy)-av(o.calm);bits.push('Bl\u00e6st <span class="m">'+av(o.windy).toFixed(1)+'</span> ('+o.windy.length+') mod stille <span class="m">'+av(o.calm).toFixed(1)+'</span>');
+   if(!tag&&dwi>=1)tag='\ud83c\udf2c\ufe0f stormfugl';else if(!tag&&dwi<=-3)tag='\ud83c\udf43 vindsky';}
+  if(o.warm.length>=2&&o.cool.length>=2){bits.push('Varmt <span class="m">'+av(o.warm).toFixed(1)+'</span> mod k\u00f8ligt <span class="m">'+av(o.cool).toFixed(1)+'</span>');}
+  if(!bits.length)return '';
+  return '<div class="gg-row"><span class="nm" style="border-left-color:'+(PLAYER_COLORS[n]||'#fff')+'">'+n+'</span>'+bits.join(' \u00b7 ')+(tag?' \u2014 <strong style="color:var(--gold-light)">'+tag+'</strong>':'')+'</div>';}).join('');
+ c.innerHTML='<div class="gg-card"><div class="gg-title">\u2614 Vejrprofeten</div><div class="gg-sub">Jeres scores krydset med det faktiske vejr p\u00e5 rundedagen \u00b7 regn = mindst 1,5 mm \u00b7 bl\u00e6st = mindst 22 km/t</div>'+rws+'<div class="gg-note">Vejrdata: Open-Meteo historisk arkiv.</div></div>';
+}).catch(function(){c.innerHTML='';});}
+function displayPressure(){const c=document.getElementById('pressure');if(!c)return;
+const P={};ROUNDS_DATA.filter(r=>!r.private&&(r.scorecards||[]).length).forEach(r=>{r.scorecards.forEach(sc=>{
+ if(!sc.points||sc.points.length!==18)return;
+ const f=sc.points.slice(0,9).reduce((a,b)=>a+b,0),b=sc.points.slice(9).reduce((a,b)=>a+b,0);
+ (P[sc.player]=P[sc.player]||[]).push({d:r.date,co:r.course,f:f,b:b,diff:b-f});});});
+const names=Object.keys(P);if(!names.length){c.innerHTML='';return;}
+const dk=s=>{const p=(s||'').split('-');return p.length===3?(+p[2])+'/'+(+p[1]):s;};
+const stats=names.map(n=>{const a=P[n];
+ const aF=a.reduce((s,x)=>s+x.f,0)/a.length,aB=a.reduce((s,x)=>s+x.b,0)/a.length;
+ const worst=a.reduce((w,x)=>x.diff<w.diff?x:w),best=a.reduce((w,x)=>x.diff>w.diff?x:w);
+ return{n:n,k:a.length,aF:aF,aB:aB,d:aB-aF,col:a.filter(x=>x.diff<=-4).length,sur:a.filter(x=>x.diff>=4).length,worst:worst,best:best};})
+ .sort((x,y)=>y.d-x.d);
+const rows=stats.map((s,idx)=>{const col=PLAYER_COLORS[s.n]||'#fff';
+ const pos=Math.max(4,Math.min(96,50+s.d*11));
+ const pin=s.d>=0.5?'#4cc97c':(s.d<=-2.5?'#c94c4c':'#e8b923');
+ let v;
+ if(s.d>=0)v='Iskold \u2014 leverer n\u00e5r det g\u00e6lder';
+ else if(s.d>-1.5)v='Stabil hele vejen rundt';
+ else if(s.d>-2.5)v='Taber en anelse damp p\u00e5 hjemturen';
+ else v='Manden i klemme p\u00e5 back nine';
+ if(idx===stats.length-1&&s.d<-1)v='\ud83c\udf21\ufe0f ' + v;
+ return '<div class="press-row"><div class="press-head"><span class="press-name" style="border-left-color:'+col+'">'+s.n+'</span><span class="press-verdict">'+v+'</span></div>'
+ +'<div class="press-gauge"><div class="press-mid"></div><div class="press-pin" style="left:'+pos+'%;background:'+pin+'"></div></div>'
+ +'<div class="press-scale"><span>Kollaps</span><span>Neutral</span><span>Optur</span></div>'
+ +'<div class="press-facts">Front nine <span class="m">'+s.aF.toFixed(1)+'</span> \u2192 back nine <span class="m">'+s.aB.toFixed(1)+'</span> i snit ('+(s.d>=0?'+':'')+s.d.toFixed(1)+' pt) \u00b7 '+s.col+' kollaps og '+s.sur+' optur p\u00e5 '+s.k+' runder \u00b7 v\u00e6rste nedtur <span class="m">'+s.worst.diff+'</span> ('+dk(s.worst.d)+', '+s.worst.co+') \u00b7 st\u00f8rste comeback <span class="m">+'+s.best.diff+'</span> ('+dk(s.best.d)+')</div></div>';}).join('');
+c.innerHTML='<div class="press"><div class="press-title">\ud83c\udf21\ufe0f Trykm\u00e5leren</div><div class="press-sub">Hvem holder hovedet koldt, n\u00e5r runden skal lukkes? Forskellen mellem front nine og back nine over hele s\u00e6sonen \u00b7 kollaps = mindst 4 point tabt p\u00e5 hjemturen</div>'+rows+'</div>';}
+function displayEndgame(){const c=document.getElementById('endgame');if(!c)return;
+const EG_TEXT={
+ 'Morten':{
+  h:'<strong>Sæsonens mest komplette spiller.</strong> Han ejer både årets højeste score (41 point på New Course 14. maj) og årets færreste slag (79 samme dag), har flest rundesejre i feltet, det højeste stableford-snit (32,3) og klart flest gross-birdies. Oven i det fem sejre i træk hen over sensommeren — og rollen som betroet kassemester. Når Morten er i rytme, spiller han en klasse for sig.',
+  i:'Fører og favorit — vinder han et par af de fire franske runder, kan titlen være afgjort inden finalen på Mandelieu.',
+  n:'Med faldende handicap og den nyfundne vinderkultur starter han 2027 som manden, alle skal slå.'},
+ 'Thomas':{
+  h:'<strong>Sæsonens fundament og forsvarende Riviera-mester.</strong> Bar førertrøjen ubrudt fra april til september og har ligaens højeste udbytte pr. runde: 1,37 ligapoint mod feltets næstbedste 1,29. Har vundet 10 runder i 2026 og leverer de magiske slag, når det gælder — to gross-birdie-2\u2019ere i silende regn 30. august og en birdie på 18. hul som punktum 6. september.',
+  i:'Kun ét point fra toppen — og Frankrig er hans scene: han vandt både åbningsrunden på Royal Mougins og finalen på Mandelieu i foråret og tog det samlede Riviera-mesterskab. En fransk sejr er desuden 1,5 point værd i regnskabet mod 0,5 for en hjemmesejr.',
+  n:'Rutinen fra en hel sæson i front og to Riviera-kampagner gør ham til evig titelkandidat — 2027 bliver revanchens år, hvis 2026 glipper.'},
+ 'Henrik':{
+  h:'<strong>Sæsonens største transformation.</strong> Otte nulrunder før sommeren — og siden ligaens formstærkeste mand: 35-30-34-32-37 i de seneste fem målinger, med to sejre og en delt undervejs, inklusive bedriften at knække Mortens stime. Hans 37 point 17. september tangerer hans egen sæsonbedste fra 21. juni, og to gross-birdie-2\u2019ere på Old Course\u2019 hul 5 har gjort hullet til hans personlige signatur.',
+  i:'Den vilde drøm lever: vinder han stort set alt, ender det 34-34 og DELT mesterskab — og hver Riviera-sejr er +2 for ham, dobbelt så meget som for de to øverste.',
+  n:'Holder efterårsformen bare halvvejs, er han den oplagte titelfavorit i 2027 — kurven peger stejlt opad.'},
+ 'Kim':{
+  h:'<strong>Manden med feltets bedste åbninger.</strong> Hans 39 point 4. juni er næstbedste score, nogen har lavet i 2026, og den 13. august slog han hele feltet i en fuld firemandsrunde med 35 point — båret af forrygende 20 point på front nine. Dertil ligaens største fightervilje og rollen som ekspeditionens gavmilde vært og forsyningsminister i Cabris.',
+  i:'Titlen må vente, men alle starter fra nul i kampen om Riviera-puljens 280\u20ac — og med færrest spillede runder tæller hvert eneste point stadig direkte i hans regnskab.',
+  n:'Med et fuldt rundeprogram i 2027 og sit dokumenterede topniveau er han feltets dark horse — ingen vil trække ham i lodtrækningen.'}
+};
+const played=ROUNDS_DATA.filter(r=>r.results&&r.results.length>0&&!r.private&&r.counting!==false);
+const upcoming=ROUNDS_DATA.filter(r=>r.time&&!(r.results||[]).length&&(r.players||[]).length>1);
+const pts={};played.forEach(r=>r.results.forEach(res=>{(pts[res.player]=pts[res.player]||[]).push(res.points);}));
+const b15=a=>[...a].sort((x,y)=>y-x).slice(0,15).reduce((s,v)=>s+v,0);
+const names=Object.keys(pts);if(!names.length||!upcoming.length){c.innerHTML='';return;}
+const cur={};names.forEach(n=>cur[n]=b15(pts[n]));
+const maxT={};names.forEach(n=>{const mine=upcoming.filter(u=>u.players.includes(n));let arr=[...pts[n]];mine.forEach(u=>arr.push(u.players.length>=4?3:u.players.length===3?2:1));maxT[n]=b15(arr);});
+const form={};played.forEach(r=>r.results.forEach(res=>{if(res.score!=null)(form[res.player]=form[res.player]||[]).push({d:r.date,s:res.score});}));
+const str={},sig={};names.forEach(n=>{const f=(form[n]||[]).slice().sort((a,b)=>a.d<b.d?1:-1).slice(0,10);
+ let w=0,tt=0;f.forEach((x,ix)=>{const ww=Math.pow(0.88,ix);w+=ww;tt+=x.s*ww;});str[n]=w?tt/w:30;
+ const all=(form[n]||[]).map(x=>x.s);const mu=all.length?all.reduce((a,b)=>a+b,0)/all.length:30;
+ sig[n]=all.length>3?Math.max(3.5,Math.sqrt(all.reduce((s,v)=>s+Math.pow(v-mu,2),0)/(all.length-1))):5;});
+function gss(){let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
+const SIMS=20000;const titles={};names.forEach(n=>titles[n]=0);
+for(let s=0;s<SIMS;s++){const sim={};names.forEach(n=>sim[n]=pts[n].slice());
+ upcoming.forEach(u=>{const sc=u.players.filter(p=>pts[p]).map(p=>({p:p,v:str[p]+gss()*sig[p]}));
+  sc.sort((a,b)=>b.v-a.v);const mp=u.players.length>=4?3:u.players.length===3?2:1;
+  sc.forEach((x,ix)=>sim[x.p].push(Math.max(0,mp-ix)));});
+ const tot={};names.forEach(n=>tot[n]=b15(sim[n]));
+ const bst=Math.max.apply(null,names.map(n=>tot[n]));
+ const ch=names.filter(n=>tot[n]===bst);ch.forEach(n=>titles[n]+=1/ch.length);}
+const prob={};names.forEach(n=>prob[n]=100*titles[n]/SIMS);
+const fmtP=v=>v>=9.95?v.toFixed(0):(v>=0.1?v.toFixed(1):(v>0?'<0.1':'0'));
+const order=[...names].sort((a,b)=>cur[b]-cur[a]);
+const leader=order[0];
+const uncatchable=names.filter(r=>r!==leader).every(r=>maxT[r]<cur[leader]);
+const rows=order.map(n=>{const col=PLAYER_COLORS[n]||'#fff';
+ const mine=upcoming.filter(u=>u.players.includes(n));
+ const rivals=names.filter(r=>r!==n);
+ const canShare=rivals.every(r=>maxT[n]>=cur[r]);
+ const canAlone=rivals.every(r=>maxT[n]>cur[r]);
+ let badge,cls;
+ if(n===leader&&uncatchable){badge='MESTER \u2014 UINDHENTELIG';cls='champ';}
+ else if(n===leader){badge='F\u00f8rer';cls='alive';}
+ else if(canAlone){badge='Kan stadig vinde';cls='alive';}
+ else if(canShare){badge='Kan h\u00f8jst n\u00e5 delt 1.-plads';cls='share';}
+ else{badge='Titlen er ude \u2014 men \u00e6ren lever';cls='out';}
+ const marg=v=>{const d=b15([...pts[n],v])-cur[n];return (d>0?'+':'')+(Number.isInteger(d)?d:d.toFixed(1));};
+ const t=EG_TEXT[n]||{h:'',i:'',n:''};
+ return '<div class="eg-row"><div class="eg-head"><span class="eg-name" style="border-left-color:'+col+'">'+n+'</span><span class="eg-badge '+cls+'">'+badge+'</span></div>'
+  +'<div class="eg-prob"><div class="eg-prob-num">'+fmtP(prob[n])+'<small>%</small></div><div class="eg-prob-meta"><div class="eg-prob-lbl">Sandsynlighed for at vinde mesterskabet</div><div class="eg-bar"><div class="eg-bar-fill" style="width:'+Math.max(prob[n],0.6).toFixed(1)+'%"></div></div></div></div>'+'<div class="eg-hyldest">'+t.h+'</div>'
+  +'<div class="eg-line"><span class="lbl">Regnskabet</span>'+cur[n].toFixed(1)+' pt nu \u00b7 '+mine.length+' runder tilbage \u00b7 teoretisk max <span class="m">'+maxT[n].toFixed(1)+'</span> \u00b7 n\u00e6ste score-v\u00e6rdi: 3\u2019er <span class="m">'+marg(3)+'</span>, 2\u2019er <span class="m">'+marg(2)+'</span>, 1.5 <span class="m">'+marg(1.5)+'</span>, 1\u2019er <span class="m">'+marg(1)+'</span></div>'
+  +'<div class="eg-line"><span class="lbl">I \u00e5r</span>'+t.i+'</div>'
+  +'<div class="eg-line"><span class="lbl">2027</span>'+t.n+'</div>'
+  +'</div>';}).join('');
+c.innerHTML='<div class="endgame"><div class="eg-title">\ud83c\udfc6 Championship Showdown</div><div class="eg-sub">'+upcoming.length+' runder tilbage \u00b7 '+upcoming.filter(u=>u.abroad).length+' p\u00e5 Rivieraen \u00b7 kun de 15 bedste t\u00e6ller \u00b7 genberegnes efter hver runde</div>'+rows+'<div class="eg-method">Sandsynlighederne bygger p\u00e5 20.000 simulerede s\u00e6sonafslutninger: hver spillers aktuelle form (v\u00e6gtet snit af seneste 10 runder) og personlige udsving m\u00f8des i de resterende runder \u2014 og de 15 bedste t\u00e6ller, som altid.</div></div>';}
+function displayPointsBreakdown(lb){const c=document.getElementById('pointsBreakdown');if(!c)return;const rows=lb.filter(p=>p.totalRounds>0).map(p=>{const col=PLAYER_COLORS[p.name]||'#fff';const inTop=p.allPoints.slice(0,15).map(fmtPt).join(', ');const out=p.allPoints.slice(15).map(fmtPt).join(', ');const listing=out?`${inTop} <span class="pb-cut">│</span> <span class="pb-out">${out}</span>`:inTop;return`<div class="pb-row"><div class="pb-name" style="border-left-color:${col}">${p.name}<span class="pb-sum">${p.total.toFixed(1)} pt</span></div><div class="pb-list">${listing}</div></div>`;}).join('');c.innerHTML=`<div class="pts-breakdown"><div class="pb-title">Tællende runder — pointlistning</div><div class="pb-sub">Sorteret bedste først · de 15 før den gyldne streg tæller · overstregede er ude af regnskabet</div>${rows}</div>`;displayEndgame();displayPressure();displayMomentum();displayGhost();displayClockwork();displayWeatherProfile();displayTwins();}
 function initMap(rounds){const valid=rounds.filter(r=>r.lat&&r.lng);if(!valid.length)return;const map=L.map('grand-tour-map',{zoomControl:true,scrollWheelZoom:false});try{L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{attribution:'',maxZoom:19,subdomains:'abcd'}).addTo(map);}catch(e){L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'',maxZoom:19}).addTo(map);}const bounds=[];valid.forEach(r=>{const ia=r.abroad===true;const isPlayed=r.results&&r.results.length>0;const pinClass=isPlayed?(ia?'abroad':''):(ia?'abroad-upcoming':'upcoming');const pinEmoji=ia?(isPlayed?'✦':'✧'):(isPlayed?'⛳':'○');const tailClass=ia&&isPlayed?'abroad':ia?'abroad-upcoming':isPlayed?'':'upcoming';const icon=L.divIcon({className:'',html:`<div><div class="map-pin-head ${pinClass}">${pinEmoji}</div><div class="map-pin-tail ${tailClass}"></div></div>`,iconSize:[26,36],iconAnchor:[13,36],popupAnchor:[0,-38]});const w=r.results.find(x=>x.placement===1);const t=r.results.filter(x=>x.placement===1).length>1;const wn=isPlayed?(w?(t?'Delt 1.':w.player):'–'):'Ikke spillet endnu';const fd=new Date(r.date).toLocaleDateString('da-DK',{weekday:'long',day:'numeric',month:'long',year:'numeric'});const meta=[r.holes?r.holes+' hul':'',r.cr?'CR '+r.cr:'',r.slope?'Slope '+r.slope:''].filter(Boolean).join(' · ');const pop=`<div class="gucci-popup">${ia&&isPlayed?'<div class="popup-expedition-badge">✦ Ekspedition</div>':ia&&!isPlayed?'<div class="popup-expedition-badge" style="background:rgba(201,168,76,0.3);color:var(--gold)">✧ Planlagt ekspedition</div>':!isPlayed?'<div class="popup-expedition-badge" style="background:rgba(255,255,255,0.12);color:var(--text-muted)">Planlagt</div>':''}<div class="popup-course">${r.course}</div><div class="popup-date">${fd}</div><div class="popup-winner"><span>🏆</span> ${wn}</div><div class="popup-meta">${meta}</div>${r.note?'<div class="popup-note">"'+r.note+'"</div>':''}${r.photo?'<img src="'+r.photo+'" class="popup-photo" alt="">':''}</div>`;L.marker([r.lat,r.lng],{icon}).addTo(map).bindPopup(pop,{maxWidth:260,minWidth:190});bounds.push([r.lat,r.lng]);});bounds.length===1?map.setView(bounds[0],12):map.fitBounds(bounds,{padding:[50,50]});}
 function initTimeline(rounds, showAll){
   const cv=document.getElementById('timelineChart');if(!cv)return;
