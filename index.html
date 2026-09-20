@@ -894,12 +894,12 @@ const SUSPENSION={
   message:'"Næste runde"-listen er på pause 🇮🇹',
   subtitle:'Thomas er i Italien — listen opdateres ikke før 7. juni. De andre spiller videre.'
 };
-const NEXT_ROUND={datetime:'2026-09-20T09:00:00',course:'New Course',tee:57,lat:55.83428967088613,lng:12.339822779286978,players:['Thomas','Henrik','Morten'],abroad:false};
+const NEXT_ROUND={datetime:'2026-09-24T13:50:00',course:'Old Course',tee:57,lat:55.83334253035411,lng:12.333272244585064,players:['Thomas','Kim','Morten'],abroad:false};
 
 // Opdater denne efter hver runde. story: brug <strong>...</strong> for guld-fremhævning. Sæt til null for at skjule boksen.
 const LATEST_ROUND={
-  meta:'17. september · New Course · Henrik i flammer — 37 point',
-  story:'Formkurven, der har peget opad i ugevis, eksploderede torsdag <strong>17. september</strong>: <strong>Henrik vandt suverænt med 37 stableford-point</strong> — en tangering af hans egen sæsonbedste fra 21. juni. Det er nu <strong>fem stærke målinger i træk</strong> (35-30-34-32-37 med to sejre og en delt), og manden, der havde otte nulrunder før sommeren, er pludselig ligaens formstærkeste. <strong>Thomas</strong> fik 27 point og det ene point, der fulgte med andenpladsen, mens <strong>Kim</strong> måtte opgive og gik ind efter 9 huller (NR) — en tung optakt til Rivieraen for manden, der i juni lavede sæsonens næstbedste score. I regnskabet henter Henrik et helt point (2\u2019eren skubber en 1\u2019er ud), mens Thomas\u2019 1\u2019er drukner i drop-bunken: <strong>Morten 34 · Thomas 33 · Henrik 26</strong> · Kim 16.5. Søndag mødes de tre øverste — Morten er tilbage efter hviledagen, og med Henriks form er det ikke længere kun en tvekamp, der tegner sig frem mod <strong>Rivieraen om to uger</strong>.'
+  meta:'20. september · New Course · Thomas slår tilbage — kampen lever',
+  story:'Med ryggen mod muren leverede <strong>Thomas</strong> præcis, hvad regnskabet krævede: Søndag <strong>20. september</strong> vandt han det direkte opgør mod føringsmanden med <strong>35 stableford-point</strong> (90 slag) mod Mortens 33 (88) — og rundens højdepunkt var en sjælden fornøjelse: <strong>en gross-birdie-3\u2019er på par 4-hul 8</strong> til hele 4 point. <strong>Morten</strong> spillede igen dagens færreste slag og åbnede stærkt med 19 point på front nine, men et 8-tal på hul 12 og en tam hjemtur kostede sejren. <strong>Henrik</strong>, der ellers har været ligaens formstærkeste, faldt helt igennem med 25 point og 105 slag — hans dårligste runde siden midten af august. I regnskabet giver Thomas\u2019 2\u2019er <span style="white-space:nowrap">+0,5</span>, mens Mortens 1\u2019er ikke flytter noget: <strong>Morten 34 · Thomas 33,5</strong> · Henrik 26 · Kim 16,5. Forskellen er nu nede på <strong>et halvt point</strong> med seks runder igen — og Thomas\u2019 chance for titlen er på én eftermiddag steget fra 5,5 % til godt 13 %. To hjemmerunder tilbage, og så fire dage i Frankrig, hvor alt kan ske.'
 };
 const EXPEDITIONS=[
   {
@@ -2321,7 +2321,37 @@ const ROUNDS_DATA=[{course:"Old Course",date:"2026-04-10",tee:56,holes:9,cr:72.3
      {player:'Thomas',score:27,points:1,placement:2,tied:false},
      {player:'Kim',score:null,points:0,placement:3,tied:false}
    ],scorecards:[]},
-  {course:"New Course",date:"2026-09-20",time:"09:00",tee:57,holes:18,cr:72.5,slope:141,lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,note:"Henrik, Thomas og Morten",photo:null,players:["Thomas","Henrik","Morten"],holeData:[],results:[],scorecards:[]},
+  {course:"New Course",date:"2026-09-20",time:"09:00",tee:57,holes:18,cr:72.5,slope:141,
+   lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,
+   note:"Thomas slog Morten i direkte opgør og holdt liv i titelkampen — gross-birdie på hul 8",photo:null,
+   counting:true,
+   players:["Thomas","Henrik","Morten"],
+   holeData:[
+     {hole:1,par:5,hcp:5},{hole:2,par:3,hcp:17},{hole:3,par:4,hcp:9},{hole:4,par:5,hcp:3},
+     {hole:5,par:3,hcp:15},{hole:6,par:4,hcp:1},{hole:7,par:5,hcp:7},{hole:8,par:4,hcp:11},
+     {hole:9,par:3,hcp:13},{hole:10,par:4,hcp:4},{hole:11,par:4,hcp:8},{hole:12,par:5,hcp:2},
+     {hole:13,par:3,hcp:18},{hole:14,par:4,hcp:12},{hole:15,par:4,hcp:14},{hole:16,par:4,hcp:10},
+     {hole:17,par:3,hcp:16},{hole:18,par:5,hcp:6}
+   ],
+   results:[
+     {player:'Thomas',score:35,points:2,placement:1,tied:false},
+     {player:'Morten',score:33,points:1,placement:2,tied:false},
+     {player:'Henrik',score:25,points:0,placement:3,tied:false}
+   ],
+   scorecards:[
+     {player:'Thomas',hcp:12.9,phcp:17,
+      scores:[6,4,6,6,3,6,6,3,4, 5,5,6,4,5,4,4,5,8],
+      points:[2,2,1,2,3,1,2,4,2, 2,2,2,1,2,3,3,1,0],
+      slag:90,grossDiff:18},
+     {player:'Morten',hcp:10.1,phcp:13,
+      scores:[5,3,4,5,4,5,5,7,4, 4,5,8,4,6,5,5,4,5],
+      points:[3,2,3,3,1,2,3,0,2, 3,2,0,1,1,1,2,1,3],
+      slag:88,grossDiff:16},
+     {player:'Henrik',hcp:17.4,phcp:22,
+      scores:[8,6,5,6,6,5,8,5,5, 5,7,7,5,6,4,5,5,7],
+      points:[0,0,2,3,0,3,0,2,1, 3,0,2,1,1,3,2,1,1],
+      slag:105,grossDiff:33}
+   ]},
   {course:"Old Course",date:"2026-09-24",time:"13:50",tee:57,holes:18,cr:72.3,slope:139,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:"Kim, Thomas og Morten",photo:null,players:["Thomas","Kim","Morten"],holeData:[],results:[],scorecards:[]},
   {course:"New Course",date:"2026-09-27",time:"09:00",tee:57,holes:18,cr:72.5,slope:141,lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,note:"Kim, Thomas og Morten — sidste runde før Rivieraen",photo:null,players:["Thomas","Kim","Morten"],holeData:[],results:[],scorecards:[]},
   {course:"Château Taulane 🇫🇷",date:"2026-10-01",time:"11:40",tee:null,holes:18,cr:null,slope:null,lat:43.7793442,lng:6.6271859,abroad:true,expId:'cote-dazur-efteraar-2026',note:"Riviera Open Efterår · Dag 1 — Gary Players bane i 1.000 m højde · teetider 11:40 & 11:50",photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
