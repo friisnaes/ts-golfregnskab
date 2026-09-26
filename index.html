@@ -920,12 +920,12 @@ const SUSPENSION={
   message:'"Næste runde"-listen er på pause 🇮🇹',
   subtitle:'Thomas er i Italien — listen opdateres ikke før 7. juni. De andre spiller videre.'
 };
-const NEXT_ROUND={datetime:'2026-09-24T13:50:00',course:'Old Course',tee:57,lat:55.83334253035411,lng:12.333272244585064,players:['Thomas','Morten','Jan (gæst)'],abroad:false};
+const NEXT_ROUND={datetime:'2026-09-27T09:00:00',course:'New Course',tee:57,lat:55.83428967088613,lng:12.339822779286978,players:['Thomas','Kim'],abroad:false};
 
 // Opdater denne efter hver runde. story: brug <strong>...</strong> for guld-fremhævning. Sæt til null for at skjule boksen.
 const LATEST_ROUND={
-  meta:'20. september · New Course · Thomas slår tilbage — kampen lever',
-  story:'Med ryggen mod muren leverede <strong>Thomas</strong> præcis, hvad regnskabet krævede: Søndag <strong>20. september</strong> vandt han det direkte opgør mod føringsmanden med <strong>35 stableford-point</strong> (90 slag) mod Mortens 33 (88) — og rundens højdepunkt var en sjælden fornøjelse: <strong>en gross-birdie-3\u2019er på par 4-hul 8</strong> til hele 4 point. <strong>Morten</strong> spillede igen dagens færreste slag og åbnede stærkt med 19 point på front nine, men et 8-tal på hul 12 og en tam hjemtur kostede sejren. <strong>Henrik</strong>, der ellers har været ligaens formstærkeste, faldt helt igennem med 25 point og 105 slag — hans dårligste runde siden midten af august. I regnskabet giver Thomas\u2019 2\u2019er <span style="white-space:nowrap">+0,5</span>, mens Mortens 1\u2019er ikke flytter noget: <strong>Morten 34 · Thomas 33,5</strong> · Henrik 26 · Kim 16,5. Forskellen er nu nede på <strong>et halvt point</strong> med seks runder igen — og Thomas\u2019 chance for titlen er på én eftermiddag steget fra 5,5 % til godt 13 %. To hjemmerunder tilbage, og så fire dage i Frankrig, hvor alt kan ske.'
+  meta:'24. september · Old Course · Morten svarer med 81 slag',
+  story:'Titelduellen fik torsdag <strong>24. september</strong> sit sidste hjemlige kapitel — og <strong>Morten</strong> svarede prompte på Thomas’ sejr fra søndagen: <strong>40 stableford-point og 81 slag</strong>, netto fire under par og hans næstbedste runde i 2026 efter rekorden på 41. Højdepunktet var en <strong>gross-birdie-3’er på par 4-hul 4</strong> — banens sværeste hul — til fire point, og han lukkede front nine med 22 point. <strong>Thomas</strong> spillede for de fleste andre en flot runde: <strong>36 point</strong>, en tangering af hans egen sæsonbedste, båret af et jævnt back nine med tre 3-pointere — men det rakte ikke mod den form, Morten er i. Special guest <strong>Jan</strong> var med for hyggens skyld uden for regnskabet. <strong>Og her er pointet:</strong> Ingen af de to flyttede et eneste ligapoint, for de dropper begge alt under 1,5 — stillingen er uforandret <strong>Morten 34 · Thomas 33,5</strong>. Søndag møder Thomas kun Kim i sidste runde før afrejse, og heller ikke dér kan noget flyttes. <strong>Hele mesterskabet afgøres nu i Frankrig</strong>, hvor Thomas skal vinde mindst tre af de fire runder. Odds efter torsdag: Morten 82 % — Thomas 18 %.'
 };
 const EXPEDITIONS=[
   {
@@ -2378,7 +2378,32 @@ const ROUNDS_DATA=[{course:"Old Course",date:"2026-04-10",tee:56,holes:9,cr:72.3
       points:[0,0,2,3,0,3,0,2,1, 3,0,2,1,1,3,2,1,1],
       slag:105,grossDiff:33}
    ]},
-  {course:"Old Course",date:"2026-09-24",time:"13:50",tee:57,holes:18,cr:72.3,slope:139,lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,note:"Morten og Thomas — med special guest Jan",photo:null,players:["Thomas","Morten"],guests:["Jan"],holeData:[],results:[],scorecards:[]},
+  {course:"Old Course",date:"2026-09-24",time:"13:50",tee:57,holes:18,cr:72.3,slope:139,
+   lat:55.83334253035411,lng:12.333272244585064,abroad:false,expId:null,
+   note:"Morten tangerede sæsonrekorden med 40 stbf og 81 slag — netto fire under par. Special guest Jan var med uden for regnskabet.",photo:null,
+   counting:true,
+   players:["Thomas","Morten"],guests:["Jan"],
+   holeData:[
+     {hole:1,par:4,hcp:11},{hole:2,par:5,hcp:5},{hole:3,par:4,hcp:13},{hole:4,par:4,hcp:1},
+     {hole:5,par:3,hcp:15},{hole:6,par:4,hcp:9},{hole:7,par:4,hcp:3},{hole:8,par:3,hcp:17},
+     {hole:9,par:5,hcp:7},{hole:10,par:5,hcp:8},{hole:11,par:4,hcp:2},{hole:12,par:3,hcp:16},
+     {hole:13,par:4,hcp:6},{hole:14,par:3,hcp:14},{hole:15,par:4,hcp:12},{hole:16,par:3,hcp:18},
+     {hole:17,par:5,hcp:4},{hole:18,par:5,hcp:10}
+   ],
+   results:[
+     {player:'Morten',score:40,points:1,placement:1,tied:false},
+     {player:'Thomas',score:36,points:0,placement:2,tied:false}
+   ],
+   scorecards:[
+     {player:'Morten',hcp:10.1,phcp:13,
+      scores:[4,5,5,3,4,5,5,3,5, 6,5,3,4,4,4,3,7,6],
+      points:[3,3,2,4,1,2,2,2,3, 2,2,2,3,1,3,2,1,2],
+      slag:81,grossDiff:9},
+     {player:'Thomas',hcp:12.9,phcp:17,
+      scores:[5,8,5,4,4,4,7,3,5, 7,4,5,6,3,4,3,5,7],
+      points:[2,0,2,3,2,3,0,3,3, 1,3,1,1,3,3,2,3,1],
+      slag:89,grossDiff:17}
+   ]},
   {course:"New Course",date:"2026-09-27",time:"09:00",tee:57,holes:18,cr:72.5,slope:141,lat:55.83428967088613,lng:12.339822779286978,abroad:false,expId:null,note:"Kim og Thomas — sidste runde før afgang til Cabris",photo:null,players:["Thomas","Kim"],holeData:[],results:[],scorecards:[]},
   {course:"Château Taulane 🇫🇷",date:"2026-10-01",time:"11:40",tee:null,holes:18,cr:null,slope:null,lat:43.7793442,lng:6.6271859,abroad:true,expId:'cote-dazur-efteraar-2026',note:"Riviera Open Efterår · Dag 1 — Gary Players bane i 1.000 m højde · teetider 11:40 & 11:50",photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
   {course:"Royal Mougins 🇫🇷",date:"2026-10-02",time:"10:00",tee:null,holes:18,cr:72.2,slope:136,lat:43.59365672710108,lng:6.971199740482849,abroad:true,expId:'cote-dazur-efteraar-2026',note:"Riviera Open Efterår · Dag 2 — gensynet med Saut de l'Ange · teetider 10:00 & 10:10",photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
