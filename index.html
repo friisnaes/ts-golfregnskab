@@ -936,7 +936,7 @@ const EXPEDITIONS=[
     flag:'🇫🇷',
     narrative:null,
     coverPhoto:null,
-    courses:['Château Taulane','Royal Mougins','Monte Carlo Golf','Old Course Mandelieu'],
+    courses:['Château Taulane','Royal Mougins','Monte Carlo Golf','Golf de Saint Donat'],
     parallelTournament:{
       name:"Riviera Open Efterår 2026",
       players:['Thomas','Henrik','Kim','Morten','Jes','Jan'],
@@ -2408,7 +2408,7 @@ const ROUNDS_DATA=[{course:"Old Course",date:"2026-04-10",tee:56,holes:9,cr:72.3
   {course:"Château Taulane 🇫🇷",date:"2026-10-01",time:"11:40",tee:null,holes:18,cr:null,slope:null,lat:43.7793442,lng:6.6271859,abroad:true,expId:'cote-dazur-efteraar-2026',note:"Riviera Open Efterår · Dag 1 — Gary Players bane i 1.000 m højde · teetider 11:40 & 11:50",photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
   {course:"Royal Mougins 🇫🇷",date:"2026-10-02",time:"10:00",tee:null,holes:18,cr:72.2,slope:136,lat:43.59365672710108,lng:6.971199740482849,abroad:true,expId:'cote-dazur-efteraar-2026',note:"Riviera Open Efterår · Dag 2 — gensynet med Saut de l'Ange · teetider 10:00 & 10:10",photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
   {course:"Monte Carlo Golf 🇫🇷",date:"2026-10-03",time:"11:00",tee:null,holes:18,cr:null,slope:null,lat:43.762757,lng:7.413907,abroad:true,expId:'cote-dazur-efteraar-2026',note:"Riviera Open Efterår · Dag 3 — Willie Park Jr. 1911, 900 m.o.h. · teetider 11:00 & 11:10",photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
-  {course:"Old Course Mandelieu 🇫🇷",date:"2026-10-04",time:"11:04",tee:null,holes:18,cr:69.6,slope:124,lat:43.53194492695571,lng:6.9403454828098115,abroad:true,expId:'cote-dazur-efteraar-2026',note:"Riviera Open Efterår · Dag 4 — finalen på Storfyrstens bane fra 1891 · teetider 11:04 & 11:12",photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]}
+  {course:"Golf de Saint Donat 🇫🇷",date:"2026-10-04",time:"10:30",tee:null,holes:18,cr:71.2,slope:130,lat:43.6296,lng:6.9174,abroad:true,expId:'cote-dazur-efteraar-2026',note:"Riviera Open Efterår · Dag 4 — finalen på Robert Trent Jones Jr.-banen ved Grasse (erstatter Old Course Mandelieu) · teetider 10:30 & 10:40",photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]}
 ];
 let allRounds=[],playerData={},countingRounds=[];
 const PLAYER_LOGINS={'tf':'Thomas','hh':'Henrik','kkj':'Kim','ma':'Morten'};
@@ -2510,7 +2510,7 @@ const RIV={url:'riviera.html',
  days:[{d:'2026-10-01',n:'1. okt',c:'Ch\u00e2teau Taulane',t:'11:40 & 11:50'},
        {d:'2026-10-02',n:'2. okt',c:'Royal Mougins',t:'10:00 & 10:10'},
        {d:'2026-10-03',n:'3. okt',c:'Monte Carlo Golf',t:'11:00 & 11:10'},
-       {d:'2026-10-04',n:'4. okt',c:'Old Course Mandelieu',t:'11:04 & 11:12'}],
+       {d:'2026-10-04',n:'4. okt',c:'Golf de Saint Donat',t:'10:30 & 10:40'}],
  ess:[['\u2708\ufe0f Ud','on 30/9 kl. 18:40 CPH\u2013NIC'],['\ud83d\udeec Hjem','s\u00f8 4/10 kl. 21:40 NIC\u2013CPH'],['\ud83c\udfab Check-in','Y9XD3P'],['\ud83d\udcb6 Kassemester','120\u20ac i sm\u00e5 sedler til Morten'],['\ud83c\udfe0 Base','hos Kim i Cabris']]};
 function rivRender(){const c=document.getElementById('rivieraBanner');if(!c)return;
  const now=new Date();const end=new Date('2026-10-04T23:59:00+02:00');
@@ -2695,7 +2695,7 @@ names.forEach(function(n){const fa=(form[n]||[]);const f=fa.slice().reverse().sl
  sig[n]=all.length>3?Math.max(3.5,Math.sqrt(all.reduce((s,v)=>s+Math.pow(v-mu,2),0)/(all.length-1))):5;
  const aw=AB.away[n]||[],hm=AB.home[n]||[];
  adj[n]=(aw.length&&hm.length)?(avg(aw)-avg(hm))*aw.length/(aw.length+8):0;});
-const NEWC=['Ch\u00e2teau Taulane \ud83c\uddeb\ud83c\uddf7','Monte Carlo Golf \ud83c\uddeb\ud83c\uddf7'];
+const NEWC=['Ch\u00e2teau Taulane \ud83c\uddeb\ud83c\uddf7','Monte Carlo Golf \ud83c\uddeb\ud83c\uddf7','Golf de Saint Donat \ud83c\uddeb\ud83c\uddf7'];
 function gss(){let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
 const SIMS=20000;const titles={};names.forEach(n=>titles[n]=0);
 for(let s=0;s<SIMS;s++){const sim={};names.forEach(n=>sim[n]=pts[n].slice());
