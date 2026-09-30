@@ -75,6 +75,16 @@
         .riv-day em{display:block;font-family:'Outfit',sans-serif;font-style:normal;font-size:0.54em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:4px;}
         .riv-day strong{display:block;font-family:'Cormorant Garamond',serif;font-size:1.02em;font-weight:600;color:var(--white,#fff);line-height:1.25;}
         .riv-day i{display:block;font-style:normal;font-family:'Outfit',sans-serif;font-size:0.58em;color:var(--text-muted);margin-top:3px;letter-spacing:0.06em;}
+        .riv-next{margin:0 0 16px;padding:14px 16px;background:rgba(0,0,0,0.38);border:1px solid rgba(201,168,76,0.45);border-radius:9px;}
+        .riv-next-lbl{font-family:'Outfit',sans-serif;font-size:0.58em;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:4px;}
+        .riv-next-course{font-family:'Cormorant Garamond',serif;font-size:1.35em;font-weight:600;color:var(--white,#fff);text-align:center;margin-bottom:10px;}
+        .riv-balls{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+        .riv-ball{padding:9px 11px;background:rgba(255,255,255,0.04);border-radius:7px;}
+        .riv-ball em{display:block;font-style:normal;font-family:'Outfit',sans-serif;font-size:0.55em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:5px;}
+        .riv-ball b{display:block;font-family:'Cormorant Garamond',serif;font-size:1.25em;font-weight:700;color:var(--gold-light);line-height:1;margin-bottom:5px;}
+        .riv-ball span{display:block;font-family:'Cormorant Garamond',serif;font-size:1.02em;color:var(--white,#fff);line-height:1.45;}
+        .riv-next-note{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.95em;color:var(--gold-dim);text-align:center;}
+        @media (max-width:600px){.riv-balls{grid-template-columns:1fr;}}
         .riv-ess{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:16px;}
         .riv-chip{padding:7px 13px;background:rgba(0,0,0,0.36);border:1px solid rgba(201,168,76,0.28);border-radius:999px;font-family:'Cormorant Garamond',serif;font-size:0.9em;color:var(--text-light);}
         .riv-chip b{color:var(--gold-light);font-weight:600;letter-spacing:0.04em;}
@@ -2507,10 +2517,14 @@ function fmtPt(v){return Number.isInteger(v)?String(v):v.toFixed(1);}
 const RIV={url:'riviera.html',
  start:new Date('2026-10-01T11:40:00+02:00'),
  depart:new Date('2026-09-30T18:40:00+02:00'),
- days:[{d:'2026-10-01',n:'1. okt',c:'Ch\u00e2teau Taulane',t:'11:40 & 11:50'},
-       {d:'2026-10-02',n:'2. okt',c:'Royal Mougins',t:'10:00 & 10:10'},
-       {d:'2026-10-03',n:'3. okt',c:'Monte Carlo Golf',t:'11:00 & 11:10'},
-       {d:'2026-10-04',n:'4. okt',c:'Golf de Saint Donat',t:'10:30 & 10:40'}],
+ days:[{d:'2026-10-01',n:'1. okt',c:'Ch\u00e2teau Taulane',t:'11:40 & 11:50',
+        b1:{t:'11:40',p:['Kim','Jan','Jes']},b2:{t:'11:50',p:['Thomas','Henrik','Morten']}},
+       {d:'2026-10-02',n:'2. okt',c:'Royal Mougins',t:'10:00 & 10:10',
+        b1:{t:'10:00',p:['Kim','Thomas','Henrik']},b2:{t:'10:10',p:['Jan','Jes','Morten']}},
+       {d:'2026-10-03',n:'3. okt',c:'Monte Carlo Golf',t:'11:00 & 11:10',
+        b1:{t:'11:00',p:['Kim','Jes','Henrik']},b2:{t:'11:10',p:['Jan','Thomas','Morten']}},
+       {d:'2026-10-04',n:'4. okt',c:'Golf de Saint Donat',t:'10:30 & 10:40',
+        b1:null,b2:null,note:'Boldene s\u00e6ttes efter stillingen: de 3 lavest placerede kl. 10:30, de 3 bedste kl. 10:40'}],
  ess:[['\u2708\ufe0f Ud','on 30/9 kl. 18:40 CPH\u2013NIC'],['\ud83d\udeec Hjem','s\u00f8 4/10 kl. 21:40 NIC\u2013CPH'],['\ud83c\udfab Check-in','Y9XD3P'],['\ud83d\udcb6 Kassemester','120\u20ac i sm\u00e5 sedler til Morten'],['\ud83c\udfe0 Base','hos Kim i Cabris']]};
 function rivRender(){const c=document.getElementById('rivieraBanner');if(!c)return;
  const now=new Date();const end=new Date('2026-10-04T23:59:00+02:00');
@@ -2522,17 +2536,25 @@ function rivRender(){const c=document.getElementById('rivieraBanner');if(!c)retu
  const diff=RIV.start-now;
  if(diff>0){const s=Math.floor(diff/1000),dd=Math.floor(s/86400),hh=Math.floor(s%86400/3600),mm=Math.floor(s%3600/60),ss=s%60;
   mid='<div class="riv-cd">'+[[dd,'dage'],[hh,'timer'],[mm,'min'],[ss,'sek']].map(function(u){return '<div class="riv-unit"><b>'+u[0]+'</b><span>'+u[1]+'</span></div>';}).join('')+'</div>';
-  if(now<RIV.depart){const ds=Math.floor((RIV.depart-now)/86400000);mid+='<div class="riv-live">'+(ds<1?'Afrejse i dag \u00b7 Kim fl\u00f8j i morges':'Afrejse om '+ds+' dag'+(ds===1?'':'e'))+' \u00b7 Kim tager i forvejen onsdag morgen og g\u00f8r Cabris klar</div>';}
+  if(now<RIV.depart){const ds=Math.floor((RIV.depart-now)/86400000);mid+='<div class="riv-live">'+(ds<1?'Afrejse i dag kl. 18:40 \u00b7 Kim fl\u00f8j i morges og g\u00f8r Cabris klar':'Afrejse om '+ds+' dag'+(ds===1?'':'e')+' \u00b7 Kim tager i forvejen onsdag morgen')+'</div>';}
   else mid+='<div class="riv-live">Vi er landet \u2014 f\u00f8rste bold g\u00e5r ud p\u00e5 Ch\u00e2teau Taulane</div>';}
  else{const idx=RIV.days.findIndex(function(d){return d.d===today;});
   mid='<div class="riv-live">'+(idx>=0?'Dag '+(idx+1)+' af 4 \u00b7 '+RIV.days[idx].c+' i dag':'Ekspeditionen er i gang')+'</div>';}
+ var nd=RIV.days.filter(function(x){return x.d>=today;})[0];
+ var nextHtml='';
+ if(nd){var isToday=nd.d===today;
+  var ball=function(lbl,b){return '<div class="riv-ball"><em>'+lbl+'</em><b>'+b.t+'</b><span>'+b.p.join(' \u00b7 ')+'</span></div>';};
+  nextHtml='<div class="riv-next"><div class="riv-next-lbl">'+(isToday?'Dagens runde':'N\u00e6ste spilledag \u00b7 '+nd.n)+'</div>'
+   +'<div class="riv-next-course">'+nd.c+'</div>'
+   +(nd.b1&&nd.b2?'<div class="riv-balls">'+ball('Bold 1',nd.b1)+ball('Bold 2',nd.b2)+'</div>'
+     :'<div class="riv-next-note">'+(nd.note||'')+'</div>')+'</div>';}
  const ess=RIV.ess.map(function(e){return '<div class="riv-chip">'+e[0]+' <b>'+e[1]+'</b></div>';}).join('');
  c.innerHTML='<a class="riv" href="'+RIV.url+'">'
   +'<img class="riv-bg" src="https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?w=1400&q=80&auto=format" alt="">'
   +'<div class="riv-in"><div class="riv-kicker">\ud83c\uddeb\ud83c\uddf7 Ekspedition \u00b7 C\u00f4te d\u2019Azur</div>'
   +'<div class="riv-title">Riviera Open 2026</div>'
   +'<div class="riv-dates">1.\u20134. oktober \u00b7 fire baner \u00b7 fire dage \u00b7 240\u20ac til den samlede vinder</div>'
-  +mid+'<div class="riv-days">'+dayHtml+'</div><div class="riv-ess">'+ess+'</div>'
+  +mid+nextHtml+'<div class="riv-days">'+dayHtml+'</div><div class="riv-ess">'+ess+'</div>'
   +'<div class="riv-cta">\u00c5bn ekspeditionssiden \u2192</div></div></a>';}
 function ggHelpers(){const played=ROUNDS_DATA.filter(r=>!r.private&&(r.results||[]).length);return played;}
 function ggDate(s){const p=(s||'').split('-');return p.length===3?(+p[2])+'/'+(+p[1]):s;}
