@@ -450,7 +450,11 @@ const PHOTOS = {"thomas": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2w
 const PLAYERS = [{"id": "henrik", "name": "Henrik Holtegaard", "club": "The Scandinavian", "hcp": 16.8, "login": "hh"}, {"id": "jan", "name": "Jan Westergaard", "club": "Simons GK", "hcp": 12.8, "login": "jw"}, {"id": "jes", "name": "Jes Frydendall", "club": "Furesø GK", "hcp": 23.1, "login": "jf"}, {"id": "kim", "name": "Kim Kehlet Johansen", "club": "The Scandinavian", "hcp": 19.6, "login": "kkj"}, {"id": "morten", "name": "Morten Axel", "club": "The Scandinavian", "hcp": 9.8, "login": "ma"}, {"id": "thomas", "name": "Thomas Friisnæs", "club": "The Scandinavian", "hcp": 13.3, "login": "tf"}];
 const COLORS = {"thomas": "#c9a84c", "morten": "#5bb8a0", "henrik": "#6b9fd4", "kim": "#c47a5a", "jes": "#a07ac4", "jan": "#7ac4a0", "torben": "#c47aa0"};
 
-const PRESET_GROUPS = {};
+const PRESET_GROUPS = {
+  1:{threeball:{time:'11:40',players:['kim','jan','jes']},fourball:{time:'11:50',players:['thomas','henrik','morten']}},
+  2:{threeball:{time:'10:00',players:['kim','thomas','henrik']},fourball:{time:'10:10',players:['jan','jes','morten']}},
+  3:{threeball:{time:'11:00',players:['kim','thomas','morten']},fourball:{time:'11:10',players:['jan','jes','henrik']}}
+};
 const DAYS = [
   {day:1,snakeHolder:null,markers:null,course:"Château Taulane",date:"Torsdag 1. oktober · 🚗 45 min fra Cabris",teeTimes:['11:40','11:50'],recap:null,pot:60,betPool:60,carryover:0,results:[],bets:{}},
   {day:2,snakeHolder:null,markers:null,course:"Royal Mougins",date:"Fredag 2. oktober · 🚗 25 min fra Cabris",teeTimes:['10:00','10:10'],recap:null,pot:60,betPool:60,carryover:0,results:[],bets:{}},
@@ -629,21 +633,21 @@ function renderDays(){
           return `<div style="display:flex;align-items:baseline;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05)"><span style="font-family:'Cormorant Garamond',serif;font-size:0.85em;color:var(--muted);min-width:18px">${i+1}.</span><span style="font-family:'Cormorant Garamond',serif;font-size:1.1em;color:var(--white)">${p?p.name.split(' ')[0]:id}</span>${isMarker?'<span style="font-size:0.6em;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-dim);background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:1px 7px;margin-left:6px">markør</span>':''}</div>`;}).join('');
         return `<div style="flex:1;padding:18px 22px"><div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid rgba(201,168,76,0.2)"><span style="font-size:0.6em;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted)">${typeLabel}</span><span style="font-family:'Cormorant Garamond',serif;font-size:1.2em;font-weight:700;color:var(--gold)">${group.time}</span></div><div>${rows}</div></div>`;
       };
-      groupsHtml=`<div style="display:flex;border-top:1px solid var(--border)">${renderGroup('3-bold · starter først',g.threeball)}<div style="width:1px;background:rgba(201,168,76,0.15);flex-shrink:0"></div>${renderGroup('4-bold · starter efter',g.fourball)}</div>`;
+      groupsHtml=`<div style="display:flex;border-top:1px solid var(--border)">${renderGroup('Bold 1 · starter først',g.threeball)}<div style="width:1px;background:rgba(201,168,76,0.15);flex-shrink:0"></div>${renderGroup('Bold 2 · starter efter',g.fourball)}</div>`;
     } else {
       const totStbf=calcOverallWinner();
       const d4sorted=Object.entries(totStbf).filter(([,v])=>v>0).sort((a,b)=>b[1]-a[1]);
       const allThreeDone=DAYS.slice(0,3).every(d=>d.results.length>0);
-      if(d4sorted.length===7&&allThreeDone){
-        const bot3=d4sorted.slice(-3),top4=d4sorted.slice(0,4);
+      if(d4sorted.length===PLAYERS.length&&allThreeDone){
+        const bot3=d4sorted.slice(-3),top4=d4sorted.slice(0,3);
         const d4group=(label,time,pList)=>{
           const sortedList=[...pList].sort(([a],[b])=>{const pa=playerById(a),pb=playerById(b);return(pa?pa.hcp:99)-(pb?pb.hcp:99);});
           const rows=sortedList.map(([id],i)=>{const p=playerById(id);return `<div style="display:flex;align-items:baseline;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05)"><span style="font-family:'Cormorant Garamond',serif;font-size:0.85em;color:var(--muted);min-width:18px">${i+1}.</span><span style="font-family:'Cormorant Garamond',serif;font-size:1.1em;color:var(--white)">${p?p.name.split(' ')[0]:id}</span></div>`;}).join('');
           return `<div style="flex:1;padding:18px 22px"><div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid rgba(201,168,76,0.2)"><span style="font-size:0.6em;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted)">${label}</span><span style="font-family:'Cormorant Garamond',serif;font-size:1.2em;font-weight:700;color:var(--gold)">${time}</span></div><div>${rows}</div></div>`;
         };
-        groupsHtml=`<div style="display:flex;border-top:1px solid var(--border)">${d4group('3-bold · starter først','11:04',bot3)}<div style="width:1px;background:rgba(201,168,76,0.15);flex-shrink:0"></div>${d4group('4-bold · starter efter','11:12',top4)}</div>`;
+        groupsHtml=`<div style="display:flex;border-top:1px solid var(--border)">${d4group('Bold 1 · de 3 lavest placerede','10:30',bot3)}<div style="width:1px;background:rgba(201,168,76,0.15);flex-shrink:0"></div>${d4group('Bold 2 · de 3 bedst placerede','10:40',top4)}</div>`;
       } else {
-        groupsHtml=`<div class="day4-note">🏆 Dag 4-holdene sættes automatisk efter dag 3 er spillet — de 4 lavest rangerende spiller i første bold (11:04), de 3 bedst i anden bold (11:12)</div>`;
+        groupsHtml=`<div class="day4-note">🏆 Dag 4-boldene sættes automatisk, når dag 3 er spillet — de 3 lavest placerede sammenlagt går ud kl. 10:30, de 3 bedst placerede kl. 10:40</div>`;
       }
     }
 
