@@ -944,8 +944,8 @@ const NEXT_ROUND={datetime:'2026-09-27T09:00:00',course:'New Course',tee:57,lat:
 
 // Opdater denne efter hver runde. story: brug <strong>...</strong> for guld-fremhævning. Sæt til null for at skjule boksen.
 const LATEST_ROUND={
-  meta:'1. oktober · Riviera dag 1 · Thomas tager føringen i Frankrig',
-  story:'Ekspeditionen fik en dramatisk åbning, før en eneste bold var slået: <strong>kraftig regn og tordenvejrsvarsel over Château Taulane</strong> i 1.000 meters højde tvang selskabet til at flytte runden — og man landede på <strong>Old Course Mandelieu</strong>, netop den bane, der for få dage siden smed os ud til fordel for et sponsorarrangement. Golfens ironi er sjældent subtil. Og hjemmebanen leverede: <strong>Thomas vandt med 37 stableford-point</strong> — netto ét under par og <strong>hans bedste runde i hele 2026</strong>. <strong>Kim</strong> fulgte lige i hælene med 36, hans stærkeste siden triumfen i august, mens <strong>Morten</strong> noterede 34 og <strong>Henrik</strong> 27. Blandt turens seks deltagere kom <strong>Jan</strong> ind på 31 og <strong>Jes</strong> på 26. I sæsonregnskabet er det her, det gør ondt for kassemesteren: Thomas får 3 point mod Mortens 1, og <strong>førertrøjen skifter hænder for første gang siden 6. september</strong>: <strong>Thomas 35 · Morten 34</strong> · Henrik 26 · Kim 18,5. Tre runder tilbage — og nu er det Morten, der skal jagte.'
+  meta:'2. oktober · Riviera dag 2 · Thomas vinder igen — nu med 93 % odds',
+  story:'To dage, to sejre. På <strong>Royal Mougins</strong> leverede <strong>Thomas</strong> endnu en gang <strong>38 stableford-point</strong> og netto to under par — nøjagtig samme score som på åbningsdagen — og han står nu alene i toppen af både ekspeditionen og sæsonen. Nøglen var et forni på <strong>22 point</strong>, anført af en gross-birdie på par 5-hul 4 til fire point. <strong>Henrik</strong> fandt formen igen med 34 og et bagni på 18, mens <strong>Jes</strong> snuppede tredjepladsen med 31 point efter en spektakulær birdie-2’er på hul 10 og 20 point på bagni. For <strong>Morten</strong> blev det derimod turens hidtil sværeste dag: <strong>28 point og fjerdeplads</strong> blandt de seks, på en bane hvor hans præcision normalt belønnes. <strong>Kim</strong> fulgte med 27 og <strong>Jan</strong> havde en dag at glemme med 18. I sæsonregnskabet betyder det, at forspringet vokser: <strong>Thomas 36 · Morten 34</strong> · Henrik 27 · Kim 18,5 — og titelodds er på to dage vendt fra 19/81 til <strong>93 % mod 7 %</strong>. To runder tilbage: Monte Carlo i morgen og finalen på Saint Donat.'
 };
 const EXPEDITIONS=[
   {
@@ -2460,7 +2460,41 @@ const ROUNDS_DATA=[{course:"Old Course",date:"2026-04-10",tee:56,holes:9,cr:72.3
       points:[2,3,0,1,1,2,0,2,3, 1,1,2,2,3,2,1,0,2],
       slag:97,grossDiff:25}
    ]},
-  {course:"Royal Mougins 🇫🇷",date:"2026-10-02",time:"10:00",tee:null,holes:18,cr:72.2,slope:136,lat:43.59365672710108,lng:6.971199740482849,abroad:true,expId:'cote-dazur-efteraar-2026',note:"Riviera Open Efterår · Dag 2 — gensynet med Saut de l'Ange · teetider 10:00 & 10:10",photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
+  {course:"Royal Mougins 🇫🇷",date:"2026-10-02",time:"10:00",tee:null,holes:18,cr:72.2,slope:136,lat:43.59365672710108,lng:6.971199740482849,abroad:true,expId:'cote-dazur-efteraar-2026',
+   note:"Riviera Open Efterår · Dag 2 — Thomas vandt igen med 38 stbf, netto to under par. Anden sejr på to dage",photo:null,
+   counting:true,
+   players:["Thomas","Henrik","Kim","Morten"],
+   holeData:[
+     {hole:1,par:4,hcp:7},{hole:2,par:3,hcp:13},{hole:3,par:5,hcp:3},{hole:4,par:5,hcp:9},
+     {hole:5,par:3,hcp:17},{hole:6,par:4,hcp:11},{hole:7,par:4,hcp:5},{hole:8,par:3,hcp:15},
+     {hole:9,par:4,hcp:1},{hole:10,par:3,hcp:16},{hole:11,par:4,hcp:6},{hole:12,par:4,hcp:14},
+     {hole:13,par:4,hcp:4},{hole:14,par:4,hcp:12},{hole:15,par:5,hcp:2},{hole:16,par:4,hcp:8},
+     {hole:17,par:3,hcp:18},{hole:18,par:5,hcp:10}
+   ],
+   results:[
+     {player:'Thomas',score:38,points:3,placement:1,tied:false},
+     {player:'Henrik',score:34,points:2,placement:2,tied:false},
+     {player:'Morten',score:28,points:1,placement:3,tied:false},
+     {player:'Kim',score:27,points:0,placement:4,tied:false}
+   ],
+   scorecards:[
+     {player:'Thomas',hcp:13.3,phcp:16,
+      scores:[4,4,5,4,4,4,4,5,5, 3,6,5,5,4,7,6,3,7],
+      points:[3,2,3,4,1,3,3,1,2, 3,1,2,2,3,1,1,2,1],
+      slag:85,grossDiff:14},
+     {player:'Henrik',hcp:16.8,phcp:20,
+      scores:[5,4,5,5,3,7,7,5,6, 4,5,5,7,5,5,6,4,5],
+      points:[2,2,3,3,3,0,0,1,2, 2,2,2,0,2,4,1,2,3],
+      slag:93,grossDiff:22},
+     {player:'Morten',hcp:9.8,phcp:11,
+      scores:[5,5,5,5,5,6,5,5,4, 4,5,6,4,4,6,5,3,8],
+      points:[2,0,3,3,0,1,2,0,3, 1,2,0,3,2,2,2,2,0],
+      slag:90,grossDiff:19},
+     {player:'Kim',hcp:19.6,phcp:23,
+      scores:[7,5,8,8,5,4,5,5,6, 3,7,5,6,5,9,5,3,7],
+      points:[0,1,1,0,1,3,3,1,2, 3,0,2,2,2,0,2,3,1],
+      slag:103,grossDiff:32}
+   ]},
   {course:"Monte Carlo Golf 🇫🇷",date:"2026-10-03",time:"11:00",tee:null,holes:18,cr:null,slope:null,lat:43.762757,lng:7.413907,abroad:true,expId:'cote-dazur-efteraar-2026',note:"Riviera Open Efterår · Dag 3 — Willie Park Jr. 1911, 900 m.o.h. · teetider 11:00 & 11:10",photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
   {course:"Golf de Saint Donat 🇫🇷",date:"2026-10-04",time:"10:30",tee:null,holes:18,cr:71.2,slope:130,lat:43.6296,lng:6.9174,abroad:true,expId:'cote-dazur-efteraar-2026',note:"Riviera Open Efterår · Dag 4 — finalen på Robert Trent Jones Jr.-banen ved Grasse (erstatter Old Course Mandelieu) · teetider 10:30 & 10:40",photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]}
 ];
@@ -2565,7 +2599,8 @@ const RIV={url:'riviera.html',
         b1:{t:'11:40',p:['Kim','Jan','Jes']},b2:{t:'11:50',p:['Thomas','Henrik','Morten']},
         res:[['Thomas',38],['Kim',37],['Morten',35],['Jan',32],['Henrik',28],['Jes',27]]},
        {d:'2026-10-02',n:'2. okt',c:'Royal Mougins',t:'10:00 & 10:10',lat:43.5937,lng:6.9712,hr:10,
-        b1:{t:'10:00',p:['Kim','Thomas','Henrik']},b2:{t:'10:10',p:['Jan','Jes','Morten']},res:null},
+        b1:{t:'10:00',p:['Kim','Thomas','Henrik']},b2:{t:'10:10',p:['Jan','Jes','Morten']},
+        res:[['Thomas',38],['Henrik',34],['Jes',31],['Morten',28],['Kim',27],['Jan',18]]},
        {d:'2026-10-03',n:'3. okt',c:'Monte Carlo Golf',t:'11:00 & 11:10',lat:43.7628,lng:7.4139,hr:11,
         b1:{t:'11:00',p:['Kim','Jes','Henrik']},b2:{t:'11:10',p:['Jan','Thomas','Morten']},res:null},
        {d:'2026-10-04',n:'4. okt',c:'Golf de Saint Donat',t:'10:30 & 10:40',lat:43.6296,lng:6.9174,hr:10,
