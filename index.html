@@ -75,6 +75,22 @@
         .riv-day em{display:block;font-family:'Outfit',sans-serif;font-style:normal;font-size:0.54em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:4px;}
         .riv-day strong{display:block;font-family:'Cormorant Garamond',serif;font-size:1.02em;font-weight:600;color:var(--white,#fff);line-height:1.25;}
         .riv-day i{display:block;font-style:normal;font-family:'Outfit',sans-serif;font-size:0.58em;color:var(--text-muted);margin-top:3px;letter-spacing:0.06em;}
+        .riv-bets{margin:10px 0 0;padding-top:9px;border-top:1px solid rgba(201,168,76,0.22);}
+        .riv-bets-lbl{font-family:'Outfit',sans-serif;font-size:0.55em;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-dim);text-align:center;margin-bottom:6px;}
+        .riv-bets-grid{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;}
+        .riv-bet{padding:4px 10px;background:rgba(255,255,255,0.05);border-radius:999px;font-family:'Cormorant Garamond',serif;font-size:0.92em;color:var(--white,#fff);}
+        .riv-bet b{color:var(--gold-light);font-weight:600;}
+        .riv-bet.hit{background:rgba(201,168,76,0.18);border:1px solid rgba(201,168,76,0.45);}
+        .riv-tot{margin:0 0 14px;padding:14px 16px;background:linear-gradient(160deg,rgba(201,168,76,0.14),rgba(0,0,0,0.42));border:1px solid rgba(201,168,76,0.5);border-radius:9px;}
+        .riv-tot-lbl{font-family:'Outfit',sans-serif;font-size:0.6em;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:3px;}
+        .riv-tot-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.85em;color:var(--gold-dim);text-align:center;margin-bottom:10px;}
+        .riv-tot-row{display:flex;align-items:baseline;gap:8px;padding:5px 2px;border-top:1px solid rgba(255,255,255,0.07);font-family:'Cormorant Garamond',serif;font-size:1.04em;color:var(--white,#fff);}
+        .riv-tot-row:first-of-type{border-top:none;}
+        .riv-tot-row i{font-style:normal;width:17px;font-family:'Outfit',sans-serif;font-size:0.6em;font-weight:700;color:var(--gold-dim);}
+        .riv-tot-row b{flex:1;font-weight:600;}
+        .riv-tot-row em{font-style:normal;font-size:0.8em;color:var(--text-muted);letter-spacing:0.04em;}
+        .riv-tot-row u{text-decoration:none;font-weight:700;color:var(--gold-light);min-width:34px;text-align:right;}
+        .riv-tot-row.lead b,.riv-tot-row.lead u{color:var(--gold-light);}
         .riv-res{margin:0 0 14px;padding:14px 16px;background:rgba(0,0,0,0.42);border:1px solid rgba(201,168,76,0.35);border-radius:9px;}
         .riv-res-lbl{font-family:'Outfit',sans-serif;font-size:0.58em;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);text-align:center;margin-bottom:9px;}
         .riv-res-row{display:flex;align-items:baseline;gap:9px;padding:4px 2px;font-family:'Cormorant Garamond',serif;font-size:1.06em;color:var(--white,#fff);border-top:1px solid rgba(255,255,255,0.06);}
@@ -93,12 +109,6 @@
         .riv-ball em{display:block;font-style:normal;font-family:'Outfit',sans-serif;font-size:0.55em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:5px;}
         .riv-ball b{display:block;font-family:'Cormorant Garamond',serif;font-size:1.25em;font-weight:700;color:var(--gold-light);line-height:1;margin-bottom:5px;}
         .riv-ball span{display:block;font-family:'Cormorant Garamond',serif;font-size:1.02em;color:var(--white,#fff);line-height:1.45;}
-        .riv-bets{margin-top:10px;padding-top:9px;border-top:1px solid rgba(201,168,76,0.22);}
-        .riv-bets-lbl{font-family:'Outfit',sans-serif;font-size:0.55em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-dim);text-align:center;margin-bottom:6px;}
-        .riv-bet-row{display:flex;align-items:baseline;gap:9px;padding:3px 2px;font-family:'Cormorant Garamond',serif;font-size:1.02em;color:var(--white,#fff);}
-        .riv-bet-row b{min-width:74px;font-weight:700;color:var(--gold-light);}
-        .riv-bet-row u{text-decoration:none;min-width:20px;text-align:center;font-family:'Outfit',sans-serif;font-size:0.62em;font-weight:800;color:#0b1a12;background:var(--gold);border-radius:999px;padding:1px 6px;}
-        .riv-bet-row span{flex:1;color:var(--text-light);}
         .riv-next-note{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.95em;color:var(--gold-dim);text-align:center;}
         @media (max-width:600px){.riv-balls{grid-template-columns:1fr;}}
         .riv-ess{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:16px;}
@@ -950,8 +960,8 @@ const NEXT_ROUND={datetime:'2026-09-27T09:00:00',course:'New Course',tee:57,lat:
 
 // Opdater denne efter hver runde. story: brug <strong>...</strong> for guld-fremhævning. Sæt til null for at skjule boksen.
 const LATEST_ROUND={
-  meta:'2. oktober · Riviera dag 2 · Thomas vinder igen — nu med 93 % odds',
-  story:'To dage, to sejre. På <strong>Royal Mougins</strong> leverede <strong>Thomas</strong> endnu en gang <strong>38 stableford-point</strong> og netto to under par — nøjagtig samme score som på åbningsdagen — og han står nu alene i toppen af både ekspeditionen og sæsonen. Nøglen var et forni på <strong>22 point</strong>, anført af en gross-birdie på par 5-hul 4 til fire point. <strong>Henrik</strong> fandt formen igen med 34 og et bagni på 18, mens <strong>Jes</strong> snuppede tredjepladsen med 31 point efter en spektakulær birdie-2’er på hul 10 og 20 point på bagni. For <strong>Morten</strong> blev det derimod turens hidtil sværeste dag: <strong>28 point og fjerdeplads</strong> blandt de seks, på en bane hvor hans præcision normalt belønnes. <strong>Kim</strong> fulgte med 27 og <strong>Jan</strong> havde en dag at glemme med 18. I sæsonregnskabet betyder det, at forspringet vokser: <strong>Thomas 36 · Morten 34</strong> · Henrik 27 · Kim 18,5 — og titelodds er på to dage vendt fra 19/81 til <strong>93 % mod 7 %</strong>. To runder tilbage: Monte Carlo i morgen og finalen på Saint Donat.'
+  meta:'3. oktober · Riviera dag 3 · Hat-trick — og mesterskabet er afgjort',
+  story:'900 meter over Middelhavet, på Willie Park Jr.s bane fra 1911, blev sæsonen afgjort. <strong>Thomas vandt tredje runde i træk</strong> med <strong>36 stableford-point</strong> — netto lige på par — og åbnede med en <strong>gross-birdie på par 5-hul 1</strong> til fire point samt 21 point på det svære forni. <strong>Kim</strong> spillede sig op på andenpladsen med 33 og sin egen birdie på hul 1, mens <strong>Morten</strong> noterede 31 trods dagens næstfærreste slag. Derefter <strong>Jes</strong> 30, <strong>Jan</strong> 26 og <strong>Henrik</strong> 25 efter en hård dag i bjergene. Og så skete det matematiske: med 3 point mod Mortens 1 er <strong>Thomas ikke længere til at indhente</strong> — selv hvis Morten vinder finalen og Thomas bliver sidst, ender det 37-35,5. <strong>Thomas er GUCCI Golf-mester 2026</strong>, med en runde til gode. Stillingen: <strong>Thomas 37 · Morten 34 · Henrik 27 · Kim 20,5</strong>. Tilbage står finalen på Saint Donat — og Riviera-puljens 240€, hvor Thomas fører sammenlagt med 112 point mod Kims 97.'
 };
 const EXPEDITIONS=[
   {
@@ -2501,7 +2511,41 @@ const ROUNDS_DATA=[{course:"Old Course",date:"2026-04-10",tee:56,holes:9,cr:72.3
       points:[0,1,1,0,1,3,3,1,2, 3,0,2,2,2,0,2,3,1],
       slag:103,grossDiff:32}
    ]},
-  {course:"Monte Carlo Golf 🇫🇷",date:"2026-10-03",time:"11:00",tee:null,holes:18,cr:null,slope:null,lat:43.762757,lng:7.413907,abroad:true,expId:'cote-dazur-efteraar-2026',note:"Riviera Open Efterår · Dag 3 — Willie Park Jr. 1911, 900 m.o.h. · teetider 11:00 & 11:10",photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]},
+  {course:"Monte Carlo Golf 🇫🇷",date:"2026-10-03",time:"11:00",tee:null,holes:18,cr:70.8,slope:134,lat:43.762757,lng:7.413907,abroad:true,expId:'cote-dazur-efteraar-2026',
+   note:"Riviera Open Efterår · Dag 3 — Thomas vandt med 36 stbf på Mont Agel og sikrede sæsonmesterskabet. Tredje sejr i træk",photo:null,
+   counting:true,
+   players:["Thomas","Henrik","Kim","Morten"],
+   holeData:[
+     {hole:1,par:5,hcp:4},{hole:2,par:3,hcp:14},{hole:3,par:4,hcp:18},{hole:4,par:3,hcp:2},
+     {hole:5,par:4,hcp:12},{hole:6,par:5,hcp:8},{hole:7,par:4,hcp:10},{hole:8,par:5,hcp:6},
+     {hole:9,par:4,hcp:7},{hole:10,par:4,hcp:5},{hole:11,par:3,hcp:17},{hole:12,par:4,hcp:9},
+     {hole:13,par:3,hcp:11},{hole:14,par:4,hcp:15},{hole:15,par:4,hcp:1},{hole:16,par:5,hcp:3},
+     {hole:17,par:4,hcp:13},{hole:18,par:3,hcp:16}
+   ],
+   results:[
+     {player:'Thomas',score:36,points:3,placement:1,tied:false},
+     {player:'Kim',score:33,points:2,placement:2,tied:false},
+     {player:'Morten',score:31,points:1,placement:3,tied:false},
+     {player:'Henrik',score:25,points:0,placement:4,tied:false}
+   ],
+   scorecards:[
+     {player:'Thomas',hcp:13.3,phcp:14,
+      scores:[4,4,5,3,5,6,5,5,5, 6,3,6,3,5,5,7,5,3],
+      points:[4,2,1,3,2,2,2,3,2, 1,2,1,3,1,2,1,2,2],
+      slag:85,grossDiff:14},
+     {player:'Kim',hcp:19.6,phcp:22,
+      scores:[5,6,5,4,4,8,5,7,6, 5,4,7,3,7,6,6,5,3],
+      points:[4,0,2,3,3,0,2,1,1, 2,2,0,3,0,2,3,2,3],
+      slag:96,grossDiff:25},
+     {player:'Morten',hcp:9.8,phcp:10,
+      scores:[5,4,6,4,4,6,4,5,5, 5,3,7,4,5,5,5,4,5],
+      points:[3,1,0,2,2,2,3,3,2, 2,2,0,1,1,2,3,2,0],
+      slag:86,grossDiff:15},
+     {player:'Henrik',hcp:16.8,phcp:18,
+      scores:[6,6,5,4,4,8,4,6,7, 7,4,7,3,4,7,8,6,4],
+      points:[2,0,2,2,3,0,3,2,0, 0,2,0,3,3,0,0,1,2],
+      slag:100,grossDiff:29}
+   ]},
   {course:"Golf de Saint Donat 🇫🇷",date:"2026-10-04",time:"10:30",tee:null,holes:18,cr:71.2,slope:130,lat:43.6296,lng:6.9174,abroad:true,expId:'cote-dazur-efteraar-2026',note:"Riviera Open Efterår · Dag 4 — finalen på Robert Trent Jones Jr.-banen ved Grasse (erstatter Old Course Mandelieu) · teetider 10:30 & 10:40",photo:null,players:["Thomas","Henrik","Kim","Morten"],holeData:[],results:[],scorecards:[]}
 ];
 let allRounds=[],playerData={},countingRounds=[];
@@ -2603,13 +2647,16 @@ const RIV={url:'riviera.html',
  depart:new Date('2026-09-30T18:40:00+02:00'),
  days:[{d:'2026-10-01',n:'1. okt',c:'Old Course Mandelieu',t:'11:40 & 11:50',lat:43.5319,lng:6.9403,hr:11,
         b1:{t:'11:40',p:['Kim','Jan','Jes']},b2:{t:'11:50',p:['Thomas','Henrik','Morten']},
-        res:[['Thomas',38],['Kim',37],['Morten',35],['Jan',32],['Henrik',28],['Jes',27]]},
+        res:[['Thomas',38],['Kim',37],['Morten',35],['Jan',32],['Henrik',28],['Jes',27]],
+        bets:[['Kim','Morten'],['Thomas','Thomas'],['Henrik','Morten'],['Jan','Henrik'],['Jes','Jan'],['Morten','Thomas']]},
        {d:'2026-10-02',n:'2. okt',c:'Royal Mougins',t:'10:00 & 10:10',lat:43.5937,lng:6.9712,hr:10,
         b1:{t:'10:00',p:['Kim','Thomas','Henrik']},b2:{t:'10:10',p:['Jan','Jes','Morten']},
-        res:[['Thomas',38],['Henrik',34],['Jes',31],['Morten',28],['Kim',27],['Jan',18]]},
+        res:[['Thomas',38],['Henrik',34],['Jes',31],['Morten',28],['Kim',27],['Jan',18]],
+        bets:[['Jes','Morten'],['Henrik','Henrik'],['Jan','Jan'],['Morten','Morten'],['Kim','Thomas'],['Thomas','Thomas']]},
        {d:'2026-10-03',n:'3. okt',c:'Monte Carlo Golf',t:'11:00 & 11:10',lat:43.7628,lng:7.4139,hr:11,
         b1:{t:'11:00',p:['Kim','Jes','Henrik']},b2:{t:'11:10',p:['Jan','Thomas','Morten']},
-        bets:[['Jan','Morten'],['Kim','Thomas'],['Morten','Thomas'],['Jes','Morten'],['Henrik','Thomas'],['Thomas','Jes']],res:null},
+        res:[['Thomas',36],['Kim',33],['Morten',31],['Jes',30],['Jan',26],['Henrik',25]],
+        bets:[['Jan','Morten'],['Kim','Thomas'],['Morten','Thomas'],['Jes','Morten'],['Henrik','Thomas'],['Thomas','Jes']]},
        {d:'2026-10-04',n:'4. okt',c:'Golf de Saint Donat',t:'10:30 & 10:40',lat:43.6296,lng:6.9174,hr:10,
         b1:null,b2:null,res:null,note:'Boldene s\u00e6ttes efter stillingen: de 3 lavest placerede kl. 10:30, de 3 bedste kl. 10:40'}],
  ess:[['\u2708\ufe0f Ud','on 30/9 kl. 18:40 CPH\u2013NIC'],['\ud83d\udeec Hjem','s\u00f8 4/10 kl. 21:40 NIC\u2013CPH'],['\ud83c\udfab Check-in','Y9XD3P'],['\ud83d\udcb6 Kassemester','120\u20ac i sm\u00e5 sedler til Morten'],['\ud83c\udfe0 Base','hos Kim i Cabris']]};
@@ -2628,11 +2675,6 @@ function rivWeather(nd){if(!nd||!nd.lat)return;
   RIV_WX[key]='\ud83c\udf21\ufe0f <span>'+t+'\u00b0</span> ved teetid \u00b7 \ud83d\udca8 <span>'+w+' km/t</span>'+(p!==null?' \u00b7 \u2614 <span>'+p+'%</span> nedb\u00f8r':'');
   var e=el();if(e)e.innerHTML=RIV_WX[key];
  }).catch(function(){RIV_WX[key]='';var e=el();if(e)e.innerHTML='';});}
-function rivBets(nd){if(!nd||!nd.bets||!nd.bets.length)return '';
- var g={},order=[];nd.bets.forEach(function(b){if(!g[b[1]]){g[b[1]]=[];order.push(b[1]);}g[b[1]].push(b[0]);});
- order.sort(function(a,b){return g[b].length-g[a].length;});
- return '<div class="riv-bets"><div class="riv-bets-lbl">\ud83c\udfb2 V\u00e6ddem\u00e5l \u00b7 hvem vinder dagen?</div>'
-  +order.map(function(w){return '<div class="riv-bet-row"><b>'+w+'</b><u>'+g[w].length+'</u><span>'+g[w].join(' \u00b7 ')+'</span></div>';}).join('')+'</div>';}
 function rivRender(){const c=document.getElementById('rivieraBanner');if(!c)return;
  const now=new Date();const end=new Date('2026-10-04T23:59:00+02:00');
  if(now>end){c.innerHTML='';return;}
@@ -2649,9 +2691,16 @@ function rivRender(){const c=document.getElementById('rivieraBanner');if(!c)retu
   mid='<div class="riv-live">'+(idx>=0?'Dag '+(idx+1)+' af 4 \u00b7 '+RIV.days[idx].c+' i dag':'Ekspeditionen er i gang')+'</div>';}
  var done=RIV.days.filter(function(x){return x.res&&x.res.length;});
  var last=done.length?done[done.length-1]:null;
+ var totHtml='';
+ if(done.length){var agg={},perDay={};
+  done.forEach(function(dy){dy.res.forEach(function(x){agg[x[0]]=(agg[x[0]]||0)+x[1];(perDay[x[0]]=perDay[x[0]]||[]).push(x[1]);});});
+  var ord=Object.keys(agg).sort(function(a,b){return agg[b]-agg[a];});
+  totHtml='<div class="riv-tot"><div class="riv-tot-lbl">\ud83c\udfc6 Samlet stilling \u00b7 Riviera Open</div>'
+   +'<div class="riv-tot-sub">Sammenlagt stableford efter '+done.length+' af 4 runder \u00b7 240\u20ac til vinderen</div>'
+   +ord.map(function(n,ix){return '<div class="riv-tot-row'+(ix===0?' lead':'')+'"><i>'+(ix+1)+'.</i><b>'+n+(ix===0?' \ud83d\udc51':'')+'</b><em>'+perDay[n].join(' \u00b7 ')+'</em><u>'+agg[n]+'</u></div>';}).join('')+'</div>';}
  var resHtml='';
  if(last){resHtml='<div class="riv-res"><div class="riv-res-lbl">Resultat \u00b7 dag '+last.n.replace('. okt','')+' \u00b7 '+last.c+'</div>'
-  +last.res.map(function(x,ix){return '<div class="riv-res-row'+(ix===0?' win':'')+'"><i>'+(ix+1)+'.</i><b>'+x[0]+(ix===0?' \ud83c\udfc6':'')+'</b><u>'+x[1]+'</u></div>';}).join('')+'</div>';}
+  +last.res.map(function(x,ix){return '<div class="riv-res-row'+(ix===0?' win':'')+'"><i>'+(ix+1)+'.</i><b>'+x[0]+(ix===0?' \ud83c\udfc6':'')+'</b><u>'+x[1]+'</u></div>';}).join('')+(last.bets?'<div class="riv-bets"><div class="riv-bets-lbl">V\u00e6ddem\u00e5l \u00b7 '+last.bets.filter(function(b){return b[1]===last.res[0][0];}).length+' ramte \u00b7 '+Math.round(60/Math.max(1,last.bets.filter(function(b){return b[1]===last.res[0][0];}).length))+'\u20ac hver</div><div class="riv-bets-grid">'+last.bets.map(function(b){var hit=b[1]===last.res[0][0];return '<div class="riv-bet'+(hit?' hit':'')+'">'+b[0]+' \u2192 <b>'+b[1]+'</b>'+(hit?' \u2705':'')+'</div>';}).join('')+'</div></div>':'')+'</div>';}
  var nd=RIV.days.filter(function(x){return !x.res&&x.d>=today;})[0]||RIV.days.filter(function(x){return x.d>=today;})[0];
  var nextHtml='';
  if(nd){var isToday=nd.d===today;
@@ -2659,14 +2708,14 @@ function rivRender(){const c=document.getElementById('rivieraBanner');if(!c)retu
   nextHtml='<div class="riv-next"><div class="riv-next-lbl">'+(isToday?'Dagens runde':'N\u00e6ste spilledag \u00b7 '+nd.n)+'</div>'
    +'<div class="riv-next-course">'+nd.c+'</div>'
    +(nd.b1&&nd.b2?'<div class="riv-balls">'+ball('Bold 1',nd.b1)+ball('Bold 2',nd.b2)+'</div>'
-     :'<div class="riv-next-note">'+(nd.note||'')+'</div>')+rivBets(nd)+'<div class="riv-wx" id="rivWx">Henter vejrudsigt\u2026</div></div>';rivWeather(nd);}
+     :'<div class="riv-next-note">'+(nd.note||'')+'</div>')+(nd.bets?'<div class="riv-bets"><div class="riv-bets-lbl">Dagens v\u00e6ddem\u00e5l</div><div class="riv-bets-grid">'+nd.bets.map(function(b){return '<div class="riv-bet">'+b[0]+' \u2192 <b>'+b[1]+'</b></div>';}).join('')+'</div></div>':'')+'<div class="riv-wx" id="rivWx">Henter vejrudsigt\u2026</div></div>';rivWeather(nd);}
  const ess=RIV.ess.map(function(e){return '<div class="riv-chip">'+e[0]+' <b>'+e[1]+'</b></div>';}).join('');
  c.innerHTML='<a class="riv" href="'+RIV.url+'">'
   +'<img class="riv-bg" src="https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?w=1400&q=80&auto=format" alt="">'
   +'<div class="riv-in"><div class="riv-kicker">\ud83c\uddeb\ud83c\uddf7 Ekspedition \u00b7 C\u00f4te d\u2019Azur</div>'
   +'<div class="riv-title">Riviera Open 2026</div>'
   +'<div class="riv-dates">1.\u20134. oktober \u00b7 fire baner \u00b7 fire dage \u00b7 240\u20ac til den samlede vinder</div>'
-  +mid+resHtml+nextHtml+'<div class="riv-days">'+dayHtml+'</div><div class="riv-ess">'+ess+'</div>'
+  +mid+totHtml+resHtml+nextHtml+'<div class="riv-days">'+dayHtml+'</div><div class="riv-ess">'+ess+'</div>'
   +'<div class="riv-cta">\u00c5bn ekspeditionssiden \u2192</div></div></a>';}
 function ggHelpers(){const played=ROUNDS_DATA.filter(r=>!r.private&&(r.results||[]).length);return played;}
 function ggDate(s){const p=(s||'').split('-');return p.length===3?(+p[2])+'/'+(+p[1]):s;}
