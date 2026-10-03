@@ -965,6 +965,16 @@ const LATEST_ROUND={
 };
 const EXPEDITIONS=[
   {
+    id:'cote-dazur-foraar-2027',
+    title:"Côte d'Azur · Forår 2027",
+    subtitle:'Rivieraen · 4 baner · næste ekspedition',
+    dates:'5. – 9. maj 2027',
+    flag:'🇫🇷',
+    narrative:'Næste ekspedition er på plads: <strong>onsdag 5. – søndag 9. maj 2027</strong>. Vi bor hos <strong>Torben</strong>. <strong>Thomas</strong> booker banerne, og <strong>Kim</strong> booker fly og bil. Dagsprogram og teetider følger, når banerne er booket.',
+    coverPhoto:null,
+    courses:['Old Course Mandelieu','Terre Blanche','Opio Valbonne','Cannes Mougins']
+  },
+  {
     id:'cote-dazur-efteraar-2026',
     title:"Côte d'Azur · Efterår 2026",
     subtitle:'Rivieraen · 4 baner · 4 dage',
@@ -2658,7 +2668,8 @@ const RIV={url:'riviera.html',
         res:[['Thomas',36],['Kim',33],['Morten',31],['Jes',30],['Jan',26],['Henrik',25]],
         bets:[['Jan','Morten'],['Kim','Thomas'],['Morten','Thomas'],['Jes','Morten'],['Henrik','Thomas'],['Thomas','Jes']]},
        {d:'2026-10-04',n:'4. okt',c:'Golf de Saint Donat',t:'10:30 & 10:40',lat:43.6296,lng:6.9174,hr:10,
-        b1:null,b2:null,res:null,note:'Boldene s\u00e6ttes efter stillingen: de 3 lavest placerede kl. 10:30, de 3 bedste kl. 10:40'}],
+        b1:{t:'10:30',p:['Jes','Henrik','Jan']},b2:{t:'10:40',p:['Thomas','Kim','Morten']},res:null,
+        bets:[['Henrik','Thomas'],['Jan','Morten'],['Jes','Henrik'],['Morten','Morten'],['Kim','Henrik'],['Thomas','Thomas']],note:'Boldene s\u00e6ttes efter stillingen: de 3 lavest placerede kl. 10:30, de 3 bedste kl. 10:40'}],
  ess:[['\u2708\ufe0f Ud','on 30/9 kl. 18:40 CPH\u2013NIC'],['\ud83d\udeec Hjem','s\u00f8 4/10 kl. 21:40 NIC\u2013CPH'],['\ud83c\udfab Check-in','Y9XD3P'],['\ud83d\udcb6 Kassemester','120\u20ac i sm\u00e5 sedler til Morten'],['\ud83c\udfe0 Base','hos Kim i Cabris']]};
 var RIV_WX={};
 function rivWeather(nd){if(!nd||!nd.lat)return;
