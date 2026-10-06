@@ -1,0 +1,38 @@
+{
+  "name": "GUCCI Golf",
+  "short_name": "GUCCI Golf",
+  "description": "Stilling, runder og ekspeditioner i GUCCI Golf.",
+  "lang": "da",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#FBFAF5",
+  "theme_color": "#FBFAF5",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Riviera Open",
+      "url": "./riviera.html"
+    }
+  ]
+}
