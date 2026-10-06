@@ -597,13 +597,12 @@ function sealSVG(text){
 
 function spread(year, rs, isFinal, asChapter){
   const st = standings(rs), j = journey(rs), a = st[0], b = st[1];
-  const full = (PEOPLE[a.name] || {}).full || a.name;
-  const first = full.split(' ')[0], rest = full.split(' ').slice(1).join(' ');
+  const title = [isFinal ? 'Årbog' : 'Sæson', String(year)];
   const H = asChapter ? 'h2' : 'h1';
   const margin = a.total - b.total;
   const lede = isFinal
-    ? 'GUCCI Golf-mester ' + year + ' med ' + fmt(a.total) + ' point' + (margin > 0 ? ' — ' + fmt(margin) + ' foran ' + b.name + '.' : '.')
-    : (margin > 0 ? 'Fører sæson ' + year + ' med ' + fmt(a.total) + ' point — ' + fmt(margin) + ' foran ' + b.name + '.' : 'Deler førstepladsen med ' + b.name + ' på ' + fmt(a.total) + ' point.');
+    ? a.name + ' er GUCCI Golf-mester ' + year + ' med ' + fmt(a.total) + ' point' + (margin > 0 ? ' — ' + fmt(margin) + ' foran ' + b.name + '.' : '.')
+    : (margin > 0 ? a.name + ' fører med ' + fmt(a.total) + ' point — ' + fmt(margin) + ' foran ' + b.name + '.' : a.name + ' og ' + b.name + ' deler førstepladsen på ' + fmt(a.total) + ' point.');
   const jersey = j.changes.length ? '<div class="jersey"><p class="lab">Førertrøjen gennem sæsonen</p><ol>' +
     j.changes.map(c => '<li><span>' + dShort(c.date) + '</span><span>' + (c.lead.length > 1 ? listDa(c.lead) + ' deler føringen' : c.lead[0]) + '</span><span>' + esc(c.course) + '</span></li>').join('') + '</ol></div>' : '';
   const courses = uniq(rs.map(r => clean(r.course))).length;
@@ -611,9 +610,9 @@ function spread(year, rs, isFinal, asChapter){
     '<span class="nm"><b>' + p.name + '</b><span class="lab">' + p.rounds + ' runder, ' + fmt(p.wins) + (p.wins === 1 ? ' sejr' : ' sejre') + '</span></span>' +
     '<span class="tot num">' + numHTML(p.total) + '</span></li>').join('');
   return '<section class="spread" id="' + (isFinal ? 'aarbog' : 'stilling') + '">' +
-    '<div class="pg pg-l">' + (isFinal ? sealSVG('Gucci Golf · Mester ' + year) : '') +
-      '<p class="lab">' + (isFinal ? 'Årbog ' + year : 'Sæson ' + year + ' efter ' + rs.length + (rs.length === 1 ? ' runde' : ' runder')) + '</p>' +
-      '<' + H + ' class="champ"><span>' + esc(first) + '</span>' + (rest ? '<span>' + esc(rest) + '</span>' : '') + '</' + H + '>' +
+    '<div class="pg pg-l">' + (isFinal ? sealSVG('Gucci Golf · Sæson ' + year) : '') +
+      '<p class="lab">' + (isFinal ? 'GUCCI Golf' : 'Stillingen efter ' + rs.length + (rs.length === 1 ? ' runde' : ' runder')) + '</p>' +
+      '<' + H + ' class="champ"><span>' + title[0] + '</span><span>' + title[1] + '</span></' + H + '>' +
       '<p class="lede">' + lede + '</p>' + jersey + '</div>' +
     '<div class="pg pg-r"><p class="h2">' + (isFinal ? 'Slutstilling' : 'Stillingen') + '</p><ol class="tbl">' + rows + '</ol>' +
       '<p class="lab foot">Kun de 15 bedste runder pr. spiller tæller. ' + rs.length + ' tællende runder på ' + courses + ' baner.</p></div></section>';
